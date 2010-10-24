@@ -1,5 +1,0 @@
-D:\Dev\PhysBox\AlgLib\bin\Debug\AlgLib.dll
-D:\Dev\PhysBox\AlgLib\bin\Debug\AlgLib.pdb
-D:\Dev\PhysBox\AlgLib\obj\Debug\ResolveAssemblyReference.cache
-D:\Dev\PhysBox\AlgLib\obj\Debug\AlgLib.dll
-D:\Dev\PhysBox\AlgLib\obj\Debug\AlgLib.pdb

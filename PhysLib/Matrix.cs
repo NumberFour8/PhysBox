@@ -22,7 +22,7 @@ namespace PhysLib
             cols = NumColumns;
         }
 
-        public Matrix(int NumRows, int NumColumns, double[] Values)
+        public Matrix(int NumRows, int NumColumns,params double[] Values)
         {
             rows = NumRows;
             cols = NumColumns;

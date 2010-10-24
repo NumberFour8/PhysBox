@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using System.Drawing;
 namespace PhysLib
 {
 
     public abstract class Geometry
     {
-        public event EventHandler OnStateChange;
-
-        public event EventHandler OnCollision;
+        public event EventHandler OnChange;
     
         public double Volume
         {
@@ -45,7 +44,18 @@ namespace PhysLib
             }
         }
 
-        public Matrix Orientation
+        public double Orientation
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        public PointF[] ObjectGeometry
         {
             get
             {

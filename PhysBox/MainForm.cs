@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 using PhysLib;
 
@@ -13,22 +15,29 @@ namespace PhysBox
 {
     public partial class MainForm : Form
     {
-        public Graphics Scene;
-
+        
         public MainForm()
         {
             InitializeComponent();
-            
-            Scene = mainScene.CreateGraphics();
-            InitScene();
+            Actors = new ArrayList();
+
+            if (!Directory.Exists("objects"))
+                Directory.CreateDirectory("objects");
         }
 
-        public void InitScene()
+        private void RefreshGeometries()
         {
-            Scene.FillRegion(Brushes.Yellow,new Region(new Rectangle(0,0,mainScene.Width,mainScene.Height)));
-            Scene.DrawEllipse(Pens.Beige, 0, 0, 20, 20);
-            Scene.Save();
+            foreach (string name in Directory.GetFiles("objects"))
+                newobj_Geometry.Items.Add(Path.GetFileNameWithoutExtension(name));
         }
+
+        private void vytvořitGeometriiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateObject obj = new CreateObject();
+            obj.ShowDialog();
+            
+            RefreshGeometries();
+        }        
 
     }
 }

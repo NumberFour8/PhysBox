@@ -3,7 +3,7 @@
   <Class Name="PhysLib.World" Collapsed="true">
     <Position X="1" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAIQAAAAAAAAAAAAAAAAAAABAAAAAAACAAwAA=</HashCode>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAABAAAAAAACAAwAA=</HashCode>
       <FileName>World.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -14,7 +14,7 @@
       <FileName>Vectors.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PhysLib.SimObject" Collapsed="true">
+  <Class Name="PhysLib.SimObject">
     <Position X="6.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAIAAAgAAAAABAAgAAAAAAigAAACAAAA=</HashCode>
@@ -35,10 +35,10 @@
       <FileName>Matrix.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PhysLib.Geometry" Collapsed="true">
+  <Class Name="PhysLib.Geometry">
     <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAAAAgAAAAAQAEAAAAAABAIAIAAAQAAAA=</HashCode>
+      <HashCode>AAAAAAAAAQAAAAAgAAAAAQAEEAAAAABAAAIEAAAAAAA=</HashCode>
       <FileName>Geometry.cs</FileName>
     </TypeIdentifier>
   </Class>
