@@ -26,12 +26,8 @@ namespace PhysLib
 
         public Vector LinearVelocity
         {
-            get { return pos;  }
-            set { 
-                pos = value;
-                if (ForceField != null)
-                  ForceField.Position = value;
-            }
+            get;
+            set;
         }
 
         public bool Enabled

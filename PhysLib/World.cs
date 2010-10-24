@@ -9,18 +9,7 @@ namespace PhysLib
     {
         private uint lastTick;
 
-        public PhysBox.Field[] Fields
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public Fluid[] Fluids
+        public Field[] Fields
         {
             get
             {
