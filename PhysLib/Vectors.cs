@@ -5,21 +5,34 @@ namespace PhysLib
     public class Vector
     {
         private double[] t;
+        public const uint MaximumVectorElements = 20;
 
         public Vector(params double[] Values)
         {
+            if (Values.Length > MaximumVectorElements)
+                throw new ArgumentException();
+
             t = new double[Values.Length];
             t = Values;
         }
 
         public Vector(int Count)
         {
+            if (Count > MaximumVectorElements)
+                throw new ArgumentException();
+
             t = new double[Count];
         }
 
         public int Size
         {
             get { return t.Length; }
+        }
+
+        public void Null()
+        {
+            for (int i = 0; i < t.Length; i++)
+                t[i] = 0;
         }
 
         public double Magnitude
@@ -140,9 +153,19 @@ namespace PhysLib
             return new Vector(d, d, d);
         }
 
+        public static implicit operator Vector(System.Drawing.PointF p)
+        {
+            return new Vector(p.X, p.Y);
+        }
+
         public static implicit operator double(Vector v)
         {
             return v.Magnitude;
+        }
+
+        public static implicit operator float(Vector v)
+        {
+            return (float)v.Magnitude;
         }
 
         public Matrix ToMatrix()

@@ -1,35 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="PhysLib.World" Collapsed="true">
+  <Class Name="PhysLib.World">
     <Position X="1" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAABAAAAAAACAAwAA=</HashCode>
+      <HashCode>AAAAACAACQAIAEAAAAAAAAAQAACAABAACAAAEAEAYAE=</HashCode>
       <FileName>World.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PhysLib.Vector" Collapsed="true">
     <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAE6AEABAAACAAAAIAIAESACAEAAiA=</HashCode>
+      <HashCode>AAAAAAACAAAAgAAE6AEABAAACAAAAIAIAEaACAEAAiA=</HashCode>
       <FileName>Vectors.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PhysLib.SimObject">
     <Position X="6.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAIAAAgAAAAABAAgAAAAAAigAAACAAAA=</HashCode>
+      <HashCode>AAAAAAIAAAAEBIABBgAAAAABAAgCAAAAAggAAACIAAA=</HashCode>
       <FileName>SimObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PhysLib.Matrix" Collapsed="true">
     <Position X="8" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAAAAAAAAAAEAAaAFAAAAAAACUQCAAAAQAAAgAAAA=</HashCode>
+      <HashCode>QAAAQAAAAAAAAGAAaAFAACAAAACUQCAAAAQAAAgAAAA=</HashCode>
       <FileName>Matrix.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PhysLib.MatrixException" Collapsed="true">
-    <Position X="1" Y="1.75" Width="1.5" />
+    <Position X="2.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Matrix.cs</FileName>
@@ -38,7 +38,7 @@
   <Class Name="PhysLib.Geometry">
     <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAAAAgAAAAAQAEEAAAAABAAAIEAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAQEAAEAgAAAAAQAEAAAAAAAAIAICAAAAAAE=</HashCode>
       <FileName>Geometry.cs</FileName>
     </TypeIdentifier>
   </Class>

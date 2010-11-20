@@ -8,7 +8,9 @@ using AlgLib;
 
 namespace PhysLib
 {
-   
+
+    public enum MatrixInitType  { VectorsAreRows = 0, VectorsAreColumns}
+
     public class Matrix
     {
 
@@ -17,6 +19,9 @@ namespace PhysLib
 
         public Matrix(int NumRows, int NumColumns)
         {
+            if (NumRows * NumColumns > Vector.MaximumVectorElements * Vector.MaximumVectorElements)
+                throw new ArgumentException();
+            
             t = new double[NumRows * NumColumns];
             rows = NumRows;
             cols = NumColumns;
@@ -24,21 +29,58 @@ namespace PhysLib
 
         public Matrix(int NumRows, int NumColumns,params double[] Values)
         {
+            if (NumRows * NumColumns > Vector.MaximumVectorElements * Vector.MaximumVectorElements)
+                throw new ArgumentException();
+
             rows = NumRows;
             cols = NumColumns;
             t = Values;
         }
 
-        public double this[int i,int j]
+        public Matrix(Matrix Clone)
+        {
+            CopyFrom(Clone);
+        }
+
+        public Matrix(MatrixInitType Type,params Vector[] Vectors)
+        {
+            t = new double[Vectors[0].Size * Vectors.Length];
+            int ctr = 0;
+
+            if (Type == MatrixInitType.VectorsAreRows)
+            {
+                cols = Vectors[0].Size;
+                rows = Vectors.Length;
+
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < cols; j++,ctr++)
+                        t[ctr] = Vectors[i][j];
+                }
+            }
+            else
+            {
+                rows = Vectors[0].Size;
+                cols = Vectors.Length;
+
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < cols; j++,ctr++)
+                        t[ctr] = Vectors[j][i];
+                }
+            }
+        }
+
+        public double this[int i, int j]
         {
             get { return t[cols * i + j]; }
             set { t[cols * i + j] = value; }
         }
 
-        public double this[int index]
+        public double this[int i]
         {
-            get { return t[index]; }
-            set { t[index] = value; }
+            get { return t[i]; }
+            set { t[i] = value; }
         }
 
         public int Rows
@@ -94,6 +136,16 @@ namespace PhysLib
             return C;
         }
 
+        public void CopyFrom(Matrix M)
+        {
+            cols = M.Columns;
+            rows = M.Rows;
+            
+            t = new double[cols * rows];
+            for (int i = 0; i < rows*cols; i++)            
+                t[i] = M[i];            
+        }
+
         public double Determinant
         {
             get 
@@ -115,6 +167,30 @@ namespace PhysLib
             return new Vector(t);
         }
 
+        public Vector GetRow(int Row)
+        {
+            if (Row >= rows) throw new MatrixException();
+
+            Vector Ret = new Vector(cols);
+            for (int i = 0; i < cols; i++)
+            {
+                Ret[i] = this[Row, i];
+            }
+            return Ret;
+        }
+
+        public Vector GetColumn(int Column)
+        {
+            if (Column >= cols) throw new MatrixException();
+
+            Vector Ret = new Vector(rows);
+            for (int i = 0; i < rows; i++)
+            {
+                Ret[i] = this[i, Column];
+            }
+            return Ret;
+        }
+
         public static int Epsilon(int i, int j, int k)
         {
             if (i + j + k > 9 || (j < 1 || k < 1 || i < 1)) throw new MatrixException();
@@ -125,6 +201,7 @@ namespace PhysLib
         {
             return i == j ? 1 : 0;
         }
+
     }
 
     [Serializable]

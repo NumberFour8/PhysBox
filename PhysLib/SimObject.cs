@@ -8,26 +8,26 @@ namespace PhysLib
     public class SimObject
     {
         private double m;
-        private double q;
-    
+        private Vector TotalForce,TotalTorque,RotPoint;
+        private Geometry model;
+
+        public SimObject(Geometry gModel, double dMass)
+        {
+            RotPoint = gModel.COG;
+            model = gModel;
+            Mass = dMass;
+            Enabled = true;
+        }
+
         public double Mass
         {
-            get
-            {
-                return m;
-            }
+            get { return m; }
             set
             {
                 if (m > 0)
                   m = value;
                 else throw new ArgumentException();
             }
-        }
-
-        public Vector LinearVelocity
-        {
-            get;
-            set;
         }
 
         public bool Enabled
@@ -37,30 +37,45 @@ namespace PhysLib
 
         public Field ForceField
         {
-            get;
-            set;
+            get; set;
         }
 
         public Geometry Model
         {
             get
             {
-                throw new System.NotImplementedException();
+                return model;
             }
-            set
-            {
-            }
+        }
+
+        public Vector RotationPoint
+        {
+            get { return RotPoint;  }
+            set { RotPoint = value; }
+        }
+
+        public Vector LinearVelocity
+        {
+            get;
+            set;
         }
 
         public Vector AngularVelocity
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
+        }
+
+        public void ApplyForce(Vector Force,Vector Origin)
+        {
+            TotalForce  += Force;
+            TotalTorque += Vector.Cross(Origin - RotPoint, Force);
+        }
+
+        public void Reset()
+        {
+            TotalForce.Null();
+            TotalTorque.Null();
         }
     }
 }
