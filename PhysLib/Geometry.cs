@@ -1,100 +1,164 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using System.Drawing;
+
 namespace PhysLib
 {
-
+    /// <summary>
+    /// Abstraktní třída reprezentující fyzický model tělesa
+    /// </summary>
     public abstract class Geometry
     {
-        public event EventHandler OnChange;
+        /// <summary>
+        /// Událost nastávající při kolizi tělesa
+        /// </summary>
         public event EventHandler OnCollision;
         
         private PointF center;
         private PointF[] geom;
         private double height,width;
 
-        public Geometry(PointF[] Vertices,PointF InitPosition,float AngleX = 0)
+        /// <summary>
+        /// Vytvoří fyzický model tělesa jako objekt z daných vertexů
+        /// </summary>
+        /// <param name="Vertices">Vertexy tělesa</param>
+        /// <param name="InitPosition">Počáteční poloha tělesa</param>
+        /// <param name="AngleX">Počáteční orientace tělesa vzhledem k ose X</param>
+        /// <param name="Height">Výška tělesa (volitelné)</param>
+        /// <param name="Width">Šířka tělesa (volitelné)</param>
+        /// <param name="Centroid">Geometrický střed tělesa - centroid (volitelné)</param>
+        public Geometry(PointF[] Vertices,PointF InitPosition,float AngleX = 0,float Height = 0,float Width = 0,PointF? Centroid = null)
         {
-            ObjectGeometry = Vertices;
-            
-            Position = InitPosition;
-            Orientation = World.B;
 
-            if (AngleX / Math.PI != 0)
+            if (Height != 0 && Width != 0 && Centroid.HasValue)
+            {
+                height = Height;
+                width = Width;
+                center = Centroid.Value;
+            }
+            else AnalyzeVertexGroup(Vertices, out height, out width, out center);
+            
+            Orientation = World.B;
+            Position = InitPosition;
+            geom = Vertices;
+            Nail = center;
+            
+            if (Math.Sin(AngleX) != 0)
                Orientation *= Matrix.Make3DRotation(AngleX, 0, 0);
         }
 
+        /// <summary>
+        /// Pozice objektu vzhledem k počátku světa
+        /// </summary>
         public Vector Position
         {
             get; set;
         }
 
+        /// <summary>
+        /// Orientace objektu vzhledem k orientaci světa
+        /// </summary>
         public Matrix Orientation
         {
             get; set;
         }
 
-        public double OrientationOf(Matrix RefFrame,Axes Axis)
+        /// <summary>
+        /// Zjistí úhel, který svírá vektor dané osy souřadného systému v tělese se souřadným systémem světa
+        /// </summary>
+        /// <param name="RefFrame">Matice souřadného systému světa</param>
+        /// <param name="Axis">Vybraná osa</param>
+        /// <returns>Úhel mezi osami</returns>
+        public float OrientationOf(Matrix RefFrame,Axes Axis)
         {
-            return Vector.Angle(RefFrame.GetRow((int)Axis - 1), Orientation.GetRow((int)Axis - 1));
+            return (float)Vector.Angle(RefFrame.GetRow((int)Axis - 1), Orientation.GetRow((int)Axis - 1));
         }
 
+        /// <summary>
+        /// Vertexy tvořící fyzický model tělesa
+        /// </summary>
         public PointF[] ObjectGeometry
         {
-            get { return geom; }
-            set
-            {
-                PointF top = value[0], bot = value[0], left = value[0], right = value[0];
-                float s = 0;
-
-                for (int i = 0; i < value.Length - 1; i++)
-                    s += value[i].X * value[i + 1].Y - value[i].Y * value[i + 1].X;
-
-                for (int i = 0; i < value.Length - 1; i++)
-                {
-                    center.X += (value[i].X + value[i + 1].X) * (value[i].X * value[i + 1].Y - value[i].Y * value[i + 1].X);
-                    center.Y += (value[i].Y + value[i + 1].Y) * (value[i].X * value[i + 1].Y - value[i].Y * value[i + 1].X);
-
-                    if (left.X > value[i+1].X) left = value[i+1];
-                    if (right.X < value[i+1].X) right = value[i+1];
-
-                    if (bot.X > value[i+1].Y) bot = value[i+1];
-                    if (top.X < value[i+1].Y) top = value[i+1];
-                }
-
-                center.X /= 3*s;
-                center.Y /= 3*s;
-
-                height = top.Y - bot.Y;
-                width = right.X - left.X;
-
-                geom   = value;
-            }
+            get { return geom; }           
         }
 
+        
+        /// <summary>
+        /// Analyzuje pole vertexů jako polygon a zjistí jeho geometrický střed (centroid), šířku a výšku
+        /// </summary>
+        /// <param name="Vertices">Pole vertexů</param>
+        /// <param name="ObjHeight">Výška tělesa</param>
+        /// <param name="ObjWidth">Šířka tělesa</param>
+        /// <param name="Centroid">Geometrický střed tělesa</param>
+        public static void AnalyzeVertexGroup(PointF[] Vertices, out double ObjHeight, out double ObjWidth, out PointF Centroid)
+        {
+            PointF top = Vertices[0], bottom = Vertices[0], left = Vertices[0], right = Vertices[0];
+            float s = 0;
+
+            for (int i = 0; i < Vertices.Length - 1; i++)
+                s += Vertices[i].X * Vertices[i + 1].Y - Vertices[i].Y * Vertices[i + 1].X;
+
+            for (int i = 0; i < Vertices.Length - 1; i++)
+            {
+                Centroid.X += (Vertices[i].X + Vertices[i + 1].X) * (Vertices[i].X * Vertices[i + 1].Y - Vertices[i].Y * Vertices[i + 1].X);
+                Centroid.Y += (Vertices[i].Y + Vertices[i + 1].Y) * (Vertices[i].X * Vertices[i + 1].Y - Vertices[i].Y * Vertices[i + 1].X);
+
+                if (left.X > Vertices[i + 1].X) left = Vertices[i + 1];
+                if (right.X < Vertices[i + 1].X) right = Vertices[i + 1];
+
+                if (bottom.X > Vertices[i + 1].Y) bottom = Vertices[i + 1];
+                if (top.X < Vertices[i + 1].Y) top = Vertices[i + 1];
+            }
+
+            Centroid.X /= 3 * s;
+            Centroid.Y /= 3 * s;
+
+            ObjHeight = top.Y - bottom.Y;
+            ObjWidth = right.X - left.X;
+        }
+
+        /// <summary>
+        /// Geometrický střed objektu (centroid)
+        /// </summary>
         public PointF Centroid
         {
             get { return center; }    
         }
 
+        /// <summary>
+        /// Bod, kterým prochází osa otáčení objektu
+        /// </summary>
+        public PointF Nail
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Výška objektu
+        /// </summary>
         public double Height 
         {
             get { return height; }
         }
 
+        /// <summary>
+        /// Šířka objektu
+        /// </summary>
         public double Width
         {
             get { return width; }
         }
 
+        /// <summary>
+        /// Objem objektu
+        /// </summary>
         public double Volume
         {
             get; set;
         }
 
+        /// <summary>
+        /// Povrch objektu
+        /// </summary>
         public double Surface
         {
             get; set;

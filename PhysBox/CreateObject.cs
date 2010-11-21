@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
 using System.Xml;
 
 namespace PhysBox
@@ -16,7 +11,7 @@ namespace PhysBox
     public partial class CreateObject : Form
     {
         private ArrayList pts;
-        private Point? COG;
+        private PointF? COG;
 
         public CreateObject()
         {
@@ -29,7 +24,7 @@ namespace PhysBox
         {
             if (COG != null) return;
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
-                pts.Add(e.Location);
+                pts.Add(new PointF(e.Location.X,e.Location.Y));
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
                 COG = e.Location;                
             
@@ -44,18 +39,18 @@ namespace PhysBox
             Graphics g = e.Graphics;
             if (COG == null)
             {
-                foreach (Point pt in pts.ToArray(typeof(Point)))
+                foreach (PointF pt in pts.ToArray(typeof(PointF)))
                 {
-                    g.FillRectangle(Brushes.Black, new Rectangle(pt.X - 2, pt.Y - 2, 4, 4));
+                    g.FillRectangle(Brushes.Black, new RectangleF(pt.X - 2, pt.Y - 2, 4, 4));
                 }
             }
             else
             {                                
                 System.Drawing.Drawing2D.GraphicsPath Path = new System.Drawing.Drawing2D.GraphicsPath();
-                Path.AddPolygon((Point[])pts.ToArray(typeof(Point)));
+                Path.AddPolygon((PointF[])pts.ToArray(typeof(PointF)));
                 g.DrawPath(Pens.Black, Path);
 
-                g.FillEllipse(Brushes.Red, new Rectangle(COG.Value.X - 2, COG.Value.Y - 2, 4, 4));
+                g.FillEllipse(Brushes.Red, new RectangleF(COG.Value.X - 2, COG.Value.Y - 2, 4, 4));
             }
         }
 
@@ -66,16 +61,27 @@ namespace PhysBox
 
         private void button_OK_Click(object sender, EventArgs e)
         {
+            PointF c = new PointF();
+            double Height, Width;
+
+            PhysLib.Geometry.AnalyzeVertexGroup((PointF[])pts.ToArray(typeof(PointF)), out Height, out Width, out c);
+
+            if (Math.Sqrt(Math.Pow(c.X - COG.Value.X, 2) + Math.Pow(c.Y - COG.Value.Y, 2)) > 10 &&
+                MessageBox.Show("Vypočítané těžiště a ručně určené težiště útvaru jsou rozdílné o více než 10 pixelů, přesto použít ručně určené těžiště?", "Různá těžiště", MessageBoxButtons.YesNo,MessageBoxIcon.Question,MessageBoxDefaultButton.Button2)
+                == System.Windows.Forms.DialogResult.No) COG = c;         
+            
             using (XmlTextWriter Object = new XmlTextWriter("objects\\" + text_objName.Text + ".xml", Encoding.UTF8))
             {
                 Object.WriteStartDocument();
                 Object.WriteStartElement("Geometry");
+                Object.WriteAttributeString("W", Width.ToString());
+                Object.WriteAttributeString("H", Height.ToString());
 
                 for (int i = 0; i < pts.Count; i++)
                 {
                     Object.WriteStartElement("Vertex");
-                    Object.WriteAttributeString("X", (((Point)pts[i]).X - COG.Value.X).ToString());
-                    Object.WriteAttributeString("Y", (((Point)pts[i]).Y - COG.Value.Y).ToString());
+                    Object.WriteAttributeString("X", (((PointF)pts[i]).X - COG.Value.X).ToString());
+                    Object.WriteAttributeString("Y", (((PointF)pts[i]).Y - COG.Value.Y).ToString());
                     Object.WriteEndElement();
                 }
 

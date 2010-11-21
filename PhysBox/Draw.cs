@@ -1,9 +1,7 @@
-﻿using System;
+﻿using System.Collections;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-
-using System.Collections;
 
 using PhysLib;
 
@@ -14,16 +12,16 @@ namespace PhysBox
     {
         public Pen Style { get; set; }
 
-        public GraphicObject(Vector vPosition,Point[] Geometry,Color Line)
+        public GraphicObject(Color Line,PointF vPosition,PointF[] Geometry) 
+            : base (Geometry,vPosition)
+        {
+            Style = new Pen(Line);            
+        }
+
+        public GraphicObject(Color Line,PointF vPosition, PointF[] Geometry,float Angle,float Height,float Width,PointF Centroid)
+            : base(Geometry, vPosition, Angle, Height, Width, Centroid)
         {
             Style = new Pen(Line);
-
-
-            ObjectGeometry = new PointF[Geometry.Length];
-            for (int i = 0; i < Geometry.Length; i++)
-               ObjectGeometry[i] = new PointF((float)Geometry[i].X,(float)Geometry[i].Y);
-            
-            Position = vPosition;
         }
 
         public GraphicsPath MakePath()
@@ -32,7 +30,7 @@ namespace PhysBox
             Ret.AddClosedCurve(ObjectGeometry);
             
             System.Drawing.Drawing2D.Matrix Trans = new System.Drawing.Drawing2D.Matrix();
-            Trans.RotateAt((float)Orientation,new PointF(0,0));
+            Trans.RotateAt(OrientationOf(World.B, Axes.X), Nail); 
             Trans.Translate((float)Position[0],(float)Position[1],MatrixOrder.Append);
 
             Ret.Transform(Trans);
