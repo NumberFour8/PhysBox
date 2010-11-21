@@ -35,6 +35,8 @@ namespace PhysLib
                 t[i] = 0;
         }
 
+        public static const Vector Zero = new Vector(0);
+
         public double Magnitude
         {
             get 
@@ -110,7 +112,7 @@ namespace PhysLib
             return Cross(v, u);
         }
 
-        public static Vector operator *(Matrix M,Vector v)
+        public static Vector operator *(Vector v,Matrix M)
         {
             return (M * v.ToMatrix()).ToVector();
         }
@@ -120,6 +122,14 @@ namespace PhysLib
             for (int i = 0; i < v.Size; i++)
                 v[i] *= k;
             
+            return v;
+        }
+
+        public static Vector operator /(Vector v, double k)
+        {
+            for (int i = 0; i < v.Size; i++)
+                v[i] /= k;
+
             return v;
         }
 
@@ -155,7 +165,7 @@ namespace PhysLib
 
         public static implicit operator Vector(System.Drawing.PointF p)
         {
-            return new Vector(p.X, p.Y);
+            return new Vector(p.X,p.Y);
         }
 
         public static implicit operator double(Vector v)

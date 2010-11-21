@@ -12,24 +12,34 @@ namespace PhysLib
         public event EventHandler OnChange;
         public event EventHandler OnCollision;
         
-        private PointF cog;
+        private PointF center;
         private PointF[] geom;
+        private double height,width;
+
+        public Geometry(PointF[] Vertices,PointF InitPosition,float AngleX = 0)
+        {
+            ObjectGeometry = Vertices;
+            
+            Position = InitPosition;
+            Orientation = World.B;
+
+            if (AngleX / Math.PI != 0)
+               Orientation *= Matrix.Make3DRotation(AngleX, 0, 0);
+        }
 
         public Vector Position
         {
-            get;
-            set;
+            get; set;
         }
 
         public Matrix Orientation
         {
-            get;
-            set;
+            get; set;
         }
 
-        public double OrientationOf(Vector RefAxis,Axes Axis)
+        public double OrientationOf(Matrix RefFrame,Axes Axis)
         {
-            return Vector.Angle(RefAxis, Orientation.GetRow((int)Axis - 1));
+            return Vector.Angle(RefFrame.GetRow((int)Axis - 1), Orientation.GetRow((int)Axis - 1));
         }
 
         public PointF[] ObjectGeometry
@@ -37,36 +47,57 @@ namespace PhysLib
             get { return geom; }
             set
             {
+                PointF top = value[0], bot = value[0], left = value[0], right = value[0];
                 float s = 0;
+
                 for (int i = 0; i < value.Length - 1; i++)
                     s += value[i].X * value[i + 1].Y - value[i].Y * value[i + 1].X;
 
                 for (int i = 0; i < value.Length - 1; i++)
                 {
-                    cog.X += (value[i].X + value[i + 1].X) * (value[i].X * value[i + 1].Y - value[i].Y * value[i + 1].X);
-                    cog.Y += (value[i].Y + value[i + 1].Y) * (value[i].X * value[i + 1].Y - value[i].Y * value[i + 1].X);
+                    center.X += (value[i].X + value[i + 1].X) * (value[i].X * value[i + 1].Y - value[i].Y * value[i + 1].X);
+                    center.Y += (value[i].Y + value[i + 1].Y) * (value[i].X * value[i + 1].Y - value[i].Y * value[i + 1].X);
+
+                    if (left.X > value[i+1].X) left = value[i+1];
+                    if (right.X < value[i+1].X) right = value[i+1];
+
+                    if (bot.X > value[i+1].Y) bot = value[i+1];
+                    if (top.X < value[i+1].Y) top = value[i+1];
                 }
-                cog.X /= 3*s;
-                cog.Y /= 3*s;
+
+                center.X /= 3*s;
+                center.Y /= 3*s;
+
+                height = top.Y - bot.Y;
+                width = right.X - left.X;
+
                 geom   = value;
             }
         }
 
-        public PointF COG
+        public PointF Centroid
         {
-            get { return cog; }    
+            get { return center; }    
+        }
+
+        public double Height 
+        {
+            get { return height; }
+        }
+
+        public double Width
+        {
+            get { return width; }
         }
 
         public double Volume
         {
-            get;
-            set;
+            get; set;
         }
 
         public double Surface
         {
-            get;
-            set;
+            get; set;
         }
     }
 }

@@ -8,15 +8,16 @@ namespace PhysLib
     public class SimObject
     {
         private double m;
-        private Vector TotalForce,TotalTorque,RotPoint;
+        private Vector totalForce,totalTorque,RotPoint;
         private Geometry model;
 
         public SimObject(Geometry gModel, double dMass)
         {
-            RotPoint = gModel.COG;
             model = gModel;
             Mass = dMass;
+         
             Enabled = true;
+            RotPoint = COG;
         }
 
         public double Mass
@@ -30,12 +31,27 @@ namespace PhysLib
             }
         }
 
-        public bool Enabled
+        public double MomentOfInertia
         {
-            get; set;
+            get { return (Mass * Math.Pow(Model.Height, 2) + Math.Pow(Model.Width, 2)) / 12; }
         }
 
-        public Field ForceField
+        public Vector COG
+        {
+            get { return model.Centroid; }
+        }
+
+        public Vector TotalForce
+        {
+            get { return totalForce; }
+        }
+
+        public Vector TotalTorque
+        {
+            get { return totalTorque; }
+        }
+
+        public bool Enabled
         {
             get; set;
         }
@@ -68,14 +84,14 @@ namespace PhysLib
 
         public void ApplyForce(Vector Force,Vector Origin)
         {
-            TotalForce  += Force;
-            TotalTorque += Vector.Cross(Origin - RotPoint, Force);
+            totalForce  += Force;
+            totalTorque += Vector.Cross(Origin - RotPoint, Force);
         }
 
         public void Reset()
         {
-            TotalForce.Null();
-            TotalTorque.Null();
+            totalForce.Null();
+            totalTorque.Null();
         }
     }
 }

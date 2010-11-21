@@ -202,6 +202,25 @@ namespace PhysLib
             return i == j ? 1 : 0;
         }
 
+        public static Matrix Make3DRotation(double Phi,double Theta,double Psi)
+        {
+            Matrix RotMatrix = new Matrix(3, 3);
+                   
+            RotMatrix[0, 0] = Math.Cos(Theta) * Math.Cos(Psi);
+            RotMatrix[0, 1] = -Math.Cos(Phi) * Math.Sin(Psi) + Math.Sin(Phi) * Math.Sin(Theta) * Math.Cos(Psi);
+            RotMatrix[0, 2] = Math.Sin(Phi) * Math.Sin(Psi) + Math.Cos(Phi) * Math.Sin(Theta) * Math.Cos(Psi);
+
+            RotMatrix[1, 0] = Math.Cos(Theta) * Math.Sin(Psi);
+            RotMatrix[1, 1] = Math.Cos(Phi) * Math.Cos(Psi) + Math.Sin(Phi) * Math.Sin(Theta) * Math.Sin(Psi);
+            RotMatrix[1, 2] = -Math.Sin(Phi) * Math.Cos(Psi) + Math.Cos(Phi) * Math.Sin(Theta) * Math.Sin(Psi);
+
+            RotMatrix[2, 0] = -Math.Sin(Theta);
+            RotMatrix[2, 1] = Math.Sin(Phi) * Math.Cos(Theta);
+            RotMatrix[2, 2] = Math.Cos(Phi) * Math.Cos(Theta);
+
+            return RotMatrix;
+        }
+
     }
 
     [Serializable]

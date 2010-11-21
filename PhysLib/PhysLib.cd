@@ -3,21 +3,21 @@
   <Class Name="PhysLib.World">
     <Position X="1" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACAACQAIAEAAAAAAAAAQAACAABAACAAAEAEAYAE=</HashCode>
+      <HashCode>AABAACAECQAIAEAAAAAAAAAQBACAABAACAAAEAEA4AE=</HashCode>
       <FileName>World.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PhysLib.Vector" Collapsed="true">
     <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAACAAAAgAAE6AEABAAACAAAAIAIAEaACAEAAiA=</HashCode>
+      <HashCode>AAAAAAACAAAAgAAE6AEABAAACQAAAIAIAEaACAEAAiA=</HashCode>
       <FileName>Vectors.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PhysLib.SimObject">
     <Position X="6.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAIAAAAEBIABBgAAAAABAAgCAAAAAggAAACIAAA=</HashCode>
+      <HashCode>AAAAAAYAAAEEBIABBgAAAAIBAAgCAAAAAggAAASIAAA=</HashCode>
       <FileName>SimObject.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,16 +38,16 @@
   <Class Name="PhysLib.Geometry">
     <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQEAAEAgAAAAAQAEAAAAAAAAIAICAAAAAAE=</HashCode>
+      <HashCode>AAgAAAAABQAAAMQgQAAAAEAEAAAAAAAAIAICAAAAAAE=</HashCode>
       <FileName>Geometry.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PhysLib.Field">
+  <Struct Name="PhysLib.Field">
     <Position X="2.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAIAgAAAAAAIAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAIAAACAAAAAAAAAAQAAAAIAQEgAAAAA=</HashCode>
       <FileName>Field.cs</FileName>
     </TypeIdentifier>
-  </Class>
+  </Struct>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

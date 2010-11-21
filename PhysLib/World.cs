@@ -18,9 +18,9 @@ namespace PhysLib
         public static const Vector X = new Vector(1, 0, 0);
         public static const Vector Y = new Vector(0, 1, 0);
         public static const Vector Z = new Vector(0, 0, 1);
-        public static const Matrix B = new Matrix(MatrixInitType.VectorsAreRows,X, Y, Z);
+        public static const Matrix B = new Matrix(MatrixInitType.VectorsAreRows, X, Y, Z);
 
-        private ArrayList Objs;
+        private ArrayList Objs,Fields;
         private Vector cons;
         private Matrix o;
         private uint simulationTime;
@@ -37,8 +37,7 @@ namespace PhysLib
 
         public Vector Gravity
         {
-            get;
-            set;
+            get; set;
         }
 
         public uint CurrentTimeFrame
@@ -53,7 +52,7 @@ namespace PhysLib
 
         public Matrix Orientation
         {
-            get { return o;    }
+            get { return o; }
         }
 
         public double OrientationOf(Axes Axis)
@@ -67,15 +66,47 @@ namespace PhysLib
             set;
         }
 
+        public Field[] ForceFields { get { return (Field[])Fields.ToArray(typeof(Field)); } }
+
+        public void AddField(Field F)
+        {
+            lock (SimLock)
+            {
+                Fields.Add(F);
+            }
+        }
+
+        public void AddObject(SimObject O)
+        {
+            lock (SimLock)
+            {
+                Objs.Add(O);
+            }
+        }
+
         public void Tick()
         {
+            double Delta = 10;
             lock (SimLock)
             {
                SimObject[] PhysObjs = (SimObject[])Objs.ToArray(typeof(SimObject));
                for (int i = 0; i < Objs.Count; i++)
                {
-                   PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity,PhysObjs[i].Model.COG);
-                   PhysObjs[i].Reset();
+                   if (!PhysObjs[i].Enabled) continue;
+
+                   foreach (Field f in ForceFields)
+                       PhysObjs[i].ApplyForce(f.GetForce(f, PhysObjs[i]), PhysObjs[i].COG);
+                   
+                   PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity,PhysObjs[i].COG);
+
+                   
+                   PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
+                   PhysObjs[i].Model.Orientation *= Matrix.Make3DRotation(PhysObjs[i].AngularVelocity[0] * Delta, PhysObjs[i].AngularVelocity[1] * Delta, PhysObjs[i].AngularVelocity[2] * Delta);
+
+                   PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * Delta / PhysObjs[i].Mass;
+                   PhysObjs[i].AngularVelocity += PhysObjs[i].TotalTorque * Delta / (PhysObjs[i].MomentOfInertia + Math.Pow((PhysObjs[i].RotationPoint - PhysObjs[i].COG).Magnitude, 2) * PhysObjs[i].Mass);
+
+                   PhysObjs[i].Reset();                   
                }
             }
         }

@@ -5,44 +5,27 @@ using System.Text;
 
 namespace PhysLib
 {
-    public class Field
+
+    public delegate Vector ForceFunction(Field F,SimObject Object);
+    
+    public struct Field
     {
-        public Vector Position
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
+        private ForceFunction F;
 
-        public Delegate Function
+        public Field(Vector Center, ForceFunction FieldFunction, params double[] FieldParams)
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
+            if (FieldFunction == null) throw new ArgumentNullException();
 
-        public bool Enabled
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
+            F = FieldFunction;
+            FieldCenter = Center;
+            Parameters = FieldParams;
 
-        public Vector GetVectorAt(Vector Position)
-        {
-            throw new System.NotImplementedException();
+            Enabled = true;
         }
+        
+        public Vector FieldCenter { get; set; }
+        public ForceFunction GetForce { get { return F; } }
+        public bool Enabled { get; set; }
+        public double[] Parameters { get; set; }
     }
 }
