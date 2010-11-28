@@ -91,6 +91,7 @@ namespace PhysLib
         /// <param name="Centroid">Geometrický střed tělesa</param>
         public static void AnalyzeVertexGroup(PointF[] Vertices, out double ObjHeight, out double ObjWidth, out PointF Centroid)
         {
+            Centroid = new PointF(0,0);
             PointF top = Vertices[0], bottom = Vertices[0], left = Vertices[0], right = Vertices[0];
             float s = 0;
 

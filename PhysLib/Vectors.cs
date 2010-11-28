@@ -61,7 +61,7 @@ namespace PhysLib
         /// <summary>
         /// Nulový vektor
         /// </summary>
-        public static const Vector Zero = new Vector(0);
+        public static readonly Vector Zero = new Vector(0);
 
         /// <summary>
         /// Velikost vektoru
@@ -167,14 +167,24 @@ namespace PhysLib
             return v;
         }
 
+        public static Vector operator -(Vector v)
+        {
+            Vector Ret = new Vector(v.Count);
+            for (int i = 0;i < v.Count;i++)
+            {
+                v[i] *= -1;
+            }
+            return Ret;
+        }
+
         public static Vector operator *(Vector v, Vector u)
         {
             return Cross(v, u);
         }
 
         public static Vector operator *(Vector v,Matrix M)
-        {
-            return (M * v.ToMatrix()).ToVector();
+        {            
+            return (M * v.ToMatrix(MatrixInitType.VectorsAreColumns)).ToVector();
         }
 
         public static Vector operator *(Vector v, double k)
@@ -187,6 +197,8 @@ namespace PhysLib
 
         public static Vector operator /(Vector v, double k)
         {
+            if (k == 0) throw new DivideByZeroException();
+
             for (int i = 0; i < v.Count; i++)
                 v[i] /= k;
 

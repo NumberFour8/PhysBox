@@ -218,6 +218,23 @@ namespace PhysLib
             }
         }
 
+
+        /// <summary>
+        /// Transponuje matici danou matici
+        /// </summary>
+        /// <param name="M">Matice, která se má transponovat</param>
+        public static Matrix Transpose(Matrix M)
+        {
+            Matrix Ret = new Matrix(M.Columns, M.Rows);
+            for (int i = 0; i < M.Rows; i++)
+            {
+                for (int j = 0; j < M.Columns; j++)
+                    Ret[j,i] = M[i, j];                
+            }
+            
+            return Ret;
+        }
+
         /// <summary>
         /// Převede matici o jednom řádku na vektor
         /// </summary>

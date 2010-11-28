@@ -15,14 +15,13 @@ namespace PhysBox
 {
     public partial class MainForm : Form
     {
-        
+        private World MyWorld;
+
         public MainForm()
         {
             InitializeComponent();
-            Actors = new ArrayList();
+            if (!Directory.Exists("objects")) Directory.CreateDirectory("objects");            
 
-            if (!Directory.Exists("objects"))
-                Directory.CreateDirectory("objects");
         }
 
         private void RefreshGeometries()
@@ -37,7 +36,32 @@ namespace PhysBox
             obj.ShowDialog();
             
             RefreshGeometries();
-        }        
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            newobj_Mass.Clear();
+        }
+
+        private void newObj_AutoName_CheckedChanged(object sender, EventArgs e)
+        {
+            newObj_Name.Enabled = !newObj_AutoName.Checked;
+        }
+
+        private void kreslitVektoryToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            velikostiVektorůToolStripMenuItem.Enabled = kreslitVektoryToolStripMenuItem.Checked;
+            velikostiVektorůToolStripMenuItem.Checked = false;
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            if (MyWorld == null)
+            {
+                MyWorld = new World(new Vector(Size.Width, Size.Height), World.B, World.EarthG);
+                MyWorld.OnTick += new EventHandler(MyWorld_OnTick);
+            }
+        }
 
     }
 }

@@ -17,6 +17,9 @@ namespace PhysLib
     public struct Field
     {
         private ForceFunction F;
+        private Vector center;
+        private object[] iparams;
+        private bool enabled;
 
         /// <summary>
         /// Vytvoří nové fyzikální pole sil
@@ -29,16 +32,16 @@ namespace PhysLib
             if (FieldFunction == null) throw new ArgumentNullException();
 
             F = FieldFunction;
-            FieldCenter = Center;
-            Parameters = FieldParams;
+            center = Center;
+            iparams = FieldParams;
 
-            Enabled = true;
+            enabled = true;
         }
         
         /// <summary>
         /// Centrum pole
         /// </summary>
-        public Vector FieldCenter { get; set; }
+        public Vector FieldCenter { get { return center; } set { center = value; } }
         
         /// <summary>
         /// Síla působící na těleso v poli
@@ -48,11 +51,11 @@ namespace PhysLib
         /// <summary>
         /// Indikuje, zda je pole zapnuté
         /// </summary>
-        public bool Enabled { get; set; }
+        public bool Enabled { get { return enabled; } set { enabled = value; } }
 
         /// <summary>
         /// Libovolné parametry pole
         /// </summary>
-        public object[] Parameters { get; set; }
+        public object[] Parameters { get { return iparams; } set { iparams = value; } }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -10,18 +11,14 @@ namespace PhysBox
 
     public class GraphicObject : Geometry
     {
-        public Pen Style { get; set; }
+        public Brush Fill { get; set; }
+        public bool ShowVectors { get; set; }
 
-        public GraphicObject(Color Line,PointF vPosition,PointF[] Geometry) 
-            : base (Geometry,vPosition)
-        {
-            Style = new Pen(Line);            
-        }
-
-        public GraphicObject(Color Line,PointF vPosition, PointF[] Geometry,float Angle,float Height,float Width,PointF Centroid)
+        public GraphicObject(Brush Texture,PointF vPosition, PointF[] Geometry,float Angle,float Height,float Width,PointF Centroid)
             : base(Geometry, vPosition, Angle, Height, Width, Centroid)
         {
-            Style = new Pen(Line);
+            Fill = Texture;
+            ShowVectors = false;
         }
 
         public GraphicsPath MakePath()
@@ -33,8 +30,8 @@ namespace PhysBox
             Trans.RotateAt(OrientationOf(World.B, Axes.X), Nail); 
             Trans.Translate((float)Position[0],(float)Position[1],MatrixOrder.Append);
 
-            Ret.Transform(Trans);
-            
+            Ret.Transform(Trans);            
+
             return Ret;
         }
     }
@@ -42,19 +39,39 @@ namespace PhysBox
     public partial class MainForm : Form
     {
 
-        private ArrayList Actors;
+        private BufferedGraphicsContext Ctx;
+
+        private void RenderAllObjects(Graphics Destination,bool WireFrame,bool ShowVectors)
+        {
+            foreach (SimObject o in MyWorld.Objects)
+            {
+                GraphicObject obj = o.Model as GraphicObject;
+                if (WireFrame)
+                    Destination.DrawPath(Pens.Black, obj.MakePath());
+                else Destination.FillPath(obj.Fill, obj.MakePath());
+            }
+        }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-
-            foreach (GraphicObject o in Actors.ToArray(typeof(GraphicObject)))
-            {
-                g.DrawPath(o.Style, o.MakePath());
-            }
-
             base.OnPaint(e);
+            
+            Rectangle WorldRect = new Rectangle(0, 0, (int)MyWorld.Constraints[0], (int)MyWorld.Constraints[1]);
+            using (BufferedGraphics buf = Ctx.Allocate(CreateGraphics(), WorldRect))
+            {
+                buf.Graphics.FillRectangle(Brushes.White, WorldRect);
+
+                if (verzeToolStripMenuItem.Checked)
+                    buf.Graphics.DrawString("PhysBox, v.0.1", new Font(FontFamily.GenericSansSerif, 12), Brushes.Black, new PointF(10, mainMenu.Height + 5));
+
+                RenderAllObjects(buf.Graphics, drátovýModelToolStripMenuItem.Checked, kreslitVektoryToolStripMenuItem.Checked);
+                buf.Render();
+            }
         }
 
+        void MyWorld_OnTick(object sender, EventArgs e)
+        {
+            Invalidate();
+        }
     }
 }

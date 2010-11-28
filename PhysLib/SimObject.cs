@@ -123,6 +123,15 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Materiálové konstanty tělesa
+        /// </summary>
+        public Material ObjectMaterial
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Aplikuje sílu na těleso
         /// </summary>
         /// <param name="Force">Vektor síly</param>

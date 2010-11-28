@@ -12,6 +12,14 @@ namespace PhysLib
     }
 
     /// <summary>
+    /// Definuje typ převodu podle rozlišení
+    /// </summary>
+    public enum ConversionType
+    {
+        MetersToPixels = 0, PixelsToMeters = 1
+    }
+
+    /// <summary>
     /// Reprezentuje fyzikální svět
     /// </summary>
     public class World
@@ -19,48 +27,72 @@ namespace PhysLib
         /// <summary>
         /// Směr osy X
         /// </summary>
-        public static const Vector X = new Vector(1, 0, 0);
+        public static readonly Vector X = new Vector(1, 0, 0);
         
         /// <summary>
         /// Směr osy Y
         /// </summary>
-        public static const Vector Y = new Vector(0, 1, 0);
+        public static readonly Vector Y = new Vector(0, 1, 0);
         
         /// <summary>
         /// Směr osy Z
         /// </summary>
-        public static const Vector Z = new Vector(0, 0, 1);
+        public static readonly Vector Z = new Vector(0, 0, 1);
         
         /// <summary>
         /// Matice souřadných os
         /// </summary>
-        public static const Matrix B = new Matrix(MatrixInitType.VectorsAreRows, X, Y, Z);
+        public static readonly Matrix B = new Matrix(MatrixInitType.VectorsAreRows, X, Y, Z);
 
         /// <summary>
         /// Průměrné zemské gravitační zrychlení
         /// </summary>
-        public static const Vector Ag = new Vector(0, -9.89, 0);
+        public static readonly Vector EarthG = new Vector(0, -9.89, 0);        
 
         private ArrayList Objs,Fields;
         private Vector cons;
         private Matrix o;
         private uint simulationTime;
+        private float r;
 
         private object SimLock = null;
 
         /// <summary>
         /// Vytvoří fyzikální svět
         /// </summary>
-        /// <param name="vConstraints">Rozměry světa</param>
-        /// <param name="mOrientation">Orientace os</param>
-        /// <param name="g">Gravitační zrychlení</param>
-        public World(Vector vConstraints,Matrix mOrientation,Vector g)
+        /// <param name="WorldConstraints">Rozměry světa v pixelech</param>
+        /// <param name="WorldOrientation">Orientace os</param>
+        /// <param name="GravityAccel">Gravitační zrychlení</param>
+        /// <param name="WorldResolution">Počet pixelů který představuje jeden fyzický metr</param>
+        public World(Vector WorldConstraints,Matrix WorldOrientation,Vector GravityAccel,float WorldResolution = 30)
         {
-            cons = vConstraints;
-            o = mOrientation;
-            Gravity = g;
+            Fields = new ArrayList();
+            Objs = new ArrayList();
+
+            cons = WorldConstraints;
+            o = WorldOrientation;
+            Gravity = GravityAccel;
             simulationTime = 0;
+            r = WorldResolution;
         }
+
+        /// <summary>
+        /// Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení světa
+        /// </summary>
+        /// <param name="Input">Vstupní číslo</param>
+        /// <param name="Type">Typ převodu</param>
+        /// <returns>Převedené číslo</returns>
+        public float Convert(float Input,ConversionType Type)
+        {
+            if (Type == ConversionType.MetersToPixels)
+                return Input * r;
+            else return Input / r;
+        }
+
+        /// <summary>
+        /// Rozlišení světa
+        /// </summary>
+        public float Resolution { get { return r; } }
 
         /// <summary>
         /// Vektor gravitace
@@ -105,7 +137,7 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Vše obklopující fluidum způsobující disipaci sil
+        /// Disipační konstanta
         /// </summary>
         public double Aether
         {
@@ -118,6 +150,11 @@ namespace PhysLib
         /// </summary>
         public Field[] ForceFields { get { return (Field[])Fields.ToArray(typeof(Field)); } }
 
+        /// <summary>
+        /// Všechna tělesave světě
+        /// </summary>
+        public SimObject[] Objects { get { return (SimObject[])Objs.ToArray(typeof(SimObject)); } }       
+
 
         /// <summary>
         /// Získá/změní těleso ve světě
@@ -127,7 +164,13 @@ namespace PhysLib
         public SimObject this[int index]
         {
             get { return (SimObject)Objs[index]; }
-            set { Objs[index] = value; }
+            set
+            {
+                lock (SimLock)
+                {
+                    Objs[index] = value;
+                }
+            }
         }
 
         /// <summary>
@@ -143,6 +186,11 @@ namespace PhysLib
             }
             return Fields.Count - 1;
         }
+
+        /// <summary>
+        /// Událost nastávající při každém simulačním kroku
+        /// </summary>
+        public event EventHandler OnTick;    
 
         /// <summary>
         /// Přidá těleso do světa
@@ -178,6 +226,7 @@ namespace PhysLib
                    }
                    
                    PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity,PhysObjs[i].COG);
+                   //PhysObjs[i].ApplyForce(, (PhysObjs[i].TotalTorque.Magnitude/PhysObjs[i].TotalForce.Magnitude)*Vector.Unit(Vector.Cross(PhysObjs[i].TotalTorque,PhysObjs[i].TotalForce)));
 
                    PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
                    PhysObjs[i].Model.Orientation *= Matrix.Make3DRotation(PhysObjs[i].AngularVelocity[0] * Delta, PhysObjs[i].AngularVelocity[1] * Delta, PhysObjs[i].AngularVelocity[2] * Delta);
@@ -188,6 +237,7 @@ namespace PhysLib
                    PhysObjs[i].Reset();                   
                }
             }
+            OnTick.DynamicInvoke(this, null);
         }
     }
 }
