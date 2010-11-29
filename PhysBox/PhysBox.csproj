@@ -38,7 +38,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -53,6 +52,9 @@
       <DependentUpon>CreateObject.cs</DependentUpon>
     </Compile>
     <Compile Include="Draw.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Geometries.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.cs">

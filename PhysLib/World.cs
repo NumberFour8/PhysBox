@@ -40,40 +40,47 @@ namespace PhysLib
         public static readonly Vector Z = new Vector(0, 0, 1);
         
         /// <summary>
-        /// Matice souřadných os
+        /// Standardní matice souřadných os
         /// </summary>
         public static readonly Matrix B = new Matrix(MatrixInitType.VectorsAreRows, X, Y, Z);
+
+        /// <summary>
+        /// Výchozí zobrazovací matice souřadných os na displeji
+        /// </summary>
+        public static readonly Matrix DisplayDefault = new Matrix(MatrixInitType.VectorsAreRows, X, -Y, Z);
 
         /// <summary>
         /// Průměrné zemské gravitační zrychlení
         /// </summary>
         public static readonly Vector EarthG = new Vector(0, -9.89, 0);        
 
-        private ArrayList Objs,Fields;
-        private Vector cons;
-        private Matrix o;
-        private uint simulationTime;
-        private float r;
+        private ArrayList Objs,Fields;        
+
+        private Matrix b;
+        private double simulationTime,maxRad, r;
 
         private object SimLock = null;
 
         /// <summary>
         /// Vytvoří fyzikální svět
         /// </summary>
-        /// <param name="WorldConstraints">Rozměry světa v pixelech</param>
-        /// <param name="WorldOrientation">Orientace os</param>
+        /// <param name="WorldOrientation">Orientace os zobrazovacího zařízení</param>
         /// <param name="GravityAccel">Gravitační zrychlení</param>
+        /// <param name="WorldConstraints">Poloměr světa v pixelech (maximální vzdálnost tělesa od počátku souřadnic)</param>
         /// <param name="WorldResolution">Počet pixelů který představuje jeden fyzický metr</param>
-        public World(Vector WorldConstraints,Matrix WorldOrientation,Vector GravityAccel,float WorldResolution = 30)
+        public World(Matrix WorldOrientation,Vector GravityAccel,double WorldDiameter,double WorldResolution = 30)
         {
             Fields = new ArrayList();
             Objs = new ArrayList();
 
-            cons = WorldConstraints;
-            o = WorldOrientation;
-            Gravity = GravityAccel;
+            
+            b = WorldOrientation;
+            maxRad = WorldDiameter;
+            
+            Gravity = Vector.ToBasis(b,GravityAccel)*WorldResolution;
             simulationTime = 0;
             r = WorldResolution;
+            SimLock = new object();
         }
 
         /// <summary>
@@ -82,7 +89,20 @@ namespace PhysLib
         /// <param name="Input">Vstupní číslo</param>
         /// <param name="Type">Typ převodu</param>
         /// <returns>Převedené číslo</returns>
-        public float Convert(float Input,ConversionType Type)
+        public double Convert(double Input,ConversionType Type)
+        {
+            if (Type == ConversionType.MetersToPixels)
+                return Input * r;
+            else return Input / r;
+        }
+
+        /// <summary>
+        /// Provede převod vektoru z metrů na pixely nebo z pixelů na metry podle daného rozlišení světa
+        /// </summary>
+        /// <param name="Input">Vstupní číslo</param>
+        /// <param name="Type">Typ převodu</param>
+        /// <returns>Převedené číslo</returns>
+        public Vector Convert(Vector Input, ConversionType Type)
         {
             if (Type == ConversionType.MetersToPixels)
                 return Input * r;
@@ -92,7 +112,7 @@ namespace PhysLib
         /// <summary>
         /// Rozlišení světa
         /// </summary>
-        public float Resolution { get { return r; } }
+        public double Resolution { get { return r; } }
 
         /// <summary>
         /// Vektor gravitace
@@ -105,17 +125,23 @@ namespace PhysLib
         /// <summary>
         /// Aktuální krok simulace
         /// </summary>
-        public uint CurrentTimeFrame
+        public double CurrentTimeFrame
         {
             get { return simulationTime; }
         }
 
         /// <summary>
-        /// Rozměry světa
+        /// Maximální vzdálenost tělesa od počátku
         /// </summary>
-        public Vector Constraints
+        public double MaximumRadius
         {
-            get { return cons; }
+            get { return maxRad; }
+            set
+            {
+                if (value < r * 30)
+                  maxRad = r * 30;
+                else maxRad = value;
+            }
         }
 
         /// <summary>
@@ -123,7 +149,7 @@ namespace PhysLib
         /// </summary>
         public Matrix Orientation
         {
-            get { return o; }
+            get { return b; }
         }
 
         /// <summary>
@@ -151,10 +177,26 @@ namespace PhysLib
         public Field[] ForceFields { get { return (Field[])Fields.ToArray(typeof(Field)); } }
 
         /// <summary>
-        /// Všechna tělesave světě
+        /// Všechna tělesa ve světě
         /// </summary>
-        public SimObject[] Objects { get { return (SimObject[])Objs.ToArray(typeof(SimObject)); } }       
+        public SimObject[] Objects { get { return (SimObject[])Objs.ToArray(typeof(SimObject)); } }
 
+
+        /// <summary>
+        /// Počet těles ve světě
+        /// </summary>
+        public uint CountObjects
+        {
+            get { return (uint)Objs.Count; }
+        }
+
+        /// <summary>
+        /// Počet polí ve světě
+        /// </summary>
+        public uint CountFields
+        {
+            get { return (uint)Fields.Count; }
+        }
 
         /// <summary>
         /// Získá/změní těleso ve světě
@@ -207,16 +249,46 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Najde první nejbližší těžiště objektu ve světě k dané pozici
+        /// </summary>
+        /// <param name="Position">Pozice</param>
+        /// <returns>Nejbližší objekt</returns>
+        public SimObject NearestObject(Vector Position)
+        {
+            double distance = Double.PositiveInfinity; 
+            int index = -1;
+            if (Objs.Count == 0)
+                throw new InvalidOperationException();
+
+            for (int i = 0; i < Objs.Count; i++)
+            {
+                double dist = (((SimObject)Objs[i]).Model.Position-Position).Magnitude;
+                if (dist == 0) return Objs[i] as SimObject;
+
+                if (dist < distance)
+                {
+                    distance = dist;
+                    index = i;
+                }
+            }
+            return Objs[index] as SimObject;
+        }
+
+        /// <summary>
         /// Provede simulační krok
         /// </summary>
         public void Tick()
         {
-            double Delta = 10;
+            double ms = DateTime.Now.Ticks / 10000;
+            double Delta = simulationTime == 0 ? 0 : (ms - simulationTime) / 1000;
+
             lock (SimLock)
             {
                SimObject[] PhysObjs = (SimObject[])Objs.ToArray(typeof(SimObject));
                for (int i = 0; i < Objs.Count; i++)
                {
+                   if (PhysObjs[i].Model.Position.Magnitude > maxRad)
+                      PhysObjs[i].Enabled = false;
                    if (!PhysObjs[i].Enabled) continue;
 
                    foreach (Field f in ForceFields)
@@ -226,17 +298,18 @@ namespace PhysLib
                    }
                    
                    PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity,PhysObjs[i].COG);
-                   //PhysObjs[i].ApplyForce(, (PhysObjs[i].TotalTorque.Magnitude/PhysObjs[i].TotalForce.Magnitude)*Vector.Unit(Vector.Cross(PhysObjs[i].TotalTorque,PhysObjs[i].TotalForce)));
 
                    PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
                    PhysObjs[i].Model.Orientation *= Matrix.Make3DRotation(PhysObjs[i].AngularVelocity[0] * Delta, PhysObjs[i].AngularVelocity[1] * Delta, PhysObjs[i].AngularVelocity[2] * Delta);
 
-                   PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * Delta / PhysObjs[i].Mass;
-                   PhysObjs[i].AngularVelocity += PhysObjs[i].TotalTorque * Delta / PhysObjs[i].MomentOfInertia;
+                   PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * (Delta / PhysObjs[i].Mass);
+                   PhysObjs[i].AngularVelocity += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);
 
                    PhysObjs[i].Reset();                   
                }
             }
+            simulationTime = ms;
+
             OnTick.DynamicInvoke(this, null);
         }
     }

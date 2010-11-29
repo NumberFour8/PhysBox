@@ -20,7 +20,12 @@ namespace PhysLib
         {
             model = gModel;
             Mass = dMass;
-         
+            
+            totalForce = new Vector(3);
+            totalTorque = new Vector(3);
+            LinearVelocity = new Vector(3);
+            AngularVelocity = new Vector(3);
+
             Enabled = true;
         }
 
@@ -32,7 +37,7 @@ namespace PhysLib
             get { return m; }
             set
             {
-                if (m > 0)
+                if (value > 0)
                   m = value;
                 else throw new ArgumentException();
             }

@@ -2,10 +2,11 @@
 using System.Drawing;
 
 namespace PhysLib
-{
+{   
     /// <summary>
     /// Abstraktní třída reprezentující fyzický model tělesa
     /// </summary>
+    [Serializable]
     public abstract class Geometry
     {
         /// <summary>
@@ -19,7 +20,7 @@ namespace PhysLib
 
         /// <summary>
         /// Vytvoří fyzický model tělesa jako objekt z daných vertexů
-        /// </summary>
+        /// </summary>       
         /// <param name="Vertices">Vertexy tělesa</param>
         /// <param name="InitPosition">Počáteční poloha tělesa</param>
         /// <param name="AngleX">Počáteční orientace tělesa vzhledem k ose X</param>
@@ -39,6 +40,7 @@ namespace PhysLib
             
             Orientation = World.B;
             Position = InitPosition;
+
             geom = Vertices;
             Nail = center;
             
@@ -47,9 +49,9 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Pozice objektu vzhledem k počátku světa
+        /// Pozice těžiště objektu vzhledem k počátku světa
         /// </summary>
-        public Vector Position
+        public virtual Vector Position
         {
             get; set;
         }
@@ -57,7 +59,7 @@ namespace PhysLib
         /// <summary>
         /// Orientace objektu vzhledem k orientaci světa
         /// </summary>
-        public Matrix Orientation
+        public virtual Matrix Orientation
         {
             get; set;
         }

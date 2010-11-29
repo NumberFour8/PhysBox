@@ -13,12 +13,14 @@ namespace PhysBox
     {
         public Brush Fill { get; set; }
         public bool ShowVectors { get; set; }
+        public string Name { get; set; }
 
         public GraphicObject(Brush Texture,PointF vPosition, PointF[] Geometry,float Angle,float Height,float Width,PointF Centroid)
             : base(Geometry, vPosition, Angle, Height, Width, Centroid)
         {
             Fill = Texture;
             ShowVectors = false;
+            Name = "obj_" + (DateTime.Now.Minute + DateTime.Now.Second).ToString();
         }
 
         public GraphicsPath MakePath()
@@ -54,9 +56,12 @@ namespace PhysBox
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e);
-            
-            Rectangle WorldRect = new Rectangle(0, 0, (int)MyWorld.Constraints[0], (int)MyWorld.Constraints[1]);
+            base.OnPaint(e);  
+        }
+
+        void MyWorld_OnTick(object sender, EventArgs e)
+        {
+            Rectangle WorldRect = new Rectangle(0, 0, Width, Height);
             using (BufferedGraphics buf = Ctx.Allocate(CreateGraphics(), WorldRect))
             {
                 buf.Graphics.FillRectangle(Brushes.White, WorldRect);
@@ -67,11 +72,6 @@ namespace PhysBox
                 RenderAllObjects(buf.Graphics, drátovýModelToolStripMenuItem.Checked, kreslitVektoryToolStripMenuItem.Checked);
                 buf.Render();
             }
-        }
-
-        void MyWorld_OnTick(object sender, EventArgs e)
-        {
-            Invalidate();
         }
     }
 }

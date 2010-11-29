@@ -78,6 +78,14 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Indikuje, zda je vektor jednotkový
+        /// </summary>
+        public bool IsUnit
+        {
+            get { return Magnitude == 1; }
+        }
+
+        /// <summary>
         /// Indikuje, zda je vektor nulový
         /// </summary>
         public bool IsNull
@@ -151,31 +159,50 @@ namespace PhysLib
             return Math.Acos(Vector.Dot(v,u) / (v.Magnitude * u.Magnitude));
         }
 
-        public static Vector operator +(Vector v, Vector u)
+        /// <summary>
+        /// Vyjádří daný vektor v bázi zadané vektory ze sloupců dané diagonální matice
+        /// </summary>
+        /// <param name="B">Matice báze</param>
+        /// <param name="V">Vektor, který se má převést</param>
+        /// <returns>Vektor A v bázi B</returns>
+        public static Vector ToBasis(Matrix B, Vector A)
         {
-            for (int i = 0; i < Math.Max(v.Count, u.Count); i++)
-               v[i] += u[i];
-            
-            return v;
+            if (!B.Diagonal || B.Columns != A.Count)
+                throw new MatrixException();
+
+            Vector Ret = new Vector(A.Count);
+            for (int i = 0, j = 0; i < B.Dimension; i += B.Columns + 1, j++)
+                Ret[j] = B[i] * A[j];
+
+            return Ret;
         }
 
-        public static Vector operator -(Vector v, Vector u)
+        public static Vector operator +(Vector v, Vector u)
         {
-            for (int i = 0; i < Math.Max(v.Count, u.Count); i++)
-                v[i] -= u[i];
-
-            return v;
+            Vector Ret = new Vector(Math.Max(v.Count,u.Count));
+            for (int i = 0; i < Ret.Count; i++)
+               Ret[i] = v[i]+u[i];
+            
+            return Ret;
         }
 
         public static Vector operator -(Vector v)
         {
             Vector Ret = new Vector(v.Count);
-            for (int i = 0;i < v.Count;i++)
-            {
-                v[i] *= -1;
-            }
+            for (int i = 0; i < v.Count; i++)
+                Ret[i] = -v[i];
+            
             return Ret;
         }
+
+        public static Vector operator -(Vector v, Vector u)
+        {
+            Vector Ret = new Vector(Math.Max(v.Count, u.Count));
+            for (int i = 0; i < Ret.Count; i++)
+                Ret[i] = v[i] - u[i];
+
+            return Ret;
+        }     
 
         public static Vector operator *(Vector v, Vector u)
         {
@@ -189,20 +216,29 @@ namespace PhysLib
 
         public static Vector operator *(Vector v, double k)
         {
+            Vector Ret = new Vector(v.Count);
             for (int i = 0; i < v.Count; i++)
-                v[i] *= k;
+                Ret[i] = v[i]*k;
             
-            return v;
+            return Ret;
+        }
+
+        public static Vector operator *(double k, Vector v)
+        {
+            return v * k;
         }
 
         public static Vector operator /(Vector v, double k)
         {
             if (k == 0) throw new DivideByZeroException();
 
-            for (int i = 0; i < v.Count; i++)
-                v[i] /= k;
+            return v*(1/k);
+        }
 
-            return v;
+        public static Vector operator /(double k,Vector v)
+        {
+            throw new InvalidOperationException();
+
         }
 
         public static bool operator ==(Vector v, Vector u)
@@ -237,7 +273,7 @@ namespace PhysLib
 
         public static implicit operator Vector(System.Drawing.PointF p)
         {
-            return new Vector(p.X,p.Y);
+            return new Vector(p.X,p.Y,0); // !
         }
 
         public static implicit operator System.Drawing.PointF(Vector v)
@@ -248,11 +284,6 @@ namespace PhysLib
         public static implicit operator double(Vector v)
         {
             return v.Magnitude;
-        }
-
-        public static implicit operator float(Vector v)
-        {
-            return (float)v.Magnitude;
         }
 
         /// <summary>

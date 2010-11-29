@@ -218,6 +218,21 @@ namespace PhysLib
             }
         }
 
+        /// <summary>
+        /// Indikuje zda je daná matice v diagonálním tvaru
+        /// </summary>
+        public bool Diagonal
+        {
+            get
+            {
+                if (rows != cols) return false;
+                for (int i = 0; i < rows * cols; i++)
+                {
+                    if (t[i] != 0 && i % (rows + 1) != 0) return false;
+                }
+                return true;
+            }
+        }
 
         /// <summary>
         /// Transponuje matici danou matici
