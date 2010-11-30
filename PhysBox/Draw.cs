@@ -29,7 +29,7 @@ namespace PhysBox
             Ret.AddClosedCurve(ObjectGeometry);
             
             System.Drawing.Drawing2D.Matrix Trans = new System.Drawing.Drawing2D.Matrix();
-            Trans.RotateAt(OrientationOf(World.B, Axes.X), Nail); 
+            Trans.RotateAt((float)Orientation[0], Nail); 
             Trans.Translate((float)Position[0],(float)Position[1],MatrixOrder.Append);
 
             Ret.Transform(Trans);            

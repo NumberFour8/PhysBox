@@ -37,15 +37,12 @@ namespace PhysLib
                 center = Centroid.Value;
             }
             else AnalyzeVertexGroup(Vertices, out height, out width, out center);
-            
-            Orientation = World.B;
+
+            Orientation = new Vector(AngleX,0,0);
             Position = InitPosition;
 
             geom = Vertices;
             Nail = center;
-            
-            if (Math.Sin(AngleX) != 0)
-               Orientation *= Matrix.Make3DRotation(AngleX, 0, 0);
         }
 
         /// <summary>
@@ -57,22 +54,11 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Orientace objektu vzhledem k orientaci světa
+        /// Orientace objektu
         /// </summary>
-        public virtual Matrix Orientation
+        public virtual Vector Orientation
         {
             get; set;
-        }
-
-        /// <summary>
-        /// Zjistí úhel, který svírá vektor dané osy souřadného systému v tělese se souřadným systémem světa
-        /// </summary>
-        /// <param name="RefFrame">Matice souřadného systému světa</param>
-        /// <param name="Axis">Vybraná osa</param>
-        /// <returns>Úhel mezi osami</returns>
-        public float OrientationOf(Matrix RefFrame,Axes Axis)
-        {
-            return (float)Vector.Angle(RefFrame.GetRow((int)Axis - 1), Orientation.GetRow((int)Axis - 1));
         }
 
         /// <summary>
