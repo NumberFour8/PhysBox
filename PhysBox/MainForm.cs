@@ -16,32 +16,35 @@ namespace PhysBox
     public partial class MainForm : Form
     {
         private World MyWorld;
-        private GraphicObject Placing = null;
-        private SimObject Selected = null;
-        private bool Moving,Rotating = false;
+        private SimObject Placing = null;
+        private bool Moving = false,Rotating = false,AddForce = false;
 
+        private Point? afOrigin;
+        
+        private Toolbox Tools;
+        public SimObject Selected = null;
+        
         public MainForm()
         {
             InitializeComponent();
-            if (!Directory.Exists("objects")) Directory.CreateDirectory("objects");
             Ctx = new BufferedGraphicsContext();
-            
-            RefreshGeometries();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ShowToolbox()
         {
-            Placing = ReadObjectFromFile(newobj_Geometry.SelectedItem.ToString());
+            if (Tools == null || Tools.IsDisposed) Tools = new Toolbox();
+                
+            Tools.Location = new Point(Size.Width - Tools.Width - 5, mainMenu.Height + 30);
+            Tools.Show(this);
+        }
+
+        public void AddObject(SimObject O)
+        {
+            Placing = O;
             Cursor = Cursors.Cross;
-            
-            newObj.Enabled = button1.Enabled = false;
             Moving = Rotating = false;
         }
 
-        private void newObj_AutoName_CheckedChanged(object sender, EventArgs e)
-        {
-            newObj_Name.Enabled = !newObj_AutoName.Checked;
-        }
 
         private void kreslitVektoryToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
@@ -51,10 +54,10 @@ namespace PhysBox
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            if (MyWorld == null)
-            {
-                MyWorld = new World(World.DisplayDefault, World.EarthG,1.5*Math.Sqrt(Math.Pow(Height,2)+Math.Pow(Width,2)));
+            if (MyWorld == null){
+                MyWorld = new World(World.DisplayDefault, World.EarthG,1.5*Math.Sqrt(Math.Pow(Size.Height,2)+Math.Pow(Size.Width,2)));
                 MyWorld.OnTick += new EventHandler(MyWorld_OnTick);
+                simTime.Enabled = true;
             }
         }
 
@@ -69,23 +72,15 @@ namespace PhysBox
             {
                 if (Placing != null)
                 {
-                    Placing.Position[0] = (double)(e.X);
-                    Placing.Position[1] = (double)(e.Y);
+                    Placing.Model.Position[0] = (double)(e.X);
+                    Placing.Model.Position[1] = (double)(e.Y);
 
-                    if (newObj_AutoName.Checked)
-                        Placing.Name = String.Format("object_#{0}", MyWorld.CountObjects + 1);
-                    else Placing.Name = newObj_Name.Text;
-
-                    SimObject MyNewObject = new SimObject(Placing, double.Parse(newobj_Mass.Text) / 1000);
-                    MyNewObject.Enabled = newObj_Enabled.Checked;
-
-                    MyWorld.AddObject(MyNewObject);
-
-                    newObj.Enabled = button1.Enabled = true;
-
+                    MyWorld.AddObject(Placing);
+                    
                     Placing = null;
                     Moving = Rotating = false;
                     Cursor = Cursors.Default;
+                    Tools.ActionDone();
                 }
 
                 if (Moving && Selected != null)
@@ -93,34 +88,35 @@ namespace PhysBox
                     Selected.Model.Position = new Vector(e.X, e.Y, 0);
                     Cursor = Cursors.Default;
                 }
+
+                if (AddForce && Selected != null){
+                    if (afOrigin == null)
+                        afOrigin = GetPositionOnObject(new Point((int)Selected.Model.Position[0], (int)Selected.Model.Position[1]), Selected.Model.ObjectGeometry, e.Location);
+                    else
+                    {
+                        AddForce = false;
+                        Cursor = Cursors.Default;
+                        Selected.ApplyForce(new Vector((double)(afOrigin.Value.X - e.X), (double)(afOrigin.Value.Y - e.Y)), new Vector((double)afOrigin.Value.X, (double)afOrigin.Value.Y));
+
+                        afOrigin = null;
+                        Tools.ActionDone();
+                    }
+                }
+                    
             }
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
+                if (MyWorld.CountObjects == 0) return;
                 Selected = MyWorld.NearestObject(new Vector(e.X, e.Y, 0));
-                status_SelObject.Text = manipulateObj_Name.Text = String.Format("Objekt: {0}", (Selected.Model as GraphicObject).Name);
+
+                stat_SelObject.Text = manipulateObj_Name.Text = String.Format("Objekt: {0}", (Selected.Model as GraphicObject).Name);
                 manipulateObj_Enabled.Checked = Selected.Enabled;
                 manipulateObj.Enabled = true;
                 manipulateObj.Show(new Point(e.X, e.Y));
+
+                Tools.ChangeTool(1);
             }
             Moving = false;
-        }
-
-        private void manipulateObj_Enabled_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Selected != null)
-                Selected.Enabled = manipulateObj_Enabled.Checked;
-        }
-
-        private void status_SelObject_DropDownOpening(object sender, EventArgs e)
-        {
-            manipulateObj_Name.Text = "Žádný objekt";
-            manipulateObj.Enabled = Selected != null;
-            Rotating = Moving = false;
-            if (Selected != null)
-            {
-                manipulateObj_Name.Text = String.Format("Objekt: {0}", (Selected.Model as GraphicObject).Name);
-                manipulateObj_Enabled.Checked = Selected.Enabled;
-            }
         }
 
         private void přemístitSemToolStripMenuItem_Click(object sender, EventArgs e)
@@ -148,6 +144,37 @@ namespace PhysBox
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left && Rotating && Selected != null)
                 Selected.Model.Orientation[0] += 3;
+        }        
+
+        private void nástrojeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowToolbox();
+        }
+
+        private void pozastavitSimulaciToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            MyWorld.Paused = pozastavitSimulaciToolStripMenuItem.Checked;
+            status_SimStat.Text = MyWorld.Paused ? "Simulace pozastavena" : "Simulace běží";
+        }
+
+        private void manipulateObj_Enabled_Click(object sender, EventArgs e)
+        {
+            if (Selected != null)
+              Selected.Enabled = manipulateObj_Enabled.Checked;
+        }
+
+        private void působitSilouToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Selected != null)
+            {
+                AddForce = true;
+                afOrigin = null;
+                Tools.Forbid();
+
+                Cursor = Cursors.Cross;
+                Cursor.Position = new Point((int)(Selected.Model.Position[0] + Selected.Model.ObjectGeometry[0].X + 1),(int)(Selected.Model.Position[1] + Selected.Model.ObjectGeometry[0].Y + 1));
+            }
+            
         }
 
     }

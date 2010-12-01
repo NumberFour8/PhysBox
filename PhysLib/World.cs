@@ -60,6 +60,7 @@ namespace PhysLib
         private double simulationTime,maxRad, r;
 
         private object SimLock = null;
+        private bool paused;
 
         /// <summary>
         /// Vytvoří fyzikální svět
@@ -81,6 +82,7 @@ namespace PhysLib
             simulationTime = 0;
             r = WorldResolution;
             SimLock = new object();
+            paused = false;
         }
 
         /// <summary>
@@ -199,6 +201,15 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Indikuje, zda je simulace pozastavena
+        /// </summary>
+        public bool Paused
+        {
+            get { return paused; }
+            set { paused = value; }
+        }
+
+        /// <summary>
         /// Získá/změní těleso ve světě
         /// </summary>
         /// <param name="index">Index tělesa</param>
@@ -282,34 +293,37 @@ namespace PhysLib
             double ms = DateTime.Now.Ticks / 10000;
             double Delta = simulationTime == 0 ? 0 : (ms - simulationTime) / 1000;
 
-            lock (SimLock)
+            if (!paused)
             {
-               SimObject[] PhysObjs = (SimObject[])Objs.ToArray(typeof(SimObject));
-               for (int i = 0; i < Objs.Count; i++)
-               {
-                   if (PhysObjs[i].Model.Position.Magnitude > maxRad)
-                   {
-                       PhysObjs[i].LinearVelocity = PhysObjs[i].AngularVelocity = 0;
-                       PhysObjs[i].Enabled = false;
-                   }
-                   if (!PhysObjs[i].Enabled) continue;
+                lock (SimLock)
+                {
+                    SimObject[] PhysObjs = (SimObject[])Objs.ToArray(typeof(SimObject));
+                    for (int i = 0; i < Objs.Count; i++)
+                    {
+                        if (PhysObjs[i].Model.Position.Magnitude > maxRad)
+                        {
+                            PhysObjs[i].LinearVelocity = PhysObjs[i].AngularVelocity = 0;
+                            PhysObjs[i].Enabled = false;
+                        }
+                        if (!PhysObjs[i].Enabled) continue;
 
-                   foreach (Field f in ForceFields)
-                   {
-                       if (f.Enabled)
-                         PhysObjs[i].ApplyForce(f.GetForce(f, PhysObjs[i]), PhysObjs[i].COG);
-                   }
-                   
-                   PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity,PhysObjs[i].COG);
+                        foreach (Field f in ForceFields)
+                        {
+                            if (f.Enabled)
+                                PhysObjs[i].ApplyForce(f.GetForce(f, PhysObjs[i]), PhysObjs[i].COG);
+                        }
 
-                   PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
-                   PhysObjs[i].Model.Orientation += PhysObjs[i].AngularVelocity * Delta;
+                        PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity, PhysObjs[i].COG);
 
-                   PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * (Delta / PhysObjs[i].Mass);
-                   PhysObjs[i].AngularVelocity += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);
+                        PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
+                        PhysObjs[i].Model.Orientation += PhysObjs[i].AngularVelocity * Delta;
 
-                   PhysObjs[i].Reset();                   
-               }
+                        PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * (Delta / PhysObjs[i].Mass);
+                        PhysObjs[i].AngularVelocity += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);
+
+                        PhysObjs[i].Reset();
+                    }
+                }
             }
             simulationTime = ms;
 

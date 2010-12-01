@@ -30,6 +30,8 @@ namespace PhysLib
         public Geometry(PointF[] Vertices,PointF InitPosition,float AngleX = 0,float Height = 0,float Width = 0,PointF? Centroid = null)
         {
 
+            if (Vertices == null || Vertices.Length < 3) throw new ArgumentException();
+
             if (Height != 0 && Width != 0 && Centroid.HasValue)
             {
                 height = Height;
@@ -84,10 +86,9 @@ namespace PhysLib
             float s = 0;
 
             for (int i = 0; i < Vertices.Length - 1; i++)
+            {
                 s += Vertices[i].X * Vertices[i + 1].Y - Vertices[i].Y * Vertices[i + 1].X;
 
-            for (int i = 0; i < Vertices.Length - 1; i++)
-            {
                 Centroid.X += (Vertices[i].X + Vertices[i + 1].X) * (Vertices[i].X * Vertices[i + 1].Y - Vertices[i].Y * Vertices[i + 1].X);
                 Centroid.Y += (Vertices[i].Y + Vertices[i + 1].Y) * (Vertices[i].X * Vertices[i + 1].Y - Vertices[i].Y * Vertices[i + 1].X);
 
@@ -106,12 +107,24 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Spočte vzdálenost dvou bodů
+        /// </summary>
+        /// <param name="A">Bod A</param>
+        /// <param name="B">Bod B</param>
+        /// <returns>Vzdálenost |AB|</returns>
+        public static double PointDistance(PointF A, PointF B)
+        {
+            return Math.Sqrt(Math.Pow(A.X - B.X, 2) + Math.Pow(A.Y - B.Y,2));
+        }
+
+        /// <summary>
         /// Geometrický střed objektu (centroid)
         /// </summary>
         public PointF Centroid
         {
             get { return center; }    
         }
+
 
         /// <summary>
         /// Bod, kterým prochází osa otáčení objektu

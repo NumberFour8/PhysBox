@@ -14,6 +14,7 @@ namespace PhysBox
         public Brush Fill { get; set; }
         public bool ShowVectors { get; set; }
         public string Name { get; set; }
+        public float Tension { get; set; }
 
         public GraphicObject(Brush Texture,PointF vPosition, PointF[] Geometry,float Angle,float Height,float Width,PointF Centroid)
             : base(Geometry, vPosition, Angle, Height, Width, Centroid)
@@ -21,12 +22,13 @@ namespace PhysBox
             Fill = Texture;
             ShowVectors = false;
             Name = "obj_" + (DateTime.Now.Minute + DateTime.Now.Second).ToString();
+            Tension = 0;
         }
 
         public GraphicsPath MakePath()
         {
             GraphicsPath Ret = new GraphicsPath();
-            Ret.AddClosedCurve(ObjectGeometry);
+            Ret.AddClosedCurve(ObjectGeometry,Tension);
             
             System.Drawing.Drawing2D.Matrix Trans = new System.Drawing.Drawing2D.Matrix();
             Trans.RotateAt((float)Orientation[0], Nail); 
@@ -49,8 +51,26 @@ namespace PhysBox
             {
                 GraphicObject obj = o.Model as GraphicObject;
                 if (WireFrame)
-                    Destination.DrawPath(Pens.Black, obj.MakePath());
+                {
+                    Pen p = Pens.Black;
+                    if (Selected != null && obj.Name == (Selected.Model as GraphicObject).Name) p = Pens.Violet;
+
+                    Destination.DrawPath(p, obj.MakePath());
+                    Destination.FillEllipse(Brushes.Black, new Rectangle((int)obj.Position[0] - 2, (int)obj.Position[1] - 2, 4, 4));
+                    Destination.FillEllipse(Brushes.Blue, new Rectangle((int)(obj.Nail.X + obj.Position[0]) - 2, (int)(obj.Nail.Y + obj.Position[1]) - 2, 4, 4));
+                }
                 else Destination.FillPath(obj.Fill, obj.MakePath());
+            }
+            if (AddForce && Selected != null && afOrigin != null)
+            {
+                Destination.FillEllipse(Brushes.Red, new Rectangle(afOrigin.Value.X - 4, afOrigin.Value.Y - 4,8,8));
+
+                Point pt = Cursor.Position;
+                pt.Y -= 23;
+
+                Destination.DrawLine(Pens.Red, pt, afOrigin.Value);                
+                double size = Math.Round(Math.Sqrt(Math.Pow(Cursor.Position.X-afOrigin.Value.X,2)+Math.Pow(Cursor.Position.Y-afOrigin.Value.Y,2))*MyWorld.Resolution,2);
+                Destination.DrawString(String.Format("{0} N", size), new Font(FontFamily.GenericSansSerif, 7), Brushes.Red, new PointF(afOrigin.Value.X + 10, afOrigin.Value.Y + 10));
             }
         }
 
