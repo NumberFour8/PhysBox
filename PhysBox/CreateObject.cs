@@ -12,12 +12,17 @@ namespace PhysBox
     {
         private ArrayList pts;
         private PointF? COG;
+        private PointF cCOG;
+        double Height, Width;
+        private Color col;
 
         public CreateObject()
         {
             InitializeComponent();
             pts = new ArrayList();
             COG = null;
+            col = Color.Brown;
+            Height = Width = 0;
         }
 
         private void panel1_MouseClick(object sender, MouseEventArgs e)
@@ -26,12 +31,19 @@ namespace PhysBox
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
                 pts.Add(new PointF(e.Location.X,e.Location.Y));
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
-                COG = e.Location;                
+            {
+                COG = e.Location;
+                PhysLib.Geometry.AnalyzeVertexGroup((PointF[])pts.ToArray(typeof(PointF)), out Height, out Width, out cCOG);
+
+                label_cCOG.Text = String.Format("Spočítané těžiště: [{0:f1};{1:f1}]", cCOG.X, cCOG.Y);
+                label_COG.Text =  String.Format("Určené těžiště: [{0};{1}]", COG.Value.X, COG.Value.Y);
+
+            }
             
             text_objName.Enabled = COG != null;
             button_selColor.Enabled = COG != null;
 
-            panel1.Refresh();
+            drawPanel.Invalidate();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -51,6 +63,7 @@ namespace PhysBox
                 g.DrawPath(Pens.Black, Path);
 
                 g.FillEllipse(Brushes.Red, new RectangleF(COG.Value.X - 2, COG.Value.Y - 2, 4, 4));
+                g.FillEllipse(Brushes.Blue, new RectangleF(cCOG.X - 2, cCOG.Y - 2, 4, 4));
             }
         }
 
@@ -60,15 +73,11 @@ namespace PhysBox
         }
 
         private void button_OK_Click(object sender, EventArgs e)
-        {
-            PointF c = new PointF();
-            double Height, Width;
+        {            
 
-            PhysLib.Geometry.AnalyzeVertexGroup((PointF[])pts.ToArray(typeof(PointF)), out Height, out Width, out c);
-
-            if (Math.Sqrt(Math.Pow(c.X - COG.Value.X, 2) + Math.Pow(c.Y - COG.Value.Y, 2)) > 10 &&
-                MessageBox.Show("Vypočítané těžiště a ručně určené težiště útvaru jsou rozdílné o více než 10 pixelů, přesto použít ručně určené těžiště?", "Různá těžiště", MessageBoxButtons.YesNo,MessageBoxIcon.Question,MessageBoxDefaultButton.Button2)
-                == System.Windows.Forms.DialogResult.No) COG = c;         
+            if (Math.Sqrt(Math.Pow(cCOG.X - COG.Value.X, 2) + Math.Pow(cCOG.Y - COG.Value.Y, 2)) > 10 &&
+                MessageBox.Show("Vzdálenost vypočítaného těžiště a ručně určeného težiště útvaru je větší než 10 pixelů, přesto použít ručně určené těžiště?", "Různá těžiště", MessageBoxButtons.YesNo,MessageBoxIcon.Question,MessageBoxDefaultButton.Button2)
+                == System.Windows.Forms.DialogResult.No) COG = cCOG;         
             
             using (XmlTextWriter Object = new XmlTextWriter("objects\\" + text_objName.Text + ".xml", Encoding.UTF8))
             {
@@ -76,7 +85,10 @@ namespace PhysBox
                 Object.WriteStartElement("Geometry");
                 Object.WriteAttributeString("W", Width.ToString());
                 Object.WriteAttributeString("H", Height.ToString());
-
+                Object.WriteAttributeString("D", text_objDepth.Text);
+                Object.WriteAttributeString("C", text_objDrag.Text);
+                Object.WriteAttributeString("Color", col.ToArgb().ToString());
+                
                 for (int i = 0; i < pts.Count; i++)
                 {
                     Object.WriteStartElement("Vertex");
@@ -89,6 +101,12 @@ namespace PhysBox
                 Object.WriteEndDocument();
             }
             Close();
+        }
+
+        private void button_selColor_Click(object sender, EventArgs e)
+        {
+            colorDialog.ShowDialog();
+            col = colorDialog.Color;
         }
     }
 }

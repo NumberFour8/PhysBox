@@ -145,7 +145,7 @@
             this.newObj_Enabled.AutoSize = true;
             this.newObj_Enabled.Checked = true;
             this.newObj_Enabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.newObj_Enabled.Location = new System.Drawing.Point(14, 181);
+            this.newObj_Enabled.Location = new System.Drawing.Point(14, 229);
             this.newObj_Enabled.Name = "newObj_Enabled";
             this.newObj_Enabled.Size = new System.Drawing.Size(72, 17);
             this.newObj_Enabled.TabIndex = 9;
@@ -157,7 +157,7 @@
             this.newObj_AutoName.AutoSize = true;
             this.newObj_AutoName.Checked = true;
             this.newObj_AutoName.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.newObj_AutoName.Location = new System.Drawing.Point(14, 157);
+            this.newObj_AutoName.Location = new System.Drawing.Point(14, 206);
             this.newObj_AutoName.Name = "newObj_AutoName";
             this.newObj_AutoName.Size = new System.Drawing.Size(116, 17);
             this.newObj_AutoName.TabIndex = 8;

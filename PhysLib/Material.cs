@@ -9,7 +9,6 @@ namespace PhysLib
     public struct Material
     {
         private double density;
-        private double dragcoeff;
         private double frictioncoeff;
         private double susceptibility;
         private string name;
@@ -18,14 +17,12 @@ namespace PhysLib
         /// Výchozí konstruktor materiálu
         /// </summary>
         /// <param name="dDensity">Hustota</param>
-        /// <param name="dDrag">Součinitel odporu</param>
         /// <param name="dFriction">Součinitel smykového tření</param>
         /// <param name="dSusceptibility">Magnetická susceptibilita materiálu</param>
         /// <param name="sName">Název materiálu</param>
-        public Material(double dDensity, double dDrag, double dFriction, double dSusceptibility, string sName)
+        public Material(double dDensity, double dFriction, double dSusceptibility, string sName)
         {
             density = dDensity;
-            dragcoeff = dDrag;
             frictioncoeff = dFriction;
             susceptibility = dSusceptibility;
             name = sName;
@@ -39,17 +36,6 @@ namespace PhysLib
             get
             {
                 return density;
-            }
-        }
-
-        /// <summary>
-        /// Součinitel odporu 
-        /// </summary>
-        public double DragCoefficient
-        {
-            get
-            {
-                return dragcoeff;
             }
         }
 

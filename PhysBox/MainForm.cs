@@ -34,7 +34,7 @@ namespace PhysBox
         {
             if (Tools == null || Tools.IsDisposed) Tools = new Toolbox();
                 
-            Tools.Location = new Point(Size.Width - Tools.Width - 5, mainMenu.Height + 30);
+            Tools.Location = new Point(Size.Width - Tools.Width - 20, mainMenu.Height + 30);
             Tools.Show(this);
         }
 
@@ -73,7 +73,7 @@ namespace PhysBox
                 if (Placing != null)
                 {
                     Placing.Model.Position[0] = (double)(e.X);
-                    Placing.Model.Position[1] = (double)(e.Y);
+                    Placing.Model.Position[1] = (double)(e.Y+CursorCorrection);
 
                     MyWorld.AddObject(Placing);
                     
@@ -85,7 +85,7 @@ namespace PhysBox
 
                 if (Moving && Selected != null)
                 {
-                    Selected.Model.Position = new Vector(e.X, e.Y, 0);
+                    Selected.Model.Position = new Vector(e.X, e.Y+CursorCorrection, 0);
                     Cursor = Cursors.Default;
                 }
 
@@ -96,7 +96,7 @@ namespace PhysBox
                     {
                         AddForce = false;
                         Cursor = Cursors.Default;
-                        Selected.ApplyForce(new Vector((double)(afOrigin.Value.X - e.X), (double)(afOrigin.Value.Y - e.Y)), new Vector((double)afOrigin.Value.X, (double)afOrigin.Value.Y));
+                        Selected.ApplyForce(new Vector((double)(afOrigin.Value.X - e.X), (double)(afOrigin.Value.Y - (e.Y+CursorCorrection))), new Vector((double)afOrigin.Value.X, (double)afOrigin.Value.Y));
 
                         afOrigin = null;
                         Tools.ActionDone();
@@ -172,7 +172,6 @@ namespace PhysBox
                 Tools.Forbid();
 
                 Cursor = Cursors.Cross;
-                Cursor.Position = new Point((int)(Selected.Model.Position[0] + Selected.Model.ObjectGeometry[0].X + 1),(int)(Selected.Model.Position[1] + Selected.Model.ObjectGeometry[0].Y + 1));
             }
             
         }

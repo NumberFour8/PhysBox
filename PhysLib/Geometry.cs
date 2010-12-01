@@ -48,6 +48,14 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Koeficient odporu
+        /// </summary>
+        public double DragCoefficient
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// Pozice těžiště objektu vzhledem k počátku světa
         /// </summary>
         public virtual Vector Position
