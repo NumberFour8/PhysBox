@@ -16,8 +16,8 @@ namespace PhysBox
         public string Name { get; set; }
         public float Tension { get; set; }
 
-        public GraphicObject(Brush Texture,PointF vPosition, PointF[] Geometry,float Angle,float Height,float Width,PointF Centroid)
-            : base(Geometry, vPosition, Angle, Height, Width, Centroid)
+        public GraphicObject(Brush Texture, PointF[] Geometry,float Height,float Width,PointF Centroid)
+            : base(Geometry, new System.Drawing.PointF(0, 0), Height, Width, Centroid)
         {
             Fill = Texture;
             ShowVectors = false;
@@ -28,16 +28,21 @@ namespace PhysBox
         public GraphicsPath MakePath()
         {
             GraphicsPath Ret = new GraphicsPath();
-            Ret.AddClosedCurve(ObjectGeometry,Tension);
-            
             System.Drawing.Drawing2D.Matrix Trans = new System.Drawing.Drawing2D.Matrix();
-            Trans.RotateAt((float)Orientation[0], Nail); 
-            Trans.Translate((float)Position[0],(float)Position[1],MatrixOrder.Append);
+            Trans.Translate((float)Position[0], (float)Position[1], MatrixOrder.Prepend);
+            Trans.RotateAt((float)Orientation[0], Nail);
 
+            Ret.AddClosedCurve(ObjectGeometry, Tension);
             Ret.Transform(Trans);            
 
             return Ret;
         }
+
+        public PointF[] TransformedGeometry
+        {
+            get { return MakePath().PathPoints; }
+        }
+
     }
 
     public partial class MainForm : Form
@@ -51,6 +56,7 @@ namespace PhysBox
             foreach (SimObject o in MyWorld.Objects)
             {
                 GraphicObject obj = o.Model as GraphicObject;
+                GraphicsPath pth = obj.MakePath();
                 if (WireFrame)
                 {
                     Pen p = Pens.Black;
@@ -59,9 +65,15 @@ namespace PhysBox
                         p = Pens.Violet;
                         if (afOrigin != null && AddForce)
                           Destination.DrawLine(Pens.Gray, new PointF(afOrigin.Value.X,afOrigin.Value.Y), new PointF(obj.Nail.X + (float)obj.Position[0], obj.Nail.Y + (float)obj.Position[1]));
+
+                        if (menu_showVertices.Checked)
+                        {
+                            foreach (PointF pt in pth.PathPoints)
+                                Destination.FillRectangle(Brushes.Navy, new RectangleF(pt.X - 2, pt.Y - 2, 4, 4));
+                        }
                     }
 
-                    Destination.DrawPath(p, obj.MakePath());
+                    Destination.DrawPath(p, pth);
                     Destination.FillEllipse(Brushes.Black, new RectangleF((float)obj.Position[0] - 2.0f, (float)obj.Position[1] - 2, 4, 4));
                     Destination.FillEllipse(Brushes.Blue, new RectangleF(obj.Nail.X + (float)obj.Position[0] - 2.0f, obj.Nail.Y + (float)obj.Position[1] - 2.0f, 4, 4));
                 }
@@ -81,12 +93,12 @@ namespace PhysBox
             {
                 buf.Graphics.FillRectangle(Brushes.White, WorldRect);
 
-                if (verzeToolStripMenuItem.Checked)
+                if (menu_showVersion.Checked)
                     buf.Graphics.DrawString("PhysBox, v.0.1", new Font(FontFamily.GenericSansSerif, 12), Brushes.Black, new PointF(10, mainMenu.Height + 5));
 
                 if (AddForce && Selected != null && afOrigin != null)
                 {
-                    buf.Graphics.FillEllipse(Brushes.Red, new Rectangle(afOrigin.Value.X - 4, afOrigin.Value.Y - 4, 8, 8));
+                    buf.Graphics.FillEllipse(Brushes.Red, new RectangleF(afOrigin.Value.X - 4, afOrigin.Value.Y - 4, 8, 8));
 
                     Point pt = Cursor.Position;
                     pt.Y += CursorCorrection;
@@ -96,7 +108,7 @@ namespace PhysBox
                     buf.Graphics.DrawString(String.Format("{0} N", size), new Font(FontFamily.GenericSansSerif, 7), Brushes.Red, new PointF(afOrigin.Value.X - 50, afOrigin.Value.Y + 10));
                 }
 
-                RenderAllObjects(buf.Graphics, drátovýModelToolStripMenuItem.Checked, kreslitVektoryToolStripMenuItem.Checked);
+                RenderAllObjects(buf.Graphics, menu_enableWireframe.Checked, menu_showVectors.Checked);
                 buf.Render();
             }
         }

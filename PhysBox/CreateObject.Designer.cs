@@ -40,10 +40,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.text_objDepth = new System.Windows.Forms.MaskedTextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.text_objTension = new System.Windows.Forms.MaskedTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label_COG = new System.Windows.Forms.Label();
             this.label_cCOG = new System.Windows.Forms.Label();
+            this.button_selTexture = new System.Windows.Forms.Button();
+            this.textureDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,9 +106,9 @@
             this.button_selColor.Enabled = false;
             this.button_selColor.Location = new System.Drawing.Point(197, 194);
             this.button_selColor.Name = "button_selColor";
-            this.button_selColor.Size = new System.Drawing.Size(93, 21);
+            this.button_selColor.Size = new System.Drawing.Size(78, 21);
             this.button_selColor.TabIndex = 7;
-            this.button_selColor.Text = "Vybrat barvu...";
+            this.button_selColor.Text = "Barva...";
             this.button_selColor.UseVisualStyleBackColor = true;
             this.button_selColor.Click += new System.EventHandler(this.button_selColor_Click);
             // 
@@ -157,15 +159,16 @@
             this.label4.TabIndex = 14;
             this.label4.Text = "px";
             // 
-            // maskedTextBox1
+            // text_objTension
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(114, 273);
-            this.maskedTextBox1.Mask = "0.00";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.PromptChar = ' ';
-            this.maskedTextBox1.Size = new System.Drawing.Size(50, 20);
-            this.maskedTextBox1.TabIndex = 16;
-            this.maskedTextBox1.Text = "000";
+            this.text_objTension.Location = new System.Drawing.Point(114, 273);
+            this.text_objTension.Mask = "0.0";
+            this.text_objTension.Name = "text_objTension";
+            this.text_objTension.PromptChar = ' ';
+            this.text_objTension.Size = new System.Drawing.Size(50, 20);
+            this.text_objTension.TabIndex = 16;
+            this.text_objTension.Text = "00";
+            this.text_objTension.TypeValidationCompleted += new System.Windows.Forms.TypeValidationEventHandler(this.text_objTension_TypeValidationCompleted);
             // 
             // label5
             // 
@@ -194,15 +197,31 @@
             this.label_cCOG.TabIndex = 18;
             this.label_cCOG.Text = "Spočítané těžiště :";
             // 
+            // button_selTexture
+            // 
+            this.button_selTexture.Enabled = false;
+            this.button_selTexture.Location = new System.Drawing.Point(283, 194);
+            this.button_selTexture.Name = "button_selTexture";
+            this.button_selTexture.Size = new System.Drawing.Size(78, 21);
+            this.button_selTexture.TabIndex = 19;
+            this.button_selTexture.Text = "Textura...";
+            this.button_selTexture.UseVisualStyleBackColor = true;
+            this.button_selTexture.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textureDialog
+            // 
+            this.textureDialog.Title = "Vybrat texturu...";
+            // 
             // CreateObject
             // 
             this.AcceptButton = this.button_OK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(364, 297);
+            this.Controls.Add(this.button_selTexture);
             this.Controls.Add(this.label_cCOG);
             this.Controls.Add(this.label_COG);
-            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.text_objTension);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.text_objDepth);
@@ -240,9 +259,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.MaskedTextBox text_objDepth;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.MaskedTextBox text_objTension;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label_COG;
         private System.Windows.Forms.Label label_cCOG;
+        private System.Windows.Forms.Button button_selTexture;
+        private System.Windows.Forms.OpenFileDialog textureDialog;
     }
 }

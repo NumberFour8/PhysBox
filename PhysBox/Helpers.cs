@@ -21,53 +21,53 @@ namespace PhysBox
             return a;
         }
 
-        private static Point GetPositionOnObject(Point Rel,PointF[] geom, Point In)
+        private static PointF GetPositionOnObject(PointF[] TransformedVertices, Point In)
         {
             int a = 0, b = 1;
-            Point ret = new Point();
-            double ad = Double.PositiveInfinity, bd = Double.PositiveInfinity, cd = Double.PositiveInfinity, dist = 0;
-            for (int i = 0; i < geom.Length; i++)
+            PointF Ret = new PointF();            
+            double ad = double.PositiveInfinity, bd = 0, cd = double.PositiveInfinity, dist = 0;
+            for (int i = 0; i < TransformedVertices.Length; i++)
             {
-                dist = Math.Sqrt(Math.Pow(In.X - (geom[i].X + Rel.X), 2) + Math.Pow(In.Y - (geom[i].Y + Rel.Y), 2));
+                dist = Math.Sqrt(Math.Pow(In.X - TransformedVertices[i].X, 2) + Math.Pow(In.Y - TransformedVertices[i].Y, 2));
                 if (dist < ad)
                 {
+                    bd = ad;
                     ad = dist;
+                    b = a;
                     a = i;
                 }
-            }
-
-            for (int i = 0; i < geom.Length; i++)
-            {
-                dist = Math.Sqrt(Math.Pow(In.X - (geom[i].X + Rel.X), 2) + Math.Pow(In.Y - (geom[i].Y + Rel.Y), 2));
-                if (dist < bd && i != a)
+                else if (dist < bd)
                 {
                     bd = dist;
                     b = i;
                 }
             }
 
-            int ax = (int)(geom[b].X - geom[a].X), ay = (int)(geom[b].Y - geom[a].Y), x = (int)geom[a].X, y = (int)geom[a].Y;
+            float ax = TransformedVertices[b].X - TransformedVertices[a].X, ay = TransformedVertices[b].Y - TransformedVertices[a].Y, x = TransformedVertices[a].X, y = TransformedVertices[a].Y,max;
 
-            if (ax == 0 && ay == 0) throw new ArgumentException();
-
-            int gcd = GCD(ax, ay);
-            ax = ax / Math.Abs(gcd);
-            ay = ay / Math.Abs(gcd);
-
-            while (!(x == geom[b].X && y == geom[b].Y))
+            if (ax == ay)
             {
-                Point pt = new Point(x+Rel.X, y+Rel.Y);
+                ax = ay = Math.Sign(ax);
+                max = 1;
+            }
+            else max = Math.Max(Math.Abs(ax), Math.Abs(ay));
+
+            while (x != TransformedVertices[b].X || y != TransformedVertices[b].Y)
+            {
+                PointF pt = new PointF(x, y);
                 dist = Geometry.PointDistance(pt, In);
                 if (dist < cd)
                 {
                     cd = dist;
-                    ret = pt;
+                    Ret = pt;
                 }
-                x += ax;
-                y += ay;
+                if (dist > cd) break;
+               
+                x += ax / max;
+                y += ay / max;
             }
 
-            return ret;
+            return Ret;
         }
     }
     

@@ -76,6 +76,8 @@ namespace PhysBox
             }
             
             ArrayList points = new ArrayList();
+            float drag = 0, depth = 0,tension = 0,h = 0,w = 0;
+            Brush fill = null;
             using (XmlTextReader rdr = new XmlTextReader("objects\\" + newobj_Geometry.SelectedItem.ToString() + ".xml"))
             {
                 while (rdr.Read())
@@ -87,10 +89,30 @@ namespace PhysBox
                         pt.Y = float.Parse(rdr.GetAttribute("Y"));
                         points.Add(pt);
                     }
+                    if (rdr.Name == "Geometry" && rdr.NodeType == XmlNodeType.Element)
+                    {
+                        drag = float.Parse(rdr.GetAttribute("C"));
+                        depth = float.Parse(rdr.GetAttribute("D"));
+                        tension = float.Parse(rdr.GetAttribute("Tension"));
+                        h = float.Parse(rdr.GetAttribute("H"));
+                        w = float.Parse(rdr.GetAttribute("W"));
+
+                        string clr = rdr.GetAttribute("Color");
+                        if (clr[0] == ':')
+                        {
+                            if (File.Exists(clr.Substring(1)))
+                                fill = new TextureBrush(Image.FromFile(clr.Substring(1)));
+                            else fill = new SolidBrush(Color.Brown);
+                        }
+                        else fill = new SolidBrush(Color.FromArgb(int.Parse(clr)));
+                    }
                 }
             }
 
-            GraphicObject Placing = new GraphicObject(System.Drawing.Brushes.Brown, new System.Drawing.PointF(0, 0), (PointF[])points.ToArray(typeof(PointF)), 0, 0, 0, PointF.Empty);
+            GraphicObject Placing = new GraphicObject(fill, (PointF[])points.ToArray(typeof(PointF)),h, w, new PointF(0,0));
+            Placing.Depth = depth;
+            Placing.DragCoefficient = drag;
+            Placing.Tension = tension;
 
             if (newObj_AutoName.Checked)
                 Placing.Name = String.Format("object_#{0}", ObjectCounter++);

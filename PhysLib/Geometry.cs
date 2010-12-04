@@ -2,7 +2,8 @@
 using System.Drawing;
 
 namespace PhysLib
-{   
+{
+
     /// <summary>
     /// Abstraktní třída reprezentující fyzický model tělesa
     /// </summary>
@@ -16,21 +17,21 @@ namespace PhysLib
         
         private PointF center;
         private PointF[] geom;
-        private double height,width;
+        private double height, width, depth,surf,vol,farea;
 
         /// <summary>
         /// Vytvoří fyzický model tělesa jako objekt z daných vertexů
         /// </summary>       
         /// <param name="Vertices">Vertexy tělesa</param>
         /// <param name="InitPosition">Počáteční poloha tělesa</param>
-        /// <param name="AngleX">Počáteční orientace tělesa vzhledem k ose X</param>
         /// <param name="Height">Výška tělesa (volitelné)</param>
         /// <param name="Width">Šířka tělesa (volitelné)</param>
         /// <param name="Centroid">Geometrický střed tělesa - centroid (volitelné)</param>
-        public Geometry(PointF[] Vertices,PointF InitPosition,float AngleX = 0,float Height = 0,float Width = 0,PointF? Centroid = null)
+        public Geometry(PointF[] Vertices,PointF InitPosition, float Height = 0,float Width = 0,PointF? Centroid = null)
         {
 
             if (Vertices == null || Vertices.Length < 3) throw new ArgumentException();
+            surf = depth = vol = 0;
 
             if (Height != 0 && Width != 0 && Centroid.HasValue)
             {
@@ -38,9 +39,9 @@ namespace PhysLib
                 width = Width;
                 center = Centroid.Value;
             }
-            else AnalyzeVertexGroup(Vertices, out height, out width, out center);
+            else AnalyzeVertexGroup(Vertices, out height, out width, out center, out farea);
 
-            Orientation = new Vector(AngleX,0,0);
+            Orientation = new Vector(3);
             Position = InitPosition;
 
             geom = Vertices;
@@ -56,6 +57,25 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Hloubka tělesa
+        /// </summary>
+        public double Depth
+        {
+            get { return depth; }
+            set
+            {
+                depth = Math.Abs(value);
+                if (depth != 0)
+                {
+                    for (int i = 0; i < geom.Length; i++)
+                        surf += depth * Geometry.PointDistance(geom[i], geom[i < geom.Length - 1 ? i + 1 : 0]);                    
+                    surf += farea*2;
+                    vol = farea * depth;
+                }
+            }
+        }
+
+        /// <summary>
         /// Pozice těžiště objektu vzhledem k počátku světa
         /// </summary>
         public virtual Vector Position
@@ -68,7 +88,8 @@ namespace PhysLib
         /// </summary>
         public virtual Vector Orientation
         {
-            get; set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -79,36 +100,54 @@ namespace PhysLib
             get { return geom; }           
         }
 
-        
+
+        /// <summary>
+        /// Spočte obsah polygonu daný určenými vertexy
+        /// </summary>
+        /// <param name="Vertices">Vertexy tvořící polygon</param>
+        /// <returns>Rovinný obsah polygonu</returns>
+        public static double PolygonArea(PointF[] Vertices)
+        {
+            double area = 0;
+            for (int i = 0,j = 0; i < Vertices.Length; i++)
+            {
+                j = (i + 1) % Vertices.Length;
+                area += Vertices[i].X * Vertices[j].Y;
+                area -= Vertices[i].Y * Vertices[j].X;
+            }
+            return Math.Abs(area)/2;
+        }
+
+
         /// <summary>
         /// Analyzuje pole vertexů jako polygon a zjistí jeho geometrický střed (centroid), šířku a výšku
         /// </summary>
         /// <param name="Vertices">Pole vertexů</param>
-        /// <param name="ObjHeight">Výška tělesa</param>
-        /// <param name="ObjWidth">Šířka tělesa</param>
-        /// <param name="Centroid">Geometrický střed tělesa</param>
-        public static void AnalyzeVertexGroup(PointF[] Vertices, out double ObjHeight, out double ObjWidth, out PointF Centroid)
+        /// <param name="ObjHeight">Výška útvaru</param>
+        /// <param name="ObjWidth">Šířka útvaru</param>
+        /// <param name="Centroid">Geometrický střed útvaru</param>
+        /// <param name="Area">Obsah obrazce</param>
+        public static void AnalyzeVertexGroup(PointF[] Vertices, out double ObjHeight, out double ObjWidth, out PointF Centroid, out double Area)
         {
             Centroid = new PointF(0,0);
             PointF top = Vertices[0], bottom = Vertices[0], left = Vertices[0], right = Vertices[0];
-            float s = 0;
+            Area = PolygonArea(Vertices);
 
-            for (int i = 0; i < Vertices.Length - 1; i++)
+            for (int i = 0,j = 0; i < Vertices.Length; i++)
             {
-                s += Vertices[i].X * Vertices[i + 1].Y - Vertices[i].Y * Vertices[i + 1].X;
+                j = (i + 1) % Vertices.Length;
+                Centroid.X += (Vertices[i].X + Vertices[j].X) * (Vertices[i].X * Vertices[j].Y - Vertices[i].Y * Vertices[j].X);
+                Centroid.Y += (Vertices[i].Y + Vertices[j].Y) * (Vertices[i].X * Vertices[j].Y - Vertices[i].Y * Vertices[j].X);
 
-                Centroid.X += (Vertices[i].X + Vertices[i + 1].X) * (Vertices[i].X * Vertices[i + 1].Y - Vertices[i].Y * Vertices[i + 1].X);
-                Centroid.Y += (Vertices[i].Y + Vertices[i + 1].Y) * (Vertices[i].X * Vertices[i + 1].Y - Vertices[i].Y * Vertices[i + 1].X);
+                if (left.X > Vertices[j].X) left = Vertices[j];
+                if (right.X < Vertices[j].X) right = Vertices[j];
 
-                if (left.X > Vertices[i + 1].X) left = Vertices[i + 1];
-                if (right.X < Vertices[i + 1].X) right = Vertices[i + 1];
-
-                if (bottom.X > Vertices[i + 1].Y) bottom = Vertices[i + 1];
-                if (top.X < Vertices[i + 1].Y) top = Vertices[i + 1];
+                if (bottom.X > Vertices[j].Y) bottom = Vertices[j];
+                if (top.X < Vertices[j].Y) top = Vertices[j];
             }
 
-            Centroid.X /= 3 * s;
-            Centroid.Y /= 3 * s;
+            Centroid.X /= (float)(Area * 6);
+            Centroid.Y /= (float)(Area * 6);
 
             ObjHeight = top.Y - bottom.Y;
             ObjWidth = right.X - left.X;
@@ -135,7 +174,7 @@ namespace PhysLib
 
 
         /// <summary>
-        /// Bod, kterým prochází osa otáčení objektu
+        /// Poloha bodu, kterým prochází osa otáčení objektu vzhledem k centroidu
         /// </summary>
         public PointF Nail
         {
@@ -159,7 +198,7 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Objem objektu
+        /// Objem objektu v krychlových pixelech
         /// </summary>
         public double Volume
         {
@@ -167,11 +206,19 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Povrch objektu
+        /// Povrch objektu v pixelech čtverečních
         /// </summary>
         public double Surface
         {
-            get; set;
+            get { return surf; }
+        }
+
+        /// <summary>
+        /// Obsah plochy polygonu
+        /// </summary>
+        public double FrontalArea
+        {
+            get { return farea; }
         }
     }
 }

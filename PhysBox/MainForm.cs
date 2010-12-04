@@ -17,9 +17,9 @@ namespace PhysBox
     {
         private World MyWorld;
         private SimObject Placing = null;
-        private bool Moving = false,Rotating = false,AddForce = false;
+        private bool Moving = false,Rotating = false,AddForce = false,SetAxis = false;
 
-        private Point? afOrigin;
+        private PointF? afOrigin;
         
         private Toolbox Tools;
         public SimObject Selected = null;
@@ -48,7 +48,7 @@ namespace PhysBox
 
         private void kreslitVektoryToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
-            velikostiVektorůToolStripMenuItem.Enabled = kreslitVektoryToolStripMenuItem.Checked;
+            velikostiVektorůToolStripMenuItem.Enabled = menu_showVectors.Checked;
             velikostiVektorůToolStripMenuItem.Checked = false;
         }
 
@@ -82,24 +82,35 @@ namespace PhysBox
                     Cursor = Cursors.Default;
                     Tools.ActionDone();
                 }
-
-                if (Moving && Selected != null)
+                if (Selected != null)
                 {
-                    Selected.Model.Position = new Vector(e.X, e.Y+CursorCorrection, 0);
-                    Cursor = Cursors.Default;
-                }
-
-                if (AddForce && Selected != null){
-                    if (afOrigin == null)
-                        afOrigin = GetPositionOnObject(new Point((int)Selected.Model.Position[0], (int)Selected.Model.Position[1]), Selected.Model.ObjectGeometry, e.Location);
-                    else
+                    if (Moving)
                     {
-                        AddForce = false;
+                        Selected.Model.Position = new Vector(e.X, e.Y + CursorCorrection, 0);
                         Cursor = Cursors.Default;
-                        Selected.ApplyForce(new Vector((double)(afOrigin.Value.X - e.X), (double)(afOrigin.Value.Y - (e.Y+CursorCorrection))), new Vector((double)afOrigin.Value.X, (double)afOrigin.Value.Y));
+                        Moving = false;
+                    }
 
-                        afOrigin = null;
-                        Tools.ActionDone();
+                    if (SetAxis)
+                    {
+                        Selected.Model.Nail = new PointF(e.X-(int)Selected.Model.Position[0], e.Y - (int)Selected.Model.Position[1]);
+                        Cursor = Cursors.Default;
+                        SetAxis = false;
+                    }
+
+                    if (AddForce)
+                    {
+                        if (afOrigin == null)
+                            afOrigin = GetPositionOnObject((Selected.Model as GraphicObject).TransformedGeometry, e.Location);
+                        else
+                        {
+                            AddForce = false;
+                            Cursor = Cursors.Default;
+                            Selected.ApplyForce(new Vector((double)(afOrigin.Value.X - e.X), (double)(afOrigin.Value.Y - (e.Y + CursorCorrection))), new Vector((double)afOrigin.Value.X, (double)afOrigin.Value.Y));
+
+                            afOrigin = null;
+                            Tools.ActionDone();
+                        }
                     }
                 }
                     
@@ -116,7 +127,6 @@ namespace PhysBox
 
                 Tools.ChangeTool(1);
             }
-            Moving = false;
         }
 
         private void přemístitSemToolStripMenuItem_Click(object sender, EventArgs e)
@@ -153,7 +163,7 @@ namespace PhysBox
 
         private void pozastavitSimulaciToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
-            MyWorld.Paused = pozastavitSimulaciToolStripMenuItem.Checked;
+            MyWorld.Paused = menu_pauseSim.Checked;
             status_SimStat.Text = MyWorld.Paused ? "Simulace pozastavena" : "Simulace běží";
         }
 
@@ -174,6 +184,19 @@ namespace PhysBox
                 Cursor = Cursors.Cross;
             }
             
+        }
+
+        private void zvolitOsuOtáčeníToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetAxis = true;
+            Cursor = Cursors.Cross;
+        }
+
+        private void drátovýModelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            menu_showVertices.Enabled = menu_enableWireframe.Checked;
+            if (!menu_enableWireframe.Checked)
+                menu_showVertices.Checked = false;
         }
 
     }
