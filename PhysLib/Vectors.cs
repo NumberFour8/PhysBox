@@ -266,22 +266,22 @@ namespace PhysLib
             return !(v1 == v2);
         }
 
-        public static implicit operator Vector(double d)
+        public static explicit operator Vector(double d)
         {
             return new Vector(d, d, d);
         }
 
-        public static implicit operator Vector(System.Drawing.PointF p)
+        public static explicit operator Vector(System.Drawing.PointF p)
         {
             return new Vector(p.X,p.Y,0); // !
         }
 
-        public static implicit operator System.Drawing.PointF(Vector v)
+        public static explicit operator System.Drawing.PointF(Vector v)
         {
             return new System.Drawing.PointF((float)v[0],(float)v[1]);
         }
 
-        public static implicit operator double(Vector v)
+        public static explicit operator double(Vector v)
         {
             return v.Magnitude;
         }

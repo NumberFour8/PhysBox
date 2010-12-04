@@ -42,7 +42,7 @@ namespace PhysBox
         {
             Placing = O;
             Cursor = Cursors.Cross;
-            Moving = Rotating = false;
+            Moving = Rotating = AddForce =  SetAxis = false;
         }
 
 
@@ -72,9 +72,7 @@ namespace PhysBox
             {
                 if (Placing != null)
                 {
-                    Placing.Model.Position[0] = (double)(e.X);
-                    Placing.Model.Position[1] = (double)(e.Y+CursorCorrection);
-
+                    Placing.Model.Position = new Vector(e.X, e.Y + CursorCorrection);
                     MyWorld.AddObject(Placing);
                     
                     Placing = null;
@@ -93,7 +91,7 @@ namespace PhysBox
 
                     if (SetAxis)
                     {
-                        Selected.Model.Nail = new PointF(e.X-(int)Selected.Model.Position[0], e.Y - (int)Selected.Model.Position[1]);
+                        Selected.RotationPoint = new Vector(e.X,e.Y,0);
                         Cursor = Cursors.Default;
                         SetAxis = false;
                     }
@@ -101,7 +99,7 @@ namespace PhysBox
                     if (AddForce)
                     {
                         if (afOrigin == null)
-                            afOrigin = GetPositionOnObject((Selected.Model as GraphicObject).TransformedGeometry, e.Location);
+                            afOrigin = GetPositionOnObject((Selected.Model as GraphicObject).ObjectGeometry, e.Location);
                         else
                         {
                             AddForce = false;
@@ -153,7 +151,7 @@ namespace PhysBox
         private void MainForm_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left && Rotating && Selected != null)
-                Selected.Model.Orientation[0] += 3;
+                Selected.Model.Orientation += 3;
         }        
 
         private void nástrojeToolStripMenuItem_Click(object sender, EventArgs e)

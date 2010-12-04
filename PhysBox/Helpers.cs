@@ -43,7 +43,8 @@ namespace PhysBox
                 }
             }
 
-            float ax = TransformedVertices[b].X - TransformedVertices[a].X, ay = TransformedVertices[b].Y - TransformedVertices[a].Y, x = TransformedVertices[a].X, y = TransformedVertices[a].Y,max;
+            float ax = TransformedVertices[b].X - TransformedVertices[a].X, ay = TransformedVertices[b].Y - TransformedVertices[a].Y, 
+                  x = TransformedVertices[a].X, y = TransformedVertices[a].Y,max;
 
             if (ax == ay)
             {

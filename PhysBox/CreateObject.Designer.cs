@@ -46,6 +46,7 @@
             this.label_cCOG = new System.Windows.Forms.Label();
             this.button_selTexture = new System.Windows.Forms.Button();
             this.textureDialog = new System.Windows.Forms.OpenFileDialog();
+            this.button_SetCOG = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -193,9 +194,9 @@
             this.label_cCOG.AutoSize = true;
             this.label_cCOG.Location = new System.Drawing.Point(194, 227);
             this.label_cCOG.Name = "label_cCOG";
-            this.label_cCOG.Size = new System.Drawing.Size(96, 13);
+            this.label_cCOG.Size = new System.Drawing.Size(52, 13);
             this.label_cCOG.TabIndex = 18;
-            this.label_cCOG.Text = "Spočítané těžiště :";
+            this.label_cCOG.Text = "Centroid :";
             // 
             // button_selTexture
             // 
@@ -212,12 +213,24 @@
             // 
             this.textureDialog.Title = "Vybrat texturu...";
             // 
+            // button_SetCOG
+            // 
+            this.button_SetCOG.Enabled = false;
+            this.button_SetCOG.Location = new System.Drawing.Point(197, 271);
+            this.button_SetCOG.Name = "button_SetCOG";
+            this.button_SetCOG.Size = new System.Drawing.Size(22, 21);
+            this.button_SetCOG.TabIndex = 20;
+            this.button_SetCOG.Text = "=";
+            this.button_SetCOG.UseVisualStyleBackColor = true;
+            this.button_SetCOG.Click += new System.EventHandler(this.button_SetCOG_Click);
+            // 
             // CreateObject
             // 
             this.AcceptButton = this.button_OK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(364, 297);
+            this.Controls.Add(this.button_SetCOG);
             this.Controls.Add(this.button_selTexture);
             this.Controls.Add(this.label_cCOG);
             this.Controls.Add(this.label_COG);
@@ -265,5 +278,6 @@
         private System.Windows.Forms.Label label_cCOG;
         private System.Windows.Forms.Button button_selTexture;
         private System.Windows.Forms.OpenFileDialog textureDialog;
+        private System.Windows.Forms.Button button_SetCOG;
     }
 }

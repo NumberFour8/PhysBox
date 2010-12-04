@@ -5,6 +5,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
+using PhysLib;
+
 namespace PhysBox
 {
 
@@ -12,15 +14,15 @@ namespace PhysBox
     {
         private ArrayList pts;
         private PointF? COG;
-        private PointF cCOG;
-        private double h, w, S;
+        private GeometryDescriptor Desc;        
         private string col;
 
         public CreateObject()
         {
             InitializeComponent();
+                       
             pts = new ArrayList();
-            h = w = S = 0;
+           
             COG = null;
             col = Color.Brown.ToArgb().ToString();
             text_objTension.ValidatingType = text_objDrag.ValidatingType = typeof(float);
@@ -41,9 +43,9 @@ namespace PhysBox
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
                 COG = e.Location;
-                PhysLib.Geometry.AnalyzeVertexGroup((PointF[])pts.ToArray(typeof(PointF)), out h, out w, out cCOG, out S);
+                Desc = Geometry.AnalyzeVertexGroup((PointF[])pts.ToArray(typeof(PointF)));
 
-                label_cCOG.Text = String.Format("Spočítané těžiště: [{0:f1};{1:f1}]", cCOG.X, cCOG.Y);
+                label_cCOG.Text = String.Format("Centroid: [{0:f1};{1:f1}]", Desc.Centroid.X, Desc.Centroid.Y);
                 label_COG.Text = String.Format("Určené těžiště: [{0};{1}]", COG.Value.X, COG.Value.Y);
             }
             
@@ -68,7 +70,7 @@ namespace PhysBox
                 g.DrawPath(Pens.Black, Path);
 
                 g.FillEllipse(Brushes.Red, new RectangleF(COG.Value.X - 2, COG.Value.Y - 2, 4, 4));
-                g.FillEllipse(Brushes.Blue, new RectangleF(cCOG.X - 2, cCOG.Y - 2, 4, 4));
+                g.FillEllipse(Brushes.Blue, new RectangleF(Desc.Centroid.X - 2, Desc.Centroid.Y - 2, 4, 4));
             }
         }
 
@@ -79,27 +81,28 @@ namespace PhysBox
 
         private void button_OK_Click(object sender, EventArgs e)
         {            
-
-            if (Math.Sqrt(Math.Pow(cCOG.X - COG.Value.X, 2) + Math.Pow(cCOG.Y - COG.Value.Y, 2)) > 10 &&
-                MessageBox.Show("Vzdálenost vypočítaného těžiště a ručně určeného težiště útvaru je větší než 10 pixelů, přesto použít ručně určené těžiště?", "Různá těžiště", MessageBoxButtons.YesNo,MessageBoxIcon.Question,MessageBoxDefaultButton.Button2)
-                == System.Windows.Forms.DialogResult.No) COG = cCOG;         
             
             using (XmlTextWriter Object = new XmlTextWriter("objects\\" + text_objName.Text + ".xml", Encoding.UTF8))
             {
                 Object.WriteStartDocument();
                 Object.WriteStartElement("Geometry");
-                Object.WriteAttributeString("W", Width.ToString());
-                Object.WriteAttributeString("H", Height.ToString());
+                Object.WriteAttributeString("W", Desc.Width.ToString());
+                Object.WriteAttributeString("H", Desc.Height.ToString());
                 Object.WriteAttributeString("D", text_objDepth.Text);
                 Object.WriteAttributeString("C", text_objDrag.Text);
                 Object.WriteAttributeString("Color", col);
                 Object.WriteAttributeString("Tension", text_objTension.Text);
-                
+
+                Object.WriteStartElement("COG");
+                Object.WriteAttributeString("X", (COG.Value.X-Desc.Centroid.X).ToString());
+                Object.WriteAttributeString("Y", (COG.Value.Y-Desc.Centroid.Y).ToString());
+                Object.WriteEndElement();
+
                 for (int i = 0; i < pts.Count; i++)
                 {
                     Object.WriteStartElement("Vertex");
-                    Object.WriteAttributeString("X", (((PointF)pts[i]).X - COG.Value.X).ToString());
-                    Object.WriteAttributeString("Y", (((PointF)pts[i]).Y - COG.Value.Y).ToString());
+                    Object.WriteAttributeString("X", (((PointF)pts[i]).X - Desc.Centroid.X).ToString());
+                    Object.WriteAttributeString("Y", (((PointF)pts[i]).Y - Desc.Centroid.Y).ToString());
                     Object.WriteEndElement();
                 }
 
@@ -125,6 +128,13 @@ namespace PhysBox
         {
             if (e.IsValidInput)
                 drawPanel.Invalidate();
+        }
+
+        private void button_SetCOG_Click(object sender, EventArgs e)
+        {
+            COG = Desc.Centroid;
+            label_cCOG.Text = String.Format("Centroid: [{0:f1};{1:f1}]", Desc.Centroid.X, Desc.Centroid.Y);
+            label_COG.Text = String.Format("Určené těžiště: [{0};{1}]", COG.Value.X, COG.Value.Y);
         }
     }
 }

@@ -48,15 +48,15 @@ namespace PhysLib
         /// </summary>
         public double MomentOfInertia
         {
-            get { return ((Mass * Math.Pow(Model.Height, 2) + Math.Pow(Model.Width, 2)) / 12)+((COG-RotationPoint).Magnitude*Mass); }
+            get { return ((Mass * Math.Pow(Model.Height, 2) + Math.Pow(Model.Width, 2)) / 12)+(((Vector)model.Nail).Magnitude*Mass); }
         }
 
         /// <summary>
-        /// Souřadnice těžiště tělesa
+        /// Absolutní souřadnice těžiště tělesa (poloha tělesa)
         /// </summary>
         public Vector COG
         {
-            get { return model.Centroid; }
+            get { return model.Position; }
         }
 
         /// <summary>
@@ -88,14 +88,11 @@ namespace PhysLib
         /// </summary>
         public Geometry Model
         {
-            get
-            {
-                return model;
-            }
+            get { return model; }
         }
 
         /// <summary>
-        /// Bod, jímž prochází osa otáčení
+        /// Absolutní poloha bodu, jímž prochází osa otáčení
         /// </summary>
         public Vector RotationPoint
         {

@@ -16,8 +16,8 @@ namespace PhysBox
         public string Name { get; set; }
         public float Tension { get; set; }
 
-        public GraphicObject(Brush Texture, PointF[] Geometry,float Height,float Width,PointF Centroid)
-            : base(Geometry, new System.Drawing.PointF(0, 0), Height, Width, Centroid)
+        public GraphicObject(Brush Texture, PointF[] Geometry,PointF COG)
+            : base(Geometry, new PointF(0, 0), COG)
         {
             Fill = Texture;
             ShowVectors = false;
@@ -28,21 +28,9 @@ namespace PhysBox
         public GraphicsPath MakePath()
         {
             GraphicsPath Ret = new GraphicsPath();
-            System.Drawing.Drawing2D.Matrix Trans = new System.Drawing.Drawing2D.Matrix();
-            Trans.Translate((float)Position[0], (float)Position[1], MatrixOrder.Prepend);
-            Trans.RotateAt((float)Orientation[0], Nail);
-
-            Ret.AddClosedCurve(ObjectGeometry, Tension);
-            Ret.Transform(Trans);            
-
+            Ret.AddClosedCurve(ObjectGeometry, Tension);            
             return Ret;
         }
-
-        public PointF[] TransformedGeometry
-        {
-            get { return MakePath().PathPoints; }
-        }
-
     }
 
     public partial class MainForm : Form
@@ -64,7 +52,7 @@ namespace PhysBox
                     {
                         p = Pens.Violet;
                         if (afOrigin != null && AddForce)
-                          Destination.DrawLine(Pens.Gray, new PointF(afOrigin.Value.X,afOrigin.Value.Y), new PointF(obj.Nail.X + (float)obj.Position[0], obj.Nail.Y + (float)obj.Position[1]));
+                          Destination.DrawLine(Pens.Gray, new PointF(afOrigin.Value.X,afOrigin.Value.Y), new PointF((float)o.RotationPoint[0], (float)o.RotationPoint[1]));
 
                         if (menu_showVertices.Checked)
                         {
@@ -74,8 +62,8 @@ namespace PhysBox
                     }
 
                     Destination.DrawPath(p, pth);
-                    Destination.FillEllipse(Brushes.Black, new RectangleF((float)obj.Position[0] - 2.0f, (float)obj.Position[1] - 2, 4, 4));
-                    Destination.FillEllipse(Brushes.Blue, new RectangleF(obj.Nail.X + (float)obj.Position[0] - 2.0f, obj.Nail.Y + (float)obj.Position[1] - 2.0f, 4, 4));
+                    Destination.FillEllipse(Brushes.Black, new RectangleF((float)(obj.Position[0] - 2), (float)(obj.Position[1] - 2), 4, 4));
+                    Destination.FillEllipse(Brushes.Blue, new RectangleF((float)(o.RotationPoint[0] - 2),(float)(o.RotationPoint[1] - 2), 4, 4));
                 }
                 else Destination.FillPath(obj.Fill, obj.MakePath());
             }
@@ -104,7 +92,7 @@ namespace PhysBox
                     pt.Y += CursorCorrection;
 
                     buf.Graphics.DrawLine(Pens.Red, pt, afOrigin.Value);
-                    double size = Math.Round(Math.Sqrt(Math.Pow(Cursor.Position.X - afOrigin.Value.X, 2) + Math.Pow(Cursor.Position.Y - afOrigin.Value.Y, 2)) * MyWorld.Resolution, 2);
+                    double size = Math.Round(Geometry.PointDistance(new PointF(Cursor.Position.X,Cursor.Position.Y),afOrigin.Value) * MyWorld.Resolution, 2);
                     buf.Graphics.DrawString(String.Format("{0} N", size), new Font(FontFamily.GenericSansSerif, 7), Brushes.Red, new PointF(afOrigin.Value.X - 50, afOrigin.Value.Y + 10));
                 }
 

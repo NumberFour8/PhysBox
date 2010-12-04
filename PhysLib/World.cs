@@ -302,7 +302,7 @@ namespace PhysLib
                     {
                         if (PhysObjs[i].Model.Position.Magnitude > maxRad)
                         {
-                            PhysObjs[i].LinearVelocity = PhysObjs[i].AngularVelocity = 0;
+                            PhysObjs[i].LinearVelocity = PhysObjs[i].AngularVelocity = Vector.Zero;
                             PhysObjs[i].Enabled = false;
                         }
                         if (!PhysObjs[i].Enabled) continue;
@@ -316,7 +316,7 @@ namespace PhysLib
                         PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity, PhysObjs[i].COG);
 
                         PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
-                        PhysObjs[i].Model.Orientation += PhysObjs[i].AngularVelocity * Delta;
+                        PhysObjs[i].Model.Orientation += PhysObjs[i].AngularVelocity.Magnitude * Delta;
 
                         PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * (Delta / PhysObjs[i].Mass);
                         PhysObjs[i].AngularVelocity += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);

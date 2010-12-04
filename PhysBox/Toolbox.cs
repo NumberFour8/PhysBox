@@ -78,6 +78,7 @@ namespace PhysBox
             ArrayList points = new ArrayList();
             float drag = 0, depth = 0,tension = 0,h = 0,w = 0;
             Brush fill = null;
+            PointF COG = new PointF();
             using (XmlTextReader rdr = new XmlTextReader("objects\\" + newobj_Geometry.SelectedItem.ToString() + ".xml"))
             {
                 while (rdr.Read())
@@ -106,10 +107,15 @@ namespace PhysBox
                         }
                         else fill = new SolidBrush(Color.FromArgb(int.Parse(clr)));
                     }
+                    if (rdr.Name == "COG" && rdr.NodeType == XmlNodeType.Element)
+                    {
+                        COG.X = float.Parse(rdr.GetAttribute("X"));
+                        COG.Y = float.Parse(rdr.GetAttribute("Y"));
+                    }
                 }
             }
 
-            GraphicObject Placing = new GraphicObject(fill, (PointF[])points.ToArray(typeof(PointF)),h, w, new PointF(0,0));
+            GraphicObject Placing = new GraphicObject(fill, (PointF[])points.ToArray(typeof(PointF)), COG);
             Placing.Depth = depth;
             Placing.DragCoefficient = drag;
             Placing.Tension = tension;
