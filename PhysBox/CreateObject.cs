@@ -50,7 +50,7 @@ namespace PhysBox
             }
             
             text_objName.Enabled = COG != null;
-            button_selTexture.Enabled = button_selColor.Enabled = COG != null;
+            button_selTexture.Enabled = button_SetCOG.Enabled = button_selColor.Enabled = COG != null;
             
             drawPanel.Invalidate();
         }

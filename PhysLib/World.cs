@@ -300,7 +300,7 @@ namespace PhysLib
                     SimObject[] PhysObjs = (SimObject[])Objs.ToArray(typeof(SimObject));
                     for (int i = 0; i < Objs.Count; i++)
                     {
-                        if (PhysObjs[i].Model.Position.Magnitude > maxRad)
+                        if (PhysObjs[i].Model.Position.Magnitude > maxRad && PhysObjs[i].Enabled)
                         {
                             PhysObjs[i].LinearVelocity = PhysObjs[i].AngularVelocity = Vector.Zero;
                             PhysObjs[i].Enabled = false;
@@ -312,11 +312,12 @@ namespace PhysLib
                             if (f.Enabled)
                                 PhysObjs[i].ApplyForce(f.GetForce(f, PhysObjs[i]), PhysObjs[i].COG);
                         }
-
+                        
                         PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity, PhysObjs[i].COG);
+                        //PhysObjs[i].TotalTorque -= 5 * PhysObjs[i].AngularVelocity;
 
-                        PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
-                        PhysObjs[i].Model.Orientation += PhysObjs[i].AngularVelocity.Magnitude * Delta;
+                        //PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
+                        PhysObjs[i].Model.Orientation += PhysObjs[i].AngularVelocity[2] * Delta;
 
                         PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * (Delta / PhysObjs[i].Mass);
                         PhysObjs[i].AngularVelocity += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);

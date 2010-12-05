@@ -116,10 +116,13 @@ namespace PhysLib
         /// <returns>Jednotkový vektor</returns>
         public static Vector Unit(Vector v)
         {
-            for (int i = 0; i < v.Count;i++)
-               v[i] = (double)Math.Sign(v[i]);
+            if (v.IsNull) return Vector.Zero;
 
-            return v;
+            Vector Ret = new Vector(v.Count);
+            for (int i = 0; i < v.Count;i++)
+               Ret[i] = v[i]/v.Magnitude;
+
+            return Ret;
         }
 
         /// <summary>
@@ -137,6 +140,17 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Spočítá "skalární mocninu" vektoru
+        /// </summary>
+        /// <param name="v">Vektor</param>
+        /// <param name="n">Mocnitel</param>
+        /// <returns>Velikost vektoru na ntou</returns>
+        public static double Pow(Vector v, uint n)
+        {
+            return Math.Pow(v.Magnitude, n);
+        }
+
+        /// <summary>
         /// Provede vektorový součin dvou vektorů
         /// </summary>
         /// <param name="u">První vektor</param>
@@ -144,8 +158,8 @@ namespace PhysLib
         /// <returns>Vektor kolmý k oběma daným vektorům</returns>
         public static Vector Cross(Vector u, Vector v)
         {
-            if (u.Count > 3 || v.Count > 3) throw new NotImplementedException();
-            return new Vector(v[3] * u[2] - v[2] * u[3], v[1] * u[3] - v[3] * u[1], v[2] * u[1] - v[1] * u[2]);
+            if (u.Count > 3 || v.Count > 3) throw new NotImplementedException();            
+            return new Vector(v[2] * u[1] - v[1] * u[2], v[0] * u[2] - v[2] * u[0], v[1] * u[0] - v[0] * u[1]);
         }
 
         /// <summary>
@@ -155,7 +169,8 @@ namespace PhysLib
         /// <param name="u">Druhé vektor</param>
         /// <returns>Úhel mezi vektory</returns>
         public static double Angle(Vector v, Vector u)
-        {            
+        {
+            if (v.IsNull || u.IsNull) throw new ArgumentException();
             return Math.Acos(Vector.Dot(v,u) / (v.Magnitude * u.Magnitude));
         }
 
@@ -225,7 +240,11 @@ namespace PhysLib
 
         public static Vector operator *(double k, Vector v)
         {
-            return v * k;
+            Vector Ret = new Vector(v.Count);
+            for (int i = 0; i < v.Count; i++)
+                Ret[i] = v[i] * k;
+
+            return Ret;
         }
 
         public static Vector operator /(Vector v, double k)
@@ -299,12 +318,11 @@ namespace PhysLib
 
         public override string ToString()
         {
+            base.ToString();
             string Ret = String.Empty;
             for (int i = 0;i < Count;i++)
-            {
-                Ret += String.Format("{0:F0}", this[i]);
-            }
-            return "(" + Ret + ")";
+                Ret += String.Format("{0:F2};", this[i]);
+            return "(" + Ret.Remove(Ret.Length-1) + ")";
         }
     }
 }

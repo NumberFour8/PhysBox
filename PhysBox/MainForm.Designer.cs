@@ -36,28 +36,31 @@
             this.menu_restartSim = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_Quit = new System.Windows.Forms.ToolStripMenuItem();
             this.analýzaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menu_showVectors = new System.Windows.Forms.ToolStripMenuItem();
-            this.velikostiVektorůToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.konfiguraceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_enableWireframe = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_showVertices = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_showVersion = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_pauseSim = new System.Windows.Forms.ToolStripMenuItem();
             this.stavovyRadek = new System.Windows.Forms.StatusStrip();
             this.status_SimStat = new System.Windows.Forms.ToolStripStatusLabel();
+            this.stat_SelObject = new System.Windows.Forms.ToolStripStatusLabel();
             this.manipulateObj = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.manipulateObj_Name = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.manipulateObj_Enabled = new System.Windows.Forms.ToolStripMenuItem();
-            this.otáčetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.přemístitSemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.působitSilouToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zrušitSílyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manipulateObj_Rotate = new System.Windows.Forms.ToolStripMenuItem();
+            this.manipulateObj_Translate = new System.Windows.Forms.ToolStripMenuItem();
+            this.manipulateObj_SetAxis = new System.Windows.Forms.ToolStripMenuItem();
+            this.manipulateObj_ApplyForce = new System.Windows.Forms.ToolStripMenuItem();
+            this.manipulateObj_CancelForces = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.analyzovatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.simTime = new System.Windows.Forms.Timer(this.components);
-            this.stat_SelObject = new System.Windows.Forms.ToolStripStatusLabel();
-            this.zvolitOsuOtáčeníToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menu_showVertices = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_showResolution = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.manipulateObj_Scale = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
             this.mainMenu.SuspendLayout();
             this.stavovyRadek.SuspendLayout();
             this.manipulateObj.SuspendLayout();
@@ -91,59 +94,41 @@
             this.menu_openToolbar.Name = "menu_openToolbar";
             this.menu_openToolbar.ShortcutKeyDisplayString = "";
             this.menu_openToolbar.ShortcutKeys = System.Windows.Forms.Keys.F8;
-            this.menu_openToolbar.Size = new System.Drawing.Size(152, 22);
+            this.menu_openToolbar.Size = new System.Drawing.Size(137, 22);
             this.menu_openToolbar.Text = "Nástroje";
             this.menu_openToolbar.Click += new System.EventHandler(this.nástrojeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(134, 6);
             // 
             // menu_restartSim
             // 
             this.menu_restartSim.Name = "menu_restartSim";
-            this.menu_restartSim.Size = new System.Drawing.Size(152, 22);
+            this.menu_restartSim.Size = new System.Drawing.Size(137, 22);
             this.menu_restartSim.Text = "Restart";
             // 
             // menu_Quit
             // 
             this.menu_Quit.Name = "menu_Quit";
-            this.menu_Quit.Size = new System.Drawing.Size(152, 22);
+            this.menu_Quit.Size = new System.Drawing.Size(137, 22);
             this.menu_Quit.Text = "Ukončit";
             // 
             // analýzaToolStripMenuItem
             // 
-            this.analýzaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menu_showVectors,
-            this.velikostiVektorůToolStripMenuItem});
             this.analýzaToolStripMenuItem.Name = "analýzaToolStripMenuItem";
             this.analýzaToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.analýzaToolStripMenuItem.Text = "Analýza";
-            // 
-            // menu_showVectors
-            // 
-            this.menu_showVectors.Checked = true;
-            this.menu_showVectors.CheckOnClick = true;
-            this.menu_showVectors.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.menu_showVectors.Name = "menu_showVectors";
-            this.menu_showVectors.Size = new System.Drawing.Size(161, 22);
-            this.menu_showVectors.Text = "Kreslit vektory";
-            this.menu_showVectors.CheckedChanged += new System.EventHandler(this.kreslitVektoryToolStripMenuItem_CheckedChanged);
-            // 
-            // velikostiVektorůToolStripMenuItem
-            // 
-            this.velikostiVektorůToolStripMenuItem.CheckOnClick = true;
-            this.velikostiVektorůToolStripMenuItem.Name = "velikostiVektorůToolStripMenuItem";
-            this.velikostiVektorůToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.velikostiVektorůToolStripMenuItem.Text = "Velikosti vektorů";
             // 
             // konfiguraceToolStripMenuItem
             // 
             this.konfiguraceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menu_enableWireframe,
             this.menu_showVertices,
+            this.menu_showResolution,
             this.menu_showVersion,
+            this.toolStripMenuItem4,
             this.menu_pauseSim});
             this.konfiguraceToolStripMenuItem.Name = "konfiguraceToolStripMenuItem";
             this.konfiguraceToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
@@ -158,6 +143,13 @@
             this.menu_enableWireframe.Size = new System.Drawing.Size(193, 22);
             this.menu_enableWireframe.Text = "Drátový model";
             this.menu_enableWireframe.Click += new System.EventHandler(this.drátovýModelToolStripMenuItem_Click);
+            // 
+            // menu_showVertices
+            // 
+            this.menu_showVertices.CheckOnClick = true;
+            this.menu_showVertices.Name = "menu_showVertices";
+            this.menu_showVertices.Size = new System.Drawing.Size(193, 22);
+            this.menu_showVertices.Text = "Zobrazit vertexy";
             // 
             // menu_showVersion
             // 
@@ -192,21 +184,31 @@
             this.status_SimStat.Size = new System.Drawing.Size(79, 17);
             this.status_SimStat.Text = "Simulace běží";
             // 
+            // stat_SelObject
+            // 
+            this.stat_SelObject.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.stat_SelObject.Name = "stat_SelObject";
+            this.stat_SelObject.Size = new System.Drawing.Size(126, 17);
+            this.stat_SelObject.Text = "Žádný vybraný objekt";
+            // 
             // manipulateObj
             // 
             this.manipulateObj.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manipulateObj_Name,
             this.toolStripMenuItem1,
             this.manipulateObj_Enabled,
-            this.otáčetToolStripMenuItem,
-            this.přemístitSemToolStripMenuItem,
-            this.zvolitOsuOtáčeníToolStripMenuItem,
-            this.působitSilouToolStripMenuItem,
-            this.zrušitSílyToolStripMenuItem,
+            this.toolStripMenuItem5,
+            this.manipulateObj_Translate,
+            this.manipulateObj_Rotate,
+            this.manipulateObj_Scale,
+            this.toolStripMenuItem6,
+            this.manipulateObj_SetAxis,
+            this.manipulateObj_ApplyForce,
+            this.manipulateObj_CancelForces,
             this.toolStripMenuItem2,
             this.analyzovatToolStripMenuItem});
             this.manipulateObj.Name = "manipulateObj";
-            this.manipulateObj.Size = new System.Drawing.Size(171, 192);
+            this.manipulateObj.Size = new System.Drawing.Size(171, 226);
             // 
             // manipulateObj_Name
             // 
@@ -229,32 +231,40 @@
             this.manipulateObj_Enabled.Text = "Simulovat";
             this.manipulateObj_Enabled.Click += new System.EventHandler(this.manipulateObj_Enabled_Click);
             // 
-            // otáčetToolStripMenuItem
+            // manipulateObj_Rotate
             // 
-            this.otáčetToolStripMenuItem.Name = "otáčetToolStripMenuItem";
-            this.otáčetToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.otáčetToolStripMenuItem.Text = "Otáčet";
-            this.otáčetToolStripMenuItem.Click += new System.EventHandler(this.otáčetToolStripMenuItem_Click);
+            this.manipulateObj_Rotate.Name = "manipulateObj_Rotate";
+            this.manipulateObj_Rotate.Size = new System.Drawing.Size(170, 22);
+            this.manipulateObj_Rotate.Text = "Otáčet";
+            this.manipulateObj_Rotate.Click += new System.EventHandler(this.otáčetToolStripMenuItem_Click);
             // 
-            // přemístitSemToolStripMenuItem
+            // manipulateObj_Translate
             // 
-            this.přemístitSemToolStripMenuItem.Name = "přemístitSemToolStripMenuItem";
-            this.přemístitSemToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.přemístitSemToolStripMenuItem.Text = "Přemístit";
-            this.přemístitSemToolStripMenuItem.Click += new System.EventHandler(this.přemístitSemToolStripMenuItem_Click);
+            this.manipulateObj_Translate.Name = "manipulateObj_Translate";
+            this.manipulateObj_Translate.Size = new System.Drawing.Size(170, 22);
+            this.manipulateObj_Translate.Text = "Přemístit";
+            this.manipulateObj_Translate.Click += new System.EventHandler(this.přemístitSemToolStripMenuItem_Click);
             // 
-            // působitSilouToolStripMenuItem
+            // manipulateObj_SetAxis
             // 
-            this.působitSilouToolStripMenuItem.Name = "působitSilouToolStripMenuItem";
-            this.působitSilouToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.působitSilouToolStripMenuItem.Text = "Působit silou...";
-            this.působitSilouToolStripMenuItem.Click += new System.EventHandler(this.působitSilouToolStripMenuItem_Click);
+            this.manipulateObj_SetAxis.Name = "manipulateObj_SetAxis";
+            this.manipulateObj_SetAxis.Size = new System.Drawing.Size(170, 22);
+            this.manipulateObj_SetAxis.Text = "Zvolit osu otáčení";
+            this.manipulateObj_SetAxis.Click += new System.EventHandler(this.zvolitOsuOtáčeníToolStripMenuItem_Click);
             // 
-            // zrušitSílyToolStripMenuItem
+            // manipulateObj_ApplyForce
             // 
-            this.zrušitSílyToolStripMenuItem.Name = "zrušitSílyToolStripMenuItem";
-            this.zrušitSílyToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.zrušitSílyToolStripMenuItem.Text = "Zrušit všechny síly";
+            this.manipulateObj_ApplyForce.Name = "manipulateObj_ApplyForce";
+            this.manipulateObj_ApplyForce.Size = new System.Drawing.Size(170, 22);
+            this.manipulateObj_ApplyForce.Text = "Působit silou...";
+            this.manipulateObj_ApplyForce.Click += new System.EventHandler(this.působitSilouToolStripMenuItem_Click);
+            // 
+            // manipulateObj_CancelForces
+            // 
+            this.manipulateObj_CancelForces.Name = "manipulateObj_CancelForces";
+            this.manipulateObj_CancelForces.Size = new System.Drawing.Size(170, 22);
+            this.manipulateObj_CancelForces.Text = "Zrušit všechny síly";
+            this.manipulateObj_CancelForces.Click += new System.EventHandler(this.manipulateObj_CancelForces_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -272,26 +282,34 @@
             this.simTime.Interval = 10;
             this.simTime.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // stat_SelObject
+            // menu_showResolution
             // 
-            this.stat_SelObject.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.stat_SelObject.Name = "stat_SelObject";
-            this.stat_SelObject.Size = new System.Drawing.Size(126, 17);
-            this.stat_SelObject.Text = "Žádný vybraný objekt";
+            this.menu_showResolution.CheckOnClick = true;
+            this.menu_showResolution.Name = "menu_showResolution";
+            this.menu_showResolution.Size = new System.Drawing.Size(193, 22);
+            this.menu_showResolution.Text = "Zobrazit měřítko";
             // 
-            // zvolitOsuOtáčeníToolStripMenuItem
+            // toolStripMenuItem4
             // 
-            this.zvolitOsuOtáčeníToolStripMenuItem.Name = "zvolitOsuOtáčeníToolStripMenuItem";
-            this.zvolitOsuOtáčeníToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.zvolitOsuOtáčeníToolStripMenuItem.Text = "Zvolit osu otáčení";
-            this.zvolitOsuOtáčeníToolStripMenuItem.Click += new System.EventHandler(this.zvolitOsuOtáčeníToolStripMenuItem_Click);
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(190, 6);
             // 
-            // menu_showVertices
+            // manipulateObj_Scale
             // 
-            this.menu_showVertices.CheckOnClick = true;
-            this.menu_showVertices.Name = "menu_showVertices";
-            this.menu_showVertices.Size = new System.Drawing.Size(193, 22);
-            this.menu_showVertices.Text = "Zobrazit vertexy";
+            this.manipulateObj_Scale.Name = "manipulateObj_Scale";
+            this.manipulateObj_Scale.Size = new System.Drawing.Size(170, 22);
+            this.manipulateObj_Scale.Text = "Škálovat";
+            this.manipulateObj_Scale.Click += new System.EventHandler(this.manipulateObj_Scale_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(167, 6);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(167, 6);
             // 
             // MainForm
             // 
@@ -333,27 +351,30 @@
         private System.Windows.Forms.ToolStripMenuItem analýzaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem konfiguraceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menu_enableWireframe;
-        private System.Windows.Forms.ToolStripMenuItem menu_showVectors;
-        private System.Windows.Forms.ToolStripMenuItem velikostiVektorůToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menu_showVersion;
         private System.Windows.Forms.Timer simTime;
         private System.Windows.Forms.ContextMenuStrip manipulateObj;
         private System.Windows.Forms.ToolStripMenuItem manipulateObj_Name;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem manipulateObj_Enabled;
-        private System.Windows.Forms.ToolStripMenuItem zrušitSílyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manipulateObj_CancelForces;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem analyzovatToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel status_SimStat;
-        private System.Windows.Forms.ToolStripMenuItem působitSilouToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem přemístitSemToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem otáčetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manipulateObj_ApplyForce;
+        private System.Windows.Forms.ToolStripMenuItem manipulateObj_Translate;
+        private System.Windows.Forms.ToolStripMenuItem manipulateObj_Rotate;
         private System.Windows.Forms.ToolStripMenuItem menu_pauseSim;
         private System.Windows.Forms.ToolStripMenuItem menu_openToolbar;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripStatusLabel stat_SelObject;
-        private System.Windows.Forms.ToolStripMenuItem zvolitOsuOtáčeníToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manipulateObj_SetAxis;
         private System.Windows.Forms.ToolStripMenuItem menu_showVertices;
+        private System.Windows.Forms.ToolStripMenuItem menu_showResolution;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem manipulateObj_Scale;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
     }
 }
 

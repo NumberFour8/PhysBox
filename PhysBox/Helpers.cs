@@ -46,12 +46,12 @@ namespace PhysBox
             float ax = TransformedVertices[b].X - TransformedVertices[a].X, ay = TransformedVertices[b].Y - TransformedVertices[a].Y, 
                   x = TransformedVertices[a].X, y = TransformedVertices[a].Y,max;
 
-            if (ax == ay)
+            /*if (ax == ay)
             {
                 ax = ay = Math.Sign(ax);
                 max = 1;
             }
-            else max = Math.Max(Math.Abs(ax), Math.Abs(ay));
+            else*/ max = (float)Math.Sqrt(ax * ax + ay * ay);
 
             while (x != TransformedVertices[b].X || y != TransformedVertices[b].Y)
             {

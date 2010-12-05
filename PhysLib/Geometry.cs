@@ -19,6 +19,7 @@ namespace PhysLib
         private PointF[] geom;
         private GeometryDescriptor desc;
         private double surf, vol, angle;
+        private float scale;
 
         /// <summary>
         /// Vytvoří fyzický model tělesa jako objekt z daných vertexů
@@ -31,6 +32,7 @@ namespace PhysLib
 
             if (Vertices == null || Vertices.Length < 3) throw new ArgumentException();
             surf = vol = angle = 0;
+            scale = 1.0f;
 
             desc = AnalyzeVertexGroup(Vertices);
             geom = Vertices;
@@ -97,7 +99,7 @@ namespace PhysLib
             set {
                 System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix();
                 Mat.RotateAt((float)(value-angle), (PointF)(Nail));
-                Mat.TransformPoints(geom);
+                Mat.TransformPoints(geom);                
 
                 if (Nail != center)
                 {
@@ -118,6 +120,19 @@ namespace PhysLib
             get { return geom; }           
         }
 
+
+        /// <summary>
+        /// Škáluje těleso daným faktorem
+        /// </summary>
+        /// <param name="Factor">Faktor</param>
+        public float Scale
+        {
+            get { return scale; }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         /// <summary>
         /// Spočte obsah polygonu daný určenými vertexy

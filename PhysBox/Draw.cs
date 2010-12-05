@@ -38,22 +38,20 @@ namespace PhysBox
 
         private BufferedGraphicsContext Ctx;
         public const int CursorCorrection = -23;
+        private readonly Font SmallFont = new Font(FontFamily.GenericSansSerif, 7);
 
-        private void RenderAllObjects(Graphics Destination,bool WireFrame,bool ShowVectors)
+        private void RenderAllObjects(Graphics Destination)
         {
             foreach (SimObject o in MyWorld.Objects)
             {
                 GraphicObject obj = o.Model as GraphicObject;
                 GraphicsPath pth = obj.MakePath();
-                if (WireFrame)
+                if (menu_enableWireframe.Checked)
                 {
                     Pen p = Pens.Black;
                     if (Selected != null && obj.Name == (Selected.Model as GraphicObject).Name)
                     {
                         p = Pens.Violet;
-                        if (afOrigin != null && AddForce)
-                          Destination.DrawLine(Pens.Gray, new PointF(afOrigin.Value.X,afOrigin.Value.Y), new PointF((float)o.RotationPoint[0], (float)o.RotationPoint[1]));
-
                         if (menu_showVertices.Checked)
                         {
                             foreach (PointF pt in pth.PathPoints)
@@ -91,12 +89,31 @@ namespace PhysBox
                     Point pt = Cursor.Position;
                     pt.Y += CursorCorrection;
 
-                    buf.Graphics.DrawLine(Pens.Red, pt, afOrigin.Value);
                     double size = Math.Round(Geometry.PointDistance(new PointF(Cursor.Position.X,Cursor.Position.Y),afOrigin.Value) * MyWorld.Resolution, 2);
-                    buf.Graphics.DrawString(String.Format("{0} N", size), new Font(FontFamily.GenericSansSerif, 7), Brushes.Red, new PointF(afOrigin.Value.X - 50, afOrigin.Value.Y + 10));
+                    buf.Graphics.DrawString(String.Format("F = {0} N", size), SmallFont, Brushes.Red, new PointF(afOrigin.Value.X - 50, afOrigin.Value.Y + 10));
+                    
+                    Vector p = Selected.GetP((Vector)afOrigin - (new Vector(pt.X,pt.Y)),(Vector)afOrigin);
+                    buf.Graphics.DrawLine(Pens.Gray,(PointF)p,(PointF)Selected.RotationPoint);
+                    buf.Graphics.FillRectangle(Brushes.Gray,(float)p[0]-2,(float)p[1]-2,2,2);
+                    buf.Graphics.DrawLine(Pens.Red, pt, (PointF)p);
+
                 }
 
-                RenderAllObjects(buf.Graphics, menu_enableWireframe.Checked, menu_showVectors.Checked);
+                if (menu_showResolution.Checked)
+                {
+                    if (MyWorld.Resolution > 500)
+                    {
+                        buf.Graphics.DrawString(String.Format("0,1 m = {0} px", MyWorld.Resolution / 10), SmallFont, Brushes.IndianRed, new PointF(30, Size.Height - 90));
+                        buf.Graphics.DrawLine(Pens.IndianRed, new PointF(30, Size.Height - 70), new PointF(30 + (float)MyWorld.Resolution / 10, Size.Height - 70));
+                    }
+                    else
+                    {
+                        buf.Graphics.DrawString(String.Format("1 m = {0} px", MyWorld.Resolution), SmallFont, Brushes.IndianRed, new PointF(30, Size.Height - 90));
+                        buf.Graphics.DrawLine(Pens.IndianRed, new PointF(30, Size.Height - 70), new PointF(30 + (float)MyWorld.Resolution, Size.Height - 70));
+                    }
+                }
+
+                RenderAllObjects(buf.Graphics);
                 buf.Render();
             }
         }

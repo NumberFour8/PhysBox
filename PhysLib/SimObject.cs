@@ -7,7 +7,7 @@ namespace PhysLib
     /// </summary>
     public class SimObject
     {
-        private double m;
+        private double m,J;
         private Vector totalForce,totalTorque;
         private Geometry model;
 
@@ -27,6 +27,17 @@ namespace PhysLib
             AngularVelocity = new Vector(3);
 
             Enabled = true;
+
+            double denom = 0,nom = 0,factor = 0;
+            for (int i = 0, j = 0; i < Model.ObjectGeometry.Length; i++)
+            {
+                j = (i + 1) % Model.ObjectGeometry.Length;
+                factor = Vector.Pow((Vector)Model.ObjectGeometry[j], 2) + Vector.Dot((Vector)Model.ObjectGeometry[j], (Vector)Model.ObjectGeometry[i]) + Vector.Pow((Vector)Model.ObjectGeometry[i], 2);
+                nom += Vector.Cross(((Vector)Model.ObjectGeometry[j]), ((Vector)Model.ObjectGeometry[i])).Magnitude * factor;
+                denom += Vector.Cross(((Vector)Model.ObjectGeometry[j]), ((Vector)Model.ObjectGeometry[i])).Magnitude;
+
+            }
+            J = nom / denom;
         }
 
         /// <summary>
@@ -48,7 +59,11 @@ namespace PhysLib
         /// </summary>
         public double MomentOfInertia
         {
-            get { return ((Mass * Math.Pow(Model.Height, 2) + Math.Pow(Model.Width, 2)) / 12)+(((Vector)model.Nail).Magnitude*Mass); }
+            get { 
+                //double d = Vector.Pow(RotationPoint - COG,2);
+                //return (J * m / 6); //+ m * d;
+                return 2;
+            }
         }
 
         /// <summary>
@@ -65,6 +80,7 @@ namespace PhysLib
         public Vector TotalForce
         {
             get { return totalForce; }
+            set { totalForce = value; }
         }
 
         /// <summary>
@@ -73,6 +89,7 @@ namespace PhysLib
         public Vector TotalTorque
         {
             get { return totalTorque; }
+            set { totalTorque = value; }
         }
 
         /// <summary>
@@ -140,8 +157,20 @@ namespace PhysLib
         /// <param name="Origin">Působiště síly</param>
         public void ApplyForce(Vector Force,Vector Origin)
         {
-            totalForce  += Force;
-            totalTorque += Vector.Cross(Origin - RotationPoint, Force);
+            if (Force.IsNull) return;
+            totalForce += Force;
+
+            Vector u = Vector.Unit(Force);
+            Vector P = Origin - (u * Vector.Dot(Origin - RotationPoint, u) / Vector.Pow(u, 2));
+            Vector r = P - RotationPoint;
+
+            totalTorque += Vector.Cross(r, Force);            
+        }
+
+        public Vector GetP(Vector Force,Vector Origin)
+        {
+            Vector u = Vector.Unit(Force);
+            return Origin - (u * Vector.Dot(Origin - RotationPoint, u) / Vector.Pow(u, 2));
         }
 
         /// <summary>

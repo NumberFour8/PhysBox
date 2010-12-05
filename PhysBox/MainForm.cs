@@ -17,7 +17,7 @@ namespace PhysBox
     {
         private World MyWorld;
         private SimObject Placing = null;
-        private bool Moving = false,Rotating = false,AddForce = false,SetAxis = false;
+        private bool Moving = false,Rotating = false,AddForce = false,SetAxis = false,Scaling = false;
 
         private PointF? afOrigin;
         
@@ -45,17 +45,10 @@ namespace PhysBox
             Moving = Rotating = AddForce =  SetAxis = false;
         }
 
-
-        private void kreslitVektoryToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            velikostiVektorůToolStripMenuItem.Enabled = menu_showVectors.Checked;
-            velikostiVektorůToolStripMenuItem.Checked = false;
-        }
-
         private void MainForm_Shown(object sender, EventArgs e)
         {
             if (MyWorld == null){
-                MyWorld = new World(World.DisplayDefault, World.EarthG,1.5*Math.Sqrt(Math.Pow(Size.Height,2)+Math.Pow(Size.Width,2)));
+                MyWorld = new World(World.DisplayDefault, World.EarthG,1.5*Math.Sqrt(Math.Pow(Size.Height,2)+Math.Pow(Size.Width,2)),100);
                 MyWorld.OnTick += new EventHandler(MyWorld_OnTick);
                 simTime.Enabled = true;
             }
@@ -131,19 +124,21 @@ namespace PhysBox
         {
             Moving = true;
             Cursor = Cursors.Cross;
+            Scaling = Rotating = SetAxis = false;
         }
 
         private void otáčetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Rotating = true;
             Cursor = Cursors.SizeNWSE;
+            Moving = Scaling = SetAxis = false;
         }
 
         private void MainForm_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left && Rotating)
+            if (e.Button == System.Windows.Forms.MouseButtons.Left && (Rotating || Scaling))
             {
-                Rotating = false;
+                Scaling = Rotating = false;
                 Cursor = Cursors.Default;
             }
         }
@@ -152,6 +147,8 @@ namespace PhysBox
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left && Rotating && Selected != null)
                 Selected.Model.Orientation += 3;
+            //if (e.Button == System.Windows.Forms.MouseButtons.Left && Scaling && Selected != null)
+            //    Selected.Model.Scale += 2;
         }        
 
         private void nástrojeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -176,6 +173,7 @@ namespace PhysBox
             if (Selected != null)
             {
                 AddForce = true;
+                Moving = Rotating = Scaling = SetAxis = false;
                 afOrigin = null;
                 Tools.Forbid();
 
@@ -187,6 +185,7 @@ namespace PhysBox
         private void zvolitOsuOtáčeníToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetAxis = true;
+            Moving = Rotating = Scaling = false;
             Cursor = Cursors.Cross;
         }
 
@@ -195,6 +194,19 @@ namespace PhysBox
             menu_showVertices.Enabled = menu_enableWireframe.Checked;
             if (!menu_enableWireframe.Checked)
                 menu_showVertices.Checked = false;
+        }
+
+        private void manipulateObj_CancelForces_Click(object sender, EventArgs e)
+        {
+            if (Selected != null)
+                Selected.Reset();
+        }
+
+        private void manipulateObj_Scale_Click(object sender, EventArgs e)
+        {
+            Scaling = true;
+            Moving = Rotating = SetAxis = false;
+            Cursor = Cursors.SizeNWSE;
         }
 
     }
