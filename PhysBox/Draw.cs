@@ -9,6 +9,7 @@ using PhysLib;
 namespace PhysBox
 {
 
+    // Odvozená třída, reprezentující grafický podklad pro těleso
     public class GraphicObject : Geometry
     {
         public Brush Fill { get; set; }
@@ -21,7 +22,7 @@ namespace PhysBox
         {
             Fill = Texture;
             ShowVectors = false;
-            Name = "obj_" + (DateTime.Now.Minute + DateTime.Now.Second).ToString();
+            Name = "obj_" + (DateTime.Now.Minute + DateTime.Now.Second).ToString(); // "Náhodný" název
             Tension = 0;
         }
 
@@ -52,24 +53,20 @@ namespace PhysBox
                     if (Selected != null && obj.Name == (Selected.Model as GraphicObject).Name)
                     {
                         p = Pens.Violet;
-                        if (menu_showVertices.Checked)
+                        if (menu_showVertices.Checked) // Je-li třeba vykresli vertexy objektu
                         {
                             foreach (PointF pt in pth.PathPoints)
                                 Destination.FillRectangle(Brushes.Navy, new RectangleF(pt.X - 2, pt.Y - 2, 4, 4));
                         }
                     }
 
+                    // Nakresli obrys objektu, jeho těžiště a osu rotace
                     Destination.DrawPath(p, pth);
-                    Destination.FillEllipse(Brushes.Black, new RectangleF((float)(obj.Position[0] - 2), (float)(obj.Position[1] - 2), 4, 4));
-                    Destination.FillEllipse(Brushes.Blue, new RectangleF((float)(o.RotationPoint[0] - 2),(float)(o.RotationPoint[1] - 2), 4, 4));
+                    Destination.FillEllipse(Brushes.Black, new RectangleF((float)(obj.Position[0] - 2), (float)(obj.Position[1] - 2), 4, 4)); // Těžiště
+                    Destination.FillEllipse(Brushes.Blue, new RectangleF((float)(o.RotationPoint[0] - 2),(float)(o.RotationPoint[1] - 2), 4, 4)); // Osa rotace
                 }
-                else Destination.FillPath(obj.Fill, obj.MakePath());
+                else Destination.FillPath(obj.Fill, obj.MakePath()); // Jinak nakresli objekt vyplněný texturou/barvou
             }
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);  
         }
 
         void MyWorld_OnTick(object sender, EventArgs e)
@@ -79,8 +76,8 @@ namespace PhysBox
             {
                 buf.Graphics.FillRectangle(Brushes.White, WorldRect);
 
-                if (menu_showVersion.Checked)
-                    buf.Graphics.DrawString("PhysBox, v.0.1", new Font(FontFamily.GenericSansSerif, 12), Brushes.Black, new PointF(10, mainMenu.Height + 5));
+                if (menu_showVersion.Checked) // Vykresli verzi
+                    buf.Graphics.DrawString("PhysBox, v.0.2", new Font(FontFamily.GenericSansSerif, 12), Brushes.Black, new PointF(10, mainMenu.Height + 5));
 
                 if (AddForce && Selected != null && afOrigin != null)
                 {
@@ -89,9 +86,11 @@ namespace PhysBox
                     Point pt = Cursor.Position;
                     pt.Y += CursorCorrection;
 
+                    // Nakresli čáru symbolizující aplikovanou sílu
                     double size = Math.Round(Geometry.PointDistance(new PointF(Cursor.Position.X,Cursor.Position.Y),afOrigin.Value) * MyWorld.Resolution, 2);
                     buf.Graphics.DrawString(String.Format("F = {0} N", size), SmallFont, Brushes.Red, new PointF(afOrigin.Value.X - 50, afOrigin.Value.Y + 10));
                     
+                    // Nakresli rameno síly
                     Vector p = Selected.GetTorqueIntersection((Vector)afOrigin - (new Vector(pt.X,pt.Y)),(Vector)afOrigin);
                     buf.Graphics.DrawLine(Pens.Gray,(PointF)p,(PointF)Selected.RotationPoint);
                     buf.Graphics.FillRectangle(Brushes.Gray,(float)p[0]-2,(float)p[1]-2,2,2);
@@ -100,6 +99,7 @@ namespace PhysBox
 
                 if (menu_showResolution.Checked)
                 {
+                    // Vykresli měřítko rozlišení
                     if (MyWorld.Resolution > 500)
                     {
                         buf.Graphics.DrawString(String.Format("0,1 m = {0} px", MyWorld.Resolution / 10), SmallFont, Brushes.IndianRed, new PointF(30, Size.Height - 90));

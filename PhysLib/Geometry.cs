@@ -90,22 +90,6 @@ namespace PhysLib
             }
         }
 
-        private double Round(double d)
-        {
-            d = Math.Abs(d);
-            double r = (d - Math.Floor(d)) * 10;
-
-            if (r >= 9) return Math.Ceiling(d);
-            else if (r <= 2) return Math.Floor(d);
-            else
-            {
-                r = (Math.Round(d, 1) - Math.Floor(Math.Round(d, 1))) * 10;
-                if (r > 8) return Math.Ceiling(d);
-                else if (r < 1) return Math.Floor(d);
-                else return Math.Round(d,1);
-            }
-        }
-
         /// <summary>
         /// Orientace objektu v úhlových stupních
         /// </summary>
@@ -123,9 +107,8 @@ namespace PhysLib
                     {
                         PointF[] t = new PointF[] { (PointF)center };
                         Mat.TransformPoints(t);
-                        center = new Vector(Round(t[0].X), Round(t[0].Y),0);
+                        center = new Vector(Math.Round(t[0].X,2),Math.Round(t[0].Y,2),0); // Nutné zaokrouhelní kvůli chybě vzniklé v rotační matici
                     }
-
                     angle = value;
                 }
             }
@@ -205,6 +188,56 @@ namespace PhysLib
             return Description;
         }
 
+        
+        /// <summary>
+        /// Provede projekci libovolného bodu na povrch tělesa
+        /// </summary>
+        /// <param name="ExternalPoint">Bod ležící mimo těleso</param>
+        /// <returns>Bod na tělese</returns>
+        public PointF ProjectToObject(Point ExternalPoint)
+        {
+            int a = 0, b = 1;
+            PointF Ret = new PointF();            
+            double ad = double.PositiveInfinity, bd = 0, cd = double.PositiveInfinity, dist = 0;
+            for (int i = 0; i < ObjectGeometry.Length; i++)
+            {
+                dist = Math.Sqrt(Math.Pow(ExternalPoint.X - ObjectGeometry[i].X, 2) + Math.Pow(ExternalPoint.Y - ObjectGeometry[i].Y, 2));
+                if (dist < ad)
+                {
+                    bd = ad;
+                    ad = dist;
+                    b = a;
+                    a = i;
+                }
+                else if (dist < bd)
+                {
+                    bd = dist;
+                    b = i;
+                }
+            }
+
+            float ax = ObjectGeometry[b].X - ObjectGeometry[a].X, ay = ObjectGeometry[b].Y - ObjectGeometry[a].Y, 
+                  x = ObjectGeometry[a].X, y = ObjectGeometry[a].Y,max = (float)Math.Sqrt(ax * ax + ay * ay);
+
+            while (x != ObjectGeometry[b].X || y != ObjectGeometry[b].Y)
+            {
+                PointF pt = new PointF(x, y);
+                dist = Geometry.PointDistance(pt, ExternalPoint);
+                if (dist < cd)
+                {
+                    cd = dist;
+                    Ret = pt;
+                }
+                if (dist > cd) break;
+               
+                x += ax / max;
+                y += ay / max;
+            }
+
+            return Ret;
+        }
+    
+
         /// <summary>
         /// Spočte vzdálenost dvou bodů
         /// </summary>
@@ -268,6 +301,7 @@ namespace PhysLib
     /// <summary>
     /// Popisovač rovinného geometrického útvaru
     /// </summary>
+    [Serializable]
     public class GeometryDescriptor
     {
         /// <summary>

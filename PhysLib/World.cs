@@ -291,8 +291,7 @@ namespace PhysLib
         public void Tick()
         {
             double ms = DateTime.Now.Ticks / 10000;
-            double Delta = simulationTime == 0 ? 0 : (ms - simulationTime) / 1000;
-            Delta = 0.01;
+            double Delta = Math.Round(simulationTime == 0 ? 0 : (ms - simulationTime) / 1000,2);
 
             if (!paused)
             {
@@ -317,7 +316,9 @@ namespace PhysLib
                         PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity, PhysObjs[i].COG);
                         //PhysObjs[i].TotalTorque -= 0.1 * PhysObjs[i].AngularVelocity;
 
-                        //PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
+                        if (!PhysObjs[i].NoTranslations)
+                          PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
+
                         PhysObjs[i].Model.Orientation += Math.Round((PhysObjs[i].AngularVelocity[2]*180/Math.PI) * Delta,3);
 
                         PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * (Delta / PhysObjs[i].Mass);

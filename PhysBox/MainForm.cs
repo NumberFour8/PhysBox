@@ -84,7 +84,6 @@ namespace PhysBox
 
                     if (SetAxis)
                     {
-                        //Selected.RotationPoint = new Vector(Selected.Model.Position[0],e.Y,0);
                         Selected.RotationPoint = new Vector(e.X, e.Y, 0);
                         Cursor = Cursors.Default;
                         SetAxis = false;
@@ -93,7 +92,7 @@ namespace PhysBox
                     if (AddForce)
                     {
                         if (afOrigin == null)
-                            afOrigin = GetPositionOnObject((Selected.Model as GraphicObject).ObjectGeometry, e.Location);
+                            afOrigin = Selected.Model.ProjectToObject(e.Location);
                         else
                         {
                             AddForce = false;
@@ -114,6 +113,14 @@ namespace PhysBox
 
                 stat_SelObject.Text = manipulateObj_Name.Text = String.Format("Objekt: {0}", (Selected.Model as GraphicObject).Name);
                 manipulateObj_Enabled.Checked = Selected.Enabled;
+                manipulateObj_NoTranslations.Checked = Selected.NoTranslations;
+                
+                manipulateObj_Rotate.Checked = Rotating;
+                manipulateObj_Scale.Checked = Scaling;
+                manipulateObj_SetAxis.Checked = SetAxis;
+                manipulateObj_ApplyForce.Checked = AddForce;
+                manipulateObj_Translate.Checked = Moving;
+
                 manipulateObj.Enabled = true;
                 manipulateObj.Show(new Point(e.X, e.Y));
 
@@ -177,10 +184,8 @@ namespace PhysBox
                 Moving = Rotating = Scaling = SetAxis = false;
                 afOrigin = null;
                 Tools.Forbid();
-
                 Cursor = Cursors.Cross;
             }
-            
         }
 
         private void zvolitOsuOtáčeníToolStripMenuItem_Click(object sender, EventArgs e)
@@ -208,6 +213,23 @@ namespace PhysBox
             Scaling = true;
             Moving = Rotating = SetAxis = AddForce = false;
             Cursor = Cursors.SizeNWSE;
+        }
+
+        private void manipulateObj_NoTranslations_Click(object sender, EventArgs e)
+        {
+            if (Selected != null)
+                Selected.NoTranslations = manipulateObj_NoTranslations.Checked;
+        }
+
+        private void MainForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Scaling = Moving = Rotating = SetAxis = AddForce = false;
+                Placing = null;
+                Cursor = Cursors.Default;
+                Tools.ActionDone();
+            }
         }
 
     }

@@ -16,10 +16,10 @@ namespace PhysLib
         /// </summary>
         /// <param name="gModel">Model tělesa</param>
         /// <param name="dMass">Hmotnost tělesa</param>
-        public SimObject(Geometry gModel, double dMass)
+        public SimObject(Geometry ObjectModel, double ObjectMass)
         {
-            model = gModel;
-            Mass = dMass;
+            model = ObjectModel;
+            Mass = ObjectMass;
             
             totalForce = new Vector(3);
             totalTorque = new Vector(3);
@@ -27,7 +27,9 @@ namespace PhysLib
             AngularVelocity = new Vector(3);
 
             Enabled = true;
+            NoTranslations = false;
 
+            // Předpočítej část momentu setrvačnosti
             double denom = 0,nom = 0,factor = 0;
             for (int i = 0, j = 0; i < Model.ObjectGeometry.Length; i++)
             {
@@ -95,6 +97,14 @@ namespace PhysLib
         /// Indikuje, zda je těleso zapnuté
         /// </summary>
         public bool Enabled
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Indikuje, zda zakázány lineární translační pohyby tělesa
+        /// </summary>
+        public bool NoTranslations
         {
             get; set;
         }
@@ -177,6 +187,8 @@ namespace PhysLib
             P[0] = Origin[0] + Force[0] * c;
             P[1] = Origin[1] + Force[1] * c;
             P[2] = 0;
+
+            if (Vector.PointDistance(P, RotationPoint) < 3) return RotationPoint;
 
             return P;
         }
