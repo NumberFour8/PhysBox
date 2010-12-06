@@ -92,11 +92,10 @@ namespace PhysBox
                     double size = Math.Round(Geometry.PointDistance(new PointF(Cursor.Position.X,Cursor.Position.Y),afOrigin.Value) * MyWorld.Resolution, 2);
                     buf.Graphics.DrawString(String.Format("F = {0} N", size), SmallFont, Brushes.Red, new PointF(afOrigin.Value.X - 50, afOrigin.Value.Y + 10));
                     
-                    Vector p = Selected.GetP((Vector)afOrigin - (new Vector(pt.X,pt.Y)),(Vector)afOrigin);
+                    Vector p = Selected.GetTorqueIntersection((Vector)afOrigin - (new Vector(pt.X,pt.Y)),(Vector)afOrigin);
                     buf.Graphics.DrawLine(Pens.Gray,(PointF)p,(PointF)Selected.RotationPoint);
                     buf.Graphics.FillRectangle(Brushes.Gray,(float)p[0]-2,(float)p[1]-2,2,2);
                     buf.Graphics.DrawLine(Pens.Red, pt, (PointF)p);
-
                 }
 
                 if (menu_showResolution.Checked)

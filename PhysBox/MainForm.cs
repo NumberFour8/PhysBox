@@ -42,7 +42,7 @@ namespace PhysBox
         {
             Placing = O;
             Cursor = Cursors.Cross;
-            Moving = Rotating = AddForce =  SetAxis = false;
+            Moving = Rotating = AddForce = Scaling = SetAxis = false;
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -65,7 +65,7 @@ namespace PhysBox
             {
                 if (Placing != null)
                 {
-                    Placing.Model.Position = new Vector(e.X, e.Y + CursorCorrection);
+                    Placing.Model.Position = new Vector(e.X, e.Y + CursorCorrection,0);
                     MyWorld.AddObject(Placing);
                     
                     Placing = null;
@@ -84,7 +84,8 @@ namespace PhysBox
 
                     if (SetAxis)
                     {
-                        Selected.RotationPoint = new Vector(e.X,e.Y,0);
+                        //Selected.RotationPoint = new Vector(Selected.Model.Position[0],e.Y,0);
+                        Selected.RotationPoint = new Vector(e.X, e.Y, 0);
                         Cursor = Cursors.Default;
                         SetAxis = false;
                     }
@@ -124,14 +125,14 @@ namespace PhysBox
         {
             Moving = true;
             Cursor = Cursors.Cross;
-            Scaling = Rotating = SetAxis = false;
+            Scaling = Rotating = SetAxis = AddForce = false;
         }
 
         private void otáčetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Rotating = true;
             Cursor = Cursors.SizeNWSE;
-            Moving = Scaling = SetAxis = false;
+            Moving = Scaling = SetAxis = AddForce = false;
         }
 
         private void MainForm_MouseUp(object sender, MouseEventArgs e)
@@ -185,7 +186,7 @@ namespace PhysBox
         private void zvolitOsuOtáčeníToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetAxis = true;
-            Moving = Rotating = Scaling = false;
+            Moving = Rotating = Scaling = AddForce =  false;
             Cursor = Cursors.Cross;
         }
 
@@ -205,7 +206,7 @@ namespace PhysBox
         private void manipulateObj_Scale_Click(object sender, EventArgs e)
         {
             Scaling = true;
-            Moving = Rotating = SetAxis = false;
+            Moving = Rotating = SetAxis = AddForce = false;
             Cursor = Cursors.SizeNWSE;
         }
 

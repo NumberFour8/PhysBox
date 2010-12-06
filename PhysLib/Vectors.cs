@@ -61,7 +61,7 @@ namespace PhysLib
         /// <summary>
         /// Nulový vektor
         /// </summary>
-        public static readonly Vector Zero = new Vector(0);
+        public static readonly Vector Zero = new Vector(3);
 
         /// <summary>
         /// Velikost vektoru
@@ -116,7 +116,7 @@ namespace PhysLib
         /// <returns>Jednotkový vektor</returns>
         public static Vector Unit(Vector v)
         {
-            if (v.IsNull) return Vector.Zero;
+            if (v.IsNull) return new Vector(v.Count);
 
             Vector Ret = new Vector(v.Count);
             for (int i = 0; i < v.Count;i++)
@@ -190,6 +190,85 @@ namespace PhysLib
                 Ret[j] = B[i] * A[j];
 
             return Ret;
+        }
+
+        /// <summary>
+        /// Usekne desetinnou část všech prvků ve vektoru
+        /// </summary>
+        /// <param name="v">Vektor</param>
+        /// <returns>Vektor se složkami bez desetinných částí</returns>
+        public static Vector Truncate(Vector v)
+        {
+            Vector Ret = new Vector(v.Count);
+            if (v.IsNull) return new Vector(v.Count);
+            for (int i = 0; i < v.Count; i++)            
+                Ret[i] = Math.Truncate(v[i]);
+            
+            return Ret;
+        }
+
+
+        /// <summary>
+        /// Převede všechny prvky ve vektoru na jejich horní celé části
+        /// </summary>
+        /// <param name="v">Vektor</param>
+        /// <returns>Horní celá část vektoru</returns>
+        public static Vector Ceiling(Vector v)
+        {
+            Vector Ret = new Vector(v.Count);
+            if (v.IsNull) return new Vector(v.Count);
+            for (int i = 0; i < v.Count; i++)
+                Ret[i] = Math.Ceiling(v[i]);
+
+            return Ret;
+        }
+        
+        /// <summary>
+        /// Převede všechny prvky ve vektoru na jejich dolní celé části
+        /// </summary>
+        /// <param name="v">Vektor</param>
+        /// <returns>Dolní celá část vektoru</returns>
+        public static Vector Floor(Vector v)
+        {
+            Vector Ret = new Vector(v.Count);
+            if (v.IsNull) return new Vector(v.Count);
+            for (int i = 0; i < v.Count; i++)
+                Ret[i] = Math.Floor(v[i]);
+
+            return Ret;
+        }
+
+
+        /// <summary>
+        /// Zaokrouhlí všechny prvky vektoru s danou přesností
+        /// </summary>
+        /// <param name="v">Vektor k zaokrouhlení</param>
+        /// <param name="decimals">Přesnost zaokrouhlování</param>
+        /// <returns>Zaokrouhlený vektor</returns>
+        public static Vector Round(Vector v,int decimals)
+        {
+            Vector Ret = new Vector(v.Count);
+            if (v.IsNull) return new Vector(v.Count);
+            for (int i = 0; i < v.Count; i++)
+                Ret[i] = Math.Round(v[i],decimals);
+
+            return Ret;
+        }
+
+        /// <summary>
+        /// Spočítá vzdálenost mezi dvěma body
+        /// </summary>
+        /// <param name="a">Bod A</param>
+        /// <param name="b">Bod B</param>
+        /// <returns>Vzdálenost |AB|</returns>
+        public static double PointDistance(Vector a, Vector b)
+        {
+            if (a.Count != b.Count) throw new ArgumentException();
+            double ret = 0;
+            for (int i = 0; i < a.Count; i++)
+                ret += Math.Pow(a[i] - b[i], 2);
+            
+            return Math.Sqrt(ret);
         }
 
         public static Vector operator +(Vector v, Vector u)
@@ -320,6 +399,7 @@ namespace PhysLib
         {
             base.ToString();
             string Ret = String.Empty;
+            if (Count == 0) return "(0)";
             for (int i = 0;i < Count;i++)
                 Ret += String.Format("{0:F2};", this[i]);
             return "(" + Ret.Remove(Ret.Length-1) + ")";

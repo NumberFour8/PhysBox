@@ -292,6 +292,7 @@ namespace PhysLib
         {
             double ms = DateTime.Now.Ticks / 10000;
             double Delta = simulationTime == 0 ? 0 : (ms - simulationTime) / 1000;
+            Delta = 0.01;
 
             if (!paused)
             {
@@ -314,13 +315,13 @@ namespace PhysLib
                         }
                         
                         PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity, PhysObjs[i].COG);
-                        //PhysObjs[i].TotalTorque -= 5 * PhysObjs[i].AngularVelocity;
+                        //PhysObjs[i].TotalTorque -= 0.1 * PhysObjs[i].AngularVelocity;
 
                         //PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
-                        PhysObjs[i].Model.Orientation += PhysObjs[i].AngularVelocity[2] * Delta;
+                        PhysObjs[i].Model.Orientation += Math.Round((PhysObjs[i].AngularVelocity[2]*180/Math.PI) * Delta,3);
 
                         PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * (Delta / PhysObjs[i].Mass);
-                        PhysObjs[i].AngularVelocity += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);
+                        PhysObjs[i].AngularVelocity += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].GetMomentOfInertia(Resolution));
 
                         PhysObjs[i].Reset();
                     }

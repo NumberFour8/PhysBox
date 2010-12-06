@@ -86,29 +86,48 @@ namespace PhysLib
                 if (Nail != center) Nail += value - center;
                 else Nail = value;
 
-                center = value;
+                center = value; 
+            }
+        }
+
+        private double Round(double d)
+        {
+            d = Math.Abs(d);
+            double r = (d - Math.Floor(d)) * 10;
+
+            if (r >= 9) return Math.Ceiling(d);
+            else if (r <= 2) return Math.Floor(d);
+            else
+            {
+                r = (Math.Round(d, 1) - Math.Floor(Math.Round(d, 1))) * 10;
+                if (r > 8) return Math.Ceiling(d);
+                else if (r < 1) return Math.Floor(d);
+                else return Math.Round(d,1);
             }
         }
 
         /// <summary>
-        /// Orientace objektu
+        /// Orientace objektu v úhlových stupních
         /// </summary>
         public double Orientation
         {
             get { return angle; }
             set {
-                System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix();
-                Mat.RotateAt((float)(value-angle), (PointF)(Nail));
-                Mat.TransformPoints(geom);                
-
-                if (Nail != center)
+                if (value - angle != 0)
                 {
-                    PointF[] t = new PointF[] { (PointF)center };
-                    Mat.TransformPoints(t);
-                    center = (Vector)t[0];
-                }
+                    System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix();
+                    Mat.RotateAt((float)(value - angle), (PointF)(Nail));
+                    Mat.TransformPoints(geom);
 
-                angle = value;
+                    if (Nail != center)
+                    {
+                        PointF[] t = new PointF[] { (PointF)center };
+                        Mat.TransformPoints(t);
+                        center = new Vector(Round(t[0].X), Round(t[0].Y),0);
+                    }
+
+                    angle = value;
+                }
             }
         }
 

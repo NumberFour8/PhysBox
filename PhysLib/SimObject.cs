@@ -55,15 +55,14 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Moment setrvačnosti tělesa vzhledem k ose otáčení
+        /// Spočítá moment setrvačnosti tělesa v závislosti na rozlišení
         /// </summary>
-        public double MomentOfInertia
+        /// <param name="Resolution">Rozlišení</param>
+        /// <returns>Moment setrvačnosti</returns>
+        public double GetMomentOfInertia(double Resolution)
         {
-            get { 
-                //double d = Vector.Pow(RotationPoint - COG,2);
-                //return (J * m / 6); //+ m * d;
-                return 2;
-            }
+             double d = Vector.PointDistance(RotationPoint,COG);
+             return (J * Resolution * m / 6) + m * d;
         }
 
         /// <summary>
@@ -160,17 +159,26 @@ namespace PhysLib
             if (Force.IsNull) return;
             totalForce += Force;
 
-            Vector u = Vector.Unit(Force);
-            Vector P = Origin - (u * Vector.Dot(Origin - RotationPoint, u) / Vector.Pow(u, 2));
-            Vector r = P - RotationPoint;
-
-            totalTorque += Vector.Cross(r, Force);            
+            totalTorque += Vector.Cross(GetTorqueIntersection(Force,Origin) - RotationPoint, Force);
+            return;
         }
 
-        public Vector GetP(Vector Force,Vector Origin)
+        /// <summary>
+        /// Získá bod ve kterém se protíná prodloužený vektor síly a vektor ramene síly
+        /// </summary>
+        /// <param name="Force">Síla působící na těleso</param>
+        /// <param name="Origin">Působiště síly</param>
+        /// <returns>Průsečík ramene a síly</returns>
+        public Vector GetTorqueIntersection(Vector Force,Vector Origin)
         {
-            Vector u = Vector.Unit(Force);
-            return Origin - (u * Vector.Dot(Origin - RotationPoint, u) / Vector.Pow(u, 2));
+            Vector P = new Vector(3);
+            double c = (Force[0] * (RotationPoint[0] - Origin[0]) + Force[1] * (RotationPoint[1] - Origin[1])) / Math.Pow(Force.Magnitude, 2);
+
+            P[0] = Origin[0] + Force[0] * c;
+            P[1] = Origin[1] + Force[1] * c;
+            P[2] = 0;
+
+            return P;
         }
 
         /// <summary>
