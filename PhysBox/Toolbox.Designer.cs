@@ -28,55 +28,215 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label label1;
+            System.Windows.Forms.Label label3;
+            System.Windows.Forms.Label label2;
+            System.Windows.Forms.Label label19;
+            System.Windows.Forms.Label label18;
+            System.Windows.Forms.Label label11;
+            System.Windows.Forms.Label label10;
+            System.Windows.Forms.Label label9;
+            System.Windows.Forms.Label label8;
+            System.Windows.Forms.Label label7;
+            System.Windows.Forms.Label label6;
+            System.Windows.Forms.Label label5;
+            System.Windows.Forms.Label label4;
             this.tab_Toolbox = new System.Windows.Forms.TabControl();
             this.tool_newObj = new System.Windows.Forms.TabPage();
             this.newobj_Saved = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.newObj_Insert = new System.Windows.Forms.Button();
             this.newObj = new System.Windows.Forms.GroupBox();
             this.createGeometry = new System.Windows.Forms.Button();
             this.newObj_Enabled = new System.Windows.Forms.CheckBox();
             this.newObj_AutoName = new System.Windows.Forms.CheckBox();
             this.newObj_Name = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.newobj_Material = new System.Windows.Forms.ComboBox();
             this.newobj_Mass = new System.Windows.Forms.MaskedTextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.newobj_Geometry = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.objProps = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button_SetProps = new System.Windows.Forms.Button();
+            this.prop_textObjDrag = new System.Windows.Forms.MaskedTextBox();
+            this.prop_comboPropMaterials = new System.Windows.Forms.ComboBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.prop_potentialEnergy = new System.Windows.Forms.Label();
+            this.radio_KineticEnergy = new System.Windows.Forms.RadioButton();
+            this.radio_AngularVelocity = new System.Windows.Forms.RadioButton();
+            this.radio_LinearVelocity = new System.Windows.Forms.RadioButton();
+            this.prop_kineticEnergy = new System.Windows.Forms.Label();
+            this.prop_angularVelocity = new System.Windows.Forms.Label();
+            this.prop_Velocity = new System.Windows.Forms.Label();
+            this.button_Analyze = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.list_allObjects = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.env_G = new System.Windows.Forms.MaskedTextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.env_Resolution = new System.Windows.Forms.MaskedTextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.env_Aether = new System.Windows.Forms.MaskedTextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.env_StepSize = new System.Windows.Forms.MaskedTextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button_applyEnv = new System.Windows.Forms.Button();
-            this.button_resetEnv = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.list_allObjects = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.env_StepSize = new System.Windows.Forms.MaskedTextBox();
+            this.env_Aether = new System.Windows.Forms.MaskedTextBox();
+            this.env_Resolution = new System.Windows.Forms.MaskedTextBox();
+            this.env_G = new System.Windows.Forms.MaskedTextBox();
+            this.radio_rotationalEnergy = new System.Windows.Forms.RadioButton();
+            this.prop_rotationalEnergy = new System.Windows.Forms.Label();
+            this.BS_SimObject = new System.Windows.Forms.BindingSource(this.components);
+            label1 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label19 = new System.Windows.Forms.Label();
+            label18 = new System.Windows.Forms.Label();
+            label11 = new System.Windows.Forms.Label();
+            label10 = new System.Windows.Forms.Label();
+            label9 = new System.Windows.Forms.Label();
+            label8 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
             this.tab_Toolbox.SuspendLayout();
             this.tool_newObj.SuspendLayout();
             this.newObj.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.objProps.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BS_SimObject)).BeginInit();
             this.SuspendLayout();
+            // 
+            // label1
+            // 
+            label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(7, 300);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(139, 13);
+            label1.TabIndex = 6;
+            label1.Text = "nebo předdefinovaný model";
+            // 
+            // label3
+            // 
+            label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(11, 134);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(44, 13);
+            label3.TabIndex = 6;
+            label3.Text = "Název :";
+            // 
+            // label2
+            // 
+            label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(11, 104);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(73, 13);
+            label2.TabIndex = 3;
+            label2.Text = "Hmotnost (g) :";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Location = new System.Drawing.Point(5, 49);
+            label19.Name = "label19";
+            label19.Size = new System.Drawing.Size(96, 13);
+            label19.TabIndex = 2;
+            label19.Text = "Koeficient odporu :";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new System.Drawing.Point(6, 22);
+            label18.Name = "label18";
+            label18.Size = new System.Drawing.Size(50, 13);
+            label18.TabIndex = 0;
+            label18.Text = "Materiál :";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(176, 106);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(20, 13);
+            label11.TabIndex = 11;
+            label11.Text = "ms";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(6, 106);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(113, 13);
+            label10.TabIndex = 9;
+            label10.Text = "Doba kroku simulace :";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(175, 82);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(44, 13);
+            label9.TabIndex = 8;
+            label9.Text = "kg/m^3";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(6, 82);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(96, 13);
+            label8.TabIndex = 6;
+            label8.Text = "Hustota prostředí :";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(176, 30);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(37, 13);
+            label7.TabIndex = 5;
+            label7.Text = "m/s^2";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(175, 56);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(31, 13);
+            label6.TabIndex = 4;
+            label6.Text = "px/m";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(6, 56);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(57, 13);
+            label5.TabIndex = 2;
+            label5.Text = "Rozlišení :";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(6, 30);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(109, 13);
+            label4.TabIndex = 1;
+            label4.Text = "Gravitační zrychlení :";
             // 
             // tab_Toolbox
             // 
@@ -89,11 +249,12 @@
             this.tab_Toolbox.SelectedIndex = 0;
             this.tab_Toolbox.Size = new System.Drawing.Size(233, 367);
             this.tab_Toolbox.TabIndex = 0;
+            this.tab_Toolbox.Selected += new System.Windows.Forms.TabControlEventHandler(this.tab_Toolbox_Selected);
             // 
             // tool_newObj
             // 
             this.tool_newObj.Controls.Add(this.newobj_Saved);
-            this.tool_newObj.Controls.Add(this.label1);
+            this.tool_newObj.Controls.Add(label1);
             this.tool_newObj.Controls.Add(this.newObj_Insert);
             this.tool_newObj.Controls.Add(this.newObj);
             this.tool_newObj.Location = new System.Drawing.Point(4, 22);
@@ -114,17 +275,6 @@
             this.newobj_Saved.Name = "newobj_Saved";
             this.newobj_Saved.Size = new System.Drawing.Size(133, 21);
             this.newobj_Saved.TabIndex = 7;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 300);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "nebo předdefinovaný model";
             // 
             // newObj_Insert
             // 
@@ -147,10 +297,10 @@
             this.newObj.Controls.Add(this.newObj_Enabled);
             this.newObj.Controls.Add(this.newObj_AutoName);
             this.newObj.Controls.Add(this.newObj_Name);
-            this.newObj.Controls.Add(this.label3);
+            this.newObj.Controls.Add(label3);
             this.newObj.Controls.Add(this.newobj_Material);
             this.newObj.Controls.Add(this.newobj_Mass);
-            this.newObj.Controls.Add(this.label2);
+            this.newObj.Controls.Add(label2);
             this.newObj.Controls.Add(this.newobj_Geometry);
             this.newObj.Location = new System.Drawing.Point(7, 6);
             this.newObj.Name = "newObj";
@@ -202,17 +352,6 @@
             this.newObj_Name.Size = new System.Drawing.Size(116, 20);
             this.newObj_Name.TabIndex = 7;
             // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 134);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Název :";
-            // 
             // newobj_Material
             // 
             this.newobj_Material.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -235,17 +374,6 @@
             this.newobj_Mass.PromptChar = ' ';
             this.newobj_Mass.Size = new System.Drawing.Size(116, 20);
             this.newobj_Mass.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 104);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Hmotnost (g) :";
             // 
             // newobj_Geometry
             // 
@@ -271,12 +399,166 @@
             // 
             // objProps
             // 
+            this.objProps.Controls.Add(this.groupBox4);
+            this.objProps.Controls.Add(this.groupBox3);
             this.objProps.Location = new System.Drawing.Point(3, 6);
             this.objProps.Name = "objProps";
             this.objProps.Size = new System.Drawing.Size(219, 332);
             this.objProps.TabIndex = 0;
             this.objProps.TabStop = false;
             this.objProps.Text = "Žádný objekt";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button_SetProps);
+            this.groupBox4.Controls.Add(this.prop_textObjDrag);
+            this.groupBox4.Controls.Add(label19);
+            this.groupBox4.Controls.Add(this.prop_comboPropMaterials);
+            this.groupBox4.Controls.Add(label18);
+            this.groupBox4.Location = new System.Drawing.Point(6, 227);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(207, 99);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Parametry";
+            // 
+            // button_SetProps
+            // 
+            this.button_SetProps.Enabled = false;
+            this.button_SetProps.Location = new System.Drawing.Point(126, 72);
+            this.button_SetProps.Name = "button_SetProps";
+            this.button_SetProps.Size = new System.Drawing.Size(75, 20);
+            this.button_SetProps.TabIndex = 16;
+            this.button_SetProps.Text = "Použít";
+            this.button_SetProps.UseVisualStyleBackColor = true;
+            // 
+            // prop_textObjDrag
+            // 
+            this.prop_textObjDrag.Enabled = false;
+            this.prop_textObjDrag.Location = new System.Drawing.Point(108, 46);
+            this.prop_textObjDrag.Mask = "0.00";
+            this.prop_textObjDrag.Name = "prop_textObjDrag";
+            this.prop_textObjDrag.PromptChar = ' ';
+            this.prop_textObjDrag.Size = new System.Drawing.Size(50, 20);
+            this.prop_textObjDrag.TabIndex = 12;
+            this.prop_textObjDrag.Text = "123";
+            // 
+            // prop_comboPropMaterials
+            // 
+            this.prop_comboPropMaterials.Enabled = false;
+            this.prop_comboPropMaterials.FormattingEnabled = true;
+            this.prop_comboPropMaterials.Location = new System.Drawing.Point(65, 19);
+            this.prop_comboPropMaterials.Name = "prop_comboPropMaterials";
+            this.prop_comboPropMaterials.Size = new System.Drawing.Size(136, 21);
+            this.prop_comboPropMaterials.TabIndex = 1;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.prop_rotationalEnergy);
+            this.groupBox3.Controls.Add(this.radio_rotationalEnergy);
+            this.groupBox3.Controls.Add(this.radioButton1);
+            this.groupBox3.Controls.Add(this.prop_potentialEnergy);
+            this.groupBox3.Controls.Add(this.radio_KineticEnergy);
+            this.groupBox3.Controls.Add(this.radio_AngularVelocity);
+            this.groupBox3.Controls.Add(this.radio_LinearVelocity);
+            this.groupBox3.Controls.Add(this.prop_kineticEnergy);
+            this.groupBox3.Controls.Add(this.prop_angularVelocity);
+            this.groupBox3.Controls.Add(this.prop_Velocity);
+            this.groupBox3.Controls.Add(this.button_Analyze);
+            this.groupBox3.Location = new System.Drawing.Point(6, 19);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(207, 202);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Hodnoty";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(6, 85);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(123, 17);
+            this.radioButton1.TabIndex = 26;
+            this.radioButton1.Text = "Potenciální energie :";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // prop_potentialEnergy
+            // 
+            this.prop_potentialEnergy.AutoSize = true;
+            this.prop_potentialEnergy.Location = new System.Drawing.Point(126, 87);
+            this.prop_potentialEnergy.Name = "prop_potentialEnergy";
+            this.prop_potentialEnergy.Size = new System.Drawing.Size(21, 13);
+            this.prop_potentialEnergy.TabIndex = 25;
+            this.prop_potentialEnergy.Text = "0 J";
+            // 
+            // radio_KineticEnergy
+            // 
+            this.radio_KineticEnergy.AutoSize = true;
+            this.radio_KineticEnergy.Location = new System.Drawing.Point(6, 62);
+            this.radio_KineticEnergy.Name = "radio_KineticEnergy";
+            this.radio_KineticEnergy.Size = new System.Drawing.Size(113, 17);
+            this.radio_KineticEnergy.TabIndex = 23;
+            this.radio_KineticEnergy.Text = "Kinetická energie :";
+            this.radio_KineticEnergy.UseVisualStyleBackColor = true;
+            // 
+            // radio_AngularVelocity
+            // 
+            this.radio_AngularVelocity.AutoSize = true;
+            this.radio_AngularVelocity.Location = new System.Drawing.Point(6, 39);
+            this.radio_AngularVelocity.Name = "radio_AngularVelocity";
+            this.radio_AngularVelocity.Size = new System.Drawing.Size(104, 17);
+            this.radio_AngularVelocity.TabIndex = 20;
+            this.radio_AngularVelocity.Text = "Úhlová rychlost :";
+            this.radio_AngularVelocity.UseVisualStyleBackColor = true;
+            // 
+            // radio_LinearVelocity
+            // 
+            this.radio_LinearVelocity.AutoSize = true;
+            this.radio_LinearVelocity.Checked = true;
+            this.radio_LinearVelocity.Location = new System.Drawing.Point(6, 16);
+            this.radio_LinearVelocity.Name = "radio_LinearVelocity";
+            this.radio_LinearVelocity.Size = new System.Drawing.Size(72, 17);
+            this.radio_LinearVelocity.TabIndex = 19;
+            this.radio_LinearVelocity.TabStop = true;
+            this.radio_LinearVelocity.Text = "Rychlost :";
+            this.radio_LinearVelocity.UseVisualStyleBackColor = true;
+            // 
+            // prop_kineticEnergy
+            // 
+            this.prop_kineticEnergy.AutoSize = true;
+            this.prop_kineticEnergy.Location = new System.Drawing.Point(126, 64);
+            this.prop_kineticEnergy.Name = "prop_kineticEnergy";
+            this.prop_kineticEnergy.Size = new System.Drawing.Size(21, 13);
+            this.prop_kineticEnergy.TabIndex = 17;
+            this.prop_kineticEnergy.Text = "0 J";
+            // 
+            // prop_angularVelocity
+            // 
+            this.prop_angularVelocity.AutoSize = true;
+            this.prop_angularVelocity.Location = new System.Drawing.Point(126, 41);
+            this.prop_angularVelocity.Name = "prop_angularVelocity";
+            this.prop_angularVelocity.Size = new System.Drawing.Size(41, 13);
+            this.prop_angularVelocity.TabIndex = 14;
+            this.prop_angularVelocity.Text = "0 rad/s";
+            // 
+            // prop_Velocity
+            // 
+            this.prop_Velocity.AutoSize = true;
+            this.prop_Velocity.Location = new System.Drawing.Point(126, 20);
+            this.prop_Velocity.Name = "prop_Velocity";
+            this.prop_Velocity.Size = new System.Drawing.Size(34, 13);
+            this.prop_Velocity.TabIndex = 13;
+            this.prop_Velocity.Text = "0 m/s";
+            // 
+            // button_Analyze
+            // 
+            this.button_Analyze.Enabled = false;
+            this.button_Analyze.Location = new System.Drawing.Point(126, 176);
+            this.button_Analyze.Name = "button_Analyze";
+            this.button_Analyze.Size = new System.Drawing.Size(75, 20);
+            this.button_Analyze.TabIndex = 12;
+            this.button_Analyze.Text = "Analyzovat";
+            this.button_Analyze.UseVisualStyleBackColor = true;
             // 
             // tabPage1
             // 
@@ -288,158 +570,6 @@
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Tělesa";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.groupBox1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(225, 341);
-            this.tabPage3.TabIndex = 3;
-            this.tabPage3.Text = "Prostředí";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.button_resetEnv);
-            this.groupBox1.Controls.Add(this.button_applyEnv);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.env_StepSize);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.env_Aether);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.env_Resolution);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.env_G);
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(216, 171);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Parametry simulace";
-            // 
-            // env_G
-            // 
-            this.env_G.Location = new System.Drawing.Point(122, 27);
-            this.env_G.Name = "env_G";
-            this.env_G.Size = new System.Drawing.Size(51, 20);
-            this.env_G.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 30);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(109, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Gravitační zrychlení :";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 56);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Rozlišení :";
-            // 
-            // env_Resolution
-            // 
-            this.env_Resolution.Location = new System.Drawing.Point(122, 53);
-            this.env_Resolution.Name = "env_Resolution";
-            this.env_Resolution.Size = new System.Drawing.Size(51, 20);
-            this.env_Resolution.TabIndex = 3;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(175, 56);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(31, 13);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "px/m";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(176, 30);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(37, 13);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "m/s^2";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 82);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(96, 13);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Hustota prostředí :";
-            // 
-            // env_Aether
-            // 
-            this.env_Aether.Location = new System.Drawing.Point(122, 79);
-            this.env_Aether.Name = "env_Aether";
-            this.env_Aether.Size = new System.Drawing.Size(51, 20);
-            this.env_Aether.TabIndex = 7;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(175, 82);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(44, 13);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "kg/m^3";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 106);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(113, 13);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "Doba kroku simulace :";
-            // 
-            // env_StepSize
-            // 
-            this.env_StepSize.Location = new System.Drawing.Point(122, 103);
-            this.env_StepSize.Name = "env_StepSize";
-            this.env_StepSize.Size = new System.Drawing.Size(51, 20);
-            this.env_StepSize.TabIndex = 10;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(176, 106);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(20, 13);
-            this.label11.TabIndex = 11;
-            this.label11.Text = "ms";
-            // 
-            // button_applyEnv
-            // 
-            this.button_applyEnv.Location = new System.Drawing.Point(135, 144);
-            this.button_applyEnv.Name = "button_applyEnv";
-            this.button_applyEnv.Size = new System.Drawing.Size(75, 21);
-            this.button_applyEnv.TabIndex = 12;
-            this.button_applyEnv.Text = "Použít";
-            this.button_applyEnv.UseVisualStyleBackColor = true;
-            // 
-            // button_resetEnv
-            // 
-            this.button_resetEnv.Location = new System.Drawing.Point(6, 144);
-            this.button_resetEnv.Name = "button_resetEnv";
-            this.button_resetEnv.Size = new System.Drawing.Size(75, 21);
-            this.button_resetEnv.TabIndex = 13;
-            this.button_resetEnv.Text = "Původní";
-            this.button_resetEnv.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -455,31 +585,14 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Všechna tělesa v prostředí";
             // 
-            // list_allObjects
+            // button4
             // 
-            this.list_allObjects.FormattingEnabled = true;
-            this.list_allObjects.Location = new System.Drawing.Point(4, 19);
-            this.list_allObjects.Name = "list_allObjects";
-            this.list_allObjects.Size = new System.Drawing.Size(209, 225);
-            this.list_allObjects.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(27, 276);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(168, 20);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Smazat tělesa mimo poloměr";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(6, 250);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(97, 20);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Smazat";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button4.Location = new System.Drawing.Point(27, 302);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(168, 20);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "Přesunout tělesa mimo poloměr";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
@@ -490,14 +603,136 @@
             this.button3.Text = "Vybrat";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // button2
             // 
-            this.button4.Location = new System.Drawing.Point(27, 302);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(168, 20);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Přesunout tělesa mimo poloměr";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button2.Location = new System.Drawing.Point(6, 250);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(97, 20);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Smazat";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(27, 276);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(168, 20);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Smazat tělesa mimo poloměr";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // list_allObjects
+            // 
+            this.list_allObjects.FormattingEnabled = true;
+            this.list_allObjects.Location = new System.Drawing.Point(4, 19);
+            this.list_allObjects.Name = "list_allObjects";
+            this.list_allObjects.Size = new System.Drawing.Size(209, 225);
+            this.list_allObjects.TabIndex = 0;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.groupBox1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(225, 341);
+            this.tabPage3.TabIndex = 3;
+            this.tabPage3.Text = "Prostředí";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.button_applyEnv);
+            this.groupBox1.Controls.Add(label11);
+            this.groupBox1.Controls.Add(this.env_StepSize);
+            this.groupBox1.Controls.Add(label10);
+            this.groupBox1.Controls.Add(label9);
+            this.groupBox1.Controls.Add(this.env_Aether);
+            this.groupBox1.Controls.Add(label8);
+            this.groupBox1.Controls.Add(label7);
+            this.groupBox1.Controls.Add(label6);
+            this.groupBox1.Controls.Add(this.env_Resolution);
+            this.groupBox1.Controls.Add(label5);
+            this.groupBox1.Controls.Add(label4);
+            this.groupBox1.Controls.Add(this.env_G);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(216, 237);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Parametry simulace";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(9, 137);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(96, 17);
+            this.checkBox1.TabIndex = 14;
+            this.checkBox1.Text = "Zapnout kolize";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // button_applyEnv
+            // 
+            this.button_applyEnv.Location = new System.Drawing.Point(138, 210);
+            this.button_applyEnv.Name = "button_applyEnv";
+            this.button_applyEnv.Size = new System.Drawing.Size(75, 21);
+            this.button_applyEnv.TabIndex = 12;
+            this.button_applyEnv.Text = "Použít";
+            this.button_applyEnv.UseVisualStyleBackColor = true;
+            this.button_applyEnv.Click += new System.EventHandler(this.button_applyEnv_Click);
+            // 
+            // env_StepSize
+            // 
+            this.env_StepSize.Location = new System.Drawing.Point(122, 103);
+            this.env_StepSize.Name = "env_StepSize";
+            this.env_StepSize.Size = new System.Drawing.Size(51, 20);
+            this.env_StepSize.TabIndex = 10;
+            // 
+            // env_Aether
+            // 
+            this.env_Aether.Location = new System.Drawing.Point(122, 79);
+            this.env_Aether.Name = "env_Aether";
+            this.env_Aether.Size = new System.Drawing.Size(51, 20);
+            this.env_Aether.TabIndex = 7;
+            // 
+            // env_Resolution
+            // 
+            this.env_Resolution.Location = new System.Drawing.Point(122, 53);
+            this.env_Resolution.Name = "env_Resolution";
+            this.env_Resolution.Size = new System.Drawing.Size(51, 20);
+            this.env_Resolution.TabIndex = 3;
+            // 
+            // env_G
+            // 
+            this.env_G.Location = new System.Drawing.Point(122, 27);
+            this.env_G.Name = "env_G";
+            this.env_G.Size = new System.Drawing.Size(51, 20);
+            this.env_G.TabIndex = 0;
+            // 
+            // radio_rotationalEnergy
+            // 
+            this.radio_rotationalEnergy.AutoSize = true;
+            this.radio_rotationalEnergy.Location = new System.Drawing.Point(6, 108);
+            this.radio_rotationalEnergy.Name = "radio_rotationalEnergy";
+            this.radio_rotationalEnergy.Size = new System.Drawing.Size(106, 17);
+            this.radio_rotationalEnergy.TabIndex = 27;
+            this.radio_rotationalEnergy.Text = "Otáčivá energie :";
+            this.radio_rotationalEnergy.UseVisualStyleBackColor = true;
+            // 
+            // prop_rotationalEnergy
+            // 
+            this.prop_rotationalEnergy.AutoSize = true;
+            this.prop_rotationalEnergy.Location = new System.Drawing.Point(126, 112);
+            this.prop_rotationalEnergy.Name = "prop_rotationalEnergy";
+            this.prop_rotationalEnergy.Size = new System.Drawing.Size(21, 13);
+            this.prop_rotationalEnergy.TabIndex = 28;
+            this.prop_rotationalEnergy.Text = "0 J";
+            // 
+            // BS_SimObject
+            // 
+            this.BS_SimObject.DataSource = typeof(PhysLib.SimObject);
             // 
             // Toolbox
             // 
@@ -516,11 +751,17 @@
             this.newObj.ResumeLayout(false);
             this.newObj.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.objProps.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabPage1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BS_SimObject)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -531,15 +772,12 @@
         private System.Windows.Forms.TabPage tool_newObj;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ComboBox newobj_Saved;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox newObj;
         private System.Windows.Forms.CheckBox newObj_Enabled;
         private System.Windows.Forms.CheckBox newObj_AutoName;
         private System.Windows.Forms.TextBox newObj_Name;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox newobj_Material;
         private System.Windows.Forms.MaskedTextBox newobj_Mass;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox newobj_Geometry;
         private System.Windows.Forms.Button createGeometry;
         public System.Windows.Forms.Button newObj_Insert;
@@ -547,25 +785,34 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.MaskedTextBox env_Aether;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.MaskedTextBox env_Resolution;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.MaskedTextBox env_G;
-        private System.Windows.Forms.Button button_resetEnv;
         private System.Windows.Forms.Button button_applyEnv;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.MaskedTextBox env_StepSize;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox list_allObjects;
+        private System.Windows.Forms.BindingSource BS_SimObject;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ComboBox prop_comboPropMaterials;
+        private System.Windows.Forms.Button button_SetProps;
+        private System.Windows.Forms.MaskedTextBox prop_textObjDrag;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button_Analyze;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radio_KineticEnergy;
+        private System.Windows.Forms.RadioButton radio_AngularVelocity;
+        private System.Windows.Forms.RadioButton radio_LinearVelocity;
+        public System.Windows.Forms.Label prop_kineticEnergy;
+        public System.Windows.Forms.Label prop_angularVelocity;
+        public System.Windows.Forms.Label prop_Velocity;
+        public System.Windows.Forms.Label prop_potentialEnergy;
+        public System.Windows.Forms.Label prop_rotationalEnergy;
+        private System.Windows.Forms.RadioButton radio_rotationalEnergy;
     }
 }

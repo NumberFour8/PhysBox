@@ -61,10 +61,13 @@ namespace PhysLib
         /// </summary>
         /// <param name="Resolution">Rozlišení</param>
         /// <returns>Moment setrvačnosti</returns>
-        public double GetMomentOfInertia(double Resolution)
+        public double MomentOfInertia
         {
-             double d = Vector.PointDistance(RotationPoint,COG);
-             return (J * Resolution * m / 6) + m * d;
+            get
+            {
+                double d = Vector.PointDistance(RotationPoint, COG);
+                return (J * m / 6) + m * d;
+            }
         }
 
         /// <summary>
@@ -200,6 +203,14 @@ namespace PhysLib
         {
             totalForce.Null();
             totalTorque.Null();
+        }
+
+        /// <summary>
+        /// Potenciální energie tělesa v místě vložení
+        /// </summary>
+        public double InitialEnergy
+        {
+            get; set;
         }
     }
 }

@@ -97,7 +97,7 @@ namespace PhysLib
         {
             get { return angle; }
             set {
-                if (value - angle != 0)
+                if (value - angle > 0.05)
                 {
                     System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix();
                     Mat.RotateAt((float)(value - angle), (PointF)(Nail));
@@ -185,6 +185,17 @@ namespace PhysLib
             Description.Height = top.Y - bottom.Y;
             Description.Width = right.X - left.X;
 
+            double dist = Double.PositiveInfinity;            
+            for (int i = 0; i < Vertices.Length; i++)
+            {
+                double d = Geometry.PointDistance(Vertices[i], Description.Centroid);
+                if (d < dist)
+                {
+                    dist = d;
+                    Description.Farthest = i;
+                }
+            }
+
             return Description;
         }
 
@@ -236,7 +247,14 @@ namespace PhysLib
 
             return Ret;
         }
-    
+
+        /// <summary>
+        /// Nejvzdálenější bod od středu tělesa
+        /// </summary>
+        public PointF FarthestPoint
+        {
+            get { return geom[desc.Farthest]; }
+        }
 
         /// <summary>
         /// Spočte vzdálenost dvou bodů
@@ -330,12 +348,17 @@ namespace PhysLib
         public PointF Centroid;
 
         /// <summary>
+        /// Index bodu nejdále od centroidu
+        /// </summary>
+        public int Farthest;
+
+        /// <summary>
         /// Výchozí konstruktor
         /// </summary>
         public GeometryDescriptor()
         {
             Centroid = new PointF(0, 0);
-            Height = Width = Depth = FrontalArea = 0;
+            Height = Width = Depth = FrontalArea = Farthest = 0;
         }
     }
 }

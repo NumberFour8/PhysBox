@@ -2,7 +2,8 @@
 using System.Collections;
 
 namespace PhysLib
-{
+{     
+
     /// <summary>
     /// Výčet všech prostorových os
     /// </summary>
@@ -23,22 +24,22 @@ namespace PhysLib
     /// Reprezentuje fyzikální svět
     /// </summary>
     public class World
-    {   
+    {
         /// <summary>
         /// Směr osy X
         /// </summary>
         public static readonly Vector X = new Vector(1, 0, 0);
-        
+
         /// <summary>
         /// Směr osy Y
         /// </summary>
         public static readonly Vector Y = new Vector(0, 1, 0);
-        
+
         /// <summary>
         /// Směr osy Z
         /// </summary>
         public static readonly Vector Z = new Vector(0, 0, 1);
-        
+
         /// <summary>
         /// Standardní matice souřadných os
         /// </summary>
@@ -52,12 +53,13 @@ namespace PhysLib
         /// <summary>
         /// Průměrné zemské gravitační zrychlení
         /// </summary>
-        public static readonly Vector EarthG = new Vector(0, -9.89, 0);        
+        public static readonly Vector EarthG = new Vector(0, -9.89, 0);
 
-        private ArrayList Objs,Fields;        
+        private ArrayList Objs, Fields;
 
         private Matrix b;
-        private double simulationTime,maxRad, r;
+        private double simulationTime, maxRad, r;
+        private Vector lv;
 
         private object SimLock = null;
         private bool paused;
@@ -69,19 +71,19 @@ namespace PhysLib
         /// <param name="GravityAccel">Gravitační zrychlení</param>
         /// <param name="WorldConstraints">Poloměr světa v pixelech (maximální vzdálnost tělesa od počátku souřadnic)</param>
         /// <param name="WorldResolution">Počet pixelů který představuje jeden fyzický metr</param>
-        public World(Matrix WorldOrientation,Vector GravityAccel,double WorldDiameter,double WorldResolution = 30)
+        public World(Matrix WorldOrientation, Vector GravityAccel, double WorldDiameter, double WorldResolution = 30)
         {
             Fields = new ArrayList();
             Objs = new ArrayList();
+            lv = new Vector(0, WorldDiameter, 0);
+            SimLock = new object();
 
-            
             b = WorldOrientation;
             maxRad = WorldDiameter;
-            
-            Gravity = Vector.ToBasis(b,GravityAccel)*WorldResolution;
+
+            Gravity = Vector.ToBasis(b, GravityAccel) * WorldResolution;
             simulationTime = 0;
-            r = WorldResolution;
-            SimLock = new object();
+            r = WorldResolution;            
             paused = false;
         }
 
@@ -91,7 +93,7 @@ namespace PhysLib
         /// <param name="Input">Vstupní číslo</param>
         /// <param name="Type">Typ převodu</param>
         /// <returns>Převedené číslo</returns>
-        public double Convert(double Input,ConversionType Type)
+        public double Convert(double Input, ConversionType Type)
         {
             if (Type == ConversionType.MetersToPixels)
                 return Input * r;
@@ -114,14 +116,15 @@ namespace PhysLib
         /// <summary>
         /// Rozlišení světa
         /// </summary>
-        public double Resolution { get { return r; } }
+        public double Resolution { get { return r; } set { r = value; } }
 
         /// <summary>
         /// Vektor gravitace
         /// </summary>
         public Vector Gravity
         {
-            get; set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -141,7 +144,7 @@ namespace PhysLib
             set
             {
                 if (value < r * 30)
-                  maxRad = r * 30;
+                    maxRad = r * 30;
                 else maxRad = value;
             }
         }
@@ -243,7 +246,7 @@ namespace PhysLib
         /// <summary>
         /// Událost nastávající při každém simulačním kroku
         /// </summary>
-        public event EventHandler OnTick;    
+        public event EventHandler OnTick;
 
         /// <summary>
         /// Přidá těleso do světa
@@ -254,6 +257,7 @@ namespace PhysLib
         {
             lock (SimLock)
             {
+                O.InitialEnergy = O.Mass * Gravity.Magnitude * Vector.PointDistance(new Vector(O.COG[0], Level[1], 0), O.COG);
                 Objs.Add(O);
             }
             return Objs.Count - 1;
@@ -266,14 +270,14 @@ namespace PhysLib
         /// <returns>Nejbližší objekt</returns>
         public SimObject NearestObject(Vector Position)
         {
-            double distance = Double.PositiveInfinity; 
+            double distance = Double.PositiveInfinity;
             int index = -1;
             if (Objs.Count == 0)
                 throw new InvalidOperationException();
 
             for (int i = 0; i < Objs.Count; i++)
             {
-                double dist = (((SimObject)Objs[i]).Model.Position-Position).Magnitude;
+                double dist = (((SimObject)Objs[i]).Model.Position - Position).Magnitude;
                 if (dist == 0) return Objs[i] as SimObject;
 
                 if (dist < distance)
@@ -290,8 +294,7 @@ namespace PhysLib
         /// </summary>
         public void Tick()
         {
-            double ms = DateTime.Now.Ticks / 10000;
-            double Delta = Math.Round(simulationTime == 0 ? 0 : (ms - simulationTime) / 1000,2);
+            double Delta = 0.01;
 
             if (!paused)
             {
@@ -312,25 +315,83 @@ namespace PhysLib
                             if (f.Enabled)
                                 PhysObjs[i].ApplyForce(f.GetForce(f, PhysObjs[i]), PhysObjs[i].COG);
                         }
-                        
+
                         PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity, PhysObjs[i].COG);
-                        //PhysObjs[i].TotalTorque -= 0.1 * PhysObjs[i].AngularVelocity;
 
+                        double DragSize = 0.5 * PhysObjs[i].Model.DragCoefficient * Aether * (PhysObjs[i].Model.Surface - 2 * PhysObjs[i].Model.FrontalArea);
+                        PhysObjs[i].ApplyForce(Vector.Unit(-PhysObjs[i].LinearVelocity) * Math.Round(DragSize * Vector.Pow(PhysObjs[i].LinearVelocity, 2)), PhysObjs[i].COG);
+                        
+                        if (Aether != 0)
+                          PhysObjs[i].TotalTorque -= Vector.Round(20 * PhysObjs[i].AngularVelocity,2);
+                        
                         if (!PhysObjs[i].NoTranslations)
-                          PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
+                        {
+                            PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
+                            PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * (Delta / PhysObjs[i].Mass);
+                        }                                                
 
-                        PhysObjs[i].Model.Orientation += Math.Round((PhysObjs[i].AngularVelocity[2]*180/Math.PI) * Delta,3);
-
-                        PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * (Delta / PhysObjs[i].Mass);
-                        PhysObjs[i].AngularVelocity += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].GetMomentOfInertia(Resolution));
+                        PhysObjs[i].Model.Orientation += Math.Round((PhysObjs[i].AngularVelocity[2] * 180 / Math.PI) * Delta, 3);
+                        PhysObjs[i].AngularVelocity += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);
 
                         PhysObjs[i].Reset();
                     }
                 }
             }
-            simulationTime = ms;
 
             OnTick.DynamicInvoke(this, null);
+        }
+
+        /// <summary>
+        /// Poloha bodu, podle kterého se určuje hladina potenciální energie
+        /// </summary>
+        public Vector Level
+        {
+            get { return lv; }
+            set
+            {
+                for (int i = 0; i < Objs.Count; i++)
+                    (Objs[i] as SimObject).InitialEnergy = value[1] - lv[1];
+                lv[0] = 0; lv[1] = value[1]; lv[2] = 0;
+            }
+        }
+
+        /// <summary>
+        /// Spočítá všechny typy energií pro dané těleso
+        /// </summary>
+        /// <param name="Object">Těleso</param>
+        /// <param name="Units">Jednotky</param>
+        /// <returns>Energie</returns>
+        public ObjectEnergy GetObjectEnergy(SimObject Object,ConversionType Units = ConversionType.MetersToPixels)
+        {
+            if (Object == null) throw new ArgumentNullException();
+
+            ObjectEnergy Ret = new ObjectEnergy();
+
+            if (Units == ConversionType.MetersToPixels)
+            {
+                Ret.Kinetic = 0.5 * Object.Mass * Vector.Pow(Object.LinearVelocity, 2);
+                Ret.Potential = Object.Mass * Vector.PointDistance(new Vector(Object.COG[0], Level[1], 0), Object.COG) * Gravity.Magnitude;
+            }
+            else
+            {
+                Ret.Kinetic = 0.5 * Object.Mass * Vector.Pow(Convert(Object.LinearVelocity,ConversionType.PixelsToMeters), 2);
+                Ret.Potential = Object.Mass * Convert(Vector.PointDistance(new Vector(Object.COG[0], Level[1], 0), Object.COG),ConversionType.PixelsToMeters) * Convert(Gravity,ConversionType.PixelsToMeters).Magnitude;
+            }
+            
+            Ret.Rotational = 0.5 * Object.Mass * Object.MomentOfInertia * Vector.Pow(Object.AngularVelocity, 2);
+            return Ret;
+        }
+    }
+
+    /// <summary>
+    /// Struktura obsahující informace o energiích tělesa
+    /// </summary>
+    public struct ObjectEnergy
+    {
+        public double Kinetic, Potential, Rotational;
+        public double Total
+        {
+            get { return Kinetic + Potential + Rotational; }
         }
     }
 }

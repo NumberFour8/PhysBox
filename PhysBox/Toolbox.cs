@@ -62,6 +62,8 @@ namespace PhysBox
                 {
                     objProps.Text = String.Format("Vlastnosti objektu: {0}", (MyOwner.Selected.Model as GraphicObject).Name);
                     objProps.Enabled = true;
+                    button_Analyze.Enabled = true;
+                    button_SetProps.Enabled = true;
                 }
             }
             tab_Toolbox.SelectedIndex = Index;
@@ -130,6 +132,23 @@ namespace PhysBox
             MyOwner.AddObject(MyNewObject);
 
             tab_Toolbox.Enabled = false;
+        }
+
+        private void button_applyEnv_Click(object sender, EventArgs e)
+        {
+            MyOwner.MyWorld.Resolution = Double.Parse(env_Resolution.Text);
+            MyOwner.MyWorld.Aether = Double.Parse(env_Aether.Text) / Math.Pow(MyOwner.MyWorld.Resolution, 3);
+            MyOwner.MyWorld.Gravity = MyOwner.MyWorld.Convert(new Vector(0, -Double.Parse(env_G.Text), 0), ConversionType.MetersToPixels);
+        }
+
+        private void tab_Toolbox_Selected(object sender, TabControlEventArgs e)
+        {
+            if (tab_Toolbox.SelectedIndex == 3)
+            {
+                env_Aether.Text = MyOwner.MyWorld.Aether.ToString();
+                env_G.Text = (-MyOwner.MyWorld.Convert(MyOwner.MyWorld.Gravity, ConversionType.PixelsToMeters).Magnitude).ToString();
+                env_Resolution.Text = MyOwner.MyWorld.Resolution.ToString();
+            }
         }
 
      }

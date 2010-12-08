@@ -15,9 +15,9 @@ namespace PhysBox
 {
     public partial class MainForm : Form
     {
-        private World MyWorld;
+        public World MyWorld;
         private SimObject Placing = null;
-        private bool Moving = false,Rotating = false,AddForce = false,SetAxis = false,Scaling = false;
+        private bool Moving = false,Rotating = false,AddForce = false,SetAxis = false,Scaling = false,SetLevel = false;
 
         private PointF? afOrigin;
         
@@ -65,19 +65,27 @@ namespace PhysBox
             {
                 if (Placing != null)
                 {
-                    Placing.Model.Position = new Vector(e.X, e.Y + CursorCorrection,0);
+                    Placing.Model.Position = new Vector(e.X, e.Y,0);
                     MyWorld.AddObject(Placing);
                     
                     Placing = null;
                     Moving = Rotating = false;
                     Cursor = Cursors.Default;
-                    Tools.ActionDone();
+                    if (Tools != null && !Tools.IsDisposed) Tools.ActionDone();
                 }
+
+                if (SetLevel)
+                {
+                    SetLevel = false;
+                    MyWorld.Level = new Vector(e.X, e.Y, 0);
+                    if (Tools != null && !Tools.IsDisposed) Tools.ActionDone();
+                }
+
                 if (Selected != null)
                 {
                     if (Moving)
                     {
-                        Selected.Model.Position = new Vector(e.X, e.Y + CursorCorrection, 0);
+                        Selected.Model.Position = new Vector(e.X, e.Y, 0);
                         Cursor = Cursors.Default;
                         Moving = false;
                     }
@@ -97,10 +105,10 @@ namespace PhysBox
                         {
                             AddForce = false;
                             Cursor = Cursors.Default;
-                            Selected.ApplyForce(new Vector((double)(afOrigin.Value.X - e.X), (double)(afOrigin.Value.Y - (e.Y + CursorCorrection))), new Vector((double)afOrigin.Value.X, (double)afOrigin.Value.Y));
+                            Selected.ApplyForce(new Vector((double)(afOrigin.Value.X - e.X), (double)(afOrigin.Value.Y - (e.Y))), new Vector((double)afOrigin.Value.X, (double)afOrigin.Value.Y));
 
                             afOrigin = null;
-                            Tools.ActionDone();
+                            if (Tools != null && !Tools.IsDisposed) Tools.ActionDone();
                         }
                     }
                 }
@@ -109,6 +117,7 @@ namespace PhysBox
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
                 if (MyWorld.CountObjects == 0) return;
+                if (SetLevel) return;
                 Selected = MyWorld.NearestObject(new Vector(e.X, e.Y, 0));
 
                 stat_SelObject.Text = manipulateObj_Name.Text = String.Format("Objekt: {0}", (Selected.Model as GraphicObject).Name);
@@ -124,7 +133,7 @@ namespace PhysBox
                 manipulateObj.Enabled = true;
                 manipulateObj.Show(new Point(e.X, e.Y));
 
-                Tools.ChangeTool(1);
+                if (Tools != null && !Tools.IsDisposed) Tools.ChangeTool(1);
             }
         }
 
@@ -183,7 +192,7 @@ namespace PhysBox
                 AddForce = true;
                 Moving = Rotating = Scaling = SetAxis = false;
                 afOrigin = null;
-                Tools.Forbid();
+                if (Tools != null && !Tools.IsDisposed) Tools.Forbid();
                 Cursor = Cursors.Cross;
             }
         }
@@ -225,12 +234,17 @@ namespace PhysBox
         {
             if (e.KeyCode == Keys.Escape)
             {
-                Scaling = Moving = Rotating = SetAxis = AddForce = false;
+                Scaling = Moving = Rotating = SetAxis = AddForce = SetLevel = false;
                 Placing = null;
                 Cursor = Cursors.Default;
-                Tools.ActionDone();
+                if (Tools != null && !Tools.IsDisposed) Tools.ActionDone();
             }
         }
 
+        private void nastavitNulovouHladinuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetLevel = true;
+            if (Tools != null && !Tools.IsDisposed) Tools.Forbid();
+        }
     }
 }
