@@ -97,7 +97,7 @@ namespace PhysLib
         {
             get { return angle; }
             set {
-                if (value - angle > 0.05)
+                if (Math.Abs(value - angle) > 0.05)
                 {
                     System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix();
                     Mat.RotateAt((float)(value - angle), (PointF)(Nail));
@@ -132,7 +132,12 @@ namespace PhysLib
             get { return scale; }
             set
             {
-                throw new NotImplementedException();
+                System.Drawing.Drawing2D.Matrix mat = new System.Drawing.Drawing2D.Matrix();
+                mat.Translate((float)-Position[0], (float)-Position[1]);
+                mat.Scale(Math.Abs(value-scale),Math.Abs(value-scale),System.Drawing.Drawing2D.MatrixOrder.Append);
+                mat.Translate((float)Position[0], (float)Position[1], System.Drawing.Drawing2D.MatrixOrder.Append);
+                mat.TransformPoints(geom);
+                scale = value;
             }
         }
 
