@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.IO;
 
 using PhysLib;
 
@@ -20,7 +13,8 @@ namespace PhysBox
         private bool Moving = false,Rotating = false,AddForce = false,SetAxis = false,Scaling = false,SetLevel = false;
 
         private PointF? afOrigin;
-        
+
+        private double multiplier = 100;
         private Toolbox Tools;
         public SimObject Selected = null;
         
@@ -100,12 +94,12 @@ namespace PhysBox
                     if (AddForce)
                     {
                         if (afOrigin == null)
-                            afOrigin = Selected.Model.ProjectToObject(e.Location);
+                            afOrigin = (PointF)Selected.Model.ProjectToObject(new Vector(e.X,e.Y,0));
                         else
                         {
                             AddForce = false;
                             Cursor = Cursors.Default;
-                            Selected.ApplyForce(new Vector((double)(afOrigin.Value.X - e.X), (double)(afOrigin.Value.Y - (e.Y))), new Vector((double)afOrigin.Value.X, (double)afOrigin.Value.Y));
+                            Selected.ApplyForce(new Vector((double)(afOrigin.Value.X - e.X), (double)(afOrigin.Value.Y - e.Y),0)*multiplier*Selected.Mass, new Vector((double)afOrigin.Value.X, (double)afOrigin.Value.Y,0));
 
                             afOrigin = null;
                             if (Tools != null && !Tools.IsDisposed) Tools.ActionDone();
@@ -245,6 +239,6 @@ namespace PhysBox
         {
             SetLevel = true;
             if (Tools != null && !Tools.IsDisposed) Tools.Forbid();
-        }
+        }       
     }
 }

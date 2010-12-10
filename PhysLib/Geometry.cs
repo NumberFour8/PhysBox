@@ -107,7 +107,7 @@ namespace PhysLib
                     {
                         PointF[] t = new PointF[] { (PointF)center };
                         Mat.TransformPoints(t);
-                        center = new Vector(Math.Round(t[0].X,2),Math.Round(t[0].Y,2),0); // Nutné zaokrouhelní kvůli chybě vzniklé v rotační matici
+                        center = new Vector(Math.Round(t[0].X,2),Math.Round(t[0].Y,2),0);
                     }
                     angle = value;
                 }
@@ -210,14 +210,16 @@ namespace PhysLib
         /// </summary>
         /// <param name="ExternalPoint">Bod ležící mimo těleso</param>
         /// <returns>Bod na tělese</returns>
-        public PointF ProjectToObject(Point ExternalPoint)
+        public Vector ProjectToObject(Vector ExternalPoint)
         {
+            if (ExternalPoint == center) return center;
+
             int a = 0, b = 1;
-            PointF Ret = new PointF();            
+            Vector Ret = null;      
             double ad = double.PositiveInfinity, bd = 0, cd = double.PositiveInfinity, dist = 0;
             for (int i = 0; i < ObjectGeometry.Length; i++)
             {
-                dist = Math.Sqrt(Math.Pow(ExternalPoint.X - ObjectGeometry[i].X, 2) + Math.Pow(ExternalPoint.Y - ObjectGeometry[i].Y, 2));
+                dist = Math.Sqrt(Math.Pow(ExternalPoint[0] - ObjectGeometry[i].X, 2) + Math.Pow(ExternalPoint[0] - ObjectGeometry[i].Y, 2));
                 if (dist < ad)
                 {
                     bd = ad;
@@ -238,11 +240,11 @@ namespace PhysLib
             while (x != ObjectGeometry[b].X || y != ObjectGeometry[b].Y)
             {
                 PointF pt = new PointF(x, y);
-                dist = Geometry.PointDistance(pt, ExternalPoint);
+                dist = Geometry.PointDistance(pt, (PointF)ExternalPoint);
                 if (dist < cd)
                 {
                     cd = dist;
-                    Ret = pt;
+                    Ret = (Vector)pt;
                 }
                 if (dist > cd) break;
                
@@ -251,6 +253,19 @@ namespace PhysLib
             }
 
             return Ret;
+        }
+
+        /// <summary>
+        /// Absolutní poloha obdélníku ohraničující těleso
+        /// </summary>
+        public RectangleF BoundingBox
+        {
+            get // Provizorní
+            {
+                System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
+                gp.AddClosedCurve(geom);
+                return gp.GetBounds();
+            }
         }
 
         /// <summary>

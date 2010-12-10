@@ -11,7 +11,7 @@ namespace PhysLib
     /// <summary>
     /// Reprezentuje matici
     /// </summary>
-    public class Matrix
+    public sealed class Matrix
     {
 
         private int rows,cols;

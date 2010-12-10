@@ -64,6 +64,10 @@ namespace PhysBox
                     Destination.DrawPath(p, pth);
                     Destination.FillEllipse(Brushes.Black, new RectangleF((float)(obj.Position[0] - 2), (float)(obj.Position[1] - 2), 4, 4)); // Těžiště
                     Destination.FillEllipse(Brushes.Blue, new RectangleF((float)(o.RotationPoint[0] - 2),(float)(o.RotationPoint[1] - 2), 4, 4)); // Osa rotace
+
+                    // Je-li třeba vykresli i ohraničující box tělesa
+                    if (menu_showBounds.Checked)
+                      Destination.DrawRectangle(Pens.Gray, Rectangle.Truncate(obj.BoundingBox));
                 }
                 else Destination.FillPath(obj.Fill, obj.MakePath()); // Jinak nakresli objekt vyplněný texturou/barvou
             }
@@ -85,7 +89,7 @@ namespace PhysBox
                     pt.Y += CursorCorrection;
 
                     // Nakresli čáru symbolizující aplikovanou sílu
-                    double size = Math.Round(MyWorld.Convert(Geometry.PointDistance(new PointF(Cursor.Position.X,Cursor.Position.Y),afOrigin.Value),ConversionType.PixelsToMeters), 2);
+                    double size = multiplier*Selected.Mass*Math.Round(MyWorld.Convert(Geometry.PointDistance(new PointF(Cursor.Position.X,Cursor.Position.Y),afOrigin.Value),ConversionType.PixelsToMeters), 2);
                     buf.Graphics.DrawString(String.Format("F = {0} N", size), SmallFont, Brushes.Red, new PointF(afOrigin.Value.X - 50, afOrigin.Value.Y + 10));
                     
                     // Nakresli rameno síly
@@ -96,8 +100,7 @@ namespace PhysBox
                 }
 
                 if (SetLevel)
-                   buf.Graphics.DrawLine(Pens.DarkViolet, new PointF(0, Cursor.Position.Y + CursorCorrection), new PointF(Size.Width, Cursor.Position.Y + CursorCorrection));
-
+                   buf.Graphics.DrawLine(Pens.DarkViolet, new PointF(0, Cursor.Position.Y + CursorCorrection), new PointF(Size.Width, Cursor.Position.Y + CursorCorrection)); 
 
                 if (menu_showVersion.Checked) // Vykresli verzi
                     buf.Graphics.DrawString("PhysBox, v.0.2", new Font(FontFamily.GenericSansSerif, 12), Brushes.Black, new PointF(10, mainMenu.Height + 5));

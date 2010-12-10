@@ -6,14 +6,14 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AABBACAECQAIAEAACIAAAAAQBACgCBEACAABEAEA4AE=</HashCode>
+      <HashCode>AADhACAECQAIAMACCIAIAAQYBAAgCEEBAQABEAEA4AE=</HashCode>
       <FileName>World.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PhysLib.Vector" Collapsed="true">
     <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAACAAAQAAAE6AUABAQACUAAAIAIAEaACAEAAiA=</HashCode>
+      <HashCode>BAAAAAACAAAAAAgE6AUAAAUAC6CAAIAIIUaAAEMAAiA=</HashCode>
       <FileName>Vectors.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -23,14 +23,14 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAYAAAEEBIABAAAAAAIBAAgCAAAAAqgAAASIAAA=</HashCode>
+      <HashCode>AAAAgAYAAAEEBIABAAAAAAIBAAoCAAAAAqgCAASJAAA=</HashCode>
       <FileName>SimObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PhysLib.Matrix" Collapsed="true">
     <Position X="8" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAQAAAAAAAAGAAaAFAACAAAACUQCAAAAQAAAgAAAA=</HashCode>
+      <HashCode>QAAAQAAAAAAAAGAAaEFAACAAAACUQCAAAAQAAAgAAAA=</HashCode>
       <FileName>Matrix.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -47,8 +47,15 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAgAAABABQAAAMQgQAAACEAEAAAAAAAAIAICAAAAAAE=</HashCode>
+      <HashCode>AQgAAABABQAAAAAgAAMQCGAGCAAAAEBgIAICABBAAAE=</HashCode>
       <FileName>Geometry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PhysLib.CollisionSolver">
+    <Position X="2.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>CollisionSolver.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="PhysLib.Field">
@@ -67,7 +74,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAIAAAAAAAAAACAAQBAAAEQUAAAAIAIAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAIAAAAAAAAAACAAQBAAAEQQAAAAIAAAAAAAA=</HashCode>
       <FileName>Material.cs</FileName>
     </TypeIdentifier>
   </Struct>

@@ -137,7 +137,7 @@ namespace PhysBox
         private void button_applyEnv_Click(object sender, EventArgs e)
         {
             MyOwner.MyWorld.Resolution = Double.Parse(env_Resolution.Text);
-            MyOwner.MyWorld.Aether = Double.Parse(env_Aether.Text) / Math.Pow(MyOwner.MyWorld.Resolution, 3);
+            MyOwner.MyWorld.Aether = Double.Parse(env_Aether.Text);
             MyOwner.MyWorld.Gravity = MyOwner.MyWorld.Convert(new Vector(0, -Double.Parse(env_G.Text), 0), ConversionType.MetersToPixels);
         }
 

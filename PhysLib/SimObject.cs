@@ -65,8 +65,8 @@ namespace PhysLib
         {
             get
             {
-                double d = Vector.PointDistance(RotationPoint, COG);
-                return (J * m / 6) + m * d;
+                double d = Math.Round(Vector.PointDistance(RotationPoint, COG),1);
+                return (J * m / 6) + m * Math.Pow(d,2);
             }
         }
 
@@ -172,8 +172,18 @@ namespace PhysLib
             if (Force.IsNull) return;
             totalForce += Force;
 
-            totalTorque += Vector.Cross(GetTorqueIntersection(Force,Origin) - RotationPoint, Force);
-            return;
+            totalTorque += Vector.Cross(GetTorqueIntersection(Force, Model.ProjectToObject(Origin)) - RotationPoint, Force);
+        }
+
+        /// <summary>
+        /// Aplikuje na těleso odporovou sílu pohybuje-li se v prostředí o dané hustotě
+        /// </summary>
+        /// <param name="EnvDensity">Hustota prostředí, ve kterém se těleso pohybuje</param>
+        public void ApplyDrag(double EnvDensity)
+        {
+            if (LinearVelocity.IsNull) return;
+            double DragSize = 0.5 * Model.DragCoefficient * EnvDensity * (Model.Surface - 2 * Model.FrontalArea);
+            ApplyForce(Vector.Unit(-LinearVelocity) * Math.Round(DragSize * Vector.Pow(LinearVelocity, 2)), COG);
         }
 
         /// <summary>

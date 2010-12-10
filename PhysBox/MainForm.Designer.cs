@@ -43,6 +43,7 @@
             this.menu_showVersion = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.menu_pauseSim = new System.Windows.Forms.ToolStripMenuItem();
+            this.nastavitNulovouHladinuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stavovyRadek = new System.Windows.Forms.StatusStrip();
             this.status_SimStat = new System.Windows.Forms.ToolStripStatusLabel();
             this.stat_SelObject = new System.Windows.Forms.ToolStripStatusLabel();
@@ -62,7 +63,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.analyzovatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.simTime = new System.Windows.Forms.Timer(this.components);
-            this.nastavitNulovouHladinuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_showBounds = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.stavovyRadek.SuspendLayout();
             this.manipulateObj.SuspendLayout();
@@ -129,6 +130,7 @@
             this.menu_enableWireframe,
             this.menu_showVertices,
             this.menu_drawInfo,
+            this.menu_showBounds,
             this.menu_showVersion,
             this.toolStripMenuItem4,
             this.menu_pauseSim,
@@ -143,7 +145,7 @@
             this.menu_enableWireframe.CheckOnClick = true;
             this.menu_enableWireframe.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menu_enableWireframe.Name = "menu_enableWireframe";
-            this.menu_enableWireframe.Size = new System.Drawing.Size(218, 22);
+            this.menu_enableWireframe.Size = new System.Drawing.Size(232, 22);
             this.menu_enableWireframe.Text = "Drátový model";
             this.menu_enableWireframe.Click += new System.EventHandler(this.drátovýModelToolStripMenuItem_Click);
             // 
@@ -151,36 +153,44 @@
             // 
             this.menu_showVertices.CheckOnClick = true;
             this.menu_showVertices.Name = "menu_showVertices";
-            this.menu_showVertices.Size = new System.Drawing.Size(218, 22);
+            this.menu_showVertices.Size = new System.Drawing.Size(232, 22);
             this.menu_showVertices.Text = "Zobrazit vertexy";
             // 
             // menu_drawInfo
             // 
             this.menu_drawInfo.CheckOnClick = true;
             this.menu_drawInfo.Name = "menu_drawInfo";
-            this.menu_drawInfo.Size = new System.Drawing.Size(218, 22);
+            this.menu_drawInfo.Size = new System.Drawing.Size(232, 22);
             this.menu_drawInfo.Text = "Zobrazit informace modelu";
             // 
             // menu_showVersion
             // 
             this.menu_showVersion.CheckOnClick = true;
             this.menu_showVersion.Name = "menu_showVersion";
-            this.menu_showVersion.Size = new System.Drawing.Size(218, 22);
+            this.menu_showVersion.Size = new System.Drawing.Size(232, 22);
             this.menu_showVersion.Text = "Zobrazit verzi";
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(215, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(229, 6);
             // 
             // menu_pauseSim
             // 
             this.menu_pauseSim.CheckOnClick = true;
             this.menu_pauseSim.Name = "menu_pauseSim";
             this.menu_pauseSim.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.menu_pauseSim.Size = new System.Drawing.Size(218, 22);
+            this.menu_pauseSim.Size = new System.Drawing.Size(232, 22);
             this.menu_pauseSim.Text = "Pozastavit simulaci";
             this.menu_pauseSim.CheckedChanged += new System.EventHandler(this.pozastavitSimulaciToolStripMenuItem_CheckedChanged);
+            // 
+            // nastavitNulovouHladinuToolStripMenuItem
+            // 
+            this.nastavitNulovouHladinuToolStripMenuItem.Name = "nastavitNulovouHladinuToolStripMenuItem";
+            this.nastavitNulovouHladinuToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
+            this.nastavitNulovouHladinuToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.nastavitNulovouHladinuToolStripMenuItem.Text = "Nastavit nulovou hladinu";
+            this.nastavitNulovouHladinuToolStripMenuItem.Click += new System.EventHandler(this.nastavitNulovouHladinuToolStripMenuItem_Click);
             // 
             // stavovyRadek
             // 
@@ -324,13 +334,12 @@
             this.simTime.Interval = 1;
             this.simTime.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // nastavitNulovouHladinuToolStripMenuItem
+            // menu_showBounds
             // 
-            this.nastavitNulovouHladinuToolStripMenuItem.Name = "nastavitNulovouHladinuToolStripMenuItem";
-            this.nastavitNulovouHladinuToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
-            this.nastavitNulovouHladinuToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-            this.nastavitNulovouHladinuToolStripMenuItem.Text = "Nastavit nulovou hladinu";
-            this.nastavitNulovouHladinuToolStripMenuItem.Click += new System.EventHandler(this.nastavitNulovouHladinuToolStripMenuItem_Click);
+            this.menu_showBounds.CheckOnClick = true;
+            this.menu_showBounds.Name = "menu_showBounds";
+            this.menu_showBounds.Size = new System.Drawing.Size(232, 22);
+            this.menu_showBounds.Text = "Zobrazit hranice modelů";
             // 
             // MainForm
             // 
@@ -399,6 +408,7 @@
         private System.Windows.Forms.ToolStripMenuItem manipulateObj_NoTranslations;
         private System.Windows.Forms.ToolStripMenuItem menu_drawInfo;
         private System.Windows.Forms.ToolStripMenuItem nastavitNulovouHladinuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menu_showBounds;
     }
 }
 

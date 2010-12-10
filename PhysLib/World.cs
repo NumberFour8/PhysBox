@@ -23,7 +23,7 @@ namespace PhysLib
     /// <summary>
     /// Reprezentuje fyzikální svět
     /// </summary>
-    public class World
+    public sealed class World
     {
         /// <summary>
         /// Směr osy X
@@ -58,11 +58,13 @@ namespace PhysLib
         private ArrayList Objs, Fields;
 
         private Matrix b;
-        private double simulationTime, maxRad, r;
+        private double simulationTime, maxRad, r,density;
         private Vector lv;
 
         private object SimLock = null;
         private bool paused;
+
+        private CollisionSolver csolve;
 
         /// <summary>
         /// Vytvoří fyzikální svět
@@ -77,6 +79,7 @@ namespace PhysLib
             Objs = new ArrayList();
             lv = new Vector(0, WorldDiameter, 0);
             SimLock = new object();
+            csolve = new CollisionSolver(this);
 
             b = WorldOrientation;
             maxRad = WorldDiameter;
@@ -117,6 +120,14 @@ namespace PhysLib
         /// Rozlišení světa
         /// </summary>
         public double Resolution { get { return r; } set { r = value; } }
+
+        /// <summary>
+        /// Třídá pro řešení kolizí
+        /// </summary>
+        public CollisionSolver Solver
+        {
+            get { return csolve; }
+        }
 
         /// <summary>
         /// Vektor gravitace
@@ -172,8 +183,8 @@ namespace PhysLib
         /// </summary>
         public double Aether
         {
-            get;
-            set;
+            get { return density; }
+            set { density = value/Math.Pow(Resolution, 3); }
         }
 
         /// <summary>
@@ -301,6 +312,7 @@ namespace PhysLib
                 lock (SimLock)
                 {
                     SimObject[] PhysObjs = (SimObject[])Objs.ToArray(typeof(SimObject));
+                    csolve.Reset();
                     for (int i = 0; i < Objs.Count; i++)
                     {
                         if (PhysObjs[i].Model.Position.Magnitude > maxRad && PhysObjs[i].Enabled)
@@ -317,9 +329,7 @@ namespace PhysLib
                         }
 
                         PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity, PhysObjs[i].COG);
-
-                        double DragSize = 0.5 * PhysObjs[i].Model.DragCoefficient * Aether * (PhysObjs[i].Model.Surface - 2 * PhysObjs[i].Model.FrontalArea);
-                        PhysObjs[i].ApplyForce(Vector.Unit(-PhysObjs[i].LinearVelocity) * Math.Round(DragSize * Vector.Pow(PhysObjs[i].LinearVelocity, 2)), PhysObjs[i].COG);
+                        PhysObjs[i].ApplyDrag(Aether);
                         
                         if (Aether != 0)
                           PhysObjs[i].TotalTorque -= Vector.Round(20 * PhysObjs[i].AngularVelocity,2);
@@ -331,9 +341,12 @@ namespace PhysLib
                         }                                                
 
                         PhysObjs[i].Model.Orientation += Math.Round((PhysObjs[i].AngularVelocity[2] * 180 / Math.PI) * Delta, 3);
-                        PhysObjs[i].AngularVelocity += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);
+                        PhysObjs[i].AngularVelocity   += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);
 
                         PhysObjs[i].Reset();
+
+                        foreach (CollisionReport rep in csolve.DetectCollisionsFor(i))
+                            csolve.SolveCollision(rep);
                     }
                 }
             }

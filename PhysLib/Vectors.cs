@@ -5,7 +5,7 @@ namespace PhysLib
     /// <summary>
     /// Třída reprezentující vektor
     /// </summary>
-    public class Vector
+    public sealed class Vector
     {
         private double[] t;
         
