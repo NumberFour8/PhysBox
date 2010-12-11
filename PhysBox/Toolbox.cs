@@ -76,7 +76,13 @@ namespace PhysBox
                 MessageBox.Show("Zadejte hmotnost tělesa","Chyba",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                 return;
             }
-            
+
+            if (newobj_Geometry.SelectedIndex < 0)
+            {
+                MessageBox.Show("Vyberte geometrii pro těleso", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             ArrayList points = new ArrayList();
             float drag = 0, depth = 0,tension = 0,h = 0,w = 0;
             Brush fill = null;

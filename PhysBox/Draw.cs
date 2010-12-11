@@ -66,13 +66,8 @@ namespace PhysBox
                     Destination.FillEllipse(Brushes.Blue, new RectangleF((float)(o.RotationPoint[0] - 2),(float)(o.RotationPoint[1] - 2), 4, 4)); // Osa rotace
 
                     // Je-li třeba vykresli i ohraničující box tělesa
-                    if (menu_showBounds.Checked){
-                        using (GraphicsPath path = new GraphicsPath())
-                        {
-                            path.AddPolygon(obj.BoundingBox);
-                            Destination.DrawPath(Pens.Gray, path);
-                        }
-                    }
+                    if (menu_showBounds.Checked)
+                      Destination.DrawClosedCurve(Pens.Gray, obj.BoundingBox, 0, FillMode.Alternate);
                 }
                 else Destination.FillPath(obj.Fill, obj.MakePath()); // Jinak nakresli objekt vyplněný texturou/barvou
             }
