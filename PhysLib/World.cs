@@ -351,7 +351,7 @@ namespace PhysLib
                 }
             }
 
-            OnTick.DynamicInvoke(this, null);
+            OnTick(this, null);
         }
 
         /// <summary>

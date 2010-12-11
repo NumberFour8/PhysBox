@@ -40,6 +40,7 @@ namespace PhysLib
 
             }
             J = nom / denom;
+            RestitutionCoefficient = 1;
         }
 
         /// <summary>
@@ -141,6 +142,14 @@ namespace PhysLib
         /// Úhlová rychlost tělesa
         /// </summary>
         public Vector AngularVelocity
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Koeficient restituce
+        /// </summary>
+        public double RestitutionCoefficient
         {
             get; set;
         }

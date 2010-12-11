@@ -6,6 +6,8 @@ namespace PhysLib
 {
     public struct CollisionReport
     {
+        public const double Epsilon = 1;
+
         public SimObject A,B;
         public RectangleF Intersection;
         public CollisionReport(SimObject a, SimObject b, RectangleF i)
@@ -14,6 +16,30 @@ namespace PhysLib
             B = b;
             Intersection = i;
         }
+
+        public bool Penetrating
+        {
+            get
+            {
+                return Intersection.Width > Epsilon;
+            }
+        }
+
+        /*public Vector Normal
+        {
+            get
+            {
+                
+            }
+        }
+
+        public Vector RelativeVelocity
+        {
+            get
+            {
+                
+            }
+        }*/
     }
 
     public sealed class CollisionSolver
@@ -49,7 +75,7 @@ namespace PhysLib
         /// <returns>Výčet reportů o kolizích</returns>
         public IEnumerable DetectCollisionsFor(int ObjectIndex)
         {
-            if (!Enabled) yield break;
+            /*  if (!Enabled) yield break;
             if (ObjectIndex >= w.CountFields || ObjectIndex < 0) throw new IndexOutOfRangeException();
 
             SimObject Obj = w[ObjectIndex];
@@ -66,7 +92,8 @@ namespace PhysLib
                 Solved.Add(i);
 
                 yield return new CollisionReport(Obj,w[i],c);
-            }
+            }*/
+            yield break;
         }
 
         /// <summary>
@@ -75,6 +102,9 @@ namespace PhysLib
         /// <param name="Report">Report o kolizi</param>
         public void SolveCollision(CollisionReport Report)
         {
+            Report.A.Model.RaiseOnCollision(Report.B);
+            Report.B.Model.RaiseOnCollision(Report.A);
+            
             throw new NotImplementedException();
         }
 

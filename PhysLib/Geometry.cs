@@ -3,17 +3,19 @@ using System.Drawing;
 
 namespace PhysLib
 {
-   
+    
     /// <summary>
     /// Abstraktní třída reprezentující fyzický model tělesa
     /// </summary>
     [Serializable]
     public abstract class Geometry
     {
+        public delegate void CollisionHandler(SimObject Sender);
+        
         /// <summary>
         /// Událost nastávající při kolizi tělesa
         /// </summary>
-        public event EventHandler OnCollision;
+        public event CollisionHandler OnCollision;
         
         private Vector center;
         private PointF[] geom;
@@ -80,12 +82,13 @@ namespace PhysLib
             get { return (Vector)center; }
             set
             {
-                System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix();
-                Mat.Translate((float)(value[0]-center[0]), (float)(value[1]-center[1]));
-                Mat.TransformPoints(geom);
-                if (Nail != center) Nail += value - center;
-                else Nail = value;
-
+                using (System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix())
+                {
+                    Mat.Translate((float)(value[0] - center[0]), (float)(value[1] - center[1]));
+                    Mat.TransformPoints(geom);
+                    if (Nail != center) Nail += value - center;
+                    else Nail = value;
+                }
                 center = value; 
             }
         }
@@ -99,15 +102,17 @@ namespace PhysLib
             set {
                 if (Math.Abs(value - angle) > 0.05)
                 {
-                    System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix();
-                    Mat.RotateAt((float)(value - angle), (PointF)(Nail));
-                    Mat.TransformPoints(geom);
-
-                    if (Nail != center)
+                    using (System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix())
                     {
-                        PointF[] t = new PointF[] { (PointF)center };
-                        Mat.TransformPoints(t);
-                        center = new Vector(Math.Round(t[0].X,2),Math.Round(t[0].Y,2),0);
+                        Mat.RotateAt((float)(value - angle), (PointF)(Nail));
+                        Mat.TransformPoints(geom);
+
+                        if (Nail != center)
+                        {
+                            PointF[] t = new PointF[] { (PointF)center };
+                            Mat.TransformPoints(t);
+                            center = new Vector(Math.Round(t[0].X, 2), Math.Round(t[0].Y, 2), 0);
+                        }
                     }
                     angle = value;
                 }
@@ -132,11 +137,13 @@ namespace PhysLib
             get { return scale; }
             set
             {
-                System.Drawing.Drawing2D.Matrix mat = new System.Drawing.Drawing2D.Matrix();
-                mat.Translate((float)-Position[0], (float)-Position[1]);
-                mat.Scale(Math.Abs(value-scale),Math.Abs(value-scale),System.Drawing.Drawing2D.MatrixOrder.Append);
-                mat.Translate((float)Position[0], (float)Position[1], System.Drawing.Drawing2D.MatrixOrder.Append);
-                mat.TransformPoints(geom);
+                using (System.Drawing.Drawing2D.Matrix mat = new System.Drawing.Drawing2D.Matrix())
+                {
+                    mat.Translate((float)-Position[0], (float)-Position[1]);
+                    mat.Scale(Math.Abs(value - scale), Math.Abs(value - scale), System.Drawing.Drawing2D.MatrixOrder.Append);
+                    mat.Translate((float)Position[0], (float)Position[1], System.Drawing.Drawing2D.MatrixOrder.Append);
+                    mat.TransformPoints(geom);
+                }
                 scale = value;
             }
         }
@@ -258,13 +265,22 @@ namespace PhysLib
         /// <summary>
         /// Absolutní poloha obdélníku ohraničující těleso
         /// </summary>
-        public RectangleF BoundingBox
+        public PointF[] BoundingBox
         {
             get // Provizorní
             {
-                System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
-                gp.AddClosedCurve(geom);
-                return gp.GetBounds();
+                using (System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath())
+                {
+                    gp.AddClosedCurve(geom);
+                    RectangleF r = gp.GetBounds();
+                    
+                    PointF[] corners = { r.Location, new PointF(r.X + r.Width, r.Y), new PointF(r.X + r.Width, r.Y + r.Height), new PointF(r.X, r.Y + r.Height) };
+                    System.Drawing.Drawing2D.Matrix rot = new System.Drawing.Drawing2D.Matrix();
+                    rot.RotateAt((float)angle, (PointF)Nail);
+                    rot.TransformPoints(corners);
+
+                    return corners;
+                }
             }
         }
 
@@ -333,6 +349,11 @@ namespace PhysLib
         public double FrontalArea
         {
             get { return desc.FrontalArea; }
+        }
+
+        internal void RaiseOnCollision(SimObject Param)
+        {
+            OnCollision(Param);
         }
     }
 
