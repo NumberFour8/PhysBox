@@ -127,6 +127,13 @@ namespace PhysLib
             get { return geom; }           
         }
 
+        /// <summary>
+        /// Relativní polohy vertexů tvořící fyzický model tělesa vzhledem k centroidu
+        /// </summary>
+        public PointF[] RelativeGeometry
+        {
+            get { return desc.DefaultVertices; }
+        }
 
         /// <summary>
         /// Škáluje těleso daným faktorem
@@ -173,7 +180,7 @@ namespace PhysLib
         /// <returns>Výsledek analýzy polygonu</returns>
         public static GeometryDescriptor AnalyzeVertexGroup(PointF[] Vertices)
         {
-            GeometryDescriptor Description = new GeometryDescriptor();
+            GeometryDescriptor Description = new GeometryDescriptor(Vertices);
 
             PointF top = Vertices[0], bottom = Vertices[0], left = Vertices[0], right = Vertices[0];
             Description.FrontalArea = PolygonArea(Vertices);
@@ -183,20 +190,25 @@ namespace PhysLib
                 j = (i + 1) % Vertices.Length;
                 Description.Centroid.X += (Vertices[i].X + Vertices[j].X) * (Vertices[i].X * Vertices[j].Y - Vertices[i].Y * Vertices[j].X);
                 Description.Centroid.Y += (Vertices[i].Y + Vertices[j].Y) * (Vertices[i].X * Vertices[j].Y - Vertices[i].Y * Vertices[j].X);
-
-                if (left.X > Vertices[j].X) left = Vertices[j];
-                if (right.X < Vertices[j].X) right = Vertices[j];
-
-                if (bottom.X > Vertices[j].Y) bottom = Vertices[j];
-                if (top.X < Vertices[j].Y) top = Vertices[j];
             }
 
             Description.Centroid.X /= (float)(Description.FrontalArea * 6);
             Description.Centroid.Y /= (float)(Description.FrontalArea * 6);
 
-            Description.Height = top.Y - bottom.Y;
-            Description.Width = right.X - left.X;
+            
+            using (System.Drawing.Drawing2D.GraphicsPath p = new System.Drawing.Drawing2D.GraphicsPath())
+            {
+                p.AddPolygon(Vertices);
+                RectangleF r = p.GetBounds();
 
+                Description.BoundingBox[0] = r.Location;
+                Description.BoundingBox[1] = new PointF(r.X + r.Width, r.Y);
+                Description.BoundingBox[2] = new PointF(r.X + r.Width, r.Y+r.Height);
+                Description.BoundingBox[3] = new PointF(r.X, r.Y+r.Height);
+                Description.Width = r.Width;
+                Description.Height = r.Height;
+            }
+            
             double dist = Double.PositiveInfinity;            
             for (int i = 0; i < Vertices.Length; i++)
             {
@@ -267,20 +279,17 @@ namespace PhysLib
         /// </summary>
         public PointF[] BoundingBox
         {
-            get // Provizorní
-            {
-                using (System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath())
-                {
-                    gp.AddClosedCurve(geom);
-                    RectangleF r = gp.GetBounds();
-                    
-                    PointF[] corners = { r.Location, new PointF(r.X + r.Width, r.Y), new PointF(r.X + r.Width, r.Y + r.Height), new PointF(r.X, r.Y + r.Height) };
-                    System.Drawing.Drawing2D.Matrix rot = new System.Drawing.Drawing2D.Matrix();
-                    rot.RotateAt((float)angle, (PointF)Nail);
-                    rot.TransformPoints(corners);
+            get
+            {       
+                PointF[] transformedBox = new PointF[4];
+                desc.BoundingBox.CopyTo(transformedBox, 0);    
 
-                    return corners;
-                }
+                System.Drawing.Drawing2D.Matrix rot = new System.Drawing.Drawing2D.Matrix();
+                rot.Translate((float)center[0], (float)center[1]);
+                rot.RotateAt((float)angle, (PointF)Nail,System.Drawing.Drawing2D.MatrixOrder.Append);
+                rot.TransformPoints(transformedBox);
+
+                return transformedBox;
             }
         }
 
@@ -394,12 +403,26 @@ namespace PhysLib
         public int Farthest;
 
         /// <summary>
+        /// Box ohraničující polygon
+        /// </summary>
+        public PointF[] BoundingBox;
+
+        /// <summary>
+        /// Původní netransformované vertexy
+        /// </summary>
+        public PointF[] DefaultVertices;
+
+        /// <summary>
         /// Výchozí konstruktor
         /// </summary>
-        public GeometryDescriptor()
+        public GeometryDescriptor(PointF[] Default)
         {
             Centroid = new PointF(0, 0);
             Height = Width = Depth = FrontalArea = Farthest = 0;
+            
+            BoundingBox = new PointF[4];
+            DefaultVertices = new PointF[Default.Length];
+            Default.CopyTo(DefaultVertices, 0);
         }
     }
 }
