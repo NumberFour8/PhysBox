@@ -7,18 +7,17 @@ namespace PhysLib
     public struct CollisionReport
     {
         public SimObject A,B;
+        public Vector MTD;
 
     }
 
     public sealed class CollisionSolver
     {
         private World w;
-        private ArrayList Solved;
         
         public CollisionSolver(World Reference)
         {
-            w = Reference;
-            Solved = new ArrayList();
+            w = Reference;            
         }
 
         /// <summary>
@@ -30,6 +29,49 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Zjistí, zda je jedno těleso od druhého odděleno danou osou
+        /// </summary>
+        /// <param name="Axis">Osa oddělení</param>
+        /// <param name="Object">Objekt</param>
+        /// <returns>True pokud je odděleno, False pokud nikoliv</returns>
+        public bool SeparatedByAxis(Vector Axis, Geometry ObjectA, Geometry ObjectB)
+        {
+
+            double minA = 0, maxA = 0, minB = 0, maxB = 0;
+            ObjectA.ProjectToAxis(Axis, ref minA, ref maxA);
+            ObjectB.ProjectToAxis(Axis, ref minB, ref maxB);
+
+            return (minA > maxB) || (minB > maxA);
+        }
+
+        /// <summary>
+        /// Zjistí, zda objekt koliduje s jiným - daným objektem
+        /// </summary>
+        /// <param name="Object"></param>
+        /// <returns></returns>
+        public bool ObjectsCollide(Geometry ObjectA,Geometry ObjectB)
+        {
+            for (int i = 0, j = ObjectA.ObjectGeometry.Length - 1; i < ObjectA.ObjectGeometry.Length; j = i, i++)
+            {
+                Vector v1 = (Vector)ObjectA.ObjectGeometry[i];
+                Vector v2 = (Vector)ObjectA.ObjectGeometry[j];
+                Vector Axis = (v1 - v2).Perp();
+
+                if (SeparatedByAxis(Axis, ObjectA,ObjectB))
+                    return false;
+            }
+            for (int i = 0, j = ObjectB.ObjectGeometry.Length - 1; i < ObjectB.ObjectGeometry.Length; j = i, i++)
+            {
+                Vector v1 = (Vector)ObjectB.ObjectGeometry[i];
+                Vector v2 = (Vector)ObjectB.ObjectGeometry[j];
+                Vector Axis = (v1 - v2).Perp();
+                if (SeparatedByAxis(Axis, ObjectA,ObjectB))
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
         /// Sestaví report o kolizích v momentálním stavu systému pro daný objekt
         /// </summary>
         /// <returns>Výčet reportů o kolizích</returns>
@@ -38,7 +80,7 @@ namespace PhysLib
             for (int i = 0; i < w.CountObjects; i++)
             {
                 if (i == ObjectIndex) continue;
-                if (w[ObjectIndex].Model.CollidesWith(w[i].Model))
+                if (ObjectsCollide(w[ObjectIndex].Model,w[i].Model))
                     throw new ExecutionEngineException("Hop, kolize!");
             }
             yield break;
