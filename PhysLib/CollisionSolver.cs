@@ -35,6 +35,12 @@ namespace PhysLib
         /// <returns>Výčet reportů o kolizích</returns>
         public IEnumerable DetectCollisionsFor(int ObjectIndex)
         {
+            for (int i = 0; i < w.CountObjects; i++)
+            {
+                if (i == ObjectIndex) continue;
+                if (w[ObjectIndex].Model.CollidesWith(w[i].Model))
+                    throw new ExecutionEngineException("Hop, kolize!");
+            }
             yield break;
         }
 

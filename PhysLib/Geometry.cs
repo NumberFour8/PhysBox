@@ -359,9 +359,72 @@ namespace PhysLib
             get { return desc.FrontalArea; }
         }
 
+        /// <summary>
+        /// Zjistí, zda objekt koliduje s jiným - daným objektem
+        /// </summary>
+        /// <param name="Object"></param>
+        /// <returns></returns>
+        public bool CollidesWith(Geometry Object)
+        {
+            for (int i = 0,j = ObjectGeometry.Length-1; i < ObjectGeometry.Length;j = i, i++)
+            {
+                Vector v1 = (Vector)ObjectGeometry[i];
+                Vector v2 = (Vector)ObjectGeometry[j];
+                Vector Axis = (v1 - v2).Perp();
+
+                if (SeparatedByAxis(Axis, Object))
+                    return false;
+            }
+            for (int i = 0, j = Object.ObjectGeometry.Length-1; i < Object.ObjectGeometry.Length; j = i, i++)
+            {
+                Vector v1 = (Vector)ObjectGeometry[i];
+                Vector v2 = (Vector)ObjectGeometry[j];
+                Vector Axis = (v1 - v2).Perp();
+                if (SeparatedByAxis(Axis, Object))
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Projektuje těleso na danou osu
+        /// </summary>
+        /// <param name="Axis">Osa projekce</param>
+        /// <param name="min">Dolní mez intervalu</param>
+        /// <param name="max">Horní mez intervalu</param>
+        public void ProjectToAxis(Vector Axis, ref double min, ref double max)
+        {
+            min = max = Vector.Dot(Axis, (Vector)ObjectGeometry[0]);
+            for (int i = 1; i < ObjectGeometry.Length; i++)
+            {
+                double d = Vector.Dot(Axis, (Vector)ObjectGeometry[i]);
+                if (d < min)
+                    min = d;
+                else if (d > max)
+                    max = d;
+            }
+        }
+
+        /// <summary>
+        /// Indikuje, zda je dané těleso od tohoto odděleno danou osou
+        /// </summary>
+        /// <param name="Axis">Osa oddělení</param>
+        /// <param name="Object">Objekt</param>
+        /// <returns>True pokud je odděleno, False pokud nikoliv</returns>
+        public bool SeparatedByAxis(Vector Axis, Geometry Object)
+        {
+
+            double minA = 0, maxA = 0, minB = 0, maxB = 0;
+            ProjectToAxis(Axis, ref minA, ref maxA);
+            Object.ProjectToAxis(Axis, ref minB, ref maxB);
+
+            return (minA > maxB) || (minB > maxA);
+        }
+
         internal void RaiseOnCollision(SimObject Param)
         {
-            OnCollision(Param);
+            if (OnCollision != null)
+              OnCollision(Param);
         }
     }
 
