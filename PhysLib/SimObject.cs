@@ -192,7 +192,7 @@ namespace PhysLib
         {
             if (LinearVelocity.IsNull) return;
             double DragSize = 0.5 * Model.DragCoefficient * EnvDensity * (Model.Surface - 2 * Model.FrontalArea);
-            ApplyForce(Vector.Unit(-LinearVelocity) * Math.Round(DragSize * Vector.Pow(LinearVelocity, 2)), COG);
+            ApplyForce(Vector.Unit(-LinearVelocity) * Math.Round(DragSize * Vector.Pow(LinearVelocity, 2),3), COG);
         }
 
         /// <summary>

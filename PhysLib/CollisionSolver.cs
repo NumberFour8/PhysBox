@@ -24,22 +24,6 @@ namespace PhysLib
                 return Intersection.Width > Epsilon;
             }
         }
-
-        /*public Vector Normal
-        {
-            get
-            {
-                
-            }
-        }
-
-        public Vector RelativeVelocity
-        {
-            get
-            {
-                
-            }
-        }*/
     }
 
     public sealed class CollisionSolver

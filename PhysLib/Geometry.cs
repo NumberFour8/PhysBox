@@ -238,7 +238,7 @@ namespace PhysLib
             double ad = double.PositiveInfinity, bd = 0, cd = double.PositiveInfinity, dist = 0;
             for (int i = 0; i < ObjectGeometry.Length; i++)
             {
-                dist = Math.Sqrt(Math.Pow(ExternalPoint[0] - ObjectGeometry[i].X, 2) + Math.Pow(ExternalPoint[0] - ObjectGeometry[i].Y, 2));
+                dist = Math.Sqrt(Math.Pow(ExternalPoint[0] - ObjectGeometry[i].X, 2) + Math.Pow(ExternalPoint[1] - ObjectGeometry[i].Y, 2));
                 if (dist < ad)
                 {
                     bd = ad;
@@ -258,12 +258,11 @@ namespace PhysLib
 
             while (x != ObjectGeometry[b].X || y != ObjectGeometry[b].Y)
             {
-                PointF pt = new PointF(x, y);
-                dist = Geometry.PointDistance(pt, (PointF)ExternalPoint);
+                dist = Geometry.PointDistance(new PointF(x,y), (PointF)ExternalPoint);
                 if (dist < cd)
                 {
                     cd = dist;
-                    Ret = (Vector)pt;
+                    Ret = new Vector(x,y,0);
                 }
                 if (dist > cd) break;
                
