@@ -4,11 +4,17 @@ using System.Drawing;
 
 namespace PhysLib
 {
-    public struct CollisionReport
+    public sealed class CollisionReport
     {
         public SimObject A,B;
         public Vector MTD;
 
+        public CollisionReport()
+        {
+            MTD = new Vector(3);
+            A = null;
+            B = null;
+        }
     }
 
     public sealed class CollisionSolver
@@ -34,14 +40,26 @@ namespace PhysLib
         /// <param name="Axis">Osa oddělení</param>
         /// <param name="Object">Objekt</param>
         /// <returns>True pokud je odděleno, False pokud nikoliv</returns>
-        public bool SeparatedByAxis(Vector Axis, Geometry ObjectA, Geometry ObjectB)
+        public bool SeparatedByAxis(Vector Axis, Geometry ObjectA, Geometry ObjectB,ref CollisionReport Rep)
         {
-
             double minA = 0, maxA = 0, minB = 0, maxB = 0;
             ObjectA.ProjectToAxis(Axis, ref minA, ref maxA);
             ObjectB.ProjectToAxis(Axis, ref minB, ref maxB);
 
-            return (minA > maxB) || (minB > maxA);
+	        double d0 = (maxB - minA);
+	        double d1 = (minB - maxA);
+
+	        if(d0 < 0.0f || d1 > 0.0f) return true;
+            
+            double overlap = (d0 < -d1) ? d0 : d1;
+
+            Vector Sep = Axis * (overlap / Vector.Pow(Axis, 2));
+
+            if (Rep.MTD.IsNull || Vector.Pow(Sep, 2) < Vector.Pow(Rep.MTD, 2))
+                Rep.MTD = Sep;
+
+            return false;
+
         }
 
         /// <summary>
@@ -49,26 +67,27 @@ namespace PhysLib
         /// </summary>
         /// <param name="Object"></param>
         /// <returns></returns>
-        public bool ObjectsCollide(Geometry ObjectA,Geometry ObjectB)
+        public CollisionReport ObjectsCollide(Geometry ObjectA,Geometry ObjectB)
         {
+            CollisionReport Ret = new CollisionReport();
             for (int i = 0, j = ObjectA.ObjectGeometry.Length - 1; i < ObjectA.ObjectGeometry.Length; j = i, i++)
             {
                 Vector v1 = (Vector)ObjectA.ObjectGeometry[i];
                 Vector v2 = (Vector)ObjectA.ObjectGeometry[j];
                 Vector Axis = (v1 - v2).Perp();
 
-                if (SeparatedByAxis(Axis, ObjectA,ObjectB))
-                    return false;
+                if (SeparatedByAxis(Axis, ObjectA,ObjectB, ref Ret))
+                    return null;
             }
             for (int i = 0, j = ObjectB.ObjectGeometry.Length - 1; i < ObjectB.ObjectGeometry.Length; j = i, i++)
             {
                 Vector v1 = (Vector)ObjectB.ObjectGeometry[i];
                 Vector v2 = (Vector)ObjectB.ObjectGeometry[j];
                 Vector Axis = (v1 - v2).Perp();
-                if (SeparatedByAxis(Axis, ObjectA,ObjectB))
-                    return false;
+                if (SeparatedByAxis(Axis, ObjectA,ObjectB, ref Ret))
+                    return null;
             }
-            return true;
+            return Ret;
         }
 
         /// <summary>
@@ -80,10 +99,14 @@ namespace PhysLib
             for (int i = 0; i < w.CountObjects; i++)
             {
                 if (i == ObjectIndex) continue;
-                if (ObjectsCollide(w[ObjectIndex].Model,w[i].Model))
-                    throw new ExecutionEngineException("Hop, kolize!");
+                CollisionReport rpt = ObjectsCollide(w[ObjectIndex].Model,w[i].Model);
+                if (rpt != null)
+                {
+                    rpt.A = w[ObjectIndex];
+                    rpt.B = w[i];
+                    yield return rpt;
+                }
             }
-            yield break;
         }
 
         /// <summary>
@@ -92,8 +115,7 @@ namespace PhysLib
         /// <param name="Report">Report o kolizi</param>
         public void SolveCollision(CollisionReport Report)
         {
-            
-            throw new NotImplementedException();
+            return;
         }
 
 
