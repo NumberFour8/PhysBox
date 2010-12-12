@@ -134,10 +134,20 @@ namespace PhysLib
         /// <returns>Skalár</returns>
         public static double Dot(Vector v, Vector u)
         {
+            if (v.Count != u.Count) throw new ArgumentException();
             double Ret = 0;
             for (int i = 0; i < v.Count; i++)
                 Ret += v[i] * u[i];
             return Ret;
+        }
+
+        /// <summary>
+        /// Vrátí 2D kolmý vektor
+        /// </summary>
+        /// <returns>Kolmý vektor</returns>
+        public Vector Perp()
+        {
+            return new Vector(-t[1],t[0],0);
         }
 
         /// <summary>

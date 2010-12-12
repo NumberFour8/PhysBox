@@ -312,7 +312,6 @@ namespace PhysLib
                 lock (SimLock)
                 {
                     SimObject[] PhysObjs = (SimObject[])Objs.ToArray(typeof(SimObject));
-                    csolve.Reset();
                     for (int i = 0; i < Objs.Count; i++)
                     {
                         if (PhysObjs[i].Model.Position.Magnitude > maxRad && PhysObjs[i].Enabled)
