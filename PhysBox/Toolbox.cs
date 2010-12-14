@@ -5,6 +5,7 @@ using System.IO;
 using System.Collections;
 using System.Xml;
 using PhysLib;
+using System.Linq;
 
 namespace PhysBox
 {
@@ -27,6 +28,13 @@ namespace PhysBox
             newobj_Geometry.Items.Clear();
             foreach (string name in Directory.GetFiles("objects"))
                 newobj_Geometry.Items.Add(Path.GetFileNameWithoutExtension(name));
+        }
+
+        public void RefreshObjects()
+        {
+            if (MyOwner == null) return;
+            foreach (GraphicObject obj in (from o in MyOwner.MyWorld.Objects select o.Model))
+                list_allObjects.Items.Add(obj.Name);
         }
 
         private void createGeometry_Click(object sender, EventArgs e)
@@ -155,6 +163,8 @@ namespace PhysBox
                 env_G.Text = (-MyOwner.MyWorld.Convert(MyOwner.MyWorld.Gravity, ConversionType.PixelsToMeters).Magnitude).ToString();
                 env_Resolution.Text = MyOwner.MyWorld.Resolution.ToString();
             }
+            else if (tab_Toolbox.SelectedIndex == 2)
+                RefreshObjects();
         }
 
      }

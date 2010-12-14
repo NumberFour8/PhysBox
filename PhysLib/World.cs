@@ -215,6 +215,28 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Smaže všechna tělesa
+        /// </summary>
+        public void ClearObjects()
+        {
+            lock (SimLock)
+            {
+                Objs.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Smaže všechna silová pole
+        /// </summary>
+        public void ClearFields()
+        {
+            lock (SimLock)
+            {
+                Fields.Clear();
+            }
+        }
+
+        /// <summary>
         /// Indikuje, zda je simulace pozastavena
         /// </summary>
         public bool Paused

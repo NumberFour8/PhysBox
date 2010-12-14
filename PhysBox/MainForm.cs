@@ -239,6 +239,12 @@ namespace PhysBox
         {
             SetLevel = true;
             if (Tools != null && !Tools.IsDisposed) Tools.Forbid();
+        }
+
+        private void menu_restartSim_Click(object sender, EventArgs e)
+        {
+            MyWorld.ClearFields();
+            MyWorld.ClearObjects();
         }       
     }
 }

@@ -67,26 +67,34 @@ namespace PhysLib
         /// </summary>
         /// <param name="Object"></param>
         /// <returns></returns>
-        public CollisionReport ObjectsCollide(Geometry ObjectA,Geometry ObjectB)
+        public CollisionReport ObjectsCollide(SimObject ObjectA,SimObject ObjectB)
         {
             CollisionReport Ret = new CollisionReport();
-            for (int i = 0, j = ObjectA.ObjectGeometry.Length - 1; i < ObjectA.ObjectGeometry.Length; j = i, i++)
+            int Count = ObjectA.Model.ObjectGeometry.Length + ObjectB.Model.ObjectGeometry.Length;
+            for (int i = 0, j; i < Count; i++)
             {
-                Vector v1 = (Vector)ObjectA.ObjectGeometry[i];
-                Vector v2 = (Vector)ObjectA.ObjectGeometry[j];
-                Vector Axis = (v1 - v2).Perp();
+                Vector Axis = null;
+                if (i < ObjectA.Model.ObjectGeometry.Length)
+                {
+                    j = (i == ObjectA.Model.ObjectGeometry.Length - 1) ? 0 : i + 1;
+                    Vector v1 = (Vector)ObjectA.Model.ObjectGeometry[i];
+                    Vector v2 = (Vector)ObjectA.Model.ObjectGeometry[j];
+                    Axis = (v1 - v2).Perp();
+                }
+                else
+                {
+                    j = (i == Count - 1) ? ObjectA.Model.ObjectGeometry.Length : i + 1;
+                    Vector v1 = (Vector)ObjectB.Model.ObjectGeometry[i - ObjectA.Model.ObjectGeometry.Length];
+                    Vector v2 = (Vector)ObjectB.Model.ObjectGeometry[j - ObjectA.Model.ObjectGeometry.Length];
+                    Axis = (v1 - v2).Perp();
+                }
 
-                if (SeparatedByAxis(Axis, ObjectA,ObjectB, ref Ret))
+                if (SeparatedByAxis(Axis,ObjectA.Model, ObjectB.Model, ref Ret))
                     return null;
             }
-            for (int i = 0, j = ObjectB.ObjectGeometry.Length - 1; i < ObjectB.ObjectGeometry.Length; j = i, i++)
-            {
-                Vector v1 = (Vector)ObjectB.ObjectGeometry[i];
-                Vector v2 = (Vector)ObjectB.ObjectGeometry[j];
-                Vector Axis = (v1 - v2).Perp();
-                if (SeparatedByAxis(Axis, ObjectA,ObjectB, ref Ret))
-                    return null;
-            }
+            
+            Ret.A = ObjectA;
+            Ret.B = ObjectB;
             return Ret;
         }
 
@@ -99,13 +107,8 @@ namespace PhysLib
             for (int i = 0; i < w.CountObjects; i++)
             {
                 if (i == ObjectIndex) continue;
-                CollisionReport rpt = ObjectsCollide(w[ObjectIndex].Model,w[i].Model);
-                if (rpt != null)
-                {
-                    rpt.A = w[ObjectIndex];
-                    rpt.B = w[i];
-                    yield return rpt;
-                }
+                CollisionReport rpt = ObjectsCollide(w[ObjectIndex],w[i]);
+                if (rpt != null) yield return rpt;
             }
         }
 

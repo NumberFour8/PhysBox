@@ -40,6 +40,7 @@
             this.menu_enableWireframe = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_showVertices = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_drawInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_showBounds = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_showVersion = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.menu_pauseSim = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +64,6 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.analyzovatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.simTime = new System.Windows.Forms.Timer(this.components);
-            this.menu_showBounds = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.stavovyRadek.SuspendLayout();
             this.manipulateObj.SuspendLayout();
@@ -97,25 +97,27 @@
             this.menu_openToolbar.Name = "menu_openToolbar";
             this.menu_openToolbar.ShortcutKeyDisplayString = "";
             this.menu_openToolbar.ShortcutKeys = System.Windows.Forms.Keys.F8;
-            this.menu_openToolbar.Size = new System.Drawing.Size(137, 22);
+            this.menu_openToolbar.Size = new System.Drawing.Size(171, 22);
             this.menu_openToolbar.Text = "Nástroje";
             this.menu_openToolbar.Click += new System.EventHandler(this.nástrojeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(134, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(168, 6);
             // 
             // menu_restartSim
             // 
             this.menu_restartSim.Name = "menu_restartSim";
-            this.menu_restartSim.Size = new System.Drawing.Size(137, 22);
-            this.menu_restartSim.Text = "Restart";
+            this.menu_restartSim.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F2)));
+            this.menu_restartSim.Size = new System.Drawing.Size(171, 22);
+            this.menu_restartSim.Text = "Resetovat";
+            this.menu_restartSim.Click += new System.EventHandler(this.menu_restartSim_Click);
             // 
             // menu_Quit
             // 
             this.menu_Quit.Name = "menu_Quit";
-            this.menu_Quit.Size = new System.Drawing.Size(137, 22);
+            this.menu_Quit.Size = new System.Drawing.Size(171, 22);
             this.menu_Quit.Text = "Ukončit";
             // 
             // analýzaToolStripMenuItem
@@ -162,6 +164,13 @@
             this.menu_drawInfo.Name = "menu_drawInfo";
             this.menu_drawInfo.Size = new System.Drawing.Size(232, 22);
             this.menu_drawInfo.Text = "Zobrazit informace modelu";
+            // 
+            // menu_showBounds
+            // 
+            this.menu_showBounds.CheckOnClick = true;
+            this.menu_showBounds.Name = "menu_showBounds";
+            this.menu_showBounds.Size = new System.Drawing.Size(232, 22);
+            this.menu_showBounds.Text = "Zobrazit hranice modelů";
             // 
             // menu_showVersion
             // 
@@ -333,13 +342,6 @@
             // 
             this.simTime.Interval = 1;
             this.simTime.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // menu_showBounds
-            // 
-            this.menu_showBounds.CheckOnClick = true;
-            this.menu_showBounds.Name = "menu_showBounds";
-            this.menu_showBounds.Size = new System.Drawing.Size(232, 22);
-            this.menu_showBounds.Text = "Zobrazit hranice modelů";
             // 
             // MainForm
             // 
