@@ -33,6 +33,7 @@ namespace PhysBox
         public void RefreshObjects()
         {
             if (MyOwner == null) return;
+            list_allObjects.Items.Clear();
             foreach (GraphicObject obj in (from o in MyOwner.MyWorld.Objects select o.Model))
                 list_allObjects.Items.Add(obj.Name);
         }

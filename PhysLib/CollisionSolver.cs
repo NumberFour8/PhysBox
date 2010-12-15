@@ -76,8 +76,15 @@ namespace PhysLib
         public CollisionReport ObjectsCollide(SimObject ObjectA,SimObject ObjectB)
         {
             CollisionReport Ret = new CollisionReport(ObjectA,ObjectB);
-            PointF[] geomA = ObjectA.Model.ObjectGeometry;
-            PointF[] geomB = ObjectB.Model.ObjectGeometry;
+            PointF[] geomA = null, geomB = null;
+            
+            if (!ObjectA.Model.Convex)
+                geomA = ObjectA.Model.BoundingBox;
+            else geomA = ObjectA.Model.ObjectGeometry;
+            
+            if (!ObjectB.Model.Convex)
+                geomB = ObjectB.Model.BoundingBox;
+            else geomB = ObjectB.Model.ObjectGeometry;
 
             int Count = geomA.Length + geomB.Length;
             for (int i = 0, j; i < Count; i++)

@@ -191,16 +191,23 @@ namespace PhysLib
             PointF top = Vertices[0], bottom = Vertices[0], left = Vertices[0], right = Vertices[0];
             Description.FrontalArea = PolygonArea(Vertices);
 
+            Vector A = (Vector)Vertices[1] - (Vector)Vertices[0],B = null;
+            int cx = 0, cy = 0;
             for (int i = 0,j = 0; i < Vertices.Length; i++)
             {
                 j = (i + 1) % Vertices.Length;
                 Description.Centroid.X += (Vertices[i].X + Vertices[j].X) * (Vertices[i].X * Vertices[j].Y - Vertices[i].Y * Vertices[j].X);
                 Description.Centroid.Y += (Vertices[i].Y + Vertices[j].Y) * (Vertices[i].X * Vertices[j].Y - Vertices[i].Y * Vertices[j].X);
+
+                B = (Vector)Vertices[j] - (Vector)Vertices[i];
+                if (Math.Sign(A[0]) != Math.Sign(B[0])) cx++;
+                if (Math.Sign(A[1]) != Math.Sign(B[1])) cy++;
+                A[0] = B[0]; A[1] = B[1];
             }
 
+            Description.Convex = cx > 2 && cy > 2;
             Description.Centroid.X /= (float)(Description.FrontalArea * 6);
             Description.Centroid.Y /= (float)(Description.FrontalArea * 6);
-
             
             using (System.Drawing.Drawing2D.GraphicsPath p = new System.Drawing.Drawing2D.GraphicsPath())
             {
@@ -352,6 +359,14 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Indikuje, zda je útvar konvexní
+        /// </summary>
+        public bool Convex
+        {
+            get { return desc.Convex; }
+        }
+
+        /// <summary>
         /// Povrch objektu v pixelech čtverečních
         /// </summary>
         public double Surface
@@ -457,6 +472,11 @@ namespace PhysLib
         /// Index bodu nejdále od centroidu
         /// </summary>
         public int Farthest;
+
+        /// <summary>
+        /// Indikuje, zda je polygon konvexní
+        /// </summary>
+        public bool Convex;
 
         /// <summary>
         /// Box ohraničující polygon
