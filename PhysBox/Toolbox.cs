@@ -153,6 +153,7 @@ namespace PhysBox
             MyOwner.MyWorld.Resolution = Double.Parse(env_Resolution.Text);
             MyOwner.MyWorld.Aether = Double.Parse(env_Aether.Text);
             MyOwner.MyWorld.Gravity = MyOwner.MyWorld.Convert(new Vector(0, -Double.Parse(env_G.Text), 0), ConversionType.MetersToPixels);
+            MyOwner.MyWorld.Solver.Enabled = check_Collisions.Checked; 
         }
 
         private void tab_Toolbox_Selected(object sender, TabControlEventArgs e)
@@ -162,6 +163,7 @@ namespace PhysBox
                 env_Aether.Text = MyOwner.MyWorld.Aether.ToString();
                 env_G.Text = (-MyOwner.MyWorld.Convert(MyOwner.MyWorld.Gravity, ConversionType.PixelsToMeters).Magnitude).ToString();
                 env_Resolution.Text = MyOwner.MyWorld.Resolution.ToString();
+                check_Collisions.Checked = MyOwner.MyWorld.Solver.Enabled;
             }
             else if (tab_Toolbox.SelectedIndex == 2)
                 RefreshObjects();

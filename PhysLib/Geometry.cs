@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Collections;
 
 namespace PhysLib
 {
@@ -376,6 +377,35 @@ namespace PhysLib
                 else if (d > max)
                     max = d;
             }
+        }
+
+        public PointF[] SupportPoints(Vector Axis)
+        {
+            double min = -1.0f;
+            const double threshold = 1.0E-1;            
+            int num = ObjectGeometry.Length;
+
+            ArrayList sp = new ArrayList();
+
+            for (int i = 0; i < num; i++)
+            {
+                double t = Vector.Dot(Axis,(Vector)ObjectGeometry[i]);
+                if (t < min || i == 0)
+                    min = t;
+            }
+
+            for (int i = 0; i < num; i++)
+            {
+                double t = Vector.Dot(Axis,(Vector)ObjectGeometry[i]);
+
+                if (t < min + threshold)
+                {
+                    sp.Add(ObjectGeometry[i]);
+                    if (sp.Count == 2) break;
+                }
+            }
+
+            return (PointF[])sp.ToArray(typeof(PointF));
         }
 
         internal void RaiseOnCollision(SimObject Param)

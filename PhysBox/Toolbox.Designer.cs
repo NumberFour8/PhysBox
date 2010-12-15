@@ -61,6 +61,8 @@
             this.prop_textObjDrag = new System.Windows.Forms.MaskedTextBox();
             this.prop_comboPropMaterials = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.prop_rotationalEnergy = new System.Windows.Forms.Label();
+            this.radio_rotationalEnergy = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.prop_potentialEnergy = new System.Windows.Forms.Label();
             this.radio_KineticEnergy = new System.Windows.Forms.RadioButton();
@@ -79,14 +81,12 @@
             this.list_allObjects = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.check_Collisions = new System.Windows.Forms.CheckBox();
             this.button_applyEnv = new System.Windows.Forms.Button();
             this.env_StepSize = new System.Windows.Forms.MaskedTextBox();
             this.env_Aether = new System.Windows.Forms.MaskedTextBox();
             this.env_Resolution = new System.Windows.Forms.MaskedTextBox();
             this.env_G = new System.Windows.Forms.MaskedTextBox();
-            this.radio_rotationalEnergy = new System.Windows.Forms.RadioButton();
-            this.prop_rotationalEnergy = new System.Windows.Forms.Label();
             this.BS_SimObject = new System.Windows.Forms.BindingSource(this.components);
             label1 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
@@ -472,6 +472,25 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Hodnoty";
             // 
+            // prop_rotationalEnergy
+            // 
+            this.prop_rotationalEnergy.AutoSize = true;
+            this.prop_rotationalEnergy.Location = new System.Drawing.Point(126, 112);
+            this.prop_rotationalEnergy.Name = "prop_rotationalEnergy";
+            this.prop_rotationalEnergy.Size = new System.Drawing.Size(21, 13);
+            this.prop_rotationalEnergy.TabIndex = 28;
+            this.prop_rotationalEnergy.Text = "0 J";
+            // 
+            // radio_rotationalEnergy
+            // 
+            this.radio_rotationalEnergy.AutoSize = true;
+            this.radio_rotationalEnergy.Location = new System.Drawing.Point(6, 108);
+            this.radio_rotationalEnergy.Name = "radio_rotationalEnergy";
+            this.radio_rotationalEnergy.Size = new System.Drawing.Size(106, 17);
+            this.radio_rotationalEnergy.TabIndex = 27;
+            this.radio_rotationalEnergy.Text = "Otáčivá energie :";
+            this.radio_rotationalEnergy.UseVisualStyleBackColor = true;
+            // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
@@ -642,7 +661,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.check_Collisions);
             this.groupBox1.Controls.Add(this.button_applyEnv);
             this.groupBox1.Controls.Add(label11);
             this.groupBox1.Controls.Add(this.env_StepSize);
@@ -663,15 +682,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parametry simulace";
             // 
-            // checkBox1
+            // check_Collisions
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(9, 137);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(96, 17);
-            this.checkBox1.TabIndex = 14;
-            this.checkBox1.Text = "Zapnout kolize";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.check_Collisions.AutoSize = true;
+            this.check_Collisions.Location = new System.Drawing.Point(9, 137);
+            this.check_Collisions.Name = "check_Collisions";
+            this.check_Collisions.Size = new System.Drawing.Size(96, 17);
+            this.check_Collisions.TabIndex = 14;
+            this.check_Collisions.Text = "Zapnout kolize";
+            this.check_Collisions.UseVisualStyleBackColor = true;
             // 
             // button_applyEnv
             // 
@@ -710,25 +729,6 @@
             this.env_G.Name = "env_G";
             this.env_G.Size = new System.Drawing.Size(51, 20);
             this.env_G.TabIndex = 0;
-            // 
-            // radio_rotationalEnergy
-            // 
-            this.radio_rotationalEnergy.AutoSize = true;
-            this.radio_rotationalEnergy.Location = new System.Drawing.Point(6, 108);
-            this.radio_rotationalEnergy.Name = "radio_rotationalEnergy";
-            this.radio_rotationalEnergy.Size = new System.Drawing.Size(106, 17);
-            this.radio_rotationalEnergy.TabIndex = 27;
-            this.radio_rotationalEnergy.Text = "Otáčivá energie :";
-            this.radio_rotationalEnergy.UseVisualStyleBackColor = true;
-            // 
-            // prop_rotationalEnergy
-            // 
-            this.prop_rotationalEnergy.AutoSize = true;
-            this.prop_rotationalEnergy.Location = new System.Drawing.Point(126, 112);
-            this.prop_rotationalEnergy.Name = "prop_rotationalEnergy";
-            this.prop_rotationalEnergy.Size = new System.Drawing.Size(21, 13);
-            this.prop_rotationalEnergy.TabIndex = 28;
-            this.prop_rotationalEnergy.Text = "0 J";
             // 
             // BS_SimObject
             // 
@@ -803,7 +803,7 @@
         private System.Windows.Forms.MaskedTextBox prop_textObjDrag;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button_Analyze;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox check_Collisions;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radio_KineticEnergy;
         private System.Windows.Forms.RadioButton radio_AngularVelocity;
