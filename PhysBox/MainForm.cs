@@ -53,12 +53,13 @@ namespace PhysBox
             MyWorld.Tick();
         }
 
+
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 if (Placing != null)
-                {
+                {                    
                     Placing.Model.Position = new Vector(e.X, e.Y,0);
                     MyWorld.AddObject(Placing);
                     

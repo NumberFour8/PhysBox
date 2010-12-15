@@ -3,152 +3,7 @@ using System.Collections;
 using System.Drawing;
 
 namespace PhysLib
-{
-    /// <summary>
-    /// Třída hlášení o kolizi
-    /// </summary>
-    public sealed class CollisionReport
-    {
-        private Vector mtd;
-        
-        /// <summary>
-        /// Výchozí konstruktor 
-        /// </summary>
-        /// <param name="ObjA">První účastník kolize</param>
-        /// <param name="ObjB">Druhý účastník kolize</param>
-        public CollisionReport(SimObject ObjA, SimObject ObjB)
-        {
-            mtd = new Vector(3);
-
-            A = ObjA;
-            B = ObjB;
-        }
-
-        /// <summary>
-        /// První účastník kolize
-        /// </summary>
-        public SimObject A
-        {
-            get; private set;
-        }
-        
-        /// <summary>
-        /// Druhý účastník kolize
-        /// </summary>
-        public SimObject B
-        {
-            get; private set;
-        }
-
-        /// <summary>
-        /// Párové body dotyku
-        /// </summary>
-        public PointF[,] ContactPairs
-        {
-            get; private set;
-        }
-
-        /// <summary>
-        /// Možné typy dotyku
-        /// </summary>
-        public enum ContactType
-        {
-            VertexVertex = 1,VertexEdge = 2,EdgeEdge = 3
-        }
-
-        /// <summary>
-        /// Typ dotyku
-        /// </summary>
-        public ContactType Type
-        {
-            get; private set;
-        }
-
-        /// <summary>
-        /// Minimální vektor oddělení
-        /// </summary>
-        public Vector MTD
-        {
-            get { return mtd; }
-            set
-            {
-                Vector umtd = Vector.Unit(value);
-                object c1 = null,c2 = null;
-
-                PointF[] supA = A.Model.SupportPoints(umtd), supB = B.Model.SupportPoints(-umtd);
-                mtd = value;
-                if (supA.Length == 1)
-                {
-                    if (supB.Length == 1)
-                    {
-                        Type = ContactType.VertexVertex;
-                        c1 = supA[0]; c2 = supB[0];
-                    }
-                    else if (supB.Length == 2)
-                    {
-                        Type = ContactType.VertexEdge;
-                        c1 = supA[0]; c2 = supB;
-                    }
-                    else throw new ArgumentException();
-                }
-                else if (supA.Length == 2)
-                {
-                    if (supB.Length == 1)
-                    {
-                        Type = ContactType.VertexEdge;
-                        c1 = supA; c2 = supB[0];
-                    }
-                    else if (supB.Length == 2)
-                    {
-                        Type = ContactType.EdgeEdge;
-                        c1 = supA; c2 = supB;
-                    }
-                    else throw new ArgumentException();
-                }
-                else throw new ArgumentException();
-                GetContactPoints(c1, c2);
-            }
-        }
-
-        private PointF ClosestPointOnEdge(PointF[] Edge,PointF v)
-        {
-	        Vector e = (Vector)Edge[1] - (Vector)Edge[0];
-	        Vector d = (Vector)v - (Vector)Edge[0];
-	        
-            double t = Vector.Dot(e,d) / Vector.Pow(e,2);
-	       
-            t = (t < 0) ? 0 : (t > 1) ? 1 : t;
-	        return (PointF)((Vector)Edge[0] + (e * t));
-        }
-
-        private void GetContactPoints(object e1, object e2)
-        {
-            switch (Type)
-            {
-                case ContactType.VertexVertex:
-                    ContactPairs = new PointF[1,2];
-                    ContactPairs[0,0] = (PointF)e1;
-                    ContactPairs[0,1] = (PointF)e2;
-                    break;
-                case ContactType.VertexEdge:
-                    if (e1.GetType() == typeof(PointF[]))
-                    {
-                        ContactPairs = new PointF[1, 2];
-                    }
-                    else if (e2.GetType() == typeof(PointF[]))
-                    {
-                        ContactPairs = new PointF[1, 2];
-                    }
-                    else throw new ArgumentException();
-                    break;
-                case ContactType.EdgeEdge:
-                    ContactPairs = new PointF[4,2];
-                    // setřídit
-                    break;
-            }
-        }
-
-    }
+{   
 
     /// <summary>
     /// Třída pro řešení kolizí
@@ -234,6 +89,7 @@ namespace PhysLib
                     return null;
             }
             
+            Ret.CalculatePairs();
             return Ret;
         }
 
@@ -258,9 +114,9 @@ namespace PhysLib
         /// <param name="Report">Report o kolizi</param>
         public void SolveCollision(CollisionReport Report)
         {
-            return;
+            Report.A.Model.RaiseOnCollision(Report);
+            Report.B.Model.RaiseOnCollision(Report);
         }
-
 
     }
 }

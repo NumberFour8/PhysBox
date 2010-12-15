@@ -11,7 +11,7 @@ namespace PhysLib
     [Serializable]
     public abstract class Geometry
     {
-        public delegate void CollisionHandler(SimObject Sender);
+        public delegate void CollisionHandler(CollisionReport sender);
         
         /// <summary>
         /// Událost nastávající při kolizi tělesa
@@ -379,7 +379,7 @@ namespace PhysLib
             }
         }
 
-        public PointF[] SupportPoints(Vector Axis)
+        internal PointF[] SupportPoints(Vector Axis)
         {
             double min = -1.0f;
             const double threshold = 1.0E-1;            
@@ -408,10 +408,10 @@ namespace PhysLib
             return (PointF[])sp.ToArray(typeof(PointF));
         }
 
-        internal void RaiseOnCollision(SimObject Param)
+        internal void RaiseOnCollision(CollisionReport Report)
         {
             if (OnCollision != null)
-              OnCollision(Param);
+              OnCollision(Report);
         }
     }
 
