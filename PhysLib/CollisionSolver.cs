@@ -138,19 +138,21 @@ namespace PhysLib
             Vector N = Vector.Unit(Report.MTD);
 
             double Num = (-1 - E) * Vector.Dot(RelativeVelo, N);
-            double C = 1 / (Report.A.Mass + Report.B.Mass);
+            double C = 1 / (1/Report.A.Mass + 1/Report.B.Mass);
 
-            Vector AP = ((Vector)Report.Pairs[0].a - Report.A.COG).Perp(), BP = ((Vector)Report.Pairs[0].b - Report.B.COG).Perp();
+            Vector AP = ((Vector)Report.Pairs[0].b - Report.A.COG).Perp(), BP = ((Vector)Report.Pairs[0].a - Report.B.COG).Perp();
             double I = (Math.Pow(Vector.Dot(AP, N), 2) / Report.A.MomentOfInertia) + (Math.Pow(Vector.Dot(BP, N), 2) / Report.B.MomentOfInertia);
             double Denom = Vector.Dot(N, N) * ((1 / Report.A.Mass) + (1 / Report.B.Mass)) + I;
 
             double Impulse = Num / Denom;
 
-            Report.A.Model.Position += Report.MTD * Report.A.Mass * C;
-            Report.A.LinearVelocity += N * (Impulse / Report.A.Mass);
+            Report.A.Model.Position += Report.MTD * (1/Report.A.Mass) * C;
+            
+            Report.A.LinearVelocity += N * (Impulse / Report.A.Mass);            
             Report.A.AngularVelocity[2] += Vector.Dot(N, AP) * (Impulse / Report.A.MomentOfInertia);
 
-            Report.B.Model.Position += -Report.MTD * Report.B.Mass * C;
+            Report.B.Model.Position += -Report.MTD * (1/Report.B.Mass) * C;
+            
             Report.B.LinearVelocity += -N * (Impulse / Report.B.Mass);
             Report.B.AngularVelocity[2] += Vector.Dot(N, BP) * (Impulse / Report.B.MomentOfInertia);
 

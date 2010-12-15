@@ -44,7 +44,7 @@
             this.menu_showVersion = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.menu_pauseSim = new System.Windows.Forms.ToolStripMenuItem();
-            this.nastavitNulovouHladinuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_setZeroLevel = new System.Windows.Forms.ToolStripMenuItem();
             this.stavovyRadek = new System.Windows.Forms.StatusStrip();
             this.status_SimStat = new System.Windows.Forms.ToolStripStatusLabel();
             this.stat_SelObject = new System.Windows.Forms.ToolStripStatusLabel();
@@ -52,6 +52,7 @@
             this.manipulateObj_Name = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.manipulateObj_Enabled = new System.Windows.Forms.ToolStripMenuItem();
+            this.manipulateObj_IsStatic = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.manipulateObj_Translate = new System.Windows.Forms.ToolStripMenuItem();
             this.manipulateObj_Rotate = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,7 +65,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.analyzovatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.simTime = new System.Windows.Forms.Timer(this.components);
-            this.manipulateObj_IsStatic = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_AllowStatics = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.stavovyRadek.SuspendLayout();
             this.manipulateObj.SuspendLayout();
@@ -137,7 +138,8 @@
             this.menu_showVersion,
             this.toolStripMenuItem4,
             this.menu_pauseSim,
-            this.nastavitNulovouHladinuToolStripMenuItem});
+            this.menu_setZeroLevel,
+            this.menu_AllowStatics});
             this.konfiguraceToolStripMenuItem.Name = "konfiguraceToolStripMenuItem";
             this.konfiguraceToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
             this.konfiguraceToolStripMenuItem.Text = "Konfigurace";
@@ -194,13 +196,13 @@
             this.menu_pauseSim.Text = "Pozastavit simulaci";
             this.menu_pauseSim.CheckedChanged += new System.EventHandler(this.pozastavitSimulaciToolStripMenuItem_CheckedChanged);
             // 
-            // nastavitNulovouHladinuToolStripMenuItem
+            // menu_setZeroLevel
             // 
-            this.nastavitNulovouHladinuToolStripMenuItem.Name = "nastavitNulovouHladinuToolStripMenuItem";
-            this.nastavitNulovouHladinuToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
-            this.nastavitNulovouHladinuToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-            this.nastavitNulovouHladinuToolStripMenuItem.Text = "Nastavit nulovou hladinu";
-            this.nastavitNulovouHladinuToolStripMenuItem.Click += new System.EventHandler(this.nastavitNulovouHladinuToolStripMenuItem_Click);
+            this.menu_setZeroLevel.Name = "menu_setZeroLevel";
+            this.menu_setZeroLevel.ShortcutKeys = System.Windows.Forms.Keys.F10;
+            this.menu_setZeroLevel.Size = new System.Drawing.Size(232, 22);
+            this.menu_setZeroLevel.Text = "Nastavit nulovou hladinu";
+            this.menu_setZeroLevel.Click += new System.EventHandler(this.nastavitNulovouHladinuToolStripMenuItem_Click);
             // 
             // stavovyRadek
             // 
@@ -267,6 +269,14 @@
             this.manipulateObj_Enabled.Size = new System.Drawing.Size(169, 22);
             this.manipulateObj_Enabled.Text = "Simulovat";
             this.manipulateObj_Enabled.Click += new System.EventHandler(this.manipulateObj_Enabled_Click);
+            // 
+            // manipulateObj_IsStatic
+            // 
+            this.manipulateObj_IsStatic.CheckOnClick = true;
+            this.manipulateObj_IsStatic.Name = "manipulateObj_IsStatic";
+            this.manipulateObj_IsStatic.Size = new System.Drawing.Size(169, 22);
+            this.manipulateObj_IsStatic.Text = "Statický";
+            this.manipulateObj_IsStatic.CheckedChanged += new System.EventHandler(this.statickýToolStripMenuItem_CheckedChanged);
             // 
             // toolStripMenuItem5
             // 
@@ -345,13 +355,12 @@
             this.simTime.Interval = 1;
             this.simTime.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // manipulateObj_IsStatic
+            // menu_AllowStatics
             // 
-            this.manipulateObj_IsStatic.CheckOnClick = true;
-            this.manipulateObj_IsStatic.Name = "manipulateObj_IsStatic";
-            this.manipulateObj_IsStatic.Size = new System.Drawing.Size(169, 22);
-            this.manipulateObj_IsStatic.Text = "Statický";
-            this.manipulateObj_IsStatic.CheckedChanged += new System.EventHandler(this.statickýToolStripMenuItem_CheckedChanged);
+            this.menu_AllowStatics.CheckOnClick = true;
+            this.menu_AllowStatics.Name = "menu_AllowStatics";
+            this.menu_AllowStatics.Size = new System.Drawing.Size(232, 22);
+            this.menu_AllowStatics.Text = "Povolit výběr statických těles";
             // 
             // MainForm
             // 
@@ -419,9 +428,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem manipulateObj_NoTranslations;
         private System.Windows.Forms.ToolStripMenuItem menu_drawInfo;
-        private System.Windows.Forms.ToolStripMenuItem nastavitNulovouHladinuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menu_setZeroLevel;
         private System.Windows.Forms.ToolStripMenuItem menu_showBounds;
         private System.Windows.Forms.ToolStripMenuItem manipulateObj_IsStatic;
+        private System.Windows.Forms.ToolStripMenuItem menu_AllowStatics;
     }
 }
 

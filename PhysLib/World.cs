@@ -327,8 +327,9 @@ namespace PhysLib
         /// Najde první nejbližší těžiště objektu ve světě k dané pozici
         /// </summary>
         /// <param name="Position">Pozice</param>
+        /// <param name="SkipStatic">Indikuje, zda přeskočit statické objekty</param>
         /// <returns>Nejbližší objekt</returns>
-        public SimObject NearestObject(Vector Position)
+        public SimObject NearestObject(Vector Position,bool SkipStatic = true)
         {
             double distance = Double.PositiveInfinity;
             int index = -1;
@@ -337,6 +338,7 @@ namespace PhysLib
 
             for (int i = 0; i < Objs.Count; i++)
             {
+                if (((SimObject)Objs[i]).Static && SkipStatic) continue;
                 double dist = (((SimObject)Objs[i]).Model.Position - Position).Magnitude;
                 if (dist == 0) return Objs[i] as SimObject;
 
@@ -346,6 +348,7 @@ namespace PhysLib
                     index = i;
                 }
             }
+            if (index < 0) return null;
             return Objs[index] as SimObject;
         }
 

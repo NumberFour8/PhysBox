@@ -112,7 +112,8 @@ namespace PhysBox
             {
                 if (MyWorld.CountObjects == 0) return;
                 if (SetLevel) return;
-                Selected = MyWorld.NearestObject(new Vector(e.X, e.Y, 0));
+                Selected = MyWorld.NearestObject(new Vector(e.X, e.Y, 0),!menu_AllowStatics.Checked);
+                if (Selected == null) return;
 
                 stat_SelObject.Text = manipulateObj_Name.Text = String.Format("Objekt: {0}", (Selected.Model as GraphicObject).Name);
                 manipulateObj_Enabled.Checked = Selected.Enabled;
