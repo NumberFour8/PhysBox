@@ -28,6 +28,7 @@ namespace PhysLib
 
             Enabled = true;
             NoTranslations = false;
+            IsStatic = false;
 
             // Předpočítej část momentu setrvačnosti
             double denom = 0,nom = 0,factor = 0;
@@ -40,7 +41,6 @@ namespace PhysLib
 
             }
             J = nom / denom;
-            RestitutionCoefficient = 1;
         }
 
         /// <summary>
@@ -147,14 +147,6 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Koeficient restituce
-        /// </summary>
-        public double RestitutionCoefficient
-        {
-            get; set;
-        }
-
-        /// <summary>
         /// Libovolné parametry
         /// </summary>
         public object[] Parameters
@@ -222,6 +214,25 @@ namespace PhysLib
         {
             totalForce.Null();
             totalTorque.Null();
+        }
+
+        /// <summary>
+        /// Zruší všechny síly a zastaví těleso
+        /// </summary>
+        public void ResetAll()
+        {
+            totalForce.Null();
+            totalTorque.Null();
+            LinearVelocity.Null();
+            AngularVelocity.Null();
+        }
+
+        /// <summary>
+        /// Indikuje, zda je těleso nehybné (např. zeď)
+        /// </summary>
+        public bool IsStatic
+        {
+            get; set;
         }
 
         /// <summary>

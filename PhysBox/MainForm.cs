@@ -53,7 +53,6 @@ namespace PhysBox
             MyWorld.Tick();
         }
 
-
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
@@ -61,7 +60,7 @@ namespace PhysBox
                 if (Placing != null)
                 {                    
                     Placing.Model.Position = new Vector(e.X, e.Y,0);
-                    MyWorld.AddObject(Placing);
+                    (Placing.Model as GraphicObject).WorldIndex = MyWorld.AddObject(Placing);
                     
                     Placing = null;
                     Moving = Rotating = false;
@@ -124,6 +123,7 @@ namespace PhysBox
                 manipulateObj_SetAxis.Checked = SetAxis;
                 manipulateObj_ApplyForce.Checked = AddForce;
                 manipulateObj_Translate.Checked = Moving;
+                manipulateObj_IsStatic.Checked = Selected.IsStatic;
 
                 manipulateObj.Enabled = true;
                 manipulateObj.Show(new Point(e.X, e.Y));
@@ -132,7 +132,7 @@ namespace PhysBox
             }
         }
 
-        private void přemístitSemToolStripMenuItem_Click(object sender, EventArgs e)
+        public void přemístitSemToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Moving = true;
             Cursor = Cursors.Cross;
@@ -209,7 +209,7 @@ namespace PhysBox
         private void manipulateObj_CancelForces_Click(object sender, EventArgs e)
         {
             if (Selected != null)
-                Selected.Reset();
+                Selected.ResetAll();
         }
 
         private void manipulateObj_Scale_Click(object sender, EventArgs e)
@@ -246,6 +246,12 @@ namespace PhysBox
         {
             MyWorld.ClearFields();
             MyWorld.ClearObjects();
+        }
+
+        private void statickýToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Selected != null)
+                Selected.IsStatic = manipulateObj_IsStatic.Checked;
         }       
     }
 }

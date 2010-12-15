@@ -16,6 +16,7 @@ namespace PhysBox
         public bool ShowVectors { get; set; }
         public string Name { get; set; }
         public float Tension { get; set; }
+        public int WorldIndex { get; set; }
 
         public GraphicObject(Brush Texture, PointF[] Geometry,PointF COG)
             : base(Geometry, new PointF(0, 0), COG)

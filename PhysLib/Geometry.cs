@@ -11,7 +11,12 @@ namespace PhysLib
     [Serializable]
     public abstract class Geometry
     {
-        public delegate void CollisionHandler(CollisionReport sender);
+        /// <summary>
+        /// Delegát pro událost kolize
+        /// </summary>
+        /// <param name="sender">Objekt, který hlásil kolizi</param>
+        /// <param name="e">Hlášení o kolizi</param>
+        public delegate void CollisionHandler(object sender,CollisionEventArgs e);
         
         /// <summary>
         /// Událost nastávající při kolizi tělesa
@@ -282,12 +287,14 @@ namespace PhysLib
             get
             {       
                 PointF[] transformedBox = new PointF[4];
-                desc.BoundingBox.CopyTo(transformedBox, 0);    
+                desc.BoundingBox.CopyTo(transformedBox, 0);
 
-                System.Drawing.Drawing2D.Matrix rot = new System.Drawing.Drawing2D.Matrix();
-                rot.Translate((float)center[0], (float)center[1]);
-                rot.RotateAt((float)angle, (PointF)Nail,System.Drawing.Drawing2D.MatrixOrder.Append);
-                rot.TransformPoints(transformedBox);
+                using (System.Drawing.Drawing2D.Matrix rot = new System.Drawing.Drawing2D.Matrix())
+                {
+                    rot.Translate((float)center[0], (float)center[1]);
+                    rot.RotateAt((float)angle, (PointF)Nail, System.Drawing.Drawing2D.MatrixOrder.Append);
+                    rot.TransformPoints(transformedBox);
+                }
 
                 return transformedBox;
             }
@@ -411,7 +418,7 @@ namespace PhysLib
         internal void RaiseOnCollision(CollisionReport Report)
         {
             if (OnCollision != null)
-              OnCollision(Report);
+              OnCollision(this,new CollisionEventArgs(Report));
         }
     }
 
@@ -472,6 +479,26 @@ namespace PhysLib
             BoundingBox = new PointF[4];
             DefaultVertices = new PointF[Default.Length];
             Default.CopyTo(DefaultVertices, 0);
+        }
+    }
+
+    /// <summary>
+    /// Třída pro argumenty události kolize těles
+    /// </summary>
+    public class CollisionEventArgs : EventArgs
+    {
+        /// <summary>
+        /// Hlášení o kolizi
+        /// </summary>
+        public CollisionReport Report { get; private set; }
+
+        /// <summary>
+        /// Výchozí konstruktor
+        /// </summary>
+        /// <param name="Rep">Hlášení o kolizi</param>
+        public CollisionEventArgs(CollisionReport Rep)
+        {
+            Report = Rep;
         }
     }
 }

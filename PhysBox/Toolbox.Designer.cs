@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label2;
@@ -42,6 +41,7 @@
             System.Windows.Forms.Label label6;
             System.Windows.Forms.Label label5;
             System.Windows.Forms.Label label4;
+            System.Windows.Forms.Label label12;
             this.tab_Toolbox = new System.Windows.Forms.TabControl();
             this.tool_newObj = new System.Windows.Forms.TabPage();
             this.newobj_Saved = new System.Windows.Forms.ComboBox();
@@ -74,10 +74,9 @@
             this.button_Analyze = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.objs_MoveSelected = new System.Windows.Forms.Button();
+            this.objs_SelectObject = new System.Windows.Forms.Button();
+            this.objs_DeleteObject = new System.Windows.Forms.Button();
             this.list_allObjects = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -87,7 +86,8 @@
             this.env_Aether = new System.Windows.Forms.MaskedTextBox();
             this.env_Resolution = new System.Windows.Forms.MaskedTextBox();
             this.env_G = new System.Windows.Forms.MaskedTextBox();
-            this.BS_SimObject = new System.Windows.Forms.BindingSource(this.components);
+            this.env_Restitution = new System.Windows.Forms.MaskedTextBox();
+            this.button_ResetObj = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -101,6 +101,7 @@
             label6 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
+            label12 = new System.Windows.Forms.Label();
             this.tab_Toolbox.SuspendLayout();
             this.tool_newObj.SuspendLayout();
             this.newObj.SuspendLayout();
@@ -112,7 +113,6 @@
             this.groupBox2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_SimObject)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -356,6 +356,7 @@
             // 
             this.newobj_Material.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.newobj_Material.Enabled = false;
             this.newobj_Material.FormattingEnabled = true;
             this.newobj_Material.Location = new System.Drawing.Point(11, 74);
             this.newobj_Material.Name = "newobj_Material";
@@ -454,6 +455,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button_ResetObj);
             this.groupBox3.Controls.Add(this.prop_rotationalEnergy);
             this.groupBox3.Controls.Add(this.radio_rotationalEnergy);
             this.groupBox3.Controls.Add(this.radioButton1);
@@ -592,10 +594,9 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.objs_MoveSelected);
+            this.groupBox2.Controls.Add(this.objs_SelectObject);
+            this.groupBox2.Controls.Add(this.objs_DeleteObject);
             this.groupBox2.Controls.Add(this.list_allObjects);
             this.groupBox2.Location = new System.Drawing.Point(3, 6);
             this.groupBox2.Name = "groupBox2";
@@ -604,41 +605,35 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Všechna tělesa v prostředí";
             // 
-            // button4
+            // objs_MoveSelected
             // 
-            this.button4.Location = new System.Drawing.Point(27, 302);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(168, 20);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Přesunout tělesa mimo poloměr";
-            this.button4.UseVisualStyleBackColor = true;
+            this.objs_MoveSelected.Location = new System.Drawing.Point(27, 276);
+            this.objs_MoveSelected.Name = "objs_MoveSelected";
+            this.objs_MoveSelected.Size = new System.Drawing.Size(168, 20);
+            this.objs_MoveSelected.TabIndex = 4;
+            this.objs_MoveSelected.Text = "Přesunout vybrané";
+            this.objs_MoveSelected.UseVisualStyleBackColor = true;
+            this.objs_MoveSelected.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button3
+            // objs_SelectObject
             // 
-            this.button3.Location = new System.Drawing.Point(116, 250);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(97, 20);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Vybrat";
-            this.button3.UseVisualStyleBackColor = true;
+            this.objs_SelectObject.Location = new System.Drawing.Point(116, 250);
+            this.objs_SelectObject.Name = "objs_SelectObject";
+            this.objs_SelectObject.Size = new System.Drawing.Size(97, 20);
+            this.objs_SelectObject.TabIndex = 3;
+            this.objs_SelectObject.Text = "Vybrat";
+            this.objs_SelectObject.UseVisualStyleBackColor = true;
+            this.objs_SelectObject.Click += new System.EventHandler(this.objs_SelectObject_Click);
             // 
-            // button2
+            // objs_DeleteObject
             // 
-            this.button2.Location = new System.Drawing.Point(6, 250);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(97, 20);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Smazat";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(27, 276);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(168, 20);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Smazat tělesa mimo poloměr";
-            this.button1.UseVisualStyleBackColor = true;
+            this.objs_DeleteObject.Location = new System.Drawing.Point(6, 250);
+            this.objs_DeleteObject.Name = "objs_DeleteObject";
+            this.objs_DeleteObject.Size = new System.Drawing.Size(97, 20);
+            this.objs_DeleteObject.TabIndex = 2;
+            this.objs_DeleteObject.Text = "Smazat";
+            this.objs_DeleteObject.UseVisualStyleBackColor = true;
+            this.objs_DeleteObject.Click += new System.EventHandler(this.objs_DeleteObject_Click);
             // 
             // list_allObjects
             // 
@@ -647,6 +642,7 @@
             this.list_allObjects.Name = "list_allObjects";
             this.list_allObjects.Size = new System.Drawing.Size(209, 225);
             this.list_allObjects.TabIndex = 0;
+            this.list_allObjects.SelectedIndexChanged += new System.EventHandler(this.list_allObjects_SelectedIndexChanged);
             // 
             // tabPage3
             // 
@@ -661,6 +657,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.env_Restitution);
+            this.groupBox1.Controls.Add(label12);
             this.groupBox1.Controls.Add(this.check_Collisions);
             this.groupBox1.Controls.Add(this.button_applyEnv);
             this.groupBox1.Controls.Add(label11);
@@ -685,7 +683,7 @@
             // check_Collisions
             // 
             this.check_Collisions.AutoSize = true;
-            this.check_Collisions.Location = new System.Drawing.Point(9, 137);
+            this.check_Collisions.Location = new System.Drawing.Point(9, 159);
             this.check_Collisions.Name = "check_Collisions";
             this.check_Collisions.Size = new System.Drawing.Size(96, 17);
             this.check_Collisions.TabIndex = 14;
@@ -705,21 +703,27 @@
             // env_StepSize
             // 
             this.env_StepSize.Location = new System.Drawing.Point(122, 103);
+            this.env_StepSize.Mask = "0999";
             this.env_StepSize.Name = "env_StepSize";
+            this.env_StepSize.PromptChar = ' ';
             this.env_StepSize.Size = new System.Drawing.Size(51, 20);
             this.env_StepSize.TabIndex = 10;
             // 
             // env_Aether
             // 
             this.env_Aether.Location = new System.Drawing.Point(122, 79);
+            this.env_Aether.Mask = "990.999";
             this.env_Aether.Name = "env_Aether";
+            this.env_Aether.PromptChar = ' ';
             this.env_Aether.Size = new System.Drawing.Size(51, 20);
             this.env_Aether.TabIndex = 7;
             // 
             // env_Resolution
             // 
             this.env_Resolution.Location = new System.Drawing.Point(122, 53);
+            this.env_Resolution.Mask = "099";
             this.env_Resolution.Name = "env_Resolution";
+            this.env_Resolution.PromptChar = ' ';
             this.env_Resolution.Size = new System.Drawing.Size(51, 20);
             this.env_Resolution.TabIndex = 3;
             // 
@@ -727,12 +731,38 @@
             // 
             this.env_G.Location = new System.Drawing.Point(122, 27);
             this.env_G.Name = "env_G";
+            this.env_G.PromptChar = ' ';
             this.env_G.Size = new System.Drawing.Size(51, 20);
             this.env_G.TabIndex = 0;
             // 
-            // BS_SimObject
+            // env_Restitution
             // 
-            this.BS_SimObject.DataSource = typeof(PhysLib.SimObject);
+            this.env_Restitution.Location = new System.Drawing.Point(122, 129);
+            this.env_Restitution.Mask = "0.0";
+            this.env_Restitution.Name = "env_Restitution";
+            this.env_Restitution.PromptChar = ' ';
+            this.env_Restitution.Size = new System.Drawing.Size(51, 20);
+            this.env_Restitution.TabIndex = 16;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(6, 132);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(103, 13);
+            label12.TabIndex = 15;
+            label12.Text = "Koeficient restituce :";
+            // 
+            // button_ResetObj
+            // 
+            this.button_ResetObj.Enabled = false;
+            this.button_ResetObj.Location = new System.Drawing.Point(6, 176);
+            this.button_ResetObj.Name = "button_ResetObj";
+            this.button_ResetObj.Size = new System.Drawing.Size(75, 20);
+            this.button_ResetObj.TabIndex = 29;
+            this.button_ResetObj.Text = "Resetovat";
+            this.button_ResetObj.UseVisualStyleBackColor = true;
+            this.button_ResetObj.Click += new System.EventHandler(this.button_ResetObj_Click);
             // 
             // Toolbox
             // 
@@ -761,7 +791,6 @@
             this.tabPage3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BS_SimObject)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -791,12 +820,10 @@
         private System.Windows.Forms.Button button_applyEnv;
         private System.Windows.Forms.MaskedTextBox env_StepSize;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button objs_MoveSelected;
+        private System.Windows.Forms.Button objs_SelectObject;
+        private System.Windows.Forms.Button objs_DeleteObject;
         private System.Windows.Forms.ListBox list_allObjects;
-        private System.Windows.Forms.BindingSource BS_SimObject;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ComboBox prop_comboPropMaterials;
         private System.Windows.Forms.Button button_SetProps;
@@ -814,5 +841,7 @@
         public System.Windows.Forms.Label prop_potentialEnergy;
         public System.Windows.Forms.Label prop_rotationalEnergy;
         private System.Windows.Forms.RadioButton radio_rotationalEnergy;
+        private System.Windows.Forms.MaskedTextBox env_Restitution;
+        private System.Windows.Forms.Button button_ResetObj;
     }
 }

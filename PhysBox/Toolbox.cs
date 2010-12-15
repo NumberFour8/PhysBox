@@ -153,7 +153,9 @@ namespace PhysBox
             MyOwner.MyWorld.Resolution = Double.Parse(env_Resolution.Text);
             MyOwner.MyWorld.Aether = Double.Parse(env_Aether.Text);
             MyOwner.MyWorld.Gravity = MyOwner.MyWorld.Convert(new Vector(0, -Double.Parse(env_G.Text), 0), ConversionType.MetersToPixels);
-            MyOwner.MyWorld.Solver.Enabled = check_Collisions.Checked; 
+            MyOwner.MyWorld.Solver.Enabled = check_Collisions.Checked;
+            MyOwner.MyWorld.Solver.E = Double.Parse(env_Restitution.Text);
+            MyOwner.MyWorld.Delta = Double.Parse(env_StepSize.Text) / 1000;
         }
 
         private void tab_Toolbox_Selected(object sender, TabControlEventArgs e)
@@ -164,9 +166,50 @@ namespace PhysBox
                 env_G.Text = (-MyOwner.MyWorld.Convert(MyOwner.MyWorld.Gravity, ConversionType.PixelsToMeters).Magnitude).ToString();
                 env_Resolution.Text = MyOwner.MyWorld.Resolution.ToString();
                 check_Collisions.Checked = MyOwner.MyWorld.Solver.Enabled;
+                env_StepSize.Text = (1000*MyOwner.MyWorld.Delta).ToString();
+                env_Restitution.Text = MyOwner.MyWorld.Solver.E.ToString();
             }
             else if (tab_Toolbox.SelectedIndex == 2)
                 RefreshObjects();
+        }
+
+        public void DoSelectByName(string ObjName)
+        {
+            var sq = from obj in MyOwner.MyWorld.Objects where ((GraphicObject)obj.Model).Name == ObjName select ((GraphicObject)obj.Model).WorldIndex;
+            if (sq.Count() == 0) return;
+            MyOwner.Selected = MyOwner.MyWorld.Objects[sq.First()];
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DoSelectByName(list_allObjects.SelectedItem.ToString());
+            MyOwner.přemístitSemToolStripMenuItem_Click(sender, e);
+        }
+
+        private void list_allObjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            objs_DeleteObject.Enabled = objs_MoveSelected.Enabled = objs_SelectObject.Enabled = list_allObjects.SelectedIndex > -1;
+        }
+
+        private void objs_DeleteObject_Click(object sender, EventArgs e)
+        {
+            string ObjName = list_allObjects.SelectedItem.ToString();
+            var sq = from obj in MyOwner.MyWorld.Objects where ((GraphicObject)obj.Model).Name == ObjName select ((GraphicObject)obj.Model).WorldIndex;
+            if (sq.Count() == 0) return;
+            if (MessageBox.Show(String.Format("Opravdu chcete těleso {0} odstranit?", ObjName), "Odstranit", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                == System.Windows.Forms.DialogResult.Yes)            
+              MyOwner.MyWorld.DeleteObject(sq.First());
+        }
+
+        private void objs_SelectObject_Click(object sender, EventArgs e)
+        {
+            DoSelectByName(list_allObjects.SelectedItem.ToString());
+        }
+
+        private void button_ResetObj_Click(object sender, EventArgs e)
+        {
+            if (MyOwner.Selected != null)
+                MyOwner.Selected.ResetAll();
         }
 
      }

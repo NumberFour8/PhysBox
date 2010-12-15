@@ -70,7 +70,7 @@ namespace PhysLib
         /// Vytvoří fyzikální svět
         /// </summary>
         /// <param name="WorldOrientation">Orientace os zobrazovacího zařízení</param>
-        /// <param name="GravityAccel">Gravitační zrychlení</param>
+        /// <param name="GravityAccel">Gravitační zrychlení (v jednotkách SI)</param>
         /// <param name="WorldConstraints">Poloměr světa v pixelech (maximální vzdálnost tělesa od počátku souřadnic)</param>
         /// <param name="WorldResolution">Počet pixelů který představuje jeden fyzický metr</param>
         public World(Matrix WorldOrientation, Vector GravityAccel, double WorldDiameter, double WorldResolution = 30)
@@ -86,7 +86,8 @@ namespace PhysLib
 
             Gravity = Vector.ToBasis(b, GravityAccel) * WorldResolution;
             simulationTime = 0;
-            r = WorldResolution;            
+            r = WorldResolution;
+            Delta = 0.01;
             paused = false;
         }
 
@@ -122,7 +123,7 @@ namespace PhysLib
         public double Resolution { get { return r; } set { r = value; } }
 
         /// <summary>
-        /// Třídá pro řešení kolizí
+        /// Třída pro vyhodnocení kolizí
         /// </summary>
         public CollisionSolver Solver
         {
@@ -179,7 +180,7 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Disipační konstanta
+        /// Hustota prostředí (v jednotkách SI)
         /// </summary>
         public double Aether
         {
@@ -222,6 +223,32 @@ namespace PhysLib
             lock (SimLock)
             {
                 Objs.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Smaže těleso s daným indexem
+        /// </summary>
+        /// <param name="Index">Index tělesa</param>
+        public void DeleteObject(int Index)
+        {
+            if (Index < 0 || Index >= Objs.Count) throw new IndexOutOfRangeException();
+            lock (SimLock)
+            {
+                Objs.RemoveAt(Index);
+            }
+        }
+
+        /// <summary>
+        /// Smaže silové pole s daným indexem
+        /// </summary>
+        /// <param name="Index">Index pole</param>
+        public void DeleteField(int Index)
+        {
+            if (Index < 0 || Index >= Fields.Count) throw new IndexOutOfRangeException();
+            lock (SimLock)
+            {
+                Fields.RemoveAt(Index);
             }
         }
 
@@ -323,12 +350,19 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Velikost kroku simulace (v sekundách)
+        /// </summary>
+        public double Delta
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Provede simulační krok
         /// </summary>
         public void Tick()
         {
-            double Delta = 0.01;
-
             if (!paused)
             {
                 lock (SimLock)
@@ -368,6 +402,8 @@ namespace PhysLib
 
                         foreach (CollisionReport rep in csolve.DetectCollisionsFor(i))
                             csolve.SolveCollision(rep);
+
+                        if (PhysObjs[i].IsStatic) PhysObjs[i].ResetAll();
                     }
                 }
             }

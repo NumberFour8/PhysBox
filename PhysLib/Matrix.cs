@@ -1,5 +1,4 @@
 ﻿using System;
-using AlgLib;
 
 namespace PhysLib
 {
@@ -198,24 +197,6 @@ namespace PhysLib
             t = new double[cols * rows];
             for (int i = 0; i < rows*cols; i++)            
                 t[i] = M[i];            
-        }
-
-        /// <summary>
-        /// Spočítá determinant matice
-        /// </summary>
-        public double Determinant
-        {
-            get 
-            { 
-                double[,] d = new double[rows,cols];
-                for (int i = 0;i < rows;i++)
-                {
-                    for (int j = 0;j < cols;j++)
-                       d[i,j] = this[i,j];
-                }
-
-                return alglib.rmatrixdet(d);  
-            }
         }
 
         /// <summary>
