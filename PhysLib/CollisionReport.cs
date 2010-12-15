@@ -134,7 +134,7 @@ namespace PhysLib
                 }
                 else throw new ArgumentException();
             }
-            else throw new ArgumentException();
+            else return;
             GetContactPairs(c1, c2);
         }
 

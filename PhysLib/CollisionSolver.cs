@@ -119,7 +119,7 @@ namespace PhysLib
         /// <returns>Výčet reportů o kolizích</returns>
         public IEnumerable DetectCollisionsFor(int ObjectIndex)
         {
-            if (!Enabled) yield break;
+            if (!Enabled || w.CountObjects < 2) yield break;
             for (int i = 0; i < w.CountObjects; i++)
             {
                 if (i == ObjectIndex) continue;

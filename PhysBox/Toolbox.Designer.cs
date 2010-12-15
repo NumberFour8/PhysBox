@@ -45,6 +45,7 @@
             this.tool_newObj = new System.Windows.Forms.TabPage();
             this.newObj_Insert = new System.Windows.Forms.Button();
             this.newObj = new System.Windows.Forms.GroupBox();
+            this.newObj_Static = new System.Windows.Forms.CheckBox();
             this.createGeometry = new System.Windows.Forms.Button();
             this.newObj_Enabled = new System.Windows.Forms.CheckBox();
             this.newObj_AutoName = new System.Windows.Forms.CheckBox();
@@ -59,6 +60,7 @@
             this.prop_textObjDrag = new System.Windows.Forms.MaskedTextBox();
             this.prop_comboPropMaterials = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button_ResetObj = new System.Windows.Forms.Button();
             this.prop_rotationalEnergy = new System.Windows.Forms.Label();
             this.radio_rotationalEnergy = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -78,15 +80,13 @@
             this.list_allObjects = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.env_Restitution = new System.Windows.Forms.MaskedTextBox();
             this.check_Collisions = new System.Windows.Forms.CheckBox();
             this.button_applyEnv = new System.Windows.Forms.Button();
             this.env_StepSize = new System.Windows.Forms.MaskedTextBox();
             this.env_Aether = new System.Windows.Forms.MaskedTextBox();
             this.env_Resolution = new System.Windows.Forms.MaskedTextBox();
             this.env_G = new System.Windows.Forms.MaskedTextBox();
-            this.env_Restitution = new System.Windows.Forms.MaskedTextBox();
-            this.button_ResetObj = new System.Windows.Forms.Button();
-            this.newObj_Static = new System.Windows.Forms.CheckBox();
             label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label19 = new System.Windows.Forms.Label();
@@ -225,6 +225,15 @@
             label4.TabIndex = 1;
             label4.Text = "Gravitační zrychlení :";
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(6, 132);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(103, 13);
+            label12.TabIndex = 15;
+            label12.Text = "Koeficient restituce :";
+            // 
             // tab_Toolbox
             // 
             this.tab_Toolbox.Controls.Add(this.tool_newObj);
@@ -283,6 +292,16 @@
             this.newObj.TabIndex = 4;
             this.newObj.TabStop = false;
             this.newObj.Text = "Parametry";
+            // 
+            // newObj_Static
+            // 
+            this.newObj_Static.AutoSize = true;
+            this.newObj_Static.Location = new System.Drawing.Point(14, 252);
+            this.newObj_Static.Name = "newObj_Static";
+            this.newObj_Static.Size = new System.Drawing.Size(65, 17);
+            this.newObj_Static.TabIndex = 11;
+            this.newObj_Static.Text = "Statické";
+            this.newObj_Static.UseVisualStyleBackColor = true;
             // 
             // createGeometry
             // 
@@ -448,6 +467,17 @@
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Hodnoty";
+            // 
+            // button_ResetObj
+            // 
+            this.button_ResetObj.Enabled = false;
+            this.button_ResetObj.Location = new System.Drawing.Point(6, 176);
+            this.button_ResetObj.Name = "button_ResetObj";
+            this.button_ResetObj.Size = new System.Drawing.Size(75, 20);
+            this.button_ResetObj.TabIndex = 29;
+            this.button_ResetObj.Text = "Resetovat";
+            this.button_ResetObj.UseVisualStyleBackColor = true;
+            this.button_ResetObj.Click += new System.EventHandler(this.button_ResetObj_Click);
             // 
             // prop_rotationalEnergy
             // 
@@ -655,6 +685,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parametry simulace";
             // 
+            // env_Restitution
+            // 
+            this.env_Restitution.Location = new System.Drawing.Point(122, 129);
+            this.env_Restitution.Mask = "0.0";
+            this.env_Restitution.Name = "env_Restitution";
+            this.env_Restitution.PromptChar = ' ';
+            this.env_Restitution.Size = new System.Drawing.Size(51, 20);
+            this.env_Restitution.TabIndex = 16;
+            // 
             // check_Collisions
             // 
             this.check_Collisions.AutoSize = true;
@@ -710,45 +749,6 @@
             this.env_G.Size = new System.Drawing.Size(51, 20);
             this.env_G.TabIndex = 0;
             // 
-            // env_Restitution
-            // 
-            this.env_Restitution.Location = new System.Drawing.Point(122, 129);
-            this.env_Restitution.Mask = "0.0";
-            this.env_Restitution.Name = "env_Restitution";
-            this.env_Restitution.PromptChar = ' ';
-            this.env_Restitution.Size = new System.Drawing.Size(51, 20);
-            this.env_Restitution.TabIndex = 16;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new System.Drawing.Point(6, 132);
-            label12.Name = "label12";
-            label12.Size = new System.Drawing.Size(103, 13);
-            label12.TabIndex = 15;
-            label12.Text = "Koeficient restituce :";
-            // 
-            // button_ResetObj
-            // 
-            this.button_ResetObj.Enabled = false;
-            this.button_ResetObj.Location = new System.Drawing.Point(6, 176);
-            this.button_ResetObj.Name = "button_ResetObj";
-            this.button_ResetObj.Size = new System.Drawing.Size(75, 20);
-            this.button_ResetObj.TabIndex = 29;
-            this.button_ResetObj.Text = "Resetovat";
-            this.button_ResetObj.UseVisualStyleBackColor = true;
-            this.button_ResetObj.Click += new System.EventHandler(this.button_ResetObj_Click);
-            // 
-            // newObj_Static
-            // 
-            this.newObj_Static.AutoSize = true;
-            this.newObj_Static.Location = new System.Drawing.Point(14, 252);
-            this.newObj_Static.Name = "newObj_Static";
-            this.newObj_Static.Size = new System.Drawing.Size(65, 17);
-            this.newObj_Static.TabIndex = 11;
-            this.newObj_Static.Text = "Statické";
-            this.newObj_Static.UseVisualStyleBackColor = true;
-            // 
             // Toolbox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -760,6 +760,7 @@
             this.Name = "Toolbox";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Nástroje";
+            this.Load += new System.EventHandler(this.Toolbox_Load);
             this.tab_Toolbox.ResumeLayout(false);
             this.tool_newObj.ResumeLayout(false);
             this.newObj.ResumeLayout(false);

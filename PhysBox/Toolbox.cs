@@ -16,8 +16,7 @@ namespace PhysBox
 
         public Toolbox()
         {
-            InitializeComponent();            
-            ObjectCounter = 0;
+            InitializeComponent();
 
             if (!Directory.Exists("objects")) Directory.CreateDirectory("objects");
             RefreshGeometries();
@@ -168,7 +167,7 @@ namespace PhysBox
                 env_G.Text = (-MyOwner.MyWorld.Convert(MyOwner.MyWorld.Gravity, ConversionType.PixelsToMeters).Magnitude).ToString();
                 env_Resolution.Text = MyOwner.MyWorld.Resolution.ToString();
                 check_Collisions.Checked = MyOwner.MyWorld.Solver.Enabled;
-                env_StepSize.Text = (1000*MyOwner.MyWorld.Delta).ToString();
+                env_StepSize.Text = (1000 * MyOwner.MyWorld.Delta).ToString();
                 env_Restitution.Text = MyOwner.MyWorld.Solver.E.ToString();
             }
             else if (tab_Toolbox.SelectedIndex == 2)
@@ -199,8 +198,11 @@ namespace PhysBox
             var sq = from obj in MyOwner.MyWorld.Objects where ((GraphicObject)obj.Model).Name == ObjName select ((GraphicObject)obj.Model).WorldIndex;
             if (sq.Count() == 0) return;
             if (MessageBox.Show(String.Format("Opravdu chcete těleso {0} odstranit?", ObjName), "Odstranit", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                == System.Windows.Forms.DialogResult.Yes)            
-              MyOwner.MyWorld.DeleteObject(sq.First());
+                == System.Windows.Forms.DialogResult.Yes)
+            {
+                MyOwner.MyWorld.DeleteObject(sq.First());
+                RefreshObjects();
+            }
         }
 
         private void objs_SelectObject_Click(object sender, EventArgs e)
@@ -212,6 +214,11 @@ namespace PhysBox
         {
             if (MyOwner.Selected != null)
                 MyOwner.Selected.ResetAll();
+        }
+
+        private void Toolbox_Load(object sender, EventArgs e)
+        {
+            ObjectCounter = (int)MyOwner.MyWorld.CountObjects;
         }
 
      }

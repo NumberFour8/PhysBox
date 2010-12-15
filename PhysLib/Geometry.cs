@@ -390,10 +390,15 @@ namespace PhysLib
         /// <param name="max">Horní mez intervalu</param>
         public void ProjectToAxis(Vector Axis, ref double min, ref double max)
         {
-            min = max = Vector.Dot(Axis, (Vector)ObjectGeometry[0]);
-            for (int i = 1; i < ObjectGeometry.Length; i++)
+            PointF[] geom = null;
+            if (Convex)
+                geom = ObjectGeometry;
+            else geom = BoundingBox;
+
+            min = max = Vector.Dot(Axis, (Vector)geom[0]);
+            for (int i = 1; i < geom.Length; i++)
             {
-                double d = Vector.Dot(Axis, (Vector)ObjectGeometry[i]);
+                double d = Vector.Dot(Axis, (Vector)geom[i]);
                 if (d < min)
                     min = d;
                 else if (d > max)
@@ -403,22 +408,27 @@ namespace PhysLib
 
         internal PointF[] SupportPoints(Vector Axis)
         {
+            PointF[] geom = null;
+            if (Convex)
+                geom = ObjectGeometry;
+            else geom = BoundingBox;            
+            
             double min = -1.0f;
             const double threshold = 1.0E-1;            
-            int num = ObjectGeometry.Length;
+            int num = geom.Length;
 
             ArrayList sp = new ArrayList();
 
             for (int i = 0; i < num; i++)
             {
-                double t = Vector.Dot(Axis,(Vector)ObjectGeometry[i]);
+                double t = Vector.Dot(Axis,(Vector)geom[i]);
                 if (t < min || i == 0)
                     min = t;
             }
 
             for (int i = 0; i < num; i++)
             {
-                double t = Vector.Dot(Axis,(Vector)ObjectGeometry[i]);
+                double t = Vector.Dot(Axis,(Vector)geom[i]);
 
                 if (t < min + threshold)
                 {
