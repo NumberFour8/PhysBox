@@ -76,22 +76,25 @@ namespace PhysLib
         public CollisionReport ObjectsCollide(SimObject ObjectA,SimObject ObjectB)
         {
             CollisionReport Ret = new CollisionReport(ObjectA,ObjectB);
-            int Count = ObjectA.Model.ObjectGeometry.Length + ObjectB.Model.ObjectGeometry.Length;
+            PointF[] geomA = ObjectA.Model.ObjectGeometry;
+            PointF[] geomB = ObjectB.Model.ObjectGeometry;
+
+            int Count = geomA.Length + geomB.Length;
             for (int i = 0, j; i < Count; i++)
             {
                 Vector Axis = null;
-                if (i < ObjectA.Model.ObjectGeometry.Length)
+                if (i < geomA.Length)
                 {
-                    j = (i == ObjectA.Model.ObjectGeometry.Length - 1) ? 0 : i + 1;
-                    Vector v1 = (Vector)ObjectA.Model.ObjectGeometry[i];
-                    Vector v2 = (Vector)ObjectA.Model.ObjectGeometry[j];
+                    j = (i == geomA.Length - 1) ? 0 : i + 1;
+                    Vector v1 = (Vector)geomA[i];
+                    Vector v2 = (Vector)geomA[j];
                     Axis = (v1 - v2).Perp();
                 }
                 else
                 {
-                    j = (i == Count - 1) ? ObjectA.Model.ObjectGeometry.Length : i + 1;
-                    Vector v1 = (Vector)ObjectB.Model.ObjectGeometry[i - ObjectA.Model.ObjectGeometry.Length];
-                    Vector v2 = (Vector)ObjectB.Model.ObjectGeometry[j - ObjectA.Model.ObjectGeometry.Length];
+                    j = (i == Count - 1) ? geomA.Length : i + 1;
+                    Vector v1 = (Vector)geomB[i - geomA.Length];
+                    Vector v2 = (Vector)geomB[j - geomA.Length];
                     Axis = (v1 - v2).Perp();
                 }
 
@@ -140,7 +143,7 @@ namespace PhysLib
             Report.A.LinearVelocity += N * (Impulse / Report.A.Mass);
             Report.A.AngularVelocity[2] += Vector.Dot(N, AP) * (Impulse / Report.A.MomentOfInertia);
 
-            Report.B.Model.Position += -Report.MTD * Report.B.Mass * C; ;
+            Report.B.Model.Position += -Report.MTD * Report.B.Mass * C;
             Report.B.LinearVelocity += -N * (Impulse / Report.B.Mass);
             Report.B.AngularVelocity[2] += Vector.Dot(N, BP) * (Impulse / Report.B.MomentOfInertia);
 

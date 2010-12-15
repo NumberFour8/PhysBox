@@ -403,7 +403,7 @@ namespace PhysLib
                         foreach (CollisionReport rep in csolve.DetectCollisionsFor(i))
                             csolve.SolveCollision(rep);
 
-                        if (PhysObjs[i].IsStatic) PhysObjs[i].ResetAll();
+                        if (PhysObjs[i].Static) PhysObjs[i].ResetAll();
                     }
                 }
             }

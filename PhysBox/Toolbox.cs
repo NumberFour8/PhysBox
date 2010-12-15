@@ -142,6 +142,7 @@ namespace PhysBox
 
             SimObject MyNewObject = new SimObject(Placing, double.Parse(newobj_Mass.Text) / 1000);
             MyNewObject.Enabled = newObj_Enabled.Checked;
+            MyNewObject.Static = newObj_Static.Checked;
 
             MyOwner.AddObject(MyNewObject);
 

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label2;
             System.Windows.Forms.Label label19;
@@ -44,7 +43,6 @@
             System.Windows.Forms.Label label12;
             this.tab_Toolbox = new System.Windows.Forms.TabControl();
             this.tool_newObj = new System.Windows.Forms.TabPage();
-            this.newobj_Saved = new System.Windows.Forms.ComboBox();
             this.newObj_Insert = new System.Windows.Forms.Button();
             this.newObj = new System.Windows.Forms.GroupBox();
             this.createGeometry = new System.Windows.Forms.Button();
@@ -88,7 +86,7 @@
             this.env_G = new System.Windows.Forms.MaskedTextBox();
             this.env_Restitution = new System.Windows.Forms.MaskedTextBox();
             this.button_ResetObj = new System.Windows.Forms.Button();
-            label1 = new System.Windows.Forms.Label();
+            this.newObj_Static = new System.Windows.Forms.CheckBox();
             label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label19 = new System.Windows.Forms.Label();
@@ -114,17 +112,6 @@
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(7, 300);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(139, 13);
-            label1.TabIndex = 6;
-            label1.Text = "nebo předdefinovaný model";
             // 
             // label3
             // 
@@ -253,8 +240,6 @@
             // 
             // tool_newObj
             // 
-            this.tool_newObj.Controls.Add(this.newobj_Saved);
-            this.tool_newObj.Controls.Add(label1);
             this.tool_newObj.Controls.Add(this.newObj_Insert);
             this.tool_newObj.Controls.Add(this.newObj);
             this.tool_newObj.Location = new System.Drawing.Point(4, 22);
@@ -264,17 +249,6 @@
             this.tool_newObj.TabIndex = 0;
             this.tool_newObj.Text = "Nový objekt";
             this.tool_newObj.UseVisualStyleBackColor = true;
-            // 
-            // newobj_Saved
-            // 
-            this.newobj_Saved.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.newobj_Saved.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.newobj_Saved.FormattingEnabled = true;
-            this.newobj_Saved.Location = new System.Drawing.Point(7, 314);
-            this.newobj_Saved.Name = "newobj_Saved";
-            this.newobj_Saved.Size = new System.Drawing.Size(133, 21);
-            this.newobj_Saved.TabIndex = 7;
             // 
             // newObj_Insert
             // 
@@ -293,6 +267,7 @@
             this.newObj.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.newObj.Controls.Add(this.newObj_Static);
             this.newObj.Controls.Add(this.createGeometry);
             this.newObj.Controls.Add(this.newObj_Enabled);
             this.newObj.Controls.Add(this.newObj_AutoName);
@@ -764,6 +739,16 @@
             this.button_ResetObj.UseVisualStyleBackColor = true;
             this.button_ResetObj.Click += new System.EventHandler(this.button_ResetObj_Click);
             // 
+            // newObj_Static
+            // 
+            this.newObj_Static.AutoSize = true;
+            this.newObj_Static.Location = new System.Drawing.Point(14, 252);
+            this.newObj_Static.Name = "newObj_Static";
+            this.newObj_Static.Size = new System.Drawing.Size(65, 17);
+            this.newObj_Static.TabIndex = 11;
+            this.newObj_Static.Text = "Statické";
+            this.newObj_Static.UseVisualStyleBackColor = true;
+            // 
             // Toolbox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -777,7 +762,6 @@
             this.Text = "Nástroje";
             this.tab_Toolbox.ResumeLayout(false);
             this.tool_newObj.ResumeLayout(false);
-            this.tool_newObj.PerformLayout();
             this.newObj.ResumeLayout(false);
             this.newObj.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -800,7 +784,6 @@
         private System.Windows.Forms.TabControl tab_Toolbox;
         private System.Windows.Forms.TabPage tool_newObj;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ComboBox newobj_Saved;
         private System.Windows.Forms.GroupBox newObj;
         private System.Windows.Forms.CheckBox newObj_Enabled;
         private System.Windows.Forms.CheckBox newObj_AutoName;
@@ -843,5 +826,6 @@
         private System.Windows.Forms.RadioButton radio_rotationalEnergy;
         private System.Windows.Forms.MaskedTextBox env_Restitution;
         private System.Windows.Forms.Button button_ResetObj;
+        private System.Windows.Forms.CheckBox newObj_Static;
     }
 }

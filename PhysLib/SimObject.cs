@@ -28,7 +28,7 @@ namespace PhysLib
 
             Enabled = true;
             NoTranslations = false;
-            IsStatic = false;
+            Static = false;
 
             // Předpočítej část momentu setrvačnosti
             double denom = 0,nom = 0,factor = 0;
@@ -230,7 +230,7 @@ namespace PhysLib
         /// <summary>
         /// Indikuje, zda je těleso nehybné (např. zeď)
         /// </summary>
-        public bool IsStatic
+        public bool Static
         {
             get; set;
         }

@@ -123,7 +123,7 @@ namespace PhysBox
                 manipulateObj_SetAxis.Checked = SetAxis;
                 manipulateObj_ApplyForce.Checked = AddForce;
                 manipulateObj_Translate.Checked = Moving;
-                manipulateObj_IsStatic.Checked = Selected.IsStatic;
+                manipulateObj_IsStatic.Checked = Selected.Static;
 
                 manipulateObj.Enabled = true;
                 manipulateObj.Show(new Point(e.X, e.Y));
@@ -251,7 +251,7 @@ namespace PhysBox
         private void statickýToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
             if (Selected != null)
-                Selected.IsStatic = manipulateObj_IsStatic.Checked;
+                Selected.Static = manipulateObj_IsStatic.Checked;
         }       
     }
 }
