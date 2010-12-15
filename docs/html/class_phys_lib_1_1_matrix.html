@@ -1,0 +1,563 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>PhysLib: Dokumentace třídy PhysLib.Matrix</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Generováno programem Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Třídy</span></a></li>
+      <li><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="annotated.html"><span>Seznam&nbsp;tříd</span></a></li>
+      <li><a href="functions.html"><span>Seznam&nbsp;členů&nbsp;tříd</span></a></li>
+    </ul>
+  </div>
+  <div class="navpath"><b>PhysLib</b>.<a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a>
+  </div>
+</div>
+<div class="contents">
+<h1>Dokumentace třídy PhysLib.Matrix</h1><!-- doxytag: class="PhysLib::Matrix" -->
+<p>Reprezentuje matici.  
+<a href="#_details">...</a></p>
+
+<p><a href="class_phys_lib_1_1_matrix-members.html">Seznam všech členů.</a></p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="2"><h2>Veřejné metody</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#a37a65f4980a277dfcf681e0d840dbaaf">Matrix</a> (int NumRows, int NumColumns)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Vytvoří matici MxN a vyplní ji nulami.  <a href="#a37a65f4980a277dfcf681e0d840dbaaf"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#ae7fdb61f618449d10e65a36829c733af">Matrix</a> (int NumRows, int NumColumns, params double[] Values)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Vytvoří matici MxN a vyplní ji danými hodnotami.  <a href="#ae7fdb61f618449d10e65a36829c733af"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#a515d9347b7f898c6d41bf89ee312dc8e">Matrix</a> (<a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a> Clone)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Vytvoří matici zkopírováním jiné.  <a href="#a515d9347b7f898c6d41bf89ee312dc8e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#a7ff47e2d6afe15ca794ed788d1d5abd8">Matrix</a> (MatrixInitType Type, params <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>[] Vectors)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Vytvoří matici pomocí vektorů.  <a href="#a7ff47e2d6afe15ca794ed788d1d5abd8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#aa3da2ebf3f67755c5b4471db1c39c72a">CopyFrom</a> (<a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a> M)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Zkopíruje prvky matice z jiné.  <a href="#aa3da2ebf3f67755c5b4471db1c39c72a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#a1ef336d3fccb7f06e3b0ba6362a7efaa">ToVector</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Převede matici o jednom řádku na vektor.  <a href="#a1ef336d3fccb7f06e3b0ba6362a7efaa"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#ac3319bdfdaffa25b01323234c2204d50">GetRow</a> (int Row)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Získá řádek matice jako vektor.  <a href="#ac3319bdfdaffa25b01323234c2204d50"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#a466c89453124952055d1065e6ad6fd1d">GetColumn</a> (int Column)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Získá sloupec matice jako vektor.  <a href="#a466c89453124952055d1065e6ad6fd1d"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Statické veřejné metody</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a41b4e91c026914ad0e99337e451cce2c"></a><!-- doxytag: member="PhysLib::Matrix::operator+" ref="a41b4e91c026914ad0e99337e451cce2c" args="(Matrix A, Matrix B)" -->
+static <a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a>&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator+</b> (<a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a> A, <a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a> B)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa7c6a8f2a75d1b6373d73d080491e6d5"></a><!-- doxytag: member="PhysLib::Matrix::operator&#45;" ref="aa7c6a8f2a75d1b6373d73d080491e6d5" args="(Matrix A, Matrix B)" -->
+static <a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a>&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator-</b> (<a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a> A, <a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a> B)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a527beead7ef0cec9cd307e54d442e320"></a><!-- doxytag: member="PhysLib::Matrix::operator*" ref="a527beead7ef0cec9cd307e54d442e320" args="(Matrix A, Matrix B)" -->
+static <a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a>&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (<a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a> A, <a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a> B)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#a0451c7cccaf93c4d4d646ff2f76d647d">Transpose</a> (<a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a> M)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Transponuje matici danou matici.  <a href="#a0451c7cccaf93c4d4d646ff2f76d647d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#ac948b1596a429e81eeca5f41fda0d80f">Epsilon</a> (int i, int j, int k)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Získá prvek totálně antisymetrického tenzoru (Levi-Civitův symbol).  <a href="#ac948b1596a429e81eeca5f41fda0d80f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#a266f128f9f1f9fe8824d8d8a8da21211">Delta</a> (int i, int j)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Kronekerovo delta.  <a href="#a266f128f9f1f9fe8824d8d8a8da21211"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Vlastnosti</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#aa2dfb32e047f770ac5c3ed40c094133b">this</a> [int i, int j]<code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Získá/změní prvek matice na daných souřadnicích.  <a href="#aa2dfb32e047f770ac5c3ed40c094133b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#a97928bb45e05e37be3ede6cbe07dda91">Rows</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Počet řádků matice.  <a href="#a97928bb45e05e37be3ede6cbe07dda91"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#a392dbd4febf5530d43d22986caa74b86">Columns</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Počet sloupců matice.  <a href="#a392dbd4febf5530d43d22986caa74b86"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#a16843ba1338978ac21241a8c2947e011">Dimension</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Dimenze matice.  <a href="#a16843ba1338978ac21241a8c2947e011"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_matrix.html#a05a68cc4da082ba7a3b64fc2c3ea285d">Diagonal</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indikuje zda je daná matice v diagonálním tvaru.  <a href="#a05a68cc4da082ba7a3b64fc2c3ea285d"></a><br/></td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Detailní popis</h2>
+<p>Reprezentuje matici. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00013">13</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+<hr/><h2>Dokumentace konstruktoru a destruktoru</h2>
+<a class="anchor" id="a37a65f4980a277dfcf681e0d840dbaaf"></a><!-- doxytag: member="PhysLib::Matrix::Matrix" ref="a37a65f4980a277dfcf681e0d840dbaaf" args="(int NumRows, int NumColumns)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PhysLib.Matrix.Matrix </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>NumRows</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>NumColumns</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vytvoří matici MxN a vyplní ji nulami. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>NumRows</em>&nbsp;</td><td>Počet M řádku</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>NumColumns</em>&nbsp;</td><td>Počet N sloupců</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00024">24</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae7fdb61f618449d10e65a36829c733af"></a><!-- doxytag: member="PhysLib::Matrix::Matrix" ref="ae7fdb61f618449d10e65a36829c733af" args="(int NumRows, int NumColumns, params double[] Values)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PhysLib.Matrix.Matrix </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>NumRows</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>NumColumns</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">params double[]&nbsp;</td>
+          <td class="paramname"> <em>Values</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vytvoří matici MxN a vyplní ji danými hodnotami. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>NumRows</em>&nbsp;</td><td>Počet M řádků</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>NumColumns</em>&nbsp;</td><td>Počet N sloupců</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>Values</em>&nbsp;</td><td>Hodnoty</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00043">43</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a515d9347b7f898c6d41bf89ee312dc8e"></a><!-- doxytag: member="PhysLib::Matrix::Matrix" ref="a515d9347b7f898c6d41bf89ee312dc8e" args="(Matrix Clone)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PhysLib.Matrix.Matrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a>&nbsp;</td>
+          <td class="paramname"> <em>Clone</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vytvoří matici zkopírováním jiné. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>Clone</em>&nbsp;</td><td>Vzorová matice</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00064">64</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7ff47e2d6afe15ca794ed788d1d5abd8"></a><!-- doxytag: member="PhysLib::Matrix::Matrix" ref="a7ff47e2d6afe15ca794ed788d1d5abd8" args="(MatrixInitType Type, params Vector[] Vectors)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PhysLib.Matrix.Matrix </td>
+          <td>(</td>
+          <td class="paramtype">MatrixInitType&nbsp;</td>
+          <td class="paramname"> <em>Type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">params <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>[]&nbsp;</td>
+          <td class="paramname"> <em>Vectors</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vytvoří matici pomocí vektorů. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>Type</em>&nbsp;</td><td>Typ inicializace matice vektory</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>Vectors</em>&nbsp;</td><td>Vektory</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00074">74</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Dokumentace k metodám</h2>
+<a class="anchor" id="aa3da2ebf3f67755c5b4471db1c39c72a"></a><!-- doxytag: member="PhysLib::Matrix::CopyFrom" ref="aa3da2ebf3f67755c5b4471db1c39c72a" args="(Matrix M)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhysLib.Matrix.CopyFrom </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a>&nbsp;</td>
+          <td class="paramname"> <em>M</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Zkopíruje prvky matice z jiné. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>M</em>&nbsp;</td><td>Vzorová matice</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00192">192</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a266f128f9f1f9fe8824d8d8a8da21211"></a><!-- doxytag: member="PhysLib::Matrix::Delta" ref="a266f128f9f1f9fe8824d8d8a8da21211" args="(int i, int j)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int PhysLib.Matrix.Delta </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>j</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Kronekerovo delta. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>i-tá souřadnice</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>j</em>&nbsp;</td><td>j-tá souřadnice</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>1 nebo 0</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00297">297</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac948b1596a429e81eeca5f41fda0d80f"></a><!-- doxytag: member="PhysLib::Matrix::Epsilon" ref="ac948b1596a429e81eeca5f41fda0d80f" args="(int i, int j, int k)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int PhysLib.Matrix.Epsilon </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>k</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Získá prvek totálně antisymetrického tenzoru (Levi-Civitův symbol). </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>i-tá součadnice</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>j</em>&nbsp;</td><td>j-tá souřadnice</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>k</em>&nbsp;</td><td>k-tá souřadnice</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Číslo -1,0 nebo 1</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00285">285</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a466c89453124952055d1065e6ad6fd1d"></a><!-- doxytag: member="PhysLib::Matrix::GetColumn" ref="a466c89453124952055d1065e6ad6fd1d" args="(int Column)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> PhysLib.Matrix.GetColumn </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>Column</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Získá sloupec matice jako vektor. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>Column</em>&nbsp;</td><td>Souřadnice sloupce</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Vektor</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00266">266</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac3319bdfdaffa25b01323234c2204d50"></a><!-- doxytag: member="PhysLib::Matrix::GetRow" ref="ac3319bdfdaffa25b01323234c2204d50" args="(int Row)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> PhysLib.Matrix.GetRow </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>Row</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Získá řádek matice jako vektor. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>Row</em>&nbsp;</td><td>Souřadnice řádku</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Vektor</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00249">249</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1ef336d3fccb7f06e3b0ba6362a7efaa"></a><!-- doxytag: member="PhysLib::Matrix::ToVector" ref="a1ef336d3fccb7f06e3b0ba6362a7efaa" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> PhysLib.Matrix.ToVector </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Převede matici o jednom řádku na vektor. </p>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Vektor</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00238">238</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0451c7cccaf93c4d4d646ff2f76d647d"></a><!-- doxytag: member="PhysLib::Matrix::Transpose" ref="a0451c7cccaf93c4d4d646ff2f76d647d" args="(Matrix M)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a> PhysLib.Matrix.Transpose </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a>&nbsp;</td>
+          <td class="paramname"> <em>M</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Transponuje matici danou matici. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>M</em>&nbsp;</td><td>Matice, která se má transponovat</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00222">222</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Dokumentace k vlastnosti</h2>
+<a class="anchor" id="a392dbd4febf5530d43d22986caa74b86"></a><!-- doxytag: member="PhysLib::Matrix::Columns" ref="a392dbd4febf5530d43d22986caa74b86" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PhysLib.Matrix.Columns<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Počet sloupců matice. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00138">138</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a05a68cc4da082ba7a3b64fc2c3ea285d"></a><!-- doxytag: member="PhysLib::Matrix::Diagonal" ref="a05a68cc4da082ba7a3b64fc2c3ea285d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PhysLib.Matrix.Diagonal<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Indikuje zda je daná matice v diagonálním tvaru. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00206">206</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a16843ba1338978ac21241a8c2947e011"></a><!-- doxytag: member="PhysLib::Matrix::Dimension" ref="a16843ba1338978ac21241a8c2947e011" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PhysLib.Matrix.Dimension<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Dimenze matice. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00146">146</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a97928bb45e05e37be3ede6cbe07dda91"></a><!-- doxytag: member="PhysLib::Matrix::Rows" ref="a97928bb45e05e37be3ede6cbe07dda91" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PhysLib.Matrix.Rows<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Počet řádků matice. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00130">130</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa2dfb32e047f770ac5c3ed40c094133b"></a><!-- doxytag: member="PhysLib::Matrix::this" ref="aa2dfb32e047f770ac5c3ed40c094133b" args="[int i, int j]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.Matrix::this<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Získá/změní prvek matice na daných souřadnicích. </p>
+<p>Získá/změní i-tý prvek matice.</p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>Souřadnice řádku</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>j</em>&nbsp;</td><td>Souřadnice sloupce</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Prvek matice</dd></dl>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>Lineární souřadnice</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Prvek matice</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="_matrix_8cs_source.html#l00110">110</a> v souboru <a class="el" href="_matrix_8cs_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<hr/>Dokumentace pro tuto třídu byla generována z následujícího souboru:<ul>
+<li>D:/Dev/PhysBox/PhysLib/<a class="el" href="_matrix_8cs_source.html">Matrix.cs</a></li>
+</ul>
+</div>
+<hr size="1"/><address style="text-align: right;"><small>Generováno Wed Dec 15 22:51:06 2010 pro projekt PhysLib programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

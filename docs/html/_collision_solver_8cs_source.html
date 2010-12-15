@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>PhysLib: Zdrojový soubor D:/Dev/PhysBox/PhysLib/CollisionSolver.cs</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Generováno programem Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+    </ul>
+  </div>
+<h1>D:/Dev/PhysBox/PhysLib/CollisionSolver.cs</h1><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 ﻿using System;
+<a name="l00002"></a>00002 <span class="keyword">using</span> System.Collections;
+<a name="l00003"></a>00003 <span class="keyword">using</span> System.Drawing;
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005 <span class="keyword">namespace </span>PhysLib
+<a name="l00006"></a>00006 {   
+<a name="l00007"></a>00007 
+<a name="l00011"></a><a class="code" href="class_phys_lib_1_1_collision_solver.html">00011</a>     <span class="keyword">public</span> sealed <span class="keyword">class </span><a class="code" href="class_phys_lib_1_1_collision_solver.html" title="Třída pro řešení kolizí.">CollisionSolver</a>
+<a name="l00012"></a>00012     {
+<a name="l00013"></a>00013         <span class="keyword">private</span> <a class="code" href="class_phys_lib_1_1_world.html" title="Reprezentuje fyzikální svět.">World</a> w;
+<a name="l00014"></a>00014         
+<a name="l00019"></a>00019         <span class="keyword">internal</span> <a class="code" href="class_phys_lib_1_1_collision_solver.html" title="Třída pro řešení kolizí.">CollisionSolver</a>(<a class="code" href="class_phys_lib_1_1_world.html" title="Reprezentuje fyzikální svět.">World</a> Reference)
+<a name="l00020"></a>00020         {
+<a name="l00021"></a>00021             w = Reference;
+<a name="l00022"></a>00022             <a class="code" href="class_phys_lib_1_1_collision_solver.html#a11437ee4e8c723458526af3ee790d461" title="Indikuje, zda je detekce kolizí zapnuta.">Enabled</a> = <span class="keyword">true</span>;
+<a name="l00023"></a>00023             <a class="code" href="class_phys_lib_1_1_collision_solver.html#a1090bf08890766a24580bd654b8ce324" title="Koeficient restituce.">E</a> = 0.5;
+<a name="l00024"></a>00024         }
+<a name="l00025"></a>00025 
+<a name="l00029"></a>00029         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_collision_solver.html#a11437ee4e8c723458526af3ee790d461" title="Indikuje, zda je detekce kolizí zapnuta.">Enabled</a>
+<a name="l00030"></a><a class="code" href="class_phys_lib_1_1_collision_solver.html#a11437ee4e8c723458526af3ee790d461">00030</a>         {
+<a name="l00031"></a>00031             <span class="keyword">get</span>; <span class="keyword">set</span>;
+<a name="l00032"></a>00032         }
+<a name="l00033"></a>00033 
+<a name="l00037"></a>00037         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_collision_solver.html#a1090bf08890766a24580bd654b8ce324" title="Koeficient restituce.">E</a>
+<a name="l00038"></a><a class="code" href="class_phys_lib_1_1_collision_solver.html#a1090bf08890766a24580bd654b8ce324">00038</a>         {
+<a name="l00039"></a>00039             <span class="keyword">get</span>; <span class="keyword">set</span>;
+<a name="l00040"></a>00040         }
+<a name="l00041"></a>00041 
+<a name="l00048"></a><a class="code" href="class_phys_lib_1_1_collision_solver.html#ab3b8140ea9d39536a7c9830067baf263">00048</a>         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_collision_solver.html#ab3b8140ea9d39536a7c9830067baf263" title="Zjistí, zda je jedno těleso od druhého odděleno danou osou.">SeparatedByAxis</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Axis, <a class="code" href="class_phys_lib_1_1_geometry.html" title="Abstraktní třída reprezentující fyzický model tělesa.">Geometry</a> ObjectA, <a class="code" href="class_phys_lib_1_1_geometry.html" title="Abstraktní třída reprezentující fyzický model tělesa.">Geometry</a> ObjectB,ref <a class="code" href="class_phys_lib_1_1_collision_report.html" title="Třída hlášení o kolizi.">CollisionReport</a> Rep)
+<a name="l00049"></a>00049         {
+<a name="l00050"></a>00050             <span class="keywordtype">double</span> minA = 0, maxA = 0, minB = 0, maxB = 0;
+<a name="l00051"></a>00051             ObjectA.<a class="code" href="class_phys_lib_1_1_geometry.html#a3660be945ecec74cecde8e337518c09a" title="Projektuje těleso na danou osu.">ProjectToAxis</a>(Axis, ref minA, ref maxA);
+<a name="l00052"></a>00052             ObjectB.<a class="code" href="class_phys_lib_1_1_geometry.html#a3660be945ecec74cecde8e337518c09a" title="Projektuje těleso na danou osu.">ProjectToAxis</a>(Axis, ref minB, ref maxB);
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054                 <span class="keywordtype">double</span> d0 = (maxB - minA);
+<a name="l00055"></a>00055                 <span class="keywordtype">double</span> d1 = (minB - maxA);
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057                 <span class="keywordflow">if</span>(d0 &lt; 0.0f || d1 &gt; 0.0f) <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00058"></a>00058             
+<a name="l00059"></a>00059             <span class="keywordtype">double</span> overlap = (d0 &lt; -d1) ? d0 : d1;
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Sep = Axis * (overlap / <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Pow(Axis, 2));
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063             <span class="keywordflow">if</span> (Rep.MTD.IsNull || <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Pow(Sep, 2) &lt; <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Pow(Rep.MTD, 2))
+<a name="l00064"></a>00064                 Rep.MTD = Sep;
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066             <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068         }
+<a name="l00069"></a>00069 
+<a name="l00076"></a><a class="code" href="class_phys_lib_1_1_collision_solver.html#a112880c9c1c7b15505deb2ef1024a360">00076</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_collision_report.html" title="Třída hlášení o kolizi.">CollisionReport</a> <a class="code" href="class_phys_lib_1_1_collision_solver.html#a112880c9c1c7b15505deb2ef1024a360" title="Zjistí, zda objekt koliduje s jiným - daným objektem.">ObjectsCollide</a>(<a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě.">SimObject</a> ObjectA,<a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě.">SimObject</a> ObjectB)
+<a name="l00077"></a>00077         {
+<a name="l00078"></a>00078             <a class="code" href="class_phys_lib_1_1_collision_report.html" title="Třída hlášení o kolizi.">CollisionReport</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_collision_report.html" title="Třída hlášení o kolizi.">CollisionReport</a>(ObjectA,ObjectB);
+<a name="l00079"></a>00079             PointF[] geomA = null, geomB = null;
+<a name="l00080"></a>00080             
+<a name="l00081"></a>00081             <span class="keywordflow">if</span> (!ObjectA.<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#adc6b0f749f7b0a0e1e361a78fc4b54bf" title="Indikuje, zda je útvar konvexní.">Convex</a>)
+<a name="l00082"></a>00082                 geomA = ObjectA.<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#a53ea962fb7f4ac902e35898b2e32ddb9" title="Absolutní poloha obdélníku ohraničující těleso.">BoundingBox</a>;
+<a name="l00083"></a>00083             <span class="keywordflow">else</span> geomA = ObjectA.<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>;
+<a name="l00084"></a>00084             
+<a name="l00085"></a>00085             <span class="keywordflow">if</span> (!ObjectB.<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#adc6b0f749f7b0a0e1e361a78fc4b54bf" title="Indikuje, zda je útvar konvexní.">Convex</a>)
+<a name="l00086"></a>00086                 geomB = ObjectB.<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#a53ea962fb7f4ac902e35898b2e32ddb9" title="Absolutní poloha obdélníku ohraničující těleso.">BoundingBox</a>;
+<a name="l00087"></a>00087             <span class="keywordflow">else</span> geomB = ObjectB.<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>;
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089             <span class="keywordtype">int</span> Count = geomA.Length + geomB.Length;
+<a name="l00090"></a>00090             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0, j; i &lt; Count; i++)
+<a name="l00091"></a>00091             {
+<a name="l00092"></a>00092                 <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Axis = null;
+<a name="l00093"></a>00093                 <span class="keywordflow">if</span> (i &lt; geomA.Length)
+<a name="l00094"></a>00094                 {
+<a name="l00095"></a>00095                     j = (i == geomA.Length - 1) ? 0 : i + 1;
+<a name="l00096"></a>00096                     <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v1 = (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)geomA[i];
+<a name="l00097"></a>00097                     <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v2 = (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)geomA[j];
+<a name="l00098"></a>00098                     Axis = (v1 - v2).Perp();
+<a name="l00099"></a>00099                 }
+<a name="l00100"></a>00100                 <span class="keywordflow">else</span>
+<a name="l00101"></a>00101                 {
+<a name="l00102"></a>00102                     j = (i == Count - 1) ? geomA.Length : i + 1;
+<a name="l00103"></a>00103                     <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v1 = (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)geomB[i - geomA.Length];
+<a name="l00104"></a>00104                     <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v2 = (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)geomB[j - geomA.Length];
+<a name="l00105"></a>00105                     Axis = (v1 - v2).<a class="code" href="class_phys_lib_1_1_vector.html#aed27e9ce4d607f2de9803ded2f57d0cc" title="Vrátí 2D kolmý vektor.">Perp</a>();
+<a name="l00106"></a>00106                 }
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108                 <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_collision_solver.html#ab3b8140ea9d39536a7c9830067baf263" title="Zjistí, zda je jedno těleso od druhého odděleno danou osou.">SeparatedByAxis</a>(Axis,ObjectA.<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>, ObjectB.<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>, ref Ret))
+<a name="l00109"></a>00109                     <span class="keywordflow">return</span> null;
+<a name="l00110"></a>00110             }
+<a name="l00111"></a>00111             
+<a name="l00112"></a>00112             Ret.CalculatePairs();
+<a name="l00113"></a>00113             <span class="keywordflow">return</span> Ret;
+<a name="l00114"></a>00114         }
+<a name="l00115"></a>00115 
+<a name="l00120"></a><a class="code" href="class_phys_lib_1_1_collision_solver.html#aeeb1a408f85dbbd1a1e7943f01f71b3d">00120</a>         <span class="keyword">public</span> IEnumerable <a class="code" href="class_phys_lib_1_1_collision_solver.html#aeeb1a408f85dbbd1a1e7943f01f71b3d" title="Sestaví report o kolizích v momentálním stavu systému pro daný objekt.">DetectCollisionsFor</a>(<span class="keywordtype">int</span> ObjectIndex)
+<a name="l00121"></a>00121         {
+<a name="l00122"></a>00122             <span class="keywordflow">if</span> (!<a class="code" href="class_phys_lib_1_1_collision_solver.html#a11437ee4e8c723458526af3ee790d461" title="Indikuje, zda je detekce kolizí zapnuta.">Enabled</a>) yield <span class="keywordflow">break</span>;
+<a name="l00123"></a>00123             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; w.<a class="code" href="class_phys_lib_1_1_world.html#a0fbab9547603842f4a45ec58e52150f6" title="Počet těles ve světě.">CountObjects</a>; i++)
+<a name="l00124"></a>00124             {
+<a name="l00125"></a>00125                 <span class="keywordflow">if</span> (i == ObjectIndex) <span class="keywordflow">continue</span>;
+<a name="l00126"></a>00126                 <a class="code" href="class_phys_lib_1_1_collision_report.html" title="Třída hlášení o kolizi.">CollisionReport</a> rpt = <a class="code" href="class_phys_lib_1_1_collision_solver.html#a112880c9c1c7b15505deb2ef1024a360" title="Zjistí, zda objekt koliduje s jiným - daným objektem.">ObjectsCollide</a>(w[ObjectIndex],w[i]);
+<a name="l00127"></a>00127                 <span class="keywordflow">if</span> (rpt != null) yield <span class="keywordflow">return</span> rpt;
+<a name="l00128"></a>00128             }
+<a name="l00129"></a>00129         }
+<a name="l00130"></a>00130 
+<a name="l00135"></a><a class="code" href="class_phys_lib_1_1_collision_solver.html#ac608bd2318416a70a860f29510274951">00135</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_phys_lib_1_1_collision_solver.html#ac608bd2318416a70a860f29510274951" title="Vyřeší konkrétní kolizi.">SolveCollision</a>(<a class="code" href="class_phys_lib_1_1_collision_report.html" title="Třída hlášení o kolizi.">CollisionReport</a> Report)
+<a name="l00136"></a>00136         {
+<a name="l00137"></a>00137             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> RelativeVelo = Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a> - Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a>;
+<a name="l00138"></a>00138             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> N = <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="class_phys_lib_1_1_vector.html#acb06a59683e724487174a0e388901fc1" title="Udělá z daného vektoru jednotkový vektor ukazující pouze směr.">Unit</a>(Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a1dfeedc9dfd7c19b73798b6d4955605a" title="Minimální vektor oddělení.">MTD</a>);
+<a name="l00139"></a>00139 
+<a name="l00140"></a>00140             <span class="keywordtype">double</span> Num = (-1 - <a class="code" href="class_phys_lib_1_1_collision_solver.html#a1090bf08890766a24580bd654b8ce324" title="Koeficient restituce.">E</a>) * <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="class_phys_lib_1_1_vector.html#acab7fffacc529e6d71bc3f2efec2d2fd" title="Provede skalární součin dvou vektorů.">Dot</a>(RelativeVelo, N);
+<a name="l00141"></a>00141             <span class="keywordtype">double</span> C = 1 / (1/Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> + 1/Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a>);
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> AP = ((<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>[0].b - Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>).Perp(), BP = ((<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>[0].a - Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>).Perp();
+<a name="l00144"></a>00144             <span class="keywordtype">double</span> I = (Math.Pow(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Dot(AP, N), 2) / Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#abebd841b2240bf066ce8f95001981a25" title="Spočítá moment setrvačnosti tělesa v závislosti na rozlišení.">MomentOfInertia</a>) + (Math.Pow(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Dot(BP, N), 2) / Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#abebd841b2240bf066ce8f95001981a25" title="Spočítá moment setrvačnosti tělesa v závislosti na rozlišení.">MomentOfInertia</a>);
+<a name="l00145"></a>00145             <span class="keywordtype">double</span> Denom = <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Dot(N, N) * ((1 / Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a>) + (1 / Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a>)) + I;
+<a name="l00146"></a>00146 
+<a name="l00147"></a>00147             <span class="keywordtype">double</span> Impulse = Num / Denom;
+<a name="l00148"></a>00148 
+<a name="l00149"></a>00149             Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a> += Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a1dfeedc9dfd7c19b73798b6d4955605a" title="Minimální vektor oddělení.">MTD</a> * (1/Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a>) * C;
+<a name="l00150"></a>00150             
+<a name="l00151"></a>00151             Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a> += N * (Impulse / Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a>);            
+<a name="l00152"></a>00152             Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>[2] += <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="class_phys_lib_1_1_vector.html#acab7fffacc529e6d71bc3f2efec2d2fd" title="Provede skalární součin dvou vektorů.">Dot</a>(N, AP) * (Impulse / Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#abebd841b2240bf066ce8f95001981a25" title="Spočítá moment setrvačnosti tělesa v závislosti na rozlišení.">MomentOfInertia</a>);
+<a name="l00153"></a>00153 
+<a name="l00154"></a>00154             Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a> += -Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a1dfeedc9dfd7c19b73798b6d4955605a" title="Minimální vektor oddělení.">MTD</a> * (1/Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a>) * C;
+<a name="l00155"></a>00155             
+<a name="l00156"></a>00156             Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a> += -N * (Impulse / Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a>);
+<a name="l00157"></a>00157             Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>[2] += <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="class_phys_lib_1_1_vector.html#acab7fffacc529e6d71bc3f2efec2d2fd" title="Provede skalární součin dvou vektorů.">Dot</a>(N, BP) * (Impulse / Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#abebd841b2240bf066ce8f95001981a25" title="Spočítá moment setrvačnosti tělesa v závislosti na rozlišení.">MomentOfInertia</a>);
+<a name="l00158"></a>00158 
+<a name="l00159"></a>00159             Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.RaiseOnCollision(Report);
+<a name="l00160"></a>00160             Report.<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.RaiseOnCollision(Report);
+<a name="l00161"></a>00161         }
+<a name="l00162"></a>00162 
+<a name="l00163"></a>00163     }
+<a name="l00164"></a>00164 }
+</pre></div></div>
+<hr size="1"/><address style="text-align: right;"><small>Generováno Wed Dec 15 22:51:05 2010 pro projekt PhysLib programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>

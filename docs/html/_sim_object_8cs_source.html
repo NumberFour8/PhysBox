@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>PhysLib: Zdrojový soubor D:/Dev/PhysBox/PhysLib/SimObject.cs</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Generováno programem Doxygen 1.6.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+    </ul>
+  </div>
+<h1>D:/Dev/PhysBox/PhysLib/SimObject.cs</h1><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 ﻿using System;
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 <span class="keyword">namespace </span>PhysLib
+<a name="l00004"></a>00004 {
+<a name="l00008"></a><a class="code" href="class_phys_lib_1_1_sim_object.html">00008</a>     <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě.">SimObject</a>
+<a name="l00009"></a>00009     {
+<a name="l00010"></a>00010         <span class="keyword">private</span> <span class="keywordtype">double</span> m,J;
+<a name="l00011"></a>00011         <span class="keyword">private</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> totalForce,totalTorque;
+<a name="l00012"></a>00012         <span class="keyword">private</span> <a class="code" href="class_phys_lib_1_1_geometry.html" title="Abstraktní třída reprezentující fyzický model tělesa.">Geometry</a> model;
+<a name="l00013"></a>00013 
+<a name="l00019"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#a670ac9f1273c8a0868643713e06b4355">00019</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_sim_object.html#a670ac9f1273c8a0868643713e06b4355" title="Vytvoří těleso s danou geometrií a hmotností.">SimObject</a>(<a class="code" href="class_phys_lib_1_1_geometry.html" title="Abstraktní třída reprezentující fyzický model tělesa.">Geometry</a> ObjectModel, <span class="keywordtype">double</span> ObjectMass)
+<a name="l00020"></a>00020         {
+<a name="l00021"></a>00021             model = ObjectModel;
+<a name="l00022"></a>00022             <a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> = ObjectMass;
+<a name="l00023"></a>00023             
+<a name="l00024"></a>00024             totalForce = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>(3);
+<a name="l00025"></a>00025             totalTorque = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>(3);
+<a name="l00026"></a>00026             <a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a> = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>(3);
+<a name="l00027"></a>00027             <a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a> = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>(3);
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029             <a class="code" href="class_phys_lib_1_1_sim_object.html#a025d9bd5e25819030ac7d4d31b54a059" title="Indikuje, zda je těleso zapnuté.">Enabled</a> = <span class="keyword">true</span>;
+<a name="l00030"></a>00030             <a class="code" href="class_phys_lib_1_1_sim_object.html#ae31b3ac1217d33a21791cef02e0a0810" title="Indikuje, zda zakázány lineární translační pohyby tělesa.">NoTranslations</a> = <span class="keyword">false</span>;
+<a name="l00031"></a>00031             <a class="code" href="class_phys_lib_1_1_sim_object.html#aa7d2adfed844cc23d664dd397a7d451a" title="Indikuje, zda je těleso nehybné (např. zeď).">Static</a> = <span class="keyword">false</span>;
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033             <span class="comment">// Předpočítej část momentu setrvačnosti</span>
+<a name="l00034"></a>00034             <span class="keywordtype">double</span> denom = 0,nom = 0,factor = 0;
+<a name="l00035"></a>00035             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0, j = 0; i &lt; <a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>.Length; i++)
+<a name="l00036"></a>00036             {
+<a name="l00037"></a>00037                 j = (i + 1) % <a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>.Length;
+<a name="l00038"></a>00038                 factor = <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Pow((<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[j], 2) + <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Dot((<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[j], (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[i]) + <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Pow((<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[i], 2);
+<a name="l00039"></a>00039                 nom += <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Cross(((<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[j]), ((<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[i])).Magnitude * factor;
+<a name="l00040"></a>00040                 denom += <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Cross(((<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[j]), ((<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[i])).Magnitude;
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042             }
+<a name="l00043"></a>00043             J = nom / denom;
+<a name="l00044"></a>00044         }
+<a name="l00045"></a>00045 
+<a name="l00049"></a>00049         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a>
+<a name="l00050"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f">00050</a>         {
+<a name="l00051"></a>00051             <span class="keyword">get</span> { <span class="keywordflow">return</span> m; }
+<a name="l00052"></a>00052             <span class="keyword">set</span>
+<a name="l00053"></a>00053             {
+<a name="l00054"></a>00054                 <span class="keywordflow">if</span> (value &gt; 0)
+<a name="l00055"></a>00055                   m = value;
+<a name="l00056"></a>00056                 <span class="keywordflow">else</span> <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
+<a name="l00057"></a>00057             }
+<a name="l00058"></a>00058         }
+<a name="l00059"></a>00059 
+<a name="l00065"></a>00065         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_sim_object.html#abebd841b2240bf066ce8f95001981a25" title="Spočítá moment setrvačnosti tělesa v závislosti na rozlišení.">MomentOfInertia</a>
+<a name="l00066"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#abebd841b2240bf066ce8f95001981a25">00066</a>         {
+<a name="l00067"></a>00067             <span class="keyword">get</span>
+<a name="l00068"></a>00068             {
+<a name="l00069"></a>00069                 <span class="keywordtype">double</span> d = Math.Round(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.PointDistance(<a class="code" href="class_phys_lib_1_1_sim_object.html#a7c087d937d4d2df67d6d3ae66cf11778" title="Absolutní poloha bodu, jímž prochází osa otáčení.">RotationPoint</a>, <a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>),1);
+<a name="l00070"></a>00070                 <span class="keywordflow">return</span> (J * m / 6) + m * Math.Pow(d,2);
+<a name="l00071"></a>00071             }
+<a name="l00072"></a>00072         }
+<a name="l00073"></a>00073 
+<a name="l00077"></a>00077         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>
+<a name="l00078"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d">00078</a>         {
+<a name="l00079"></a>00079             <span class="keyword">get</span> { <span class="keywordflow">return</span> model.<a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a>; }
+<a name="l00080"></a>00080         }
+<a name="l00081"></a>00081 
+<a name="l00085"></a>00085         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_sim_object.html#a646da127bcf25da97056d4ef573009cb" title="Výslednice všech sil působící na těleso.">TotalForce</a>
+<a name="l00086"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#a646da127bcf25da97056d4ef573009cb">00086</a>         {
+<a name="l00087"></a>00087             <span class="keyword">get</span> { <span class="keywordflow">return</span> totalForce; }
+<a name="l00088"></a>00088             <span class="keyword">set</span> { totalForce = value; }
+<a name="l00089"></a>00089         }
+<a name="l00090"></a>00090 
+<a name="l00094"></a>00094         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_sim_object.html#ac2e341d9ddfbde5022aaeb5899ca3b0b" title="Výslednice všech točivých momentů působící na těleso.">TotalTorque</a>
+<a name="l00095"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#ac2e341d9ddfbde5022aaeb5899ca3b0b">00095</a>         {
+<a name="l00096"></a>00096             <span class="keyword">get</span> { <span class="keywordflow">return</span> totalTorque; }
+<a name="l00097"></a>00097             <span class="keyword">set</span> { totalTorque = value; }
+<a name="l00098"></a>00098         }
+<a name="l00099"></a>00099 
+<a name="l00103"></a>00103         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_sim_object.html#a025d9bd5e25819030ac7d4d31b54a059" title="Indikuje, zda je těleso zapnuté.">Enabled</a>
+<a name="l00104"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#a025d9bd5e25819030ac7d4d31b54a059">00104</a>         {
+<a name="l00105"></a>00105             <span class="keyword">get</span>; <span class="keyword">set</span>;
+<a name="l00106"></a>00106         }
+<a name="l00107"></a>00107 
+<a name="l00111"></a>00111         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_sim_object.html#ae31b3ac1217d33a21791cef02e0a0810" title="Indikuje, zda zakázány lineární translační pohyby tělesa.">NoTranslations</a>
+<a name="l00112"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#ae31b3ac1217d33a21791cef02e0a0810">00112</a>         {
+<a name="l00113"></a>00113             <span class="keyword">get</span>; <span class="keyword">set</span>;
+<a name="l00114"></a>00114         }
+<a name="l00115"></a>00115 
+<a name="l00119"></a>00119         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_geometry.html" title="Abstraktní třída reprezentující fyzický model tělesa.">Geometry</a> <a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>
+<a name="l00120"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2">00120</a>         {
+<a name="l00121"></a>00121             <span class="keyword">get</span> { <span class="keywordflow">return</span> model; }
+<a name="l00122"></a>00122         }
+<a name="l00123"></a>00123 
+<a name="l00127"></a>00127         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_sim_object.html#a7c087d937d4d2df67d6d3ae66cf11778" title="Absolutní poloha bodu, jímž prochází osa otáčení.">RotationPoint</a>
+<a name="l00128"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#a7c087d937d4d2df67d6d3ae66cf11778">00128</a>         {
+<a name="l00129"></a>00129             <span class="keyword">get</span> { <span class="keywordflow">return</span> model.<a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a>;  }
+<a name="l00130"></a>00130             <span class="keyword">set</span> { model.<a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a> = value; }
+<a name="l00131"></a>00131         }
+<a name="l00132"></a>00132 
+<a name="l00136"></a>00136         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a>
+<a name="l00137"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730">00137</a>         {
+<a name="l00138"></a>00138             <span class="keyword">get</span>; <span class="keyword">set</span>;
+<a name="l00139"></a>00139         }
+<a name="l00140"></a>00140 
+<a name="l00144"></a>00144         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>
+<a name="l00145"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc">00145</a>         {
+<a name="l00146"></a>00146             <span class="keyword">get</span>; <span class="keyword">set</span>;
+<a name="l00147"></a>00147         }
+<a name="l00148"></a>00148 
+<a name="l00152"></a>00152         <span class="keyword">public</span> <span class="keywordtype">object</span>[] <a class="code" href="class_phys_lib_1_1_sim_object.html#a5e61a98eabd0a7b3ac5e718273686d74" title="Libovolné parametry.">Parameters</a>
+<a name="l00153"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#a5e61a98eabd0a7b3ac5e718273686d74">00153</a>         {
+<a name="l00154"></a>00154             <span class="keyword">get</span>; <span class="keyword">set</span>;
+<a name="l00155"></a>00155         }
+<a name="l00156"></a>00156 
+<a name="l00160"></a>00160         <span class="keyword">public</span> <a class="code" href="struct_phys_lib_1_1_material.html" title="Reprezentuje materiál.">Material</a> <a class="code" href="class_phys_lib_1_1_sim_object.html#ab15e5bcfb4b196fb0ca472d14b247846" title="Materiálové konstanty tělesa.">ObjectMaterial</a>
+<a name="l00161"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#ab15e5bcfb4b196fb0ca472d14b247846">00161</a>         {
+<a name="l00162"></a>00162             <span class="keyword">get</span>;
+<a name="l00163"></a>00163             <span class="keyword">set</span>;
+<a name="l00164"></a>00164         }
+<a name="l00165"></a>00165 
+<a name="l00171"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#a5ff717de4eca507be090b3436c2a22f2">00171</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_phys_lib_1_1_sim_object.html#a5ff717de4eca507be090b3436c2a22f2" title="Aplikuje sílu na těleso.">ApplyForce</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Force,<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Origin)
+<a name="l00172"></a>00172         {
+<a name="l00173"></a>00173             <span class="keywordflow">if</span> (Force.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový.">IsNull</a>) <span class="keywordflow">return</span>;
+<a name="l00174"></a>00174             totalForce += Force;
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176             totalTorque += <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="class_phys_lib_1_1_vector.html#a73d079f3213ad2a12627b1a13ba7192d" title="Provede vektorový součin dvou vektorů.">Cross</a>(<a class="code" href="class_phys_lib_1_1_sim_object.html#ae94585d0d75670d021d4ce0cf5de99db" title="Získá bod ve kterém se protíná prodloužený vektor síly a vektor ramene síly...">GetTorqueIntersection</a>(Force, <a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#a6951cd27db46e54483a9208eae51b0e0" title="Provede projekci libovolného bodu na povrch tělesa.">ProjectToObject</a>(Origin)) - <a class="code" href="class_phys_lib_1_1_sim_object.html#a7c087d937d4d2df67d6d3ae66cf11778" title="Absolutní poloha bodu, jímž prochází osa otáčení.">RotationPoint</a>, Force);
+<a name="l00177"></a>00177         }
+<a name="l00178"></a>00178 
+<a name="l00183"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#a332e0cdbcf1ac2d6de1cab5154e93a83">00183</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_phys_lib_1_1_sim_object.html#a332e0cdbcf1ac2d6de1cab5154e93a83" title="Aplikuje na těleso odporovou sílu pohybuje-li se v prostředí o dané hustotě...">ApplyDrag</a>(<span class="keywordtype">double</span> EnvDensity)
+<a name="l00184"></a>00184         {
+<a name="l00185"></a>00185             <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a>.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový.">IsNull</a>) <span class="keywordflow">return</span>;
+<a name="l00186"></a>00186             <span class="keywordtype">double</span> DragSize = 0.5 * <a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#a4e66a23359a51b17bede92205730d24e" title="Koeficient odporu.">DragCoefficient</a> * EnvDensity * (<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#affca371f1015e9bd8309c41c74baee77" title="Povrch objektu v pixelech čtverečních.">Surface</a> - 2 * <a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#a7e86471f6a3ae35ccc693597f571b25b" title="Obsah plochy polygonu.">FrontalArea</a>);
+<a name="l00187"></a>00187             <a class="code" href="class_phys_lib_1_1_sim_object.html#a5ff717de4eca507be090b3436c2a22f2" title="Aplikuje sílu na těleso.">ApplyForce</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Unit(-<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a>) * Math.Round(DragSize * <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Pow(<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a>, 2),3), <a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>);
+<a name="l00188"></a>00188         }
+<a name="l00189"></a>00189 
+<a name="l00196"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#ae94585d0d75670d021d4ce0cf5de99db">00196</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_sim_object.html#ae94585d0d75670d021d4ce0cf5de99db" title="Získá bod ve kterém se protíná prodloužený vektor síly a vektor ramene síly...">GetTorqueIntersection</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Force,<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Origin)
+<a name="l00197"></a>00197         {
+<a name="l00198"></a>00198             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> P = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>(3);
+<a name="l00199"></a>00199             <span class="keywordtype">double</span> c = (Force[0] * (<a class="code" href="class_phys_lib_1_1_sim_object.html#a7c087d937d4d2df67d6d3ae66cf11778" title="Absolutní poloha bodu, jímž prochází osa otáčení.">RotationPoint</a>[0] - Origin[0]) + Force[1] * (<a class="code" href="class_phys_lib_1_1_sim_object.html#a7c087d937d4d2df67d6d3ae66cf11778" title="Absolutní poloha bodu, jímž prochází osa otáčení.">RotationPoint</a>[1] - Origin[1])) / Math.Pow(Force.<a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>, 2);
+<a name="l00200"></a>00200 
+<a name="l00201"></a>00201             P[0] = Origin[0] + Force[0] * c;
+<a name="l00202"></a>00202             P[1] = Origin[1] + Force[1] * c;
+<a name="l00203"></a>00203             P[2] = 0;
+<a name="l00204"></a>00204 
+<a name="l00205"></a>00205             <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.PointDistance(P, <a class="code" href="class_phys_lib_1_1_sim_object.html#a7c087d937d4d2df67d6d3ae66cf11778" title="Absolutní poloha bodu, jímž prochází osa otáčení.">RotationPoint</a>) &lt; 3) <span class="keywordflow">return</span> <a class="code" href="class_phys_lib_1_1_sim_object.html#a7c087d937d4d2df67d6d3ae66cf11778" title="Absolutní poloha bodu, jímž prochází osa otáčení.">RotationPoint</a>;
+<a name="l00206"></a>00206 
+<a name="l00207"></a>00207             <span class="keywordflow">return</span> P;
+<a name="l00208"></a>00208         }
+<a name="l00209"></a>00209 
+<a name="l00213"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#a63831905d95885b1a525c51f8123ee25">00213</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_phys_lib_1_1_sim_object.html#a63831905d95885b1a525c51f8123ee25" title="Zruší všechny síly působící na těleso.">Reset</a>()
+<a name="l00214"></a>00214         {
+<a name="l00215"></a>00215             totalForce.<a class="code" href="class_phys_lib_1_1_vector.html#af3b198d4029f3119bf79a74b9b7549eb" title="Vynuluje všechny složky vektoru (vytvoří z něj nulový).">Null</a>();
+<a name="l00216"></a>00216             totalTorque.<a class="code" href="class_phys_lib_1_1_vector.html#af3b198d4029f3119bf79a74b9b7549eb" title="Vynuluje všechny složky vektoru (vytvoří z něj nulový).">Null</a>();
+<a name="l00217"></a>00217         }
+<a name="l00218"></a>00218 
+<a name="l00222"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#a5ff9d1e7de6d07322a65f66aa179aee9">00222</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_phys_lib_1_1_sim_object.html#a5ff9d1e7de6d07322a65f66aa179aee9" title="Zruší všechny síly a zastaví těleso.">ResetAll</a>()
+<a name="l00223"></a>00223         {
+<a name="l00224"></a>00224             totalForce.<a class="code" href="class_phys_lib_1_1_vector.html#af3b198d4029f3119bf79a74b9b7549eb" title="Vynuluje všechny složky vektoru (vytvoří z něj nulový).">Null</a>();
+<a name="l00225"></a>00225             totalTorque.<a class="code" href="class_phys_lib_1_1_vector.html#af3b198d4029f3119bf79a74b9b7549eb" title="Vynuluje všechny složky vektoru (vytvoří z něj nulový).">Null</a>();
+<a name="l00226"></a>00226             <a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a>.<a class="code" href="class_phys_lib_1_1_vector.html#af3b198d4029f3119bf79a74b9b7549eb" title="Vynuluje všechny složky vektoru (vytvoří z něj nulový).">Null</a>();
+<a name="l00227"></a>00227             <a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>.<a class="code" href="class_phys_lib_1_1_vector.html#af3b198d4029f3119bf79a74b9b7549eb" title="Vynuluje všechny složky vektoru (vytvoří z něj nulový).">Null</a>();
+<a name="l00228"></a>00228         }
+<a name="l00229"></a>00229 
+<a name="l00233"></a>00233         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_sim_object.html#aa7d2adfed844cc23d664dd397a7d451a" title="Indikuje, zda je těleso nehybné (např. zeď).">Static</a>
+<a name="l00234"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#aa7d2adfed844cc23d664dd397a7d451a">00234</a>         {
+<a name="l00235"></a>00235             <span class="keyword">get</span>; <span class="keyword">set</span>;
+<a name="l00236"></a>00236         }
+<a name="l00237"></a>00237 
+<a name="l00241"></a>00241         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_sim_object.html#a30741b3569bd9445559d925fcc3c560d" title="Potenciální energie tělesa v místě vložení.">InitialEnergy</a>
+<a name="l00242"></a><a class="code" href="class_phys_lib_1_1_sim_object.html#a30741b3569bd9445559d925fcc3c560d">00242</a>         {
+<a name="l00243"></a>00243             <span class="keyword">get</span>; <span class="keyword">set</span>;
+<a name="l00244"></a>00244         }
+<a name="l00245"></a>00245     }
+<a name="l00246"></a>00246 }
+</pre></div></div>
+<hr size="1"/><address style="text-align: right;"><small>Generováno Wed Dec 15 22:51:05 2010 pro projekt PhysLib programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+</body>
+</html>
