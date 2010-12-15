@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollisionReport.cs" />
     <Compile Include="CollisionSolver.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="Geometry.cs" />

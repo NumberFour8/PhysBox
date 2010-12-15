@@ -31,6 +31,14 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Koeficient restituce
+        /// </summary>
+        public double E
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// Zjistí, zda je jedno těleso od druhého odděleno danou osou
         /// </summary>
         /// <param name="Axis">Osa oddělení</param>
@@ -111,11 +119,27 @@ namespace PhysLib
         /// <summary>
         /// Vyřeší konkrétní kolizi
         /// </summary>
-        /// <param name="Report">Report o kolizi</param>
+        /// <param name="Report">Hlášení o kolizi</param>
         public void SolveCollision(CollisionReport Report)
         {
             Report.A.Model.RaiseOnCollision(Report);
             Report.B.Model.RaiseOnCollision(Report);
+            Vector RelativeVelo = Report.A.LinearVelocity - Report.B.LinearVelocity;
+            Vector N = Vector.Unit(Report.MTD);
+
+            double Num = (-1 - E) * Vector.Dot(RelativeVelo, N);
+
+            Vector AP = ((Vector)Report.Pairs[0].a - Report.A.COG).Perp(), BP = ((Vector)Report.Pairs[0].b - Report.B.COG).Perp();
+            double I = (Math.Pow(Vector.Dot(AP, N), 2) / Report.A.MomentOfInertia) + (Math.Pow(Vector.Dot(BP, N), 2) / Report.B.MomentOfInertia);
+            double Denom = Vector.Dot(N, N) * ((1 / Report.A.Mass) + (1 / Report.B.Mass)) + I;
+
+            double Impulse = Num / Denom;
+
+            Report.A.LinearVelocity += N * (Impulse / Report.A.Mass);
+            Report.A.AngularVelocity[2] += Vector.Dot(N, AP) * (Impulse / Report.A.MomentOfInertia);
+
+            Report.B.LinearVelocity += -N * (Impulse / Report.B.Mass);
+            Report.B.AngularVelocity[2] += Vector.Dot(N, BP) * (Impulse / Report.B.MomentOfInertia);
         }
 
     }
