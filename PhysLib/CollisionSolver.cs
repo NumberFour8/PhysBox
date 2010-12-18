@@ -128,31 +128,80 @@ namespace PhysLib
             }
         }
 
+        public void SolveCollision_Experimental(CollisionReport Report) // Experimentální!
+        {
+            double cof = 0.3, cor = E;
+            double C = 1 / (1/Report.A.Mass + 1/Report.B.Mass);
+            double AinvM = 1 / Report.A.Mass, BinvM = 1 / Report.B.Mass,AinvI = 1/Report.A.MomentOfInertia,BinvI = 1/Report.B.MomentOfInertia;
+
+            Report.A.Model.Position += Report.MTD * (1 / Report.A.Mass) * C;
+            Report.B.Model.Position -= Report.MTD * (1 / Report.B.Mass) * C;           
+
+            // apply friction impulses at contacts
+            Vector pa = (Vector)Report.Pairs[0].a;
+            Vector pb = (Vector)Report.Pairs[0].b;
+            Vector ncol = Vector.Unit(Report.MTD);
+            Vector ra = pa - Report.A.Model.Position;
+            Vector rb = pb - Report.A.Model.Position;
+            Vector va = Report.A.LinearVelocity + (ra.Perp()*Report.A.AngularVelocity[2]);
+            Vector vb = Report.B.LinearVelocity + (rb.Perp()*Report.B.AngularVelocity[2]);
+            Vector v = (va - vb);
+            Vector vt = v - ncol*Vector.Dot(v,ncol);
+            Vector nf = Vector.Unit(-vt); // friction normal
+
+            // contact points separating, no impulses.
+            if (Vector.Dot(v,ncol) > 0.0f) return;
+
+            // collision impulse
+            double jc = Vector.Dot(v,ncol) / ((AinvM + BinvM) +
+                                        Vector.Dot(Vector.Cross(ra,ncol) , Vector.Cross(ra,ncol)) * AinvI +
+                                        Vector.Dot(Vector.Cross(rb,ncol) , Vector.Cross(rb,ncol)) * BinvI);
+
+            // friction impulse
+            double jf = Vector.Dot(v,nf) / ((AinvM + BinvM) +
+                                        Vector.Dot(Vector.Cross(ra,nf),Vector.Cross(ra,nf)) * AinvI +
+                                        Vector.Dot(Vector.Cross(rb,nf),Vector.Cross(rb,nf)) * BinvI);
+
+            // clamp friction. 
+            if (Math.Abs(jf) > Math.Abs(jc * cof))
+                jf = Math.Abs(cof) * Math.Sign(jc);
+
+            // total impulse restituted
+            Vector impulse = ncol * (jc * -(1 + cor)) + nf * (-jf);
+
+            Report.A.LinearVelocity += impulse * AinvM;
+            Report.B.LinearVelocity -= impulse * BinvM;
+
+            Report.A.AngularVelocity += Vector.Cross(ra,impulse) * AinvI;
+            Report.B.AngularVelocity -= Vector.Cross(rb,impulse) * BinvI;
+        }
+
         /// <summary>
         /// Vyřeší konkrétní kolizi
         /// </summary>
         /// <param name="Report">Hlášení o kolizi</param>
         public void SolveCollision(CollisionReport Report)
         {
-            Vector RelativeVelo = Report.A.LinearVelocity - Report.B.LinearVelocity;
+            Vector AP = ((Vector)Report.Pairs[0].b - Report.A.COG).Perp(), BP = ((Vector)Report.Pairs[0].a - Report.B.COG).Perp();
+
+            Vector RelativeVelo = (Report.A.LinearVelocity + AP*Report.A.AngularVelocity[2]) - (Report.B.LinearVelocity+BP*Report.B.AngularVelocity[2]);
             Vector N = Vector.Unit(Report.MTD);
 
             double Num = (-1 - E) * Vector.Dot(RelativeVelo, N);
-            double C = 1 / (1/Report.A.Mass + 1/Report.B.Mass);
+            double C = 1 / (1 / Report.A.Mass + 1 / Report.B.Mass);
 
-            Vector AP = ((Vector)Report.Pairs[0].b - Report.A.COG).Perp(), BP = ((Vector)Report.Pairs[0].a - Report.B.COG).Perp();
             double I = (Math.Pow(Vector.Dot(AP, N), 2) / Report.A.MomentOfInertia) + (Math.Pow(Vector.Dot(BP, N), 2) / Report.B.MomentOfInertia);
             double Denom = Vector.Dot(N, N) * ((1 / Report.A.Mass) + (1 / Report.B.Mass)) + I;
 
             double Impulse = Num / Denom;
 
-            Report.A.Model.Position += Report.MTD * (1/Report.A.Mass) * C;
-            
-            Report.A.LinearVelocity += N * (Impulse / Report.A.Mass);            
+            Report.A.Model.Position += Report.MTD * (1 / Report.A.Mass) * C;
+
+            Report.A.LinearVelocity += N * (Impulse / Report.A.Mass);
             Report.A.AngularVelocity[2] += Vector.Dot(N, AP) * (Impulse / Report.A.MomentOfInertia);
 
-            Report.B.Model.Position += -Report.MTD * (1/Report.B.Mass) * C;
-            
+            Report.B.Model.Position += -Report.MTD * (1 / Report.B.Mass) * C;
+
             Report.B.LinearVelocity += -N * (Impulse / Report.B.Mass);
             Report.B.AngularVelocity[2] += Vector.Dot(N, BP) * (Impulse / Report.B.MomentOfInertia);
 

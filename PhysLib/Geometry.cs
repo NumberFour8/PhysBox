@@ -178,7 +178,6 @@ namespace PhysLib
             return Math.Abs(area)/2;
         }
 
-
         /// <summary>
         /// Analyzuje pole vertexů jako polygon a zjistí jeho geometrický střed (centroid), šířku a výšku
         /// </summary>
@@ -191,21 +190,14 @@ namespace PhysLib
             PointF top = Vertices[0], bottom = Vertices[0], left = Vertices[0], right = Vertices[0];
             Description.FrontalArea = PolygonArea(Vertices);
 
-            Vector A = (Vector)Vertices[1] - (Vector)Vertices[0],B = null;
-            int cx = 0, cy = 0;
             for (int i = 0,j = 0; i < Vertices.Length; i++)
             {
                 j = (i + 1) % Vertices.Length;
                 Description.Centroid.X += (Vertices[i].X + Vertices[j].X) * (Vertices[i].X * Vertices[j].Y - Vertices[i].Y * Vertices[j].X);
                 Description.Centroid.Y += (Vertices[i].Y + Vertices[j].Y) * (Vertices[i].X * Vertices[j].Y - Vertices[i].Y * Vertices[j].X);
-
-                B = (Vector)Vertices[j] - (Vector)Vertices[i];
-                if (Math.Sign(A[0]) != Math.Sign(B[0])) cx++;
-                if (Math.Sign(A[1]) != Math.Sign(B[1])) cy++;
-                A[0] = B[0]; A[1] = B[1];
             }
 
-            Description.Convex = cx > 2 && cy > 2;
+            Description.ConvexHull = ConvexHull.GetConvexHull(Vertices);
             Description.Centroid.X /= (float)(Description.FrontalArea * 6);
             Description.Centroid.Y /= (float)(Description.FrontalArea * 6);
             
@@ -214,10 +206,6 @@ namespace PhysLib
                 p.AddPolygon(Vertices);
                 RectangleF r = p.GetBounds();
 
-                Description.BoundingBox[0] = r.Location;
-                Description.BoundingBox[1] = new PointF(r.X + r.Width, r.Y);
-                Description.BoundingBox[2] = new PointF(r.X + r.Width, r.Y+r.Height);
-                Description.BoundingBox[3] = new PointF(r.X, r.Y+r.Height);
                 Description.Width = r.Width;
                 Description.Height = r.Height;
             }
@@ -293,17 +281,17 @@ namespace PhysLib
         {
             get
             {       
-                PointF[] transformedBox = new PointF[4];
-                desc.BoundingBox.CopyTo(transformedBox, 0);
+                PointF[] transformedHull = new PointF[desc.ConvexHull.Length];
+                desc.ConvexHull.CopyTo(transformedHull, 0);
 
                 using (System.Drawing.Drawing2D.Matrix rot = new System.Drawing.Drawing2D.Matrix())
                 {
                     rot.Translate((float)center[0], (float)center[1]);
                     rot.RotateAt((float)angle, (PointF)Nail, System.Drawing.Drawing2D.MatrixOrder.Append);
-                    rot.TransformPoints(transformedBox);
+                    rot.TransformPoints(transformedHull);
                 }
 
-                return transformedBox;
+                return transformedHull;
             }
         }
 
@@ -486,12 +474,15 @@ namespace PhysLib
         /// <summary>
         /// Indikuje, zda je polygon konvexní
         /// </summary>
-        public bool Convex;
+        public bool Convex
+        {
+            get { return ConvexHull.Length == DefaultVertices.Length; }
+        }
 
         /// <summary>
-        /// Box ohraničující polygon
+        /// Ohraničující konvexní polygon
         /// </summary>
-        public PointF[] BoundingBox;
+        public PointF[] ConvexHull;
 
         /// <summary>
         /// Původní netransformované vertexy
@@ -506,7 +497,6 @@ namespace PhysLib
             Centroid = new PointF(0, 0);
             Height = Width = Depth = FrontalArea = Farthest = 0;
             
-            BoundingBox = new PointF[4];
             DefaultVertices = new PointF[Default.Length];
             Default.CopyTo(DefaultVertices, 0);
         }
@@ -529,6 +519,55 @@ namespace PhysLib
         public CollisionEventArgs(CollisionReport Rep)
         {
             Report = Rep;
+        }
+    }
+
+    /// <summary>
+    /// Interní třída generující konvexní obal z vertexů
+    /// </summary>
+    internal class ConvexHull
+    {
+        private static int LexicalPointComparison(PointF a, PointF b)
+        {
+            if (a.X != b.X)
+                return a.X > b.X ? 1 : -1;
+            else if (a.Y != b.Y)
+                return a.Y > b.Y ? 1 : -1;
+            else return 0;
+        }
+
+        private static float zc(PointF O,PointF A,PointF B)
+        {
+	        return (A.X - O.X) * (B.Y - O.Y) - (A.Y - O.Y) * (B.X - O.X);
+        }
+
+        public static PointF[] GetConvexHull(PointF[] input)
+        {
+            int n = input.Length, k = 0;
+            PointF[] Hull = new PointF[2 * n],Sorted = new PointF[input.Length];
+            input.CopyTo(Sorted, 0);
+
+            Array.Sort<PointF>(Sorted, new Comparison<PointF>(LexicalPointComparison));
+
+            for (int i = 0; i < n; i++)
+            {
+                while (k >= 2 && zc((PointF)Hull[k - 2],(PointF)Hull[k - 1], Sorted[i]) <= 0) k--;
+                Hull[k++] = Sorted[i];
+            }
+
+            for (int i = n - 2, t = k + 1; i >= 0; i--)
+            {
+                while (k >= t && zc((PointF)Hull[k - 2], (PointF)Hull[k - 1], Sorted[i]) <= 0) k--;
+                Hull[k++] = Sorted[i];
+            }
+
+            PointF[] Ret = new PointF[k-1];
+            for (int i = 0; i < k - 1; i++)
+            {
+                Ret[i].X = Hull[i].X;
+                Ret[i].Y = Hull[i].Y;
+            }
+            return Ret;
         }
     }
 }

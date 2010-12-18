@@ -82,6 +82,9 @@ namespace PhysBox
         private void button_OK_Click(object sender, EventArgs e)
         {            
             
+            if (!Desc.Convex)
+              MessageBox.Show("Útvar není konvexní a při detekci kolizí bude nahrazen jeho konvexním obalem.","Konvexnost",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
             using (XmlTextWriter Object = new XmlTextWriter("objects\\" + text_objName.Text + ".xml", Encoding.UTF8))
             {
                 Object.WriteStartDocument();
@@ -134,7 +137,7 @@ namespace PhysBox
         {
             COG = Desc.Centroid;
             label_cCOG.Text = String.Format("Centroid: [{0:f1};{1:f1}]", Desc.Centroid.X, Desc.Centroid.Y);
-            label_COG.Text = String.Format("Určené těžiště: [{0};{1}]", COG.Value.X, COG.Value.Y);
+            label_COG.Text = String.Format("Určené těžiště: [{0:f1};{1:f1}]", COG.Value.X, COG.Value.Y);
         }
     }
 }
