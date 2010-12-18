@@ -275,12 +275,14 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Absolutní poloha obdélníku ohraničující těleso
+        /// Absolutní poloha konvexního útvaru ohraničující těleso
         /// </summary>
         public PointF[] BoundingBox
         {
             get
-            {       
+            {
+                if (Convex) return geom;
+
                 PointF[] transformedHull = new PointF[desc.ConvexHull.Length];
                 desc.ConvexHull.CopyTo(transformedHull, 0);
 
