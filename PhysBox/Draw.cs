@@ -123,7 +123,6 @@ namespace PhysBox
 
                 // Vykresli nulovou hladinu
                 Buffer.Graphics.DrawLine(Pens.Silver, new PointF(0, (float)MyWorld.Level[1]), new PointF(Size.Width, (float)MyWorld.Level[1]));
-
             }
 
             if (Tools != null && !Tools.IsDisposed && UpdateCounter >= 10)

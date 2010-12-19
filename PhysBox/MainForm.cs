@@ -45,8 +45,10 @@ namespace PhysBox
             if (MyWorld == null){
                 MyWorld = new World(World.DisplayDefault, World.EarthG,1.5*Math.Sqrt(Math.Pow(Size.Height,2)+Math.Pow(Size.Width,2)),100);
                 MyWorld.OnTick += new EventHandler(MyWorld_OnTick);
-                simTime.Enabled = true;
+
                 Buffer = Ctx.Allocate(CreateGraphics(), new Rectangle(0, 0, Width, Height));
+                simTime.Enabled = true;
+                MinimumSize = MaximumSize = Size;     
             }
         }
 
@@ -255,6 +257,12 @@ namespace PhysBox
         {
             if (Selected != null)
                 Selected.Static = manipulateObj_IsStatic.Checked;
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            if (MyWorld != null) 
+              MyWorld.Paused = WindowState != FormWindowState.Maximized;
         }       
     }
 }
