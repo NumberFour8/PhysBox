@@ -17,6 +17,7 @@ namespace PhysBox
         private double multiplier = 100;
         private Toolbox Tools;
         public SimObject Selected = null;
+        private BufferedGraphics Buffer;
         
         public MainForm()
         {
@@ -45,6 +46,7 @@ namespace PhysBox
                 MyWorld = new World(World.DisplayDefault, World.EarthG,1.5*Math.Sqrt(Math.Pow(Size.Height,2)+Math.Pow(Size.Width,2)),100);
                 MyWorld.OnTick += new EventHandler(MyWorld_OnTick);
                 simTime.Enabled = true;
+                Buffer = Ctx.Allocate(CreateGraphics(), new Rectangle(0, 0, Width, Height));
             }
         }
 

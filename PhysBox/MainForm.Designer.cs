@@ -45,6 +45,7 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.menu_pauseSim = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_setZeroLevel = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_AllowStatics = new System.Windows.Forms.ToolStripMenuItem();
             this.stavovyRadek = new System.Windows.Forms.StatusStrip();
             this.status_SimStat = new System.Windows.Forms.ToolStripStatusLabel();
             this.stat_SelObject = new System.Windows.Forms.ToolStripStatusLabel();
@@ -65,7 +66,6 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.analyzovatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.simTime = new System.Windows.Forms.Timer(this.components);
-            this.menu_AllowStatics = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.stavovyRadek.SuspendLayout();
             this.manipulateObj.SuspendLayout();
@@ -203,6 +203,13 @@
             this.menu_setZeroLevel.Size = new System.Drawing.Size(232, 22);
             this.menu_setZeroLevel.Text = "Nastavit nulovou hladinu";
             this.menu_setZeroLevel.Click += new System.EventHandler(this.nastavitNulovouHladinuToolStripMenuItem_Click);
+            // 
+            // menu_AllowStatics
+            // 
+            this.menu_AllowStatics.CheckOnClick = true;
+            this.menu_AllowStatics.Name = "menu_AllowStatics";
+            this.menu_AllowStatics.Size = new System.Drawing.Size(232, 22);
+            this.menu_AllowStatics.Text = "Povolit výběr statických těles";
             // 
             // stavovyRadek
             // 
@@ -352,15 +359,8 @@
             // 
             // simTime
             // 
-            this.simTime.Interval = 1;
+            this.simTime.Interval = 3;
             this.simTime.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // menu_AllowStatics
-            // 
-            this.menu_AllowStatics.CheckOnClick = true;
-            this.menu_AllowStatics.Name = "menu_AllowStatics";
-            this.menu_AllowStatics.Size = new System.Drawing.Size(232, 22);
-            this.menu_AllowStatics.Text = "Povolit výběr statických těles";
             // 
             // MainForm
             // 
