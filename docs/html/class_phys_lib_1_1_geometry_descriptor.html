@@ -48,17 +48,18 @@
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Centroid útvaru.  <a href="#a2eb30e8a3f3d450f7203f68c6d4e63c5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_geometry_descriptor.html#ad0ff55ef7239fa9c81873da058a0a6c2">Farthest</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Index bodu nejdále od centroidu.  <a href="#ad0ff55ef7239fa9c81873da058a0a6c2"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_geometry_descriptor.html#a37c639dc95658f38f9de773dd9a60464">Convex</a></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indikuje, zda je polygon konvexní.  <a href="#a37c639dc95658f38f9de773dd9a60464"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">PointF[]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_geometry_descriptor.html#a624d33012528cb3c2267ed98c3de82a6">BoundingBox</a></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Box ohraničující polygon.  <a href="#a624d33012528cb3c2267ed98c3de82a6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PointF[]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_geometry_descriptor.html#a57b3b404c8afd9b33aed0de215b71f49">ConvexHull</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Ohraničující konvexní polygon.  <a href="#a57b3b404c8afd9b33aed0de215b71f49"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">PointF[]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_geometry_descriptor.html#aed5fd7c998ebcd25cd644ff7c8a0aab8">DefaultVertices</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Původní netransformované vertexy.  <a href="#aed5fd7c998ebcd25cd644ff7c8a0aab8"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Vlastnosti</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_geometry_descriptor.html#a37c639dc95658f38f9de773dd9a60464">Convex</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indikuje, zda je polygon konvexní.  <a href="#a37c639dc95658f38f9de773dd9a60464"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailní popis</h2>
 <p>Popisovač rovinného geometrického útvaru. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00444">444</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00450">450</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
 <hr/><h2>Dokumentace konstruktoru a destruktoru</h2>
 <a class="anchor" id="affbc07b4f1a53102740451bd8ba4e5d3"></a><!-- doxytag: member="PhysLib::GeometryDescriptor::GeometryDescriptor" ref="affbc07b4f1a53102740451bd8ba4e5d3" args="(PointF[] Default)" -->
 <div class="memitem">
@@ -78,28 +79,11 @@
 
 <p>Výchozí konstruktor. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00494">494</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00503">503</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Dokumentace k datovým členům</h2>
-<a class="anchor" id="a624d33012528cb3c2267ed98c3de82a6"></a><!-- doxytag: member="PhysLib::GeometryDescriptor::BoundingBox" ref="a624d33012528cb3c2267ed98c3de82a6" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">PointF [] <a class="el" href="class_phys_lib_1_1_geometry_descriptor.html#a624d33012528cb3c2267ed98c3de82a6">PhysLib.GeometryDescriptor.BoundingBox</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Box ohraničující polygon. </p>
-
-<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00484">484</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a2eb30e8a3f3d450f7203f68c6d4e63c5"></a><!-- doxytag: member="PhysLib::GeometryDescriptor::Centroid" ref="a2eb30e8a3f3d450f7203f68c6d4e63c5" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -113,24 +97,24 @@
 
 <p>Centroid útvaru. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00469">469</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00475">475</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a37c639dc95658f38f9de773dd9a60464"></a><!-- doxytag: member="PhysLib::GeometryDescriptor::Convex" ref="a37c639dc95658f38f9de773dd9a60464" args="" -->
+<a class="anchor" id="a57b3b404c8afd9b33aed0de215b71f49"></a><!-- doxytag: member="PhysLib::GeometryDescriptor::ConvexHull" ref="a57b3b404c8afd9b33aed0de215b71f49" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_phys_lib_1_1_geometry_descriptor.html#a37c639dc95658f38f9de773dd9a60464">PhysLib.GeometryDescriptor.Convex</a></td>
+          <td class="memname">PointF [] <a class="el" href="class_phys_lib_1_1_geometry_descriptor.html#a57b3b404c8afd9b33aed0de215b71f49">PhysLib.GeometryDescriptor.ConvexHull</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Indikuje, zda je polygon konvexní. </p>
+<p>Ohraničující konvexní polygon. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00479">479</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00493">493</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
 
 </div>
 </div>
@@ -147,7 +131,7 @@
 
 <p>Původní netransformované vertexy. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00489">489</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00498">498</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
 
 </div>
 </div>
@@ -164,7 +148,7 @@
 
 <p>Hloubka útvaru. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00459">459</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00465">465</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
 
 </div>
 </div>
@@ -181,7 +165,7 @@
 
 <p>Index bodu nejdále od centroidu. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00474">474</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00480">480</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
 
 </div>
 </div>
@@ -198,7 +182,7 @@
 
 <p>Obsah útvaru. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00464">464</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00470">470</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
 
 </div>
 </div>
@@ -215,7 +199,7 @@
 
 <p>Výška útvaru. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00449">449</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00455">455</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
 
 </div>
 </div>
@@ -232,7 +216,25 @@
 
 <p>Šířka útvaru. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00454">454</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00460">460</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Dokumentace k vlastnosti</h2>
+<a class="anchor" id="a37c639dc95658f38f9de773dd9a60464"></a><!-- doxytag: member="PhysLib::GeometryDescriptor::Convex" ref="a37c639dc95658f38f9de773dd9a60464" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PhysLib.GeometryDescriptor.Convex<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Indikuje, zda je polygon konvexní. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="_geometry_8cs_source.html#l00486">486</a> v souboru <a class="el" href="_geometry_8cs_source.html">Geometry.cs</a>.</p>
 
 </div>
 </div>
@@ -240,7 +242,7 @@
 <li>D:/Dev/PhysBox/PhysLib/<a class="el" href="_geometry_8cs_source.html">Geometry.cs</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generováno Wed Dec 15 22:51:06 2010 pro projekt PhysLib programem&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generováno Tue Dec 21 13:33:03 2010 pro projekt PhysLib programem&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

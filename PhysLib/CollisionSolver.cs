@@ -186,6 +186,7 @@ namespace PhysLib
 
             Vector RelativeVelo = (Report.A.LinearVelocity + AP*Report.A.AngularVelocity[2]) - (Report.B.LinearVelocity+BP*Report.B.AngularVelocity[2]);
             Vector N = Vector.Unit(Report.MTD);
+            if (N.IsNull) return;
 
             double C = 1 / (1 / Report.A.Mass + 1 / Report.B.Mass);
             double I = (Math.Pow(Vector.Dot(AP, N), 2) / Report.A.MomentOfInertia) + (Math.Pow(Vector.Dot(BP, N), 2) / Report.B.MomentOfInertia);

@@ -6,14 +6,14 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AADhACAECQAIAMACCIAIAAQYBAAgCEEBAQABEAEA4AE=</HashCode>
+      <HashCode>QBDhACAECQAIAOACCIIIAAQYBAAgCUGBAQABEAEA4AE=</HashCode>
       <FileName>World.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PhysLib.Vector" Collapsed="true">
+  <Class Name="PhysLib.Vector">
     <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAACAAAAAAgE6AUAAAUAC6CAAIAIIUaAAEMAAiA=</HashCode>
+      <HashCode>BAAAAAACAAAAAAgM6AUAAAUAC6CAAIAIIUaAAEMAAiA=</HashCode>
       <FileName>Vectors.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -23,19 +23,19 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAgAYAAAEEBIABAAAAAAIBAAoCAAAAAqgCAASJAAA=</HashCode>
+      <HashCode>AAAAgAYAAAEEBMABAAAAAAIBAAoCAAAEAqgCAASJAAg=</HashCode>
       <FileName>SimObject.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PhysLib.Matrix" Collapsed="true">
+  <Class Name="PhysLib.Matrix">
     <Position X="8" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAQAAAAAAAAGAAaEFAACAAAACUQCAAAAQAAAgAAAA=</HashCode>
+      <HashCode>QAAAQAAAAAAAAGAAaEFAACAAAACUQAAAAAQAAAgAAAA=</HashCode>
       <FileName>Matrix.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PhysLib.MatrixException" Collapsed="true">
-    <Position X="9.75" Y="1.25" Width="1.5" />
+    <Position X="8" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Matrix.cs</FileName>
@@ -46,15 +46,22 @@
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
+    <NestedTypes>
+      <Delegate Name="PhysLib.Geometry.CollisionHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Geometry.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AQgAAABABQAAAAAgAAMQCGAGCAAAAEBgIAICABBAAAE=</HashCode>
+      <HashCode>AQgAAABABQAAAAIgAAMQCGAGCCgEAEBgIAIiABBgAAE=</HashCode>
       <FileName>Geometry.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PhysLib.CollisionSolver">
     <Position X="2.75" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>AAAAgEAAAAACAIAAAQAAAAAAAAAAAAAAAAgAEgAAAAA=</HashCode>
       <FileName>CollisionSolver.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -69,7 +76,7 @@
     </TypeIdentifier>
   </Struct>
   <Struct Name="PhysLib.Material">
-    <Position X="8" Y="1.25" Width="1.5" />
+    <Position X="11.5" Y="0.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>

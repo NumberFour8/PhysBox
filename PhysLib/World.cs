@@ -409,9 +409,6 @@ namespace PhysLib
                             PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * (Delta / PhysObjs[i].Mass);
                         }
 
-                        if (PhysObjs[i].LinearVelocity.IsNaN)
-                            throw new DataMisalignedException("Tuhle vtipnou vyjímku musím chytit, abych zjistil kdy tenhle divnej stav nastává");
-
                         PhysObjs[i].Model.Orientation += Math.Round((PhysObjs[i].AngularVelocity[2] * 180 / Math.PI) * Delta, 3);
                         PhysObjs[i].AngularVelocity   += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);
 
@@ -421,6 +418,10 @@ namespace PhysLib
                             csolve.SolveCollision(rep);
 
                         if (PhysObjs[i].Static) PhysObjs[i].ResetAll();
+
+                        if (PhysObjs[i].LinearVelocity.IsNaN)
+                            throw new DataMisalignedException("Tuhle vtipnou vyjímku musím chytit, abych zjistil kdy tenhle divnej stav nastává");
+
                     }
                 }
             }
