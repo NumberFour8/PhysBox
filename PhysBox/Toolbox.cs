@@ -12,7 +12,6 @@ namespace PhysBox
     public partial class Toolbox : Form
     {
         private MainForm MyOwner { get { return Owner as MainForm; } }
-        private int ObjectCounter;
 
         public Toolbox()
         {
@@ -91,10 +90,10 @@ namespace PhysBox
                 return;
             }
 
-            GraphicObject Placing = GraphicObject.LoadFromFile("objects\\" + newobj_Geometry.SelectedItem.ToString() + ".xml");
+            GraphicObject Placing = GraphicObject.LoadFromFile(@"objects\" + newobj_Geometry.SelectedItem.ToString() + ".xml");
 
             if (newObj_AutoName.Checked)
-                Placing.Name = String.Format("object_#{0}", ObjectCounter++);
+                Placing.Name = String.Format("object_#{0}", MyOwner.MyWorld.CountObjects);
             else Placing.Name = newObj_Name.Text;
 
             SimObject MyNewObject = new SimObject(Placing, double.Parse(newobj_Mass.Text) / 1000);
@@ -171,11 +170,6 @@ namespace PhysBox
         {
             if (MyOwner.Selected != null)
                 MyOwner.Selected.ResetAll();
-        }
-
-        private void Toolbox_Load(object sender, EventArgs e)
-        {
-            ObjectCounter = (int)MyOwner.MyWorld.CountObjects;
         }
 
      }

@@ -760,7 +760,6 @@
             this.Name = "Toolbox";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Nástroje";
-            this.Load += new System.EventHandler(this.Toolbox_Load);
             this.tab_Toolbox.ResumeLayout(false);
             this.tool_newObj.ResumeLayout(false);
             this.newObj.ResumeLayout(false);

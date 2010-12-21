@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.ukončitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_LoadScene = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_SaveScene = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_openToolbar = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.menu_restartSim = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +44,7 @@
             this.menu_drawInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_showBounds = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_showVersion = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_showPhantom = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.menu_pauseSim = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_setZeroLevel = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,11 +72,10 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.analyzovatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.simTime = new System.Windows.Forms.Timer(this.components);
-            this.menu_showPhantom = new System.Windows.Forms.ToolStripMenuItem();
-            this.menu_SaveScene = new System.Windows.Forms.ToolStripMenuItem();
-            this.menu_LoadScene = new System.Windows.Forms.ToolStripMenuItem();
             this.saveScene = new System.Windows.Forms.SaveFileDialog();
             this.openScene = new System.Windows.Forms.OpenFileDialog();
+            this.menu_Scenes = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_DeleteOutOfBounds = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.stavovyRadek.SuspendLayout();
             this.manipulateObj.SuspendLayout();
@@ -95,6 +97,7 @@
             // 
             this.ukončitToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menu_LoadScene,
+            this.menu_Scenes,
             this.menu_SaveScene,
             this.menu_openToolbar,
             this.toolStripMenuItem3,
@@ -103,6 +106,23 @@
             this.ukončitToolStripMenuItem.Name = "ukončitToolStripMenuItem";
             this.ukončitToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.ukončitToolStripMenuItem.Text = "Program";
+            // 
+            // menu_LoadScene
+            // 
+            this.menu_LoadScene.Name = "menu_LoadScene";
+            this.menu_LoadScene.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.menu_LoadScene.Size = new System.Drawing.Size(184, 22);
+            this.menu_LoadScene.Text = "Načíst scénu";
+            this.menu_LoadScene.Click += new System.EventHandler(this.menu_LoadScene_Click);
+            // 
+            // menu_SaveScene
+            // 
+            this.menu_SaveScene.Enabled = false;
+            this.menu_SaveScene.Name = "menu_SaveScene";
+            this.menu_SaveScene.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.menu_SaveScene.Size = new System.Drawing.Size(184, 22);
+            this.menu_SaveScene.Text = "Uložit scénu";
+            this.menu_SaveScene.Click += new System.EventHandler(this.uložitScénuToolStripMenuItem_Click);
             // 
             // menu_openToolbar
             // 
@@ -151,6 +171,7 @@
             this.menu_pauseSim,
             this.menu_setZeroLevel,
             this.menu_AllowStatics,
+            this.menu_DeleteOutOfBounds,
             this.toolStripMenuItem7,
             this.menu_ZoomIn,
             this.menu_ZoomOut});
@@ -195,6 +216,15 @@
             this.menu_showVersion.Name = "menu_showVersion";
             this.menu_showVersion.Size = new System.Drawing.Size(234, 22);
             this.menu_showVersion.Text = "Zobrazit verzi";
+            // 
+            // menu_showPhantom
+            // 
+            this.menu_showPhantom.Checked = true;
+            this.menu_showPhantom.CheckOnClick = true;
+            this.menu_showPhantom.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.menu_showPhantom.Name = "menu_showPhantom";
+            this.menu_showPhantom.Size = new System.Drawing.Size(234, 22);
+            this.menu_showPhantom.Text = "Zobrazit siluetu při manipulaci";
             // 
             // toolStripMenuItem4
             // 
@@ -397,40 +427,30 @@
             this.simTime.Interval = 3;
             this.simTime.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // menu_showPhantom
-            // 
-            this.menu_showPhantom.Checked = true;
-            this.menu_showPhantom.CheckOnClick = true;
-            this.menu_showPhantom.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.menu_showPhantom.Name = "menu_showPhantom";
-            this.menu_showPhantom.Size = new System.Drawing.Size(234, 22);
-            this.menu_showPhantom.Text = "Zobrazit siluetu při manipulaci";
-            // 
-            // menu_SaveScene
-            // 
-            this.menu_SaveScene.Enabled = false;
-            this.menu_SaveScene.Name = "menu_SaveScene";
-            this.menu_SaveScene.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.menu_SaveScene.Size = new System.Drawing.Size(184, 22);
-            this.menu_SaveScene.Text = "Uložit scénu";
-            this.menu_SaveScene.Click += new System.EventHandler(this.uložitScénuToolStripMenuItem_Click);
-            // 
-            // menu_LoadScene
-            // 
-            this.menu_LoadScene.Name = "menu_LoadScene";
-            this.menu_LoadScene.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.menu_LoadScene.Size = new System.Drawing.Size(184, 22);
-            this.menu_LoadScene.Text = "Načíst scénu";
-            this.menu_LoadScene.Click += new System.EventHandler(this.menu_LoadScene_Click);
-            // 
             // saveScene
             // 
-            this.saveScene.Filter = "Soubory XML|*.xml";
+            this.saveScene.Filter = "Soubory SCE|*.sce";
+            this.saveScene.InitialDirectory = "scenes";
             this.saveScene.Title = "Uložit scénu";
             // 
             // openScene
             // 
-            this.openScene.Filter = "Soubory XML|*.xml";
+            this.openScene.Filter = "Soubory SCE|*.sce";
+            this.openScene.InitialDirectory = "scenes";
+            // 
+            // menu_Scenes
+            // 
+            this.menu_Scenes.Name = "menu_Scenes";
+            this.menu_Scenes.Size = new System.Drawing.Size(184, 22);
+            this.menu_Scenes.Text = "Scény";
+            // 
+            // menu_DeleteOutOfBounds
+            // 
+            this.menu_DeleteOutOfBounds.CheckOnClick = true;
+            this.menu_DeleteOutOfBounds.Name = "menu_DeleteOutOfBounds";
+            this.menu_DeleteOutOfBounds.Size = new System.Drawing.Size(234, 22);
+            this.menu_DeleteOutOfBounds.Text = "Odstranit objekty mimo okno";
+            this.menu_DeleteOutOfBounds.CheckedChanged += new System.EventHandler(this.menu_DeleteOutOfBounds_CheckedChanged);
             // 
             // MainForm
             // 
@@ -511,6 +531,8 @@
         private System.Windows.Forms.ToolStripMenuItem menu_SaveScene;
         private System.Windows.Forms.SaveFileDialog saveScene;
         private System.Windows.Forms.OpenFileDialog openScene;
+        private System.Windows.Forms.ToolStripMenuItem menu_Scenes;
+        private System.Windows.Forms.ToolStripMenuItem menu_DeleteOutOfBounds;
     }
 }
 

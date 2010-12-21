@@ -89,6 +89,7 @@ namespace PhysLib
             r = WorldResolution;
             Delta = 0.01;
             paused = false;
+            DeleteOutOfBounds = false;
         }
 
         /// <summary>
@@ -362,6 +363,15 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Indikuje, zda objekty mimo simulační okno budou smazány místo vypnutí
+        /// </summary>
+        public bool DeleteOutOfBounds
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Provede simulační krok
         /// </summary>
         public void Tick()
@@ -377,6 +387,7 @@ namespace PhysLib
                         {
                             PhysObjs[i].LinearVelocity = PhysObjs[i].AngularVelocity = Vector.Zero;
                             PhysObjs[i].Enabled = false;
+                            if (DeleteOutOfBounds) Objs.RemoveAt(i);
                         }
                         if (!PhysObjs[i].Enabled) continue;
 
@@ -399,7 +410,7 @@ namespace PhysLib
                         }
 
                         if (PhysObjs[i].LinearVelocity.IsNaN)
-                            throw new DataMisalignedException();
+                            throw new DataMisalignedException("Tuhle vtipnou vyjímku musím chytit, abych zjistil kdy tenhle divnej stav nastává");
 
                         PhysObjs[i].Model.Orientation += Math.Round((PhysObjs[i].AngularVelocity[2] * 180 / Math.PI) * Delta, 3);
                         PhysObjs[i].AngularVelocity   += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);

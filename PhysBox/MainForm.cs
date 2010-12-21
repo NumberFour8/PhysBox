@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
+using System.Linq;
 
 using PhysLib;
 
@@ -27,6 +28,19 @@ namespace PhysBox
             InitializeComponent();
             Ctx = new BufferedGraphicsContext();
             if (!Directory.Exists("scenes")) Directory.CreateDirectory("scenes");
+            RefreshScenes();
+        }
+
+        private void RefreshScenes()
+        {
+            menu_Scenes.DropDownItems.Clear();
+            foreach (string name in from string n in Directory.GetFiles("scenes") where n.Contains(".sce") select Path.GetFileNameWithoutExtension(n))
+                menu_Scenes.DropDownItems.Add(new ToolStripMenuItem(name,null,new EventHandler(QuickLoadScene)));
+        }
+
+        private void QuickLoadScene(object Sender, EventArgs args)
+        {
+            LoadScene(@"scenes\" + (Sender as ToolStripMenuItem).Text + ".sce");
         }
 
         private void ShowToolbox()
@@ -273,7 +287,8 @@ namespace PhysBox
             Buffer.Graphics.ScaleTransform(0.5f, 0.5f);
             MyWorld.MaximumRadius *= 2;
 
-            menu_ZoomOut.Enabled = ScaleRatio <= 4;            
+            menu_ZoomOut.Enabled = ScaleRatio <= 4;
+            menu_ZoomIn.Enabled = ScaleRatio >= 0.25;
         }
 
         private void menu_ZoomIn_Click(object sender, EventArgs e)
@@ -283,6 +298,7 @@ namespace PhysBox
             MyWorld.MaximumRadius *= 0.5;
 
             menu_ZoomIn.Enabled = ScaleRatio >= 0.25;
+            menu_ZoomOut.Enabled = ScaleRatio <= 4;
         }
 
         private void uložitScénuToolStripMenuItem_Click(object sender, EventArgs e)
@@ -314,15 +330,13 @@ namespace PhysBox
             Wri.Close();
         }
 
-        private void menu_LoadScene_Click(object sender, EventArgs e)
+        private void LoadScene(string Path)
         {
-            if (openScene.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
-            
             MyWorld.ClearFields();
             MyWorld.ClearObjects();
             menu_pauseSim.Checked = true;
 
-            XmlTextReader Rdr = new XmlTextReader(openScene.FileName);
+            XmlTextReader Rdr = new XmlTextReader(Path);
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter fmt = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             while (Rdr.Read())
             {
@@ -341,6 +355,18 @@ namespace PhysBox
                 else continue;
             }
             Rdr.Close();
+        }
+
+        private void menu_LoadScene_Click(object sender, EventArgs e)
+        {
+            if (openScene.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
+
+            LoadScene(openScene.FileName);
+        }
+
+        private void menu_DeleteOutOfBounds_CheckedChanged(object sender, EventArgs e)
+        {
+            MyWorld.DeleteOutOfBounds = menu_DeleteOutOfBounds.Checked;
         }       
     }
 }
