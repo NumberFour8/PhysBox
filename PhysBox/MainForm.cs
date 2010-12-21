@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml;
+using System.IO;
 
 using PhysLib;
 
@@ -18,11 +20,13 @@ namespace PhysBox
         private Toolbox Tools;
         public SimObject Selected = null;
         private BufferedGraphics Buffer;
-        
+        private float ScaleRatio = 1;
+
         public MainForm()
         {
             InitializeComponent();
             Ctx = new BufferedGraphicsContext();
+            if (!Directory.Exists("scenes")) Directory.CreateDirectory("scenes");
         }
 
         private void ShowToolbox()
@@ -59,38 +63,34 @@ namespace PhysBox
 
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
+            Vector ClickPos = (new Vector(e.X, e.Y, 0))*(double)ScaleRatio;
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
+
                 if (Placing != null)
                 {                    
-                    Placing.Model.Position = new Vector(e.X, e.Y,0);
+                    Placing.Model.Position = ClickPos;
                     (Placing.Model as GraphicObject).WorldIndex = MyWorld.AddObject(Placing);
                     
                     Placing = null;
                     Moving = Rotating = false;
                     Cursor = Cursors.Default;
+                    menu_SaveScene.Enabled = MyWorld.CountObjects > 0;
                     if (Tools != null && !Tools.IsDisposed) Tools.ActionDone();
                 }
 
                 if (SetLevel)
                 {
                     SetLevel = false;
-                    MyWorld.Level = new Vector(e.X, e.Y, 0);
+                    MyWorld.Level = ClickPos;
                     if (Tools != null && !Tools.IsDisposed) Tools.ActionDone();
                 }
 
                 if (Selected != null)
                 {
-                    if (Moving)
-                    {
-                        Selected.Model.Position = new Vector(e.X, e.Y, 0);
-                        Cursor = Cursors.Default;
-                        Moving = false;
-                    }
-
                     if (SetAxis)
                     {
-                        Selected.RotationPoint = new Vector(e.X, e.Y, 0);
+                        Selected.RotationPoint = ClickPos;
                         Cursor = Cursors.Default;
                         SetAxis = false;
                     }
@@ -98,12 +98,12 @@ namespace PhysBox
                     if (AddForce)
                     {
                         if (afOrigin == null)
-                            afOrigin = (PointF)Selected.Model.ProjectToObject(new Vector(e.X,e.Y,0));
+                            afOrigin = (PointF)Selected.Model.ProjectToObject(ClickPos);
                         else
                         {
                             AddForce = false;
                             Cursor = Cursors.Default;
-                            Selected.ApplyForce(new Vector((double)(afOrigin.Value.X - e.X), (double)(afOrigin.Value.Y - e.Y),0)*multiplier*Selected.Mass, new Vector((double)afOrigin.Value.X, (double)afOrigin.Value.Y,0));
+                            Selected.ApplyForce(((Vector)afOrigin.Value - ClickPos) * multiplier * Selected.Mass, (Vector)afOrigin.Value);
 
                             afOrigin = null;
                             if (Tools != null && !Tools.IsDisposed) Tools.ActionDone();
@@ -116,7 +116,7 @@ namespace PhysBox
             {
                 if (MyWorld.CountObjects == 0) return;
                 if (SetLevel) return;
-                Selected = MyWorld.NearestObject(new Vector(e.X, e.Y, 0),!menu_AllowStatics.Checked);
+                Selected = MyWorld.NearestObject(ClickPos,!menu_AllowStatics.Checked);
                 if (Selected == null) return;
 
                 stat_SelObject.Text = manipulateObj_Name.Text = String.Format("Objekt: {0}", (Selected.Model as GraphicObject).Name);
@@ -153,9 +153,9 @@ namespace PhysBox
 
         private void MainForm_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left && (Rotating || Scaling))
+            if (e.Button == System.Windows.Forms.MouseButtons.Left && (Rotating || Scaling || Moving))
             {
-                Scaling = Rotating = false;
+                Scaling = Rotating = Moving = false;
                 Cursor = Cursors.Default;
             }
         }
@@ -164,6 +164,8 @@ namespace PhysBox
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left && Rotating && Selected != null)
                 Selected.Model.Orientation += 3;
+            if (e.Button == System.Windows.Forms.MouseButtons.Left && Moving && Selected != null)
+                Selected.Model.Position = (new Vector(e.X, e.Y, 0)) * ScaleRatio;
             //if (e.Button == System.Windows.Forms.MouseButtons.Left && Scaling && Selected != null)
             //    Selected.Model.Scale += 2;
         }        
@@ -263,6 +265,82 @@ namespace PhysBox
         {
             if (MyWorld != null) 
               MyWorld.Paused = WindowState != FormWindowState.Maximized;
+        }
+
+        private void menu_ZoomOut_Click(object sender, EventArgs e)
+        {
+            ScaleRatio *= 2;
+            Buffer.Graphics.ScaleTransform(0.5f, 0.5f);
+            MyWorld.MaximumRadius *= 2;
+
+            menu_ZoomOut.Enabled = ScaleRatio <= 4;            
+        }
+
+        private void menu_ZoomIn_Click(object sender, EventArgs e)
+        {
+            ScaleRatio *= 0.5f;
+            Buffer.Graphics.ScaleTransform(2, 2);
+            MyWorld.MaximumRadius *= 0.5;
+
+            menu_ZoomIn.Enabled = ScaleRatio >= 0.25;
+        }
+
+        private void uložitScénuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            menu_pauseSim.Checked = true;
+            if (saveScene.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
+
+            XmlTextWriter Wri = new XmlTextWriter(saveScene.FileName, System.Text.Encoding.UTF8);
+            Wri.Formatting = Formatting.Indented;
+            
+            Wri.WriteStartDocument();
+            Wri.WriteStartElement("Scene");
+            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter fmt = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            foreach (SimObject obj in MyWorld.Objects)
+            {
+                Wri.WriteStartElement("Object");
+                using (MemoryStream S = new MemoryStream()){
+                    fmt.Serialize(S, obj);
+                    byte[] bfr = new byte[S.Length];
+                    S.Seek(0, SeekOrigin.Begin);
+                    S.Read(bfr, 0, (int)S.Length);
+                    Wri.WriteAttributeString("Size", S.Length.ToString());
+                    Wri.WriteBase64(bfr, 0,(int)S.Length);
+                }
+                Wri.WriteEndElement();
+            }
+            Wri.WriteEndElement();
+            Wri.WriteEndDocument();
+            Wri.Close();
+        }
+
+        private void menu_LoadScene_Click(object sender, EventArgs e)
+        {
+            if (openScene.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
+            
+            MyWorld.ClearFields();
+            MyWorld.ClearObjects();
+            menu_pauseSim.Checked = true;
+
+            XmlTextReader Rdr = new XmlTextReader(openScene.FileName);
+            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter fmt = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            while (Rdr.Read())
+            {
+                if (Rdr.Name == "Object" && Rdr.NodeType == XmlNodeType.Element)
+                {
+                    int length = int.Parse(Rdr.GetAttribute("Size"));
+                    byte[] data = new byte[length];
+                    using (MemoryStream S = new MemoryStream())
+                    {
+                        Rdr.ReadElementContentAsBase64(data, 0, length);
+                        S.Write(data, 0, length);
+                        S.Seek(0, SeekOrigin.Begin);
+                        MyWorld.AddObject((SimObject)fmt.Deserialize(S));
+                    }
+                }
+                else continue;
+            }
+            Rdr.Close();
         }       
     }
 }

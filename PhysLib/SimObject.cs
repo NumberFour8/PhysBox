@@ -5,6 +5,7 @@ namespace PhysLib
     /// <summary>
     /// Reprezentuje těleso ve fyzikálním světě
     /// </summary>
+    [Serializable]
     public class SimObject
     {
         private double m,J;
@@ -18,6 +19,9 @@ namespace PhysLib
         /// <param name="dMass">Hmotnost tělesa</param>
         public SimObject(Geometry ObjectModel, double ObjectMass)
         {
+            if (!ObjectModel.GetType().Attributes.HasFlag(System.Reflection.TypeAttributes.Serializable))
+                throw new ArgumentException();
+
             model = ObjectModel;
             Mass = ObjectMass;
             
@@ -170,7 +174,7 @@ namespace PhysLib
         /// <param name="Origin">Působiště síly</param>
         public void ApplyForce(Vector Force,Vector Origin)
         {
-            if (Force.IsNull) return;
+            if (Force.IsNull || Force.IsNaN) return;
             totalForce += Force;
 
             totalTorque += Vector.Cross(GetTorqueIntersection(Force, Model.ProjectToObject(Origin)) - RotationPoint, Force);
@@ -195,6 +199,7 @@ namespace PhysLib
         /// <returns>Průsečík ramene a síly</returns>
         public Vector GetTorqueIntersection(Vector Force,Vector Origin)
         {
+            if (Force.IsNull) return COG;
             Vector P = new Vector(3);
             double c = (Force[0] * (RotationPoint[0] - Origin[0]) + Force[1] * (RotationPoint[1] - Origin[1])) / Math.Pow(Force.Magnitude, 2);
 

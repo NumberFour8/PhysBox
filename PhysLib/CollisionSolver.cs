@@ -74,7 +74,7 @@ namespace PhysLib
         /// <param name="ObjectB">Účastník kolize</param>
         /// <returns>Hlášení o kolizi nebo null</returns>
         public CollisionReport ObjectsCollide(SimObject ObjectA,SimObject ObjectB)
-        {
+        {            
             CollisionReport Ret = new CollisionReport(ObjectA,ObjectB);
             PointF[] geomA = null, geomB = null;
             

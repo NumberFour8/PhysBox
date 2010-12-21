@@ -60,6 +60,19 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Zjistí jestli vektor obsahuje nekonečno nebo nedefinovaný výraz
+        /// </summary>
+        public bool IsNaN
+        {
+            get
+            {
+                for (int i = 0; i < Count; i++)
+                    if (Double.IsNaN(t[i]) || Double.IsInfinity(t[i])) return true;
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Nulový vektor
         /// </summary>
         public static readonly Vector Zero = new Vector(3);

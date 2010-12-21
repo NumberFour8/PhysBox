@@ -57,6 +57,7 @@
     <Compile Include="Draw.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GraphicObject.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

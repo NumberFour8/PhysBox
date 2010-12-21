@@ -95,6 +95,7 @@ namespace PhysBox
                 Object.WriteAttributeString("C", text_objDrag.Text);
                 Object.WriteAttributeString("Color", col);
                 Object.WriteAttributeString("Tension", text_objTension.Text);
+                Object.WriteAttributeString("ID", System.Guid.NewGuid().ToString());
 
                 Object.WriteStartElement("COG");
                 Object.WriteAttributeString("X", (COG.Value.X-Desc.Centroid.X).ToString());

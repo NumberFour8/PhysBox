@@ -396,7 +396,10 @@ namespace PhysLib
                         {
                             PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
                             PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * (Delta / PhysObjs[i].Mass);
-                        }                                                
+                        }
+
+                        if (PhysObjs[i].LinearVelocity.IsNaN)
+                            throw new DataMisalignedException();
 
                         PhysObjs[i].Model.Orientation += Math.Round((PhysObjs[i].AngularVelocity[2] * 180 / Math.PI) * Delta, 3);
                         PhysObjs[i].AngularVelocity   += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);
@@ -454,6 +457,7 @@ namespace PhysLib
             Ret.Rotational = 0.5 * Object.Mass * Object.MomentOfInertia * Vector.Pow(Object.AngularVelocity, 2);
             return Ret;
         }
+
     }
 
     /// <summary>

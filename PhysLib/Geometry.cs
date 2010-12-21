@@ -88,6 +88,8 @@ namespace PhysLib
             get { return (Vector)center; }
             set
             {
+                if (value.IsNaN) throw new ArgumentOutOfRangeException();
+
                 using (System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix())
                 {
                     Mat.Translate((float)(value[0] - center[0]), (float)(value[1] - center[1]));
@@ -106,6 +108,8 @@ namespace PhysLib
         {
             get { return angle; }
             set {
+                if (Double.IsNaN(value) || Double.IsInfinity(value)) throw new ArgumentOutOfRangeException();
+
                 if (Math.Abs(value - angle) > 0.05)
                 {
                     using (System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix())
@@ -150,6 +154,8 @@ namespace PhysLib
             get { return scale; }
             set
             {
+                if (Double.IsNaN(value) || Double.IsInfinity(value)) throw new ArgumentOutOfRangeException();
+
                 using (System.Drawing.Drawing2D.Matrix mat = new System.Drawing.Drawing2D.Matrix())
                 {
                     mat.Translate((float)-Position[0], (float)-Position[1]);

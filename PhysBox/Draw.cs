@@ -9,38 +9,12 @@ using PhysLib;
 namespace PhysBox
 {
 
-    // Odvozená třída, reprezentující grafický podklad pro těleso
-    public class GraphicObject : Geometry
-    {
-        public Brush Fill { get; set; }
-        public bool ShowVectors { get; set; }
-        public string Name { get; set; }
-        public float Tension { get; set; }
-        public int WorldIndex { get; set; }
-
-        public GraphicObject(Brush Texture, PointF[] Geometry,PointF COG)
-            : base(Geometry, new PointF(0, 0), COG)
-        {
-            Fill = Texture;
-            ShowVectors = false;
-            Name = "obj_" + (DateTime.Now.Minute + DateTime.Now.Second).ToString(); // "Náhodný" název
-            Tension = 0;
-        }
-
-        public GraphicsPath MakePath()
-        {
-            GraphicsPath Ret = new GraphicsPath();
-            Ret.AddClosedCurve(ObjectGeometry, Tension);            
-            return Ret;
-        }
-    }
-
+    // Vykreslovací kód
     public partial class MainForm : Form
     {
 
         private BufferedGraphicsContext Ctx;
         public const int CursorCorrection = -23;
-        private readonly Font SmallFont = new Font(FontFamily.GenericSansSerif, 7);
 
         private void RenderAllObjects(Graphics Destination)
         {
@@ -84,12 +58,13 @@ namespace PhysBox
             {
                 Buffer.Graphics.FillEllipse(Brushes.Red, new RectangleF(afOrigin.Value.X - 4, afOrigin.Value.Y - 4, 8, 8));
 
-                Point pt = Cursor.Position;
+                PointF pt = Cursor.Position;
                 pt.Y += CursorCorrection;
+                pt.X *= ScaleRatio; pt.Y *= ScaleRatio;
 
                 // Nakresli čáru symbolizující aplikovanou sílu
-                double size = multiplier*Selected.Mass*Math.Round(MyWorld.Convert(Geometry.PointDistance(new PointF(Cursor.Position.X,Cursor.Position.Y),afOrigin.Value),ConversionType.PixelsToMeters), 2);
-                Buffer.Graphics.DrawString(String.Format("F = {0} N", size), SmallFont, Brushes.Red, new PointF(afOrigin.Value.X - 50, afOrigin.Value.Y + 10));
+                double size = multiplier*Selected.Mass*Math.Round(MyWorld.Convert(Geometry.PointDistance(pt,afOrigin.Value),ConversionType.PixelsToMeters), 2);
+                Buffer.Graphics.DrawString(String.Format("F = {0} N", size), new Font(FontFamily.GenericSansSerif, 7*ScaleRatio), Brushes.Red, new PointF(afOrigin.Value.X - 50, afOrigin.Value.Y + 10));
                     
                 // Nakresli rameno síly
                 Vector p = Selected.GetTorqueIntersection((Vector)afOrigin - (new Vector(pt.X,pt.Y)),(Vector)afOrigin);
@@ -99,30 +74,48 @@ namespace PhysBox
             }
 
             if (SetLevel)
-                Buffer.Graphics.DrawLine(Pens.DarkViolet, new PointF(0, Cursor.Position.Y + CursorCorrection), new PointF(Size.Width, Cursor.Position.Y + CursorCorrection)); 
+                Buffer.Graphics.DrawLine(Pens.DarkViolet, new PointF(0, (Cursor.Position.Y + CursorCorrection)*ScaleRatio), new PointF(Size.Width*ScaleRatio, (Cursor.Position.Y + CursorCorrection)*ScaleRatio)); 
 
             if (menu_showVersion.Checked) // Vykresli verzi
-                Buffer.Graphics.DrawString("PhysBox, v.0.2", new Font(FontFamily.GenericSansSerif, 12), Brushes.Black, new PointF(10, mainMenu.Height + 5));
+                Buffer.Graphics.DrawString("PhysBox, v.0.2", new Font(FontFamily.GenericSansSerif, 12*ScaleRatio), Brushes.Black, new PointF(10, (mainMenu.Height + 5)*ScaleRatio));
 
             if (menu_drawInfo.Checked) // Vykresli informace o modelu
             {
-                string Info = String.Format("g: {0} m.s^-2\nRozlišení: {1}", MyWorld.Convert(MyWorld.Gravity, ConversionType.PixelsToMeters).Magnitude, MyWorld.Resolution);
-                Buffer.Graphics.DrawString(Info, new Font(FontFamily.GenericSansSerif, 11), Brushes.Black, Size.Width - 150, Size.Height - 120);
+                string Info = String.Format("g: {0} m.s^-2\nRozlišení: {1}\nZvětšení: {2}x", MyWorld.Convert(MyWorld.Gravity, ConversionType.PixelsToMeters).Magnitude, MyWorld.Resolution,1/ScaleRatio);
+                if (MyWorld.Paused)
+                    Info += "\nPOZASTAVENO";
+
+                Buffer.Graphics.DrawString(Info, new Font(FontFamily.GenericSansSerif, 11*ScaleRatio), Brushes.Black, (Size.Width - 150)*ScaleRatio, (Size.Height - 120)*ScaleRatio);
 
                 // Vykresli měřítko rozlišení
                 if (MyWorld.Resolution > 500)
                 {
-                    Buffer.Graphics.DrawString(String.Format("0,1 m = {0} px", MyWorld.Resolution / 10), SmallFont, Brushes.IndianRed, new PointF(30, Size.Height - 90));
-                    Buffer.Graphics.DrawLine(Pens.IndianRed, new PointF(30, Size.Height - 70), new PointF(30 + (float)MyWorld.Resolution / 10, Size.Height - 70));
+                    Buffer.Graphics.DrawString(String.Format("0,1 m = {0} px", MyWorld.Resolution / 10), new Font(FontFamily.GenericSansSerif, 7*ScaleRatio), Brushes.IndianRed, new PointF(30, Size.Height - 90));
+                    Buffer.Graphics.DrawLine(Pens.IndianRed, new PointF(30 * ScaleRatio, (Size.Height - 70) * ScaleRatio), new PointF(30 * ScaleRatio + (float)MyWorld.Resolution / 10, (Size.Height - 70) * ScaleRatio));
                 }
                 else
                 {
-                    Buffer.Graphics.DrawString(String.Format("1 m = {0} px", MyWorld.Resolution), SmallFont, Brushes.IndianRed, new PointF(30, Size.Height - 90));
-                    Buffer.Graphics.DrawLine(Pens.IndianRed, new PointF(30, Size.Height - 70), new PointF(30 + (float)MyWorld.Resolution, Size.Height - 70));
+                    Buffer.Graphics.DrawString(String.Format("1 m = {0} px", MyWorld.Resolution), new Font(FontFamily.GenericSansSerif, 7*ScaleRatio), Brushes.IndianRed, new PointF(30 * ScaleRatio, (Size.Height - 90) * ScaleRatio));
+                    Buffer.Graphics.DrawLine(Pens.IndianRed, new PointF(30*ScaleRatio, (Size.Height - 70)*ScaleRatio), new PointF(30*ScaleRatio + (float)MyWorld.Resolution, (Size.Height - 70)*ScaleRatio));
                 }
 
                 // Vykresli nulovou hladinu
-                Buffer.Graphics.DrawLine(Pens.Silver, new PointF(0, (float)MyWorld.Level[1]), new PointF(Size.Width, (float)MyWorld.Level[1]));
+                Buffer.Graphics.DrawLine(Pens.Silver, new PointF(0, (float)MyWorld.Level[1]*ScaleRatio), new PointF(Size.Width*ScaleRatio, (float)MyWorld.Level[1]*ScaleRatio));
+            }
+
+            // Je-li třeba vykresli siluetu
+            if (Placing != null && menu_showPhantom.Checked)
+            {
+                GraphicObject obj = Placing.Model as GraphicObject;
+                
+                PointF pt = Cursor.Position;
+                pt.Y += CursorCorrection;
+                pt.X *= ScaleRatio; pt.Y *= ScaleRatio;
+
+                Pen pn = new Pen(Color.ForestGreen);
+                pn.DashStyle = DashStyle.Dash;
+                obj.Position = (Vector)pt;
+                Buffer.Graphics.DrawPath(pn, obj.MakePath());
             }
 
             if (Tools != null && !Tools.IsDisposed && UpdateCounter >= 10)
