@@ -12,26 +12,6 @@ namespace PhysLib
         private Vector mtd;
 
         /// <summary>
-        /// Struktura pro pár kontaktních bodů
-        /// </summary>
-        public struct ContactPair
-        {
-            public PointF a, b;
-            public ContactPair(PointF first, PointF second)
-            {
-                a = first; b = second;
-            }
-
-            /// <summary>
-            /// Druhá mocnina vzdálenosti bodů
-            /// </summary>
-            public double DistanceSquared
-            {
-                get { return Vector.Pow((Vector)b - (Vector)a, 2);  }
-            }
-        }
-
-        /// <summary>
         /// Výchozí konstruktor 
         /// </summary>
         /// <param name="ObjA">První účastník kolize</param>
@@ -82,7 +62,7 @@ namespace PhysLib
         /// <summary>
         /// Typ dotyku
         /// </summary>
-        public ContactType Type
+        public ContactType TouchType
         {
             get;
             private set;
@@ -98,6 +78,27 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Zredukuje kontaktní páry na jeden jediný
+        /// </summary>
+        internal void Reduce()
+        {
+            ContactPair Ret = new ContactPair(Pairs[0].a, Pairs[0].b);
+            int len = Pairs.Length;
+            for (int i = 1; i < len; i++)
+            {
+                Ret.a.X += Pairs[i].a.X;
+                Ret.a.Y += Pairs[i].a.Y;
+
+                Ret.b.X += Pairs[i].b.X;
+                Ret.b.Y += Pairs[i].b.Y;
+            }
+
+            Ret.a.X /= len; Ret.b.X /= len;
+            Ret.a.Y /= len; Ret.b.Y /= len;
+            Pairs[0] = Ret;
+        }
+
+        /// <summary>
         /// Spočítá kontaktní páry
         /// </summary>
         internal void CalculatePairs()
@@ -110,12 +111,12 @@ namespace PhysLib
             {
                 if (supB.Length == 1)
                 {
-                    Type = ContactType.VertexVertex;
+                    TouchType = ContactType.VertexVertex;
                     c1 = supA[0]; c2 = supB[0];
                 }
                 else if (supB.Length == 2)
                 {
-                    Type = ContactType.VertexEdge;
+                    TouchType = ContactType.VertexEdge;
                     c1 = supA[0]; c2 = supB;
                 }
                 else throw new ArgumentException();
@@ -124,18 +125,19 @@ namespace PhysLib
             {
                 if (supB.Length == 1)
                 {
-                    Type = ContactType.VertexEdge;
+                    TouchType = ContactType.VertexEdge;
                     c1 = supA; c2 = supB[0];
                 }
                 else if (supB.Length == 2)
                 {
-                    Type = ContactType.EdgeEdge;
+                    TouchType = ContactType.EdgeEdge;
                     c1 = supA; c2 = supB;
                 }
                 else throw new ArgumentException();
             }
             else return;
             GetContactPairs(c1, c2);
+            Reduce();
         }
 
         /// <summary>
@@ -144,7 +146,7 @@ namespace PhysLib
         /// <param name="Edge">Hrana</param>
         /// <param name="V">Vnější bod</param>
         /// <returns>Bod na hraně</returns>
-        private PointF ClosestPointOnEdge(PointF[] Edge, PointF V)
+        private static PointF ClosestPointOnEdge(PointF[] Edge, PointF V)
         {
             Vector e = (Vector)Edge[1] - (Vector)Edge[0];
             Vector d = (Vector)V - (Vector)Edge[0];
@@ -174,7 +176,7 @@ namespace PhysLib
         /// <param name="e2">Bod/hrana</param>
         private void GetContactPairs(object e1, object e2)
         {
-            switch (Type)
+            switch (TouchType)
             {
                 case ContactType.VertexVertex:
                     Pairs = new ContactPair[1];
@@ -195,15 +197,38 @@ namespace PhysLib
                     break;
                 case ContactType.EdgeEdge:
                     Pairs = new ContactPair[4];
-                    Pairs[0] = new ContactPair(((PointF[])e1)[0], ClosestPointOnEdge((PointF[])e2, ((PointF[])e1)[0]));
-                    Pairs[1] = new ContactPair(((PointF[])e1)[1], ClosestPointOnEdge((PointF[])e2, ((PointF[])e1)[1]));
-                    Pairs[2] = new ContactPair(ClosestPointOnEdge((PointF[])e1, ((PointF[])e2)[0]), ((PointF[])e2)[0]);
-                    Pairs[3] = new ContactPair(ClosestPointOnEdge((PointF[])e1, ((PointF[])e2)[1]), ((PointF[])e2)[1]);
+                    PointF[] Edge1 = (PointF[])e1, Edge2 = (PointF[])e2;
+
+                    Pairs[0] = new ContactPair(Edge1[0], ClosestPointOnEdge(Edge2, Edge1[0]));
+                    Pairs[1] = new ContactPair(Edge1[1], ClosestPointOnEdge(Edge2, Edge1[1]));
+                    Pairs[2] = new ContactPair(ClosestPointOnEdge(Edge1, Edge2[0]), Edge2[0]);
+                    Pairs[3] = new ContactPair(ClosestPointOnEdge(Edge1, Edge2[1]), Edge2[1]);
 
                     Array.Sort<ContactPair>(Pairs, new Comparison<ContactPair>(CompareCP));
                     break;
             }
         }
 
+    }
+
+    /// <summary>
+    /// Struktura pro pár kontaktních bodů
+    /// </summary>
+    public struct ContactPair
+    {
+        public PointF a, b;
+        public ContactPair(PointF first, PointF second)
+        {
+            a = new PointF(first.X, first.Y);
+            b = new PointF(second.X, second.Y);
+        }
+
+        /// <summary>
+        /// Druhá mocnina vzdálenosti bodů
+        /// </summary>
+        public double DistanceSquared
+        {
+            get { return Math.Pow(Geometry.PointDistance(a, b), 2); }
+        }
     }
 }

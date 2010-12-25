@@ -45,7 +45,7 @@ namespace PhysLib
         /// <param name="Axis">Osa oddělení</param>
         /// <param name="Object">Objekt</param>
         /// <returns>True pokud je odděleno, False pokud nikoliv</returns>
-        public bool SeparatedByAxis(Vector Axis, Geometry ObjectA, Geometry ObjectB,ref CollisionReport Rep)
+        public static bool SeparatedByAxis(Vector Axis, Geometry ObjectA, Geometry ObjectB,ref CollisionReport Rep)
         {
             double minA = 0, maxA = 0, minB = 0, maxB = 0;
             ObjectA.ProjectToAxis(Axis, ref minA, ref maxA);
@@ -73,18 +73,10 @@ namespace PhysLib
         /// <param name="ObjectA">Účastník kolize</param>
         /// <param name="ObjectB">Účastník kolize</param>
         /// <returns>Hlášení o kolizi nebo null</returns>
-        public CollisionReport ObjectsCollide(SimObject ObjectA,SimObject ObjectB)
+        public static CollisionReport ObjectsCollide(SimObject ObjectA,SimObject ObjectB)
         {            
             CollisionReport Ret = new CollisionReport(ObjectA,ObjectB);
-            PointF[] geomA = null, geomB = null;
-            
-            if (!ObjectA.Model.Convex)
-                geomA = ObjectA.Model.BoundingBox;
-            else geomA = ObjectA.Model.ObjectGeometry;
-            
-            if (!ObjectB.Model.Convex)
-                geomB = ObjectB.Model.BoundingBox;
-            else geomB = ObjectB.Model.ObjectGeometry;
+            PointF[] geomA = ObjectA.Model.BoundingBox,geomB = ObjectB.Model.BoundingBox;
 
             int Count = geomA.Length + geomB.Length;
             for (int i = 0, j; i < Count; i++)
@@ -186,24 +178,24 @@ namespace PhysLib
 
             Vector RelativeVelo = (Report.A.LinearVelocity + AP*Report.A.AngularVelocity[2]) - (Report.B.LinearVelocity+BP*Report.B.AngularVelocity[2]);
             Vector N = Vector.Unit(Report.MTD);
-            if (N.IsNull) return;
 
             double C = 1 / (1 / Report.A.Mass + 1 / Report.B.Mass);
             double I = (Math.Pow(Vector.Dot(AP, N), 2) / Report.A.MomentOfInertia) + (Math.Pow(Vector.Dot(BP, N), 2) / Report.B.MomentOfInertia);
 
             double Num = (-1 - E) * Vector.Dot(RelativeVelo, N);
             double Denom = Vector.Dot(N, N) * ((1 / Report.A.Mass) + (1 / Report.B.Mass)) + I;
-            double Impulse_F = Num / Denom;
-
+            double Impulse_C = Math.Round(Num / Denom,2);
+            
             Report.A.Model.Position += Report.MTD * (1 / Report.A.Mass) * C;
-
-            Report.A.LinearVelocity += N * (Impulse_F / Report.A.Mass);
-            Report.A.AngularVelocity[2] += Vector.Dot(N, AP) * (Impulse_F / Report.A.MomentOfInertia);
-
             Report.B.Model.Position += -Report.MTD * (1 / Report.B.Mass) * C;
 
-            Report.B.LinearVelocity -= N * (Impulse_F / Report.B.Mass);
-            Report.B.AngularVelocity[2] -= Vector.Dot(N, BP) * (Impulse_F / Report.B.MomentOfInertia);
+            if (Double.IsNaN(Impulse_C)) return;
+
+            Report.A.LinearVelocity += N * (Impulse_C / Report.A.Mass);
+            Report.A.AngularVelocity[2] += Vector.Dot(N, AP) * (Impulse_C / Report.A.MomentOfInertia);            
+
+            Report.B.LinearVelocity -= N * (Impulse_C / Report.B.Mass);
+            Report.B.AngularVelocity[2] -= Vector.Dot(N, BP) * (Impulse_C / Report.B.MomentOfInertia);
 
             Report.A.Model.RaiseOnCollision(Report);
             Report.B.Model.RaiseOnCollision(Report);

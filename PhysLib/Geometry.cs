@@ -43,7 +43,8 @@ namespace PhysLib
             scale = 1.0f;
 
             desc = AnalyzeVertexGroup(Vertices);
-            geom = Vertices;
+            geom = new PointF[Vertices.Length];
+            Vertices.CopyTo(geom, 0);
 
             if (COG.HasValue)
                 center = (Vector)COG;
@@ -192,8 +193,6 @@ namespace PhysLib
         public static GeometryDescriptor AnalyzeVertexGroup(PointF[] Vertices)
         {
             GeometryDescriptor Description = new GeometryDescriptor(Vertices);
-
-            PointF top = Vertices[0], bottom = Vertices[0], left = Vertices[0], right = Vertices[0];
             Description.FrontalArea = PolygonArea(Vertices);
 
             for (int i = 0,j = 0; i < Vertices.Length; i++)
@@ -216,17 +215,6 @@ namespace PhysLib
                 Description.Height = r.Height;
             }
             
-            double dist = Double.PositiveInfinity;            
-            for (int i = 0; i < Vertices.Length; i++)
-            {
-                double d = Geometry.PointDistance(Vertices[i], Description.Centroid);
-                if (d < dist)
-                {
-                    dist = d;
-                    Description.Farthest = i;
-                }
-            }
-
             return Description;
         }
 
@@ -304,14 +292,6 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Nejvzdálenější bod od středu tělesa
-        /// </summary>
-        public PointF FarthestPoint
-        {
-            get { return geom[desc.Farthest]; }
-        }
-
-        /// <summary>
         /// Spočte vzdálenost dvou bodů
         /// </summary>
         /// <param name="A">Bod A</param>
@@ -386,15 +366,12 @@ namespace PhysLib
         /// <param name="max">Horní mez intervalu</param>
         public void ProjectToAxis(Vector Axis, ref double min, ref double max)
         {
-            PointF[] geom = null;
-            if (Convex)
-                geom = ObjectGeometry;
-            else geom = BoundingBox;
+            PointF[] axProj = BoundingBox;
 
-            min = max = Vector.Dot(Axis, (Vector)geom[0]);
-            for (int i = 1; i < geom.Length; i++)
+            min = max = Vector.Dot(Axis, (Vector)axProj[0]);
+            for (int i = 1; i < axProj.Length; i++)
             {
-                double d = Vector.Dot(Axis, (Vector)geom[i]);
+                double d = Vector.Dot(Axis, (Vector)axProj[i]);
                 if (d < min)
                     min = d;
                 else if (d > max)
@@ -403,32 +380,27 @@ namespace PhysLib
         }
 
         internal PointF[] SupportPoints(Vector Axis)
-        {
-            PointF[] geom = null;
-            if (Convex)
-                geom = ObjectGeometry;
-            else geom = BoundingBox;            
-            
+        {   
             double min = -1.0f;
             const double threshold = 1.0E-1;            
-            int num = geom.Length;
+            PointF[] supGeom = BoundingBox;
 
             ArrayList sp = new ArrayList();
 
-            for (int i = 0; i < num; i++)
+            for (int i = 0; i < supGeom.Length; i++)
             {
-                double t = Vector.Dot(Axis,(Vector)geom[i]);
+                double t = Vector.Dot(Axis,(Vector)supGeom[i]);
                 if (t < min || i == 0)
                     min = t;
             }
 
-            for (int i = 0; i < num; i++)
+            for (int i = 0; i < supGeom.Length; i++)
             {
-                double t = Vector.Dot(Axis,(Vector)geom[i]);
+                double t = Vector.Dot(Axis,(Vector)supGeom[i]);
 
                 if (t < min + threshold)
                 {
-                    sp.Add(ObjectGeometry[i]);
+                    sp.Add(supGeom[i]);
                     if (sp.Count == 2) break;
                 }
             }
@@ -475,11 +447,6 @@ namespace PhysLib
         public PointF Centroid;
 
         /// <summary>
-        /// Index bodu nejdále od centroidu
-        /// </summary>
-        public int Farthest;
-
-        /// <summary>
         /// Indikuje, zda je polygon konvexní
         /// </summary>
         public bool Convex
@@ -503,7 +470,7 @@ namespace PhysLib
         public GeometryDescriptor(PointF[] Default)
         {
             Centroid = new PointF(0, 0);
-            Height = Width = Depth = FrontalArea = Farthest = 0;
+            Height = Width = Depth = FrontalArea = 0;
             
             DefaultVertices = new PointF[Default.Length];
             Default.CopyTo(DefaultVertices, 0);
@@ -549,11 +516,16 @@ namespace PhysLib
 	        return (A.X - O.X) * (B.Y - O.Y) - (A.Y - O.Y) * (B.X - O.X);
         }
 
-        public static PointF[] GetConvexHull(PointF[] input)
+        /// <summary>
+        /// Vytvoří konvexní obal z daných vertexů
+        /// </summary>
+        /// <param name="Vertices">Vertexy</param>
+        /// <returns>Pole vertexů tvořící konvexní obal</returns>
+        public static PointF[] GetConvexHull(PointF[] Vertices)
         {
-            int n = input.Length, k = 0;
-            PointF[] Hull = new PointF[2 * n],Sorted = new PointF[input.Length];
-            input.CopyTo(Sorted, 0);
+            int n = Vertices.Length, k = 0;
+            PointF[] Hull = new PointF[2 * n],Sorted = new PointF[Vertices.Length];
+            Vertices.CopyTo(Sorted, 0);
 
             Array.Sort<PointF>(Sorted, new Comparison<PointF>(LexicalPointComparison));
 

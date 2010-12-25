@@ -371,7 +371,6 @@ namespace Mersenne
         /// Generates a new pseudo-random <see cref="UInt32"/>.
         /// </summary>
         /// <returns>A pseudo-random <see cref="UInt32"/>.</returns>
-        [CLSCompliant(false)]
         protected UInt32 GenerateUInt32()
         {
             UInt32 y;
