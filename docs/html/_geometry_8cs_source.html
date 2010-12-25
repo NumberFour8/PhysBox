@@ -49,422 +49,395 @@
 <a name="l00043"></a>00043             scale = 1.0f;
 <a name="l00044"></a>00044 
 <a name="l00045"></a>00045             desc = <a class="code" href="class_phys_lib_1_1_geometry.html#a0c34c013ea02adfc8d755b8c9c33e226" title="Analyzuje pole vertexů jako polygon a zjistí jeho geometrický střed (centroid)...">AnalyzeVertexGroup</a>(Vertices);
-<a name="l00046"></a>00046             geom = Vertices;
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048             <span class="keywordflow">if</span> (COG.HasValue)
-<a name="l00049"></a>00049                 center = (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)COG;
-<a name="l00050"></a>00050             <span class="keywordflow">else</span> center = (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a2eb30e8a3f3d450f7203f68c6d4e63c5" title="Centroid útvaru.">Centroid</a>;
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052             <a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a> = (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)InitPosition;
-<a name="l00053"></a>00053             <a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a> = (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)InitPosition;
-<a name="l00054"></a>00054         }
-<a name="l00055"></a>00055 
-<a name="l00059"></a>00059         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a4e66a23359a51b17bede92205730d24e" title="Koeficient odporu.">DragCoefficient</a>
-<a name="l00060"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a4e66a23359a51b17bede92205730d24e">00060</a>         {
-<a name="l00061"></a>00061             <span class="keyword">get</span>; <span class="keyword">set</span>;
-<a name="l00062"></a>00062         }
-<a name="l00063"></a>00063 
-<a name="l00067"></a>00067         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a5434e9ce6b416eb37bbb62090087d3c3" title="Hloubka tělesa.">Depth</a>
-<a name="l00068"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a5434e9ce6b416eb37bbb62090087d3c3">00068</a>         {
-<a name="l00069"></a>00069             <span class="keyword">get</span> { <span class="keywordflow">return</span> desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a4011b6aa5d2cc4f22ab3e22d3c64aa54" title="Hloubka útvaru.">Depth</a>; }
-<a name="l00070"></a>00070             <span class="keyword">set</span>
-<a name="l00071"></a>00071             {
-<a name="l00072"></a>00072                 desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a4011b6aa5d2cc4f22ab3e22d3c64aa54" title="Hloubka útvaru.">Depth</a> = Math.Abs(value);
-<a name="l00073"></a>00073                 <span class="keywordflow">if</span> (desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a4011b6aa5d2cc4f22ab3e22d3c64aa54" title="Hloubka útvaru.">Depth</a> != 0)
-<a name="l00074"></a>00074                 {
-<a name="l00075"></a>00075                     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; geom.Length; i++)
-<a name="l00076"></a>00076                         surf += desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a4011b6aa5d2cc4f22ab3e22d3c64aa54" title="Hloubka útvaru.">Depth</a> * <a class="code" href="class_phys_lib_1_1_geometry.html" title="Abstraktní třída reprezentující fyzický model tělesa.">Geometry</a>.PointDistance(geom[i], geom[i &lt; geom.Length - 1 ? i + 1 : 0]);                    
-<a name="l00077"></a>00077                     surf += desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b" title="Obsah útvaru.">FrontalArea</a>*2;
-<a name="l00078"></a>00078                     vol = desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b" title="Obsah útvaru.">FrontalArea</a> * desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a4011b6aa5d2cc4f22ab3e22d3c64aa54" title="Hloubka útvaru.">Depth</a>;
-<a name="l00079"></a>00079                 }
-<a name="l00080"></a>00080             }
-<a name="l00081"></a>00081         }
-<a name="l00082"></a>00082 
-<a name="l00086"></a>00086         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a>
-<a name="l00087"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21">00087</a>         {
-<a name="l00088"></a>00088             <span class="keyword">get</span> { <span class="keywordflow">return</span> (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)center; }
-<a name="l00089"></a>00089             <span class="keyword">set</span>
-<a name="l00090"></a>00090             {
-<a name="l00091"></a>00091                 <span class="keywordflow">if</span> (value.IsNaN) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentOutOfRangeException();
-<a name="l00092"></a>00092 
-<a name="l00093"></a>00093                 <span class="keyword">using</span> (System.Drawing.Drawing2D.Matrix Mat = <span class="keyword">new</span> System.Drawing.Drawing2D.Matrix())
-<a name="l00094"></a>00094                 {
-<a name="l00095"></a>00095                     Mat.Translate((<span class="keywordtype">float</span>)(value[0] - center[0]), (<span class="keywordtype">float</span>)(value[1] - center[1]));
-<a name="l00096"></a>00096                     Mat.TransformPoints(geom);
-<a name="l00097"></a>00097                     <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a> != center) <a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a> += value - center;
-<a name="l00098"></a>00098                     <span class="keywordflow">else</span> <a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a> = value;
-<a name="l00099"></a>00099                 }
-<a name="l00100"></a>00100                 center = value; 
-<a name="l00101"></a>00101             }
-<a name="l00102"></a>00102         }
-<a name="l00103"></a>00103 
-<a name="l00107"></a>00107         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a1e8503693216b6a3d578ba51f41851ba" title="Orientace objektu v úhlových stupních.">Orientation</a>
-<a name="l00108"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a1e8503693216b6a3d578ba51f41851ba">00108</a>         {
-<a name="l00109"></a>00109             <span class="keyword">get</span> { <span class="keywordflow">return</span> angle; }
-<a name="l00110"></a>00110             <span class="keyword">set</span> {
-<a name="l00111"></a>00111                 <span class="keywordflow">if</span> (Double.IsNaN(value) || Double.IsInfinity(value)) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentOutOfRangeException();
-<a name="l00112"></a>00112 
-<a name="l00113"></a>00113                 <span class="keywordflow">if</span> (Math.Abs(value - angle) &gt; 0.05)
-<a name="l00114"></a>00114                 {
-<a name="l00115"></a>00115                     <span class="keyword">using</span> (System.Drawing.Drawing2D.Matrix Mat = <span class="keyword">new</span> System.Drawing.Drawing2D.Matrix())
-<a name="l00116"></a>00116                     {
-<a name="l00117"></a>00117                         Mat.RotateAt((<span class="keywordtype">float</span>)(value - angle), (PointF)(<a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a>));
-<a name="l00118"></a>00118                         Mat.TransformPoints(geom);
-<a name="l00119"></a>00119 
-<a name="l00120"></a>00120                         <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a> != center)
-<a name="l00121"></a>00121                         {
-<a name="l00122"></a>00122                             PointF[] t = <span class="keyword">new</span> PointF[] { (PointF)center };
-<a name="l00123"></a>00123                             Mat.TransformPoints(t);
-<a name="l00124"></a>00124                             center = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>(Math.Round(t[0].X, 2), Math.Round(t[0].Y, 2), 0);
-<a name="l00125"></a>00125                         }
-<a name="l00126"></a>00126                     }
-<a name="l00127"></a>00127                     angle = value;
-<a name="l00128"></a>00128                 }
-<a name="l00129"></a>00129             }
-<a name="l00130"></a>00130         }
-<a name="l00131"></a>00131 
-<a name="l00135"></a>00135         <span class="keyword">public</span> PointF[] <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>
-<a name="l00136"></a><a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb">00136</a>         {
-<a name="l00137"></a>00137             <span class="keyword">get</span> { <span class="keywordflow">return</span> geom; }           
-<a name="l00138"></a>00138         }
-<a name="l00139"></a>00139 
-<a name="l00143"></a>00143         <span class="keyword">public</span> PointF[] <a class="code" href="class_phys_lib_1_1_geometry.html#a5af0dd92de56fa5de82a496af9ce3893" title="Relativní polohy vertexů tvořící fyzický model tělesa vzhledem k centroidu...">RelativeGeometry</a>
-<a name="l00144"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a5af0dd92de56fa5de82a496af9ce3893">00144</a>         {
-<a name="l00145"></a>00145             <span class="keyword">get</span> { <span class="keywordflow">return</span> desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#aed5fd7c998ebcd25cd644ff7c8a0aab8" title="Původní netransformované vertexy.">DefaultVertices</a>; }
-<a name="l00146"></a>00146         }
-<a name="l00147"></a>00147 
-<a name="l00152"></a>00152         <span class="keyword">public</span> <span class="keywordtype">float</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a6242589f3d4618404614029447b238be" title="Škáluje těleso daným faktorem.">Scale</a>
-<a name="l00153"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a6242589f3d4618404614029447b238be">00153</a>         {
-<a name="l00154"></a>00154             <span class="keyword">get</span> { <span class="keywordflow">return</span> scale; }
-<a name="l00155"></a>00155             <span class="keyword">set</span>
-<a name="l00156"></a>00156             {
-<a name="l00157"></a>00157                 <span class="keywordflow">if</span> (Double.IsNaN(value) || Double.IsInfinity(value)) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentOutOfRangeException();
-<a name="l00158"></a>00158 
-<a name="l00159"></a>00159                 <span class="keyword">using</span> (System.Drawing.Drawing2D.Matrix mat = <span class="keyword">new</span> System.Drawing.Drawing2D.Matrix())
-<a name="l00160"></a>00160                 {
-<a name="l00161"></a>00161                     mat.Translate((<span class="keywordtype">float</span>)-<a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a>[0], (<span class="keywordtype">float</span>)-<a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a>[1]);
-<a name="l00162"></a>00162                     mat.Scale(Math.Abs(value - scale), Math.Abs(value - scale), System.Drawing.Drawing2D.MatrixOrder.Append);
-<a name="l00163"></a>00163                     mat.Translate((<span class="keywordtype">float</span>)<a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a>[0], (<span class="keywordtype">float</span>)Position[1], System.Drawing.Drawing2D.MatrixOrder.Append);
-<a name="l00164"></a>00164                     mat.TransformPoints(geom);
-<a name="l00165"></a>00165                 }
-<a name="l00166"></a>00166                 scale = value;
-<a name="l00167"></a>00167             }
-<a name="l00168"></a>00168         }
-<a name="l00169"></a>00169 
-<a name="l00175"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a3df938cd93d2df2af7aed8fb59d137db">00175</a>         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a3df938cd93d2df2af7aed8fb59d137db" title="Spočte obsah polygonu daný určenými vertexy.">PolygonArea</a>(PointF[] Vertices)
-<a name="l00176"></a>00176         {
-<a name="l00177"></a>00177             <span class="keywordtype">double</span> area = 0;
-<a name="l00178"></a>00178             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0,j = 0; i &lt; Vertices.Length; i++)
-<a name="l00179"></a>00179             {
-<a name="l00180"></a>00180                 j = (i + 1) % Vertices.Length;
-<a name="l00181"></a>00181                 area += Vertices[i].X * Vertices[j].Y;
-<a name="l00182"></a>00182                 area -= Vertices[i].Y * Vertices[j].X;
-<a name="l00183"></a>00183             }
-<a name="l00184"></a>00184             <span class="keywordflow">return</span> Math.Abs(area)/2;
-<a name="l00185"></a>00185         }
-<a name="l00186"></a>00186 
-<a name="l00192"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a0c34c013ea02adfc8d755b8c9c33e226">00192</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_geometry_descriptor.html" title="Popisovač rovinného geometrického útvaru.">GeometryDescriptor</a> <a class="code" href="class_phys_lib_1_1_geometry.html#a0c34c013ea02adfc8d755b8c9c33e226" title="Analyzuje pole vertexů jako polygon a zjistí jeho geometrický střed (centroid)...">AnalyzeVertexGroup</a>(PointF[] Vertices)
-<a name="l00193"></a>00193         {
-<a name="l00194"></a>00194             <a class="code" href="class_phys_lib_1_1_geometry_descriptor.html" title="Popisovač rovinného geometrického útvaru.">GeometryDescriptor</a> Description = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_geometry_descriptor.html" title="Popisovač rovinného geometrického útvaru.">GeometryDescriptor</a>(Vertices);
-<a name="l00195"></a>00195 
-<a name="l00196"></a>00196             PointF top = Vertices[0], bottom = Vertices[0], left = Vertices[0], right = Vertices[0];
-<a name="l00197"></a>00197             Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b" title="Obsah útvaru.">FrontalArea</a> = <a class="code" href="class_phys_lib_1_1_geometry.html#a3df938cd93d2df2af7aed8fb59d137db" title="Spočte obsah polygonu daný určenými vertexy.">PolygonArea</a>(Vertices);
-<a name="l00198"></a>00198 
-<a name="l00199"></a>00199             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0,j = 0; i &lt; Vertices.Length; i++)
-<a name="l00200"></a>00200             {
-<a name="l00201"></a>00201                 j = (i + 1) % Vertices.Length;
-<a name="l00202"></a>00202                 Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a2eb30e8a3f3d450f7203f68c6d4e63c5" title="Centroid útvaru.">Centroid</a>.X += (Vertices[i].X + Vertices[j].X) * (Vertices[i].X * Vertices[j].Y - Vertices[i].Y * Vertices[j].X);
-<a name="l00203"></a>00203                 Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a2eb30e8a3f3d450f7203f68c6d4e63c5" title="Centroid útvaru.">Centroid</a>.Y += (Vertices[i].Y + Vertices[j].Y) * (Vertices[i].X * Vertices[j].Y - Vertices[i].Y * Vertices[j].X);
-<a name="l00204"></a>00204             }
-<a name="l00205"></a>00205 
-<a name="l00206"></a>00206             Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a57b3b404c8afd9b33aed0de215b71f49" title="Ohraničující konvexní polygon.">ConvexHull</a> = <a class="code" href="class_phys_lib_1_1_convex_hull.html" title="Interní třída generující konvexní obal z vertexů.">ConvexHull</a>.GetConvexHull(Vertices);
-<a name="l00207"></a>00207             Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a2eb30e8a3f3d450f7203f68c6d4e63c5" title="Centroid útvaru.">Centroid</a>.X /= (float)(Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b" title="Obsah útvaru.">FrontalArea</a> * 6);
-<a name="l00208"></a>00208             Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a2eb30e8a3f3d450f7203f68c6d4e63c5" title="Centroid útvaru.">Centroid</a>.Y /= (float)(Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b" title="Obsah útvaru.">FrontalArea</a> * 6);
-<a name="l00209"></a>00209             
-<a name="l00210"></a>00210             <span class="keyword">using</span> (System.Drawing.Drawing2D.GraphicsPath p = <span class="keyword">new</span> System.Drawing.Drawing2D.GraphicsPath())
-<a name="l00211"></a>00211             {
-<a name="l00212"></a>00212                 p.AddPolygon(Vertices);
-<a name="l00213"></a>00213                 RectangleF r = p.GetBounds();
-<a name="l00214"></a>00214 
-<a name="l00215"></a>00215                 Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#afb6fd90ad9fad15423e8e72837b2d773" title="Šířka útvaru.">Width</a> = r.Width;
-<a name="l00216"></a>00216                 Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a39dfc00d33ff588e495a20e0ec6a9066" title="Výška útvaru.">Height</a> = r.Height;
-<a name="l00217"></a>00217             }
-<a name="l00218"></a>00218             
-<a name="l00219"></a>00219             <span class="keywordtype">double</span> dist = Double.PositiveInfinity;            
-<a name="l00220"></a>00220             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Vertices.Length; i++)
-<a name="l00221"></a>00221             {
-<a name="l00222"></a>00222                 <span class="keywordtype">double</span> d = <a class="code" href="class_phys_lib_1_1_geometry.html" title="Abstraktní třída reprezentující fyzický model tělesa.">Geometry</a>.PointDistance(Vertices[i], Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a2eb30e8a3f3d450f7203f68c6d4e63c5" title="Centroid útvaru.">Centroid</a>);
-<a name="l00223"></a>00223                 <span class="keywordflow">if</span> (d &lt; dist)
-<a name="l00224"></a>00224                 {
-<a name="l00225"></a>00225                     dist = d;
-<a name="l00226"></a>00226                     Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ad0ff55ef7239fa9c81873da058a0a6c2" title="Index bodu nejdále od centroidu.">Farthest</a> = i;
-<a name="l00227"></a>00227                 }
-<a name="l00228"></a>00228             }
-<a name="l00229"></a>00229 
-<a name="l00230"></a>00230             <span class="keywordflow">return</span> Description;
-<a name="l00231"></a>00231         }
-<a name="l00232"></a>00232 
-<a name="l00233"></a>00233         
-<a name="l00239"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a6951cd27db46e54483a9208eae51b0e0">00239</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_geometry.html#a6951cd27db46e54483a9208eae51b0e0" title="Provede projekci libovolného bodu na povrch tělesa.">ProjectToObject</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> ExternalPoint)
-<a name="l00240"></a>00240         {
-<a name="l00241"></a>00241             <span class="keywordflow">if</span> (ExternalPoint == center) <span class="keywordflow">return</span> center;
-<a name="l00242"></a>00242 
-<a name="l00243"></a>00243             <span class="keywordtype">int</span> a = 0, b = 1;
-<a name="l00244"></a>00244             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = null;      
-<a name="l00245"></a>00245             <span class="keywordtype">double</span> ad = <span class="keywordtype">double</span>.PositiveInfinity, bd = 0, cd = <span class="keywordtype">double</span>.PositiveInfinity, dist = 0;
-<a name="l00246"></a>00246             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>.Length; i++)
-<a name="l00247"></a>00247             {
-<a name="l00248"></a>00248                 dist = Math.Sqrt(Math.Pow(ExternalPoint[0] - <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[i].X, 2) + Math.Pow(ExternalPoint[1] - <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[i].Y, 2));
-<a name="l00249"></a>00249                 <span class="keywordflow">if</span> (dist &lt; ad)
-<a name="l00250"></a>00250                 {
-<a name="l00251"></a>00251                     bd = ad;
-<a name="l00252"></a>00252                     ad = dist;
-<a name="l00253"></a>00253                     b = a;
-<a name="l00254"></a>00254                     a = i;
-<a name="l00255"></a>00255                 }
-<a name="l00256"></a>00256                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dist &lt; bd)
-<a name="l00257"></a>00257                 {
-<a name="l00258"></a>00258                     bd = dist;
-<a name="l00259"></a>00259                     b = i;
-<a name="l00260"></a>00260                 }
-<a name="l00261"></a>00261             }
-<a name="l00262"></a>00262 
-<a name="l00263"></a>00263             <span class="keywordtype">float</span> ax = <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[b].X - <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[a].X, ay = <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[b].Y - <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[a].Y, 
-<a name="l00264"></a>00264                   x = <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[a].X, y = <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[a].Y,max = (float)Math.Sqrt(ax * ax + ay * ay);
-<a name="l00265"></a>00265 
-<a name="l00266"></a>00266             <span class="keywordflow">while</span> (x != <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[b].X || y != <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[b].Y)
-<a name="l00267"></a>00267             {
-<a name="l00268"></a>00268                 dist = <a class="code" href="class_phys_lib_1_1_geometry.html" title="Abstraktní třída reprezentující fyzický model tělesa.">Geometry</a>.PointDistance(<span class="keyword">new</span> PointF(x,y), (PointF)ExternalPoint);
-<a name="l00269"></a>00269                 <span class="keywordflow">if</span> (dist &lt; cd)
-<a name="l00270"></a>00270                 {
-<a name="l00271"></a>00271                     cd = dist;
-<a name="l00272"></a>00272                     Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>(x,y,0);
-<a name="l00273"></a>00273                 }
-<a name="l00274"></a>00274                 <span class="keywordflow">if</span> (dist &gt; cd) <span class="keywordflow">break</span>;
-<a name="l00275"></a>00275                
-<a name="l00276"></a>00276                 x += ax / max;
-<a name="l00277"></a>00277                 y += ay / max;
-<a name="l00278"></a>00278             }
+<a name="l00046"></a>00046             geom = <span class="keyword">new</span> PointF[Vertices.Length];
+<a name="l00047"></a>00047             Vertices.CopyTo(geom, 0);
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049             <span class="keywordflow">if</span> (COG.HasValue)
+<a name="l00050"></a>00050                 center = (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)COG;
+<a name="l00051"></a>00051             <span class="keywordflow">else</span> center = (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a2eb30e8a3f3d450f7203f68c6d4e63c5" title="Centroid útvaru.">Centroid</a>;
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053             <a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a> = (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)InitPosition;
+<a name="l00054"></a>00054             <a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a> = (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)InitPosition;
+<a name="l00055"></a>00055         }
+<a name="l00056"></a>00056 
+<a name="l00060"></a>00060         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a4e66a23359a51b17bede92205730d24e" title="Koeficient odporu.">DragCoefficient</a>
+<a name="l00061"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a4e66a23359a51b17bede92205730d24e">00061</a>         {
+<a name="l00062"></a>00062             <span class="keyword">get</span>; <span class="keyword">set</span>;
+<a name="l00063"></a>00063         }
+<a name="l00064"></a>00064 
+<a name="l00068"></a>00068         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a5434e9ce6b416eb37bbb62090087d3c3" title="Hloubka tělesa.">Depth</a>
+<a name="l00069"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a5434e9ce6b416eb37bbb62090087d3c3">00069</a>         {
+<a name="l00070"></a>00070             <span class="keyword">get</span> { <span class="keywordflow">return</span> desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a4011b6aa5d2cc4f22ab3e22d3c64aa54" title="Hloubka útvaru.">Depth</a>; }
+<a name="l00071"></a>00071             <span class="keyword">set</span>
+<a name="l00072"></a>00072             {
+<a name="l00073"></a>00073                 desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a4011b6aa5d2cc4f22ab3e22d3c64aa54" title="Hloubka útvaru.">Depth</a> = Math.Abs(value);
+<a name="l00074"></a>00074                 <span class="keywordflow">if</span> (desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a4011b6aa5d2cc4f22ab3e22d3c64aa54" title="Hloubka útvaru.">Depth</a> != 0)
+<a name="l00075"></a>00075                 {
+<a name="l00076"></a>00076                     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; geom.Length; i++)
+<a name="l00077"></a>00077                         surf += desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a4011b6aa5d2cc4f22ab3e22d3c64aa54" title="Hloubka útvaru.">Depth</a> * <a class="code" href="class_phys_lib_1_1_geometry.html" title="Abstraktní třída reprezentující fyzický model tělesa.">Geometry</a>.PointDistance(geom[i], geom[i &lt; geom.Length - 1 ? i + 1 : 0]);                    
+<a name="l00078"></a>00078                     surf += desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b" title="Obsah útvaru.">FrontalArea</a>*2;
+<a name="l00079"></a>00079                     vol = desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b" title="Obsah útvaru.">FrontalArea</a> * desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a4011b6aa5d2cc4f22ab3e22d3c64aa54" title="Hloubka útvaru.">Depth</a>;
+<a name="l00080"></a>00080                 }
+<a name="l00081"></a>00081             }
+<a name="l00082"></a>00082         }
+<a name="l00083"></a>00083 
+<a name="l00087"></a>00087         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a>
+<a name="l00088"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21">00088</a>         {
+<a name="l00089"></a>00089             <span class="keyword">get</span> { <span class="keywordflow">return</span> (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)center; }
+<a name="l00090"></a>00090             <span class="keyword">set</span>
+<a name="l00091"></a>00091             {
+<a name="l00092"></a>00092                 <span class="keywordflow">if</span> (value.IsNaN) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentOutOfRangeException();
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094                 <span class="keyword">using</span> (System.Drawing.Drawing2D.Matrix Mat = <span class="keyword">new</span> System.Drawing.Drawing2D.Matrix())
+<a name="l00095"></a>00095                 {
+<a name="l00096"></a>00096                     Mat.Translate((<span class="keywordtype">float</span>)(value[0] - center[0]), (<span class="keywordtype">float</span>)(value[1] - center[1]));
+<a name="l00097"></a>00097                     Mat.TransformPoints(geom);
+<a name="l00098"></a>00098                     <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a> != center) <a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a> += value - center;
+<a name="l00099"></a>00099                     <span class="keywordflow">else</span> <a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a> = value;
+<a name="l00100"></a>00100                 }
+<a name="l00101"></a>00101                 center = value; 
+<a name="l00102"></a>00102             }
+<a name="l00103"></a>00103         }
+<a name="l00104"></a>00104 
+<a name="l00108"></a>00108         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a1e8503693216b6a3d578ba51f41851ba" title="Orientace objektu v úhlových stupních.">Orientation</a>
+<a name="l00109"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a1e8503693216b6a3d578ba51f41851ba">00109</a>         {
+<a name="l00110"></a>00110             <span class="keyword">get</span> { <span class="keywordflow">return</span> angle; }
+<a name="l00111"></a>00111             <span class="keyword">set</span> {
+<a name="l00112"></a>00112                 <span class="keywordflow">if</span> (Double.IsNaN(value) || Double.IsInfinity(value)) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentOutOfRangeException();
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114                 <span class="keywordflow">if</span> (Math.Abs(value - angle) &gt; 0.05)
+<a name="l00115"></a>00115                 {
+<a name="l00116"></a>00116                     <span class="keyword">using</span> (System.Drawing.Drawing2D.Matrix Mat = <span class="keyword">new</span> System.Drawing.Drawing2D.Matrix())
+<a name="l00117"></a>00117                     {
+<a name="l00118"></a>00118                         Mat.RotateAt((<span class="keywordtype">float</span>)(value - angle), (PointF)(<a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a>));
+<a name="l00119"></a>00119                         Mat.TransformPoints(geom);
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121                         <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a> != center)
+<a name="l00122"></a>00122                         {
+<a name="l00123"></a>00123                             PointF[] t = <span class="keyword">new</span> PointF[] { (PointF)center };
+<a name="l00124"></a>00124                             Mat.TransformPoints(t);
+<a name="l00125"></a>00125                             center = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>(Math.Round(t[0].X, 2), Math.Round(t[0].Y, 2), 0);
+<a name="l00126"></a>00126                         }
+<a name="l00127"></a>00127                     }
+<a name="l00128"></a>00128                     angle = value;
+<a name="l00129"></a>00129                 }
+<a name="l00130"></a>00130             }
+<a name="l00131"></a>00131         }
+<a name="l00132"></a>00132 
+<a name="l00136"></a>00136         <span class="keyword">public</span> PointF[] <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>
+<a name="l00137"></a><a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb">00137</a>         {
+<a name="l00138"></a>00138             <span class="keyword">get</span> { <span class="keywordflow">return</span> geom; }           
+<a name="l00139"></a>00139         }
+<a name="l00140"></a>00140 
+<a name="l00144"></a>00144         <span class="keyword">public</span> PointF[] <a class="code" href="class_phys_lib_1_1_geometry.html#a5af0dd92de56fa5de82a496af9ce3893" title="Relativní polohy vertexů tvořící fyzický model tělesa vzhledem k centroidu...">RelativeGeometry</a>
+<a name="l00145"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a5af0dd92de56fa5de82a496af9ce3893">00145</a>         {
+<a name="l00146"></a>00146             <span class="keyword">get</span> { <span class="keywordflow">return</span> desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#aed5fd7c998ebcd25cd644ff7c8a0aab8" title="Původní netransformované vertexy.">DefaultVertices</a>; }
+<a name="l00147"></a>00147         }
+<a name="l00148"></a>00148 
+<a name="l00153"></a>00153         <span class="keyword">public</span> <span class="keywordtype">float</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a6242589f3d4618404614029447b238be" title="Škáluje těleso daným faktorem.">Scale</a>
+<a name="l00154"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a6242589f3d4618404614029447b238be">00154</a>         {
+<a name="l00155"></a>00155             <span class="keyword">get</span> { <span class="keywordflow">return</span> scale; }
+<a name="l00156"></a>00156             <span class="keyword">set</span>
+<a name="l00157"></a>00157             {
+<a name="l00158"></a>00158                 <span class="keywordflow">if</span> (Double.IsNaN(value) || Double.IsInfinity(value)) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentOutOfRangeException();
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160                 <span class="keyword">using</span> (System.Drawing.Drawing2D.Matrix mat = <span class="keyword">new</span> System.Drawing.Drawing2D.Matrix())
+<a name="l00161"></a>00161                 {
+<a name="l00162"></a>00162                     mat.Translate((<span class="keywordtype">float</span>)-<a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a>[0], (<span class="keywordtype">float</span>)-<a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a>[1]);
+<a name="l00163"></a>00163                     mat.Scale(Math.Abs(value - scale), Math.Abs(value - scale), System.Drawing.Drawing2D.MatrixOrder.Append);
+<a name="l00164"></a>00164                     mat.Translate((<span class="keywordtype">float</span>)<a class="code" href="class_phys_lib_1_1_geometry.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a>[0], (<span class="keywordtype">float</span>)Position[1], System.Drawing.Drawing2D.MatrixOrder.Append);
+<a name="l00165"></a>00165                     mat.TransformPoints(geom);
+<a name="l00166"></a>00166                 }
+<a name="l00167"></a>00167                 scale = value;
+<a name="l00168"></a>00168             }
+<a name="l00169"></a>00169         }
+<a name="l00170"></a>00170 
+<a name="l00176"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a3df938cd93d2df2af7aed8fb59d137db">00176</a>         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a3df938cd93d2df2af7aed8fb59d137db" title="Spočte obsah polygonu daný určenými vertexy.">PolygonArea</a>(PointF[] Vertices)
+<a name="l00177"></a>00177         {
+<a name="l00178"></a>00178             <span class="keywordtype">double</span> area = 0;
+<a name="l00179"></a>00179             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0,j = 0; i &lt; Vertices.Length; i++)
+<a name="l00180"></a>00180             {
+<a name="l00181"></a>00181                 j = (i + 1) % Vertices.Length;
+<a name="l00182"></a>00182                 area += Vertices[i].X * Vertices[j].Y;
+<a name="l00183"></a>00183                 area -= Vertices[i].Y * Vertices[j].X;
+<a name="l00184"></a>00184             }
+<a name="l00185"></a>00185             <span class="keywordflow">return</span> Math.Abs(area)/2;
+<a name="l00186"></a>00186         }
+<a name="l00187"></a>00187 
+<a name="l00193"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a0c34c013ea02adfc8d755b8c9c33e226">00193</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_geometry_descriptor.html" title="Popisovač rovinného geometrického útvaru.">GeometryDescriptor</a> <a class="code" href="class_phys_lib_1_1_geometry.html#a0c34c013ea02adfc8d755b8c9c33e226" title="Analyzuje pole vertexů jako polygon a zjistí jeho geometrický střed (centroid)...">AnalyzeVertexGroup</a>(PointF[] Vertices)
+<a name="l00194"></a>00194         {
+<a name="l00195"></a>00195             <a class="code" href="class_phys_lib_1_1_geometry_descriptor.html" title="Popisovač rovinného geometrického útvaru.">GeometryDescriptor</a> Description = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_geometry_descriptor.html" title="Popisovač rovinného geometrického útvaru.">GeometryDescriptor</a>(Vertices);
+<a name="l00196"></a>00196             Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b" title="Obsah útvaru.">FrontalArea</a> = <a class="code" href="class_phys_lib_1_1_geometry.html#a3df938cd93d2df2af7aed8fb59d137db" title="Spočte obsah polygonu daný určenými vertexy.">PolygonArea</a>(Vertices);
+<a name="l00197"></a>00197 
+<a name="l00198"></a>00198             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0,j = 0; i &lt; Vertices.Length; i++)
+<a name="l00199"></a>00199             {
+<a name="l00200"></a>00200                 j = (i + 1) % Vertices.Length;
+<a name="l00201"></a>00201                 Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a2eb30e8a3f3d450f7203f68c6d4e63c5" title="Centroid útvaru.">Centroid</a>.X += (Vertices[i].X + Vertices[j].X) * (Vertices[i].X * Vertices[j].Y - Vertices[i].Y * Vertices[j].X);
+<a name="l00202"></a>00202                 Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a2eb30e8a3f3d450f7203f68c6d4e63c5" title="Centroid útvaru.">Centroid</a>.Y += (Vertices[i].Y + Vertices[j].Y) * (Vertices[i].X * Vertices[j].Y - Vertices[i].Y * Vertices[j].X);
+<a name="l00203"></a>00203             }
+<a name="l00204"></a>00204 
+<a name="l00205"></a>00205             Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a57b3b404c8afd9b33aed0de215b71f49" title="Ohraničující konvexní polygon.">ConvexHull</a> = <a class="code" href="class_phys_lib_1_1_convex_hull.html" title="Interní třída generující konvexní obal z vertexů.">ConvexHull</a>.GetConvexHull(Vertices);
+<a name="l00206"></a>00206             Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a2eb30e8a3f3d450f7203f68c6d4e63c5" title="Centroid útvaru.">Centroid</a>.X /= (float)(Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b" title="Obsah útvaru.">FrontalArea</a> * 6);
+<a name="l00207"></a>00207             Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a2eb30e8a3f3d450f7203f68c6d4e63c5" title="Centroid útvaru.">Centroid</a>.Y /= (float)(Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b" title="Obsah útvaru.">FrontalArea</a> * 6);
+<a name="l00208"></a>00208             
+<a name="l00209"></a>00209             <span class="keyword">using</span> (System.Drawing.Drawing2D.GraphicsPath p = <span class="keyword">new</span> System.Drawing.Drawing2D.GraphicsPath())
+<a name="l00210"></a>00210             {
+<a name="l00211"></a>00211                 p.AddPolygon(Vertices);
+<a name="l00212"></a>00212                 RectangleF r = p.GetBounds();
+<a name="l00213"></a>00213 
+<a name="l00214"></a>00214                 Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#afb6fd90ad9fad15423e8e72837b2d773" title="Šířka útvaru.">Width</a> = r.Width;
+<a name="l00215"></a>00215                 Description.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a39dfc00d33ff588e495a20e0ec6a9066" title="Výška útvaru.">Height</a> = r.Height;
+<a name="l00216"></a>00216             }
+<a name="l00217"></a>00217             
+<a name="l00218"></a>00218             <span class="keywordflow">return</span> Description;
+<a name="l00219"></a>00219         }
+<a name="l00220"></a>00220 
+<a name="l00221"></a>00221         
+<a name="l00227"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a6951cd27db46e54483a9208eae51b0e0">00227</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_geometry.html#a6951cd27db46e54483a9208eae51b0e0" title="Provede projekci libovolného bodu na povrch tělesa.">ProjectToObject</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> ExternalPoint)
+<a name="l00228"></a>00228         {
+<a name="l00229"></a>00229             <span class="keywordflow">if</span> (ExternalPoint == center) <span class="keywordflow">return</span> center;
+<a name="l00230"></a>00230 
+<a name="l00231"></a>00231             <span class="keywordtype">int</span> a = 0, b = 1;
+<a name="l00232"></a>00232             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = null;      
+<a name="l00233"></a>00233             <span class="keywordtype">double</span> ad = <span class="keywordtype">double</span>.PositiveInfinity, bd = 0, cd = <span class="keywordtype">double</span>.PositiveInfinity, dist = 0;
+<a name="l00234"></a>00234             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>.Length; i++)
+<a name="l00235"></a>00235             {
+<a name="l00236"></a>00236                 dist = Math.Sqrt(Math.Pow(ExternalPoint[0] - <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[i].X, 2) + Math.Pow(ExternalPoint[1] - <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[i].Y, 2));
+<a name="l00237"></a>00237                 <span class="keywordflow">if</span> (dist &lt; ad)
+<a name="l00238"></a>00238                 {
+<a name="l00239"></a>00239                     bd = ad;
+<a name="l00240"></a>00240                     ad = dist;
+<a name="l00241"></a>00241                     b = a;
+<a name="l00242"></a>00242                     a = i;
+<a name="l00243"></a>00243                 }
+<a name="l00244"></a>00244                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dist &lt; bd)
+<a name="l00245"></a>00245                 {
+<a name="l00246"></a>00246                     bd = dist;
+<a name="l00247"></a>00247                     b = i;
+<a name="l00248"></a>00248                 }
+<a name="l00249"></a>00249             }
+<a name="l00250"></a>00250 
+<a name="l00251"></a>00251             <span class="keywordtype">float</span> ax = <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[b].X - <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[a].X, ay = <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[b].Y - <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[a].Y, 
+<a name="l00252"></a>00252                   x = <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[a].X, y = <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[a].Y,max = (float)Math.Sqrt(ax * ax + ay * ay);
+<a name="l00253"></a>00253 
+<a name="l00254"></a>00254             <span class="keywordflow">while</span> (x != <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[b].X || y != <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[b].Y)
+<a name="l00255"></a>00255             {
+<a name="l00256"></a>00256                 dist = <a class="code" href="class_phys_lib_1_1_geometry.html" title="Abstraktní třída reprezentující fyzický model tělesa.">Geometry</a>.PointDistance(<span class="keyword">new</span> PointF(x,y), (PointF)ExternalPoint);
+<a name="l00257"></a>00257                 <span class="keywordflow">if</span> (dist &lt; cd)
+<a name="l00258"></a>00258                 {
+<a name="l00259"></a>00259                     cd = dist;
+<a name="l00260"></a>00260                     Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>(x,y,0);
+<a name="l00261"></a>00261                 }
+<a name="l00262"></a>00262                 <span class="keywordflow">if</span> (dist &gt; cd) <span class="keywordflow">break</span>;
+<a name="l00263"></a>00263                
+<a name="l00264"></a>00264                 x += ax / max;
+<a name="l00265"></a>00265                 y += ay / max;
+<a name="l00266"></a>00266             }
+<a name="l00267"></a>00267 
+<a name="l00268"></a>00268             <span class="keywordflow">return</span> Ret;
+<a name="l00269"></a>00269         }
+<a name="l00270"></a>00270 
+<a name="l00274"></a>00274         <span class="keyword">public</span> PointF[] <a class="code" href="class_phys_lib_1_1_geometry.html#a53ea962fb7f4ac902e35898b2e32ddb9" title="Absolutní poloha konvexního útvaru ohraničující těleso.">BoundingBox</a>
+<a name="l00275"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a53ea962fb7f4ac902e35898b2e32ddb9">00275</a>         {
+<a name="l00276"></a>00276             <span class="keyword">get</span>
+<a name="l00277"></a>00277             {
+<a name="l00278"></a>00278                 <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_geometry.html#adc6b0f749f7b0a0e1e361a78fc4b54bf" title="Indikuje, zda je útvar konvexní.">Convex</a>) <span class="keywordflow">return</span> geom;
 <a name="l00279"></a>00279 
-<a name="l00280"></a>00280             <span class="keywordflow">return</span> Ret;
-<a name="l00281"></a>00281         }
+<a name="l00280"></a>00280                 PointF[] transformedHull = <span class="keyword">new</span> PointF[desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a57b3b404c8afd9b33aed0de215b71f49" title="Ohraničující konvexní polygon.">ConvexHull</a>.Length];
+<a name="l00281"></a>00281                 desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a57b3b404c8afd9b33aed0de215b71f49" title="Ohraničující konvexní polygon.">ConvexHull</a>.CopyTo(transformedHull, 0);
 <a name="l00282"></a>00282 
-<a name="l00286"></a>00286         <span class="keyword">public</span> PointF[] <a class="code" href="class_phys_lib_1_1_geometry.html#a53ea962fb7f4ac902e35898b2e32ddb9" title="Absolutní poloha konvexního útvaru ohraničující těleso.">BoundingBox</a>
-<a name="l00287"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a53ea962fb7f4ac902e35898b2e32ddb9">00287</a>         {
-<a name="l00288"></a>00288             <span class="keyword">get</span>
-<a name="l00289"></a>00289             {
-<a name="l00290"></a>00290                 <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_geometry.html#adc6b0f749f7b0a0e1e361a78fc4b54bf" title="Indikuje, zda je útvar konvexní.">Convex</a>) <span class="keywordflow">return</span> geom;
-<a name="l00291"></a>00291 
-<a name="l00292"></a>00292                 PointF[] transformedHull = <span class="keyword">new</span> PointF[desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a57b3b404c8afd9b33aed0de215b71f49" title="Ohraničující konvexní polygon.">ConvexHull</a>.Length];
-<a name="l00293"></a>00293                 desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a57b3b404c8afd9b33aed0de215b71f49" title="Ohraničující konvexní polygon.">ConvexHull</a>.CopyTo(transformedHull, 0);
-<a name="l00294"></a>00294 
-<a name="l00295"></a>00295                 <span class="keyword">using</span> (System.Drawing.Drawing2D.Matrix rot = <span class="keyword">new</span> System.Drawing.Drawing2D.Matrix())
-<a name="l00296"></a>00296                 {
-<a name="l00297"></a>00297                     rot.Translate((<span class="keywordtype">float</span>)center[0], (<span class="keywordtype">float</span>)center[1]);
-<a name="l00298"></a>00298                     rot.RotateAt((<span class="keywordtype">float</span>)angle, (PointF)<a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a>, System.Drawing.Drawing2D.MatrixOrder.Append);
-<a name="l00299"></a>00299                     rot.TransformPoints(transformedHull);
-<a name="l00300"></a>00300                 }
-<a name="l00301"></a>00301 
-<a name="l00302"></a>00302                 <span class="keywordflow">return</span> transformedHull;
-<a name="l00303"></a>00303             }
-<a name="l00304"></a>00304         }
-<a name="l00305"></a>00305 
-<a name="l00309"></a>00309         <span class="keyword">public</span> PointF <a class="code" href="class_phys_lib_1_1_geometry.html#ab95ecda22f7df9f6b51dcd819b649075" title="Nejvzdálenější bod od středu tělesa.">FarthestPoint</a>
-<a name="l00310"></a><a class="code" href="class_phys_lib_1_1_geometry.html#ab95ecda22f7df9f6b51dcd819b649075">00310</a>         {
-<a name="l00311"></a>00311             <span class="keyword">get</span> { <span class="keywordflow">return</span> geom[desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ad0ff55ef7239fa9c81873da058a0a6c2" title="Index bodu nejdále od centroidu.">Farthest</a>]; }
-<a name="l00312"></a>00312         }
-<a name="l00313"></a>00313 
-<a name="l00320"></a><a class="code" href="class_phys_lib_1_1_geometry.html#af85267217006c70bf21a251bcf422f11">00320</a>         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#af85267217006c70bf21a251bcf422f11" title="Spočte vzdálenost dvou bodů.">PointDistance</a>(PointF A, PointF B)
-<a name="l00321"></a>00321         {
-<a name="l00322"></a>00322             <span class="keywordflow">return</span> Math.Sqrt(Math.Pow(A.X - B.X, 2) + Math.Pow(A.Y - B.Y,2));
-<a name="l00323"></a>00323         }
-<a name="l00324"></a>00324 
-<a name="l00328"></a>00328         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a>
-<a name="l00329"></a><a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8">00329</a>         {
-<a name="l00330"></a>00330             <span class="keyword">get</span>; <span class="keyword">set</span>;
-<a name="l00331"></a>00331         }
-<a name="l00332"></a>00332 
-<a name="l00336"></a>00336         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a988a6e0a503763fc314d72051af91f7e" title="Výška objektu.">Height</a> 
-<a name="l00337"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a988a6e0a503763fc314d72051af91f7e">00337</a>         {
-<a name="l00338"></a>00338             <span class="keyword">get</span> { <span class="keywordflow">return</span> desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a39dfc00d33ff588e495a20e0ec6a9066" title="Výška útvaru.">Height</a>; }
-<a name="l00339"></a>00339         }
-<a name="l00340"></a>00340 
-<a name="l00344"></a>00344         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a36d0b136444be5f248f71403d5918b08" title="Šířka objektu.">Width</a>
-<a name="l00345"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a36d0b136444be5f248f71403d5918b08">00345</a>         {
-<a name="l00346"></a>00346             <span class="keyword">get</span> { <span class="keywordflow">return</span> desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#afb6fd90ad9fad15423e8e72837b2d773" title="Šířka útvaru.">Width</a>; }
-<a name="l00347"></a>00347         }
-<a name="l00348"></a>00348 
-<a name="l00352"></a>00352         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a26bd2fda8600d48f3ed99f7fcef2aa65" title="Objem objektu v krychlových pixelech.">Volume</a>
-<a name="l00353"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a26bd2fda8600d48f3ed99f7fcef2aa65">00353</a>         {
-<a name="l00354"></a>00354             <span class="keyword">get</span> { <span class="keywordflow">return</span> vol; }
-<a name="l00355"></a>00355         }
-<a name="l00356"></a>00356 
-<a name="l00360"></a>00360         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_geometry.html#adc6b0f749f7b0a0e1e361a78fc4b54bf" title="Indikuje, zda je útvar konvexní.">Convex</a>
-<a name="l00361"></a><a class="code" href="class_phys_lib_1_1_geometry.html#adc6b0f749f7b0a0e1e361a78fc4b54bf">00361</a>         {
-<a name="l00362"></a>00362             <span class="keyword">get</span> { <span class="keywordflow">return</span> desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a37c639dc95658f38f9de773dd9a60464" title="Indikuje, zda je polygon konvexní.">Convex</a>; }
-<a name="l00363"></a>00363         }
-<a name="l00364"></a>00364 
-<a name="l00368"></a>00368         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#affca371f1015e9bd8309c41c74baee77" title="Povrch objektu v pixelech čtverečních.">Surface</a>
-<a name="l00369"></a><a class="code" href="class_phys_lib_1_1_geometry.html#affca371f1015e9bd8309c41c74baee77">00369</a>         {
-<a name="l00370"></a>00370             <span class="keyword">get</span> { <span class="keywordflow">return</span> surf; }
-<a name="l00371"></a>00371         }
-<a name="l00372"></a>00372 
-<a name="l00376"></a>00376         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a7e86471f6a3ae35ccc693597f571b25b" title="Obsah plochy polygonu.">FrontalArea</a>
-<a name="l00377"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a7e86471f6a3ae35ccc693597f571b25b">00377</a>         {
-<a name="l00378"></a>00378             <span class="keyword">get</span> { <span class="keywordflow">return</span> desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b" title="Obsah útvaru.">FrontalArea</a>; }
-<a name="l00379"></a>00379         }
-<a name="l00380"></a>00380 
-<a name="l00387"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a3660be945ecec74cecde8e337518c09a">00387</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a3660be945ecec74cecde8e337518c09a" title="Projektuje těleso na danou osu.">ProjectToAxis</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Axis, ref <span class="keywordtype">double</span> min, ref <span class="keywordtype">double</span> max)
-<a name="l00388"></a>00388         {
-<a name="l00389"></a>00389             PointF[] geom = null;
-<a name="l00390"></a>00390             <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_geometry.html#adc6b0f749f7b0a0e1e361a78fc4b54bf" title="Indikuje, zda je útvar konvexní.">Convex</a>)
-<a name="l00391"></a>00391                 geom = <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>;
-<a name="l00392"></a>00392             <span class="keywordflow">else</span> geom = <a class="code" href="class_phys_lib_1_1_geometry.html#a53ea962fb7f4ac902e35898b2e32ddb9" title="Absolutní poloha konvexního útvaru ohraničující těleso.">BoundingBox</a>;
-<a name="l00393"></a>00393 
-<a name="l00394"></a>00394             min = max = <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Dot(Axis, (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)geom[0]);
-<a name="l00395"></a>00395             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; geom.Length; i++)
-<a name="l00396"></a>00396             {
-<a name="l00397"></a>00397                 <span class="keywordtype">double</span> d = <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Dot(Axis, (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)geom[i]);
-<a name="l00398"></a>00398                 <span class="keywordflow">if</span> (d &lt; min)
-<a name="l00399"></a>00399                     min = d;
-<a name="l00400"></a>00400                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (d &gt; max)
-<a name="l00401"></a>00401                     max = d;
-<a name="l00402"></a>00402             }
-<a name="l00403"></a>00403         }
-<a name="l00404"></a>00404 
-<a name="l00405"></a>00405         <span class="keyword">internal</span> PointF[] SupportPoints(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Axis)
-<a name="l00406"></a>00406         {
-<a name="l00407"></a>00407             PointF[] geom = null;
-<a name="l00408"></a>00408             <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_geometry.html#adc6b0f749f7b0a0e1e361a78fc4b54bf" title="Indikuje, zda je útvar konvexní.">Convex</a>)
-<a name="l00409"></a>00409                 geom = <a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>;
-<a name="l00410"></a>00410             <span class="keywordflow">else</span> geom = <a class="code" href="class_phys_lib_1_1_geometry.html#a53ea962fb7f4ac902e35898b2e32ddb9" title="Absolutní poloha konvexního útvaru ohraničující těleso.">BoundingBox</a>;            
-<a name="l00411"></a>00411             
-<a name="l00412"></a>00412             <span class="keywordtype">double</span> min = -1.0f;
-<a name="l00413"></a>00413             <span class="keyword">const</span> <span class="keywordtype">double</span> threshold = 1.0E-1;            
-<a name="l00414"></a>00414             <span class="keywordtype">int</span> num = geom.Length;
-<a name="l00415"></a>00415 
-<a name="l00416"></a>00416             ArrayList sp = <span class="keyword">new</span> ArrayList();
+<a name="l00283"></a>00283                 <span class="keyword">using</span> (System.Drawing.Drawing2D.Matrix rot = <span class="keyword">new</span> System.Drawing.Drawing2D.Matrix())
+<a name="l00284"></a>00284                 {
+<a name="l00285"></a>00285                     rot.Translate((<span class="keywordtype">float</span>)center[0], (<span class="keywordtype">float</span>)center[1]);
+<a name="l00286"></a>00286                     rot.RotateAt((<span class="keywordtype">float</span>)angle, (PointF)<a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a>, System.Drawing.Drawing2D.MatrixOrder.Append);
+<a name="l00287"></a>00287                     rot.TransformPoints(transformedHull);
+<a name="l00288"></a>00288                 }
+<a name="l00289"></a>00289 
+<a name="l00290"></a>00290                 <span class="keywordflow">return</span> transformedHull;
+<a name="l00291"></a>00291             }
+<a name="l00292"></a>00292         }
+<a name="l00293"></a>00293 
+<a name="l00300"></a><a class="code" href="class_phys_lib_1_1_geometry.html#af85267217006c70bf21a251bcf422f11">00300</a>         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#af85267217006c70bf21a251bcf422f11" title="Spočte vzdálenost dvou bodů.">PointDistance</a>(PointF A, PointF B)
+<a name="l00301"></a>00301         {
+<a name="l00302"></a>00302             <span class="keywordflow">return</span> Math.Sqrt(Math.Pow(A.X - B.X, 2) + Math.Pow(A.Y - B.Y,2));
+<a name="l00303"></a>00303         }
+<a name="l00304"></a>00304 
+<a name="l00308"></a>00308         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8" title="Absolutní poloha bodu osy otáčení v rovině těžiště.">Nail</a>
+<a name="l00309"></a><a class="code" href="class_phys_lib_1_1_geometry.html#ac9c1ae2a7624167be9cc4cab9aac44c8">00309</a>         {
+<a name="l00310"></a>00310             <span class="keyword">get</span>; <span class="keyword">set</span>;
+<a name="l00311"></a>00311         }
+<a name="l00312"></a>00312 
+<a name="l00316"></a>00316         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a988a6e0a503763fc314d72051af91f7e" title="Výška objektu.">Height</a> 
+<a name="l00317"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a988a6e0a503763fc314d72051af91f7e">00317</a>         {
+<a name="l00318"></a>00318             <span class="keyword">get</span> { <span class="keywordflow">return</span> desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a39dfc00d33ff588e495a20e0ec6a9066" title="Výška útvaru.">Height</a>; }
+<a name="l00319"></a>00319         }
+<a name="l00320"></a>00320 
+<a name="l00324"></a>00324         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a36d0b136444be5f248f71403d5918b08" title="Šířka objektu.">Width</a>
+<a name="l00325"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a36d0b136444be5f248f71403d5918b08">00325</a>         {
+<a name="l00326"></a>00326             <span class="keyword">get</span> { <span class="keywordflow">return</span> desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#afb6fd90ad9fad15423e8e72837b2d773" title="Šířka útvaru.">Width</a>; }
+<a name="l00327"></a>00327         }
+<a name="l00328"></a>00328 
+<a name="l00332"></a>00332         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a26bd2fda8600d48f3ed99f7fcef2aa65" title="Objem objektu v krychlových pixelech.">Volume</a>
+<a name="l00333"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a26bd2fda8600d48f3ed99f7fcef2aa65">00333</a>         {
+<a name="l00334"></a>00334             <span class="keyword">get</span> { <span class="keywordflow">return</span> vol; }
+<a name="l00335"></a>00335         }
+<a name="l00336"></a>00336 
+<a name="l00340"></a>00340         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_geometry.html#adc6b0f749f7b0a0e1e361a78fc4b54bf" title="Indikuje, zda je útvar konvexní.">Convex</a>
+<a name="l00341"></a><a class="code" href="class_phys_lib_1_1_geometry.html#adc6b0f749f7b0a0e1e361a78fc4b54bf">00341</a>         {
+<a name="l00342"></a>00342             <span class="keyword">get</span> { <span class="keywordflow">return</span> desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a37c639dc95658f38f9de773dd9a60464" title="Indikuje, zda je polygon konvexní.">Convex</a>; }
+<a name="l00343"></a>00343         }
+<a name="l00344"></a>00344 
+<a name="l00348"></a>00348         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#affca371f1015e9bd8309c41c74baee77" title="Povrch objektu v pixelech čtverečních.">Surface</a>
+<a name="l00349"></a><a class="code" href="class_phys_lib_1_1_geometry.html#affca371f1015e9bd8309c41c74baee77">00349</a>         {
+<a name="l00350"></a>00350             <span class="keyword">get</span> { <span class="keywordflow">return</span> surf; }
+<a name="l00351"></a>00351         }
+<a name="l00352"></a>00352 
+<a name="l00356"></a>00356         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a7e86471f6a3ae35ccc693597f571b25b" title="Obsah plochy polygonu.">FrontalArea</a>
+<a name="l00357"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a7e86471f6a3ae35ccc693597f571b25b">00357</a>         {
+<a name="l00358"></a>00358             <span class="keyword">get</span> { <span class="keywordflow">return</span> desc.<a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b" title="Obsah útvaru.">FrontalArea</a>; }
+<a name="l00359"></a>00359         }
+<a name="l00360"></a>00360 
+<a name="l00367"></a><a class="code" href="class_phys_lib_1_1_geometry.html#a3660be945ecec74cecde8e337518c09a">00367</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a3660be945ecec74cecde8e337518c09a" title="Projektuje těleso na danou osu.">ProjectToAxis</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Axis, ref <span class="keywordtype">double</span> min, ref <span class="keywordtype">double</span> max)
+<a name="l00368"></a>00368         {
+<a name="l00369"></a>00369             PointF[] axProj = <a class="code" href="class_phys_lib_1_1_geometry.html#a53ea962fb7f4ac902e35898b2e32ddb9" title="Absolutní poloha konvexního útvaru ohraničující těleso.">BoundingBox</a>;
+<a name="l00370"></a>00370 
+<a name="l00371"></a>00371             min = max = <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Dot(Axis, (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)axProj[0]);
+<a name="l00372"></a>00372             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; axProj.Length; i++)
+<a name="l00373"></a>00373             {
+<a name="l00374"></a>00374                 <span class="keywordtype">double</span> d = <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Dot(Axis, (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)axProj[i]);
+<a name="l00375"></a>00375                 <span class="keywordflow">if</span> (d &lt; min)
+<a name="l00376"></a>00376                     min = d;
+<a name="l00377"></a>00377                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (d &gt; max)
+<a name="l00378"></a>00378                     max = d;
+<a name="l00379"></a>00379             }
+<a name="l00380"></a>00380         }
+<a name="l00381"></a>00381 
+<a name="l00382"></a>00382         <span class="keyword">internal</span> PointF[] SupportPoints(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Axis)
+<a name="l00383"></a>00383         {   
+<a name="l00384"></a>00384             <span class="keywordtype">double</span> min = -1.0f;
+<a name="l00385"></a>00385             <span class="keyword">const</span> <span class="keywordtype">double</span> threshold = 1.0E-1;            
+<a name="l00386"></a>00386             PointF[] supGeom = <a class="code" href="class_phys_lib_1_1_geometry.html#a53ea962fb7f4ac902e35898b2e32ddb9" title="Absolutní poloha konvexního útvaru ohraničující těleso.">BoundingBox</a>;
+<a name="l00387"></a>00387 
+<a name="l00388"></a>00388             ArrayList sp = <span class="keyword">new</span> ArrayList();
+<a name="l00389"></a>00389 
+<a name="l00390"></a>00390             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; supGeom.Length; i++)
+<a name="l00391"></a>00391             {
+<a name="l00392"></a>00392                 <span class="keywordtype">double</span> t = <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Dot(Axis,(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)supGeom[i]);
+<a name="l00393"></a>00393                 <span class="keywordflow">if</span> (t &lt; min || i == 0)
+<a name="l00394"></a>00394                     min = t;
+<a name="l00395"></a>00395             }
+<a name="l00396"></a>00396 
+<a name="l00397"></a>00397             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; supGeom.Length; i++)
+<a name="l00398"></a>00398             {
+<a name="l00399"></a>00399                 <span class="keywordtype">double</span> t = Vector.Dot(Axis,(Vector)supGeom[i]);
+<a name="l00400"></a>00400 
+<a name="l00401"></a>00401                 <span class="keywordflow">if</span> (t &lt; min + threshold)
+<a name="l00402"></a>00402                 {
+<a name="l00403"></a>00403                     sp.Add(supGeom[i]);
+<a name="l00404"></a>00404                     <span class="keywordflow">if</span> (sp.Count == 2) <span class="keywordflow">break</span>;
+<a name="l00405"></a>00405                 }
+<a name="l00406"></a>00406             }
+<a name="l00407"></a>00407 
+<a name="l00408"></a>00408             <span class="keywordflow">return</span> (PointF[])sp.ToArray(typeof(PointF));
+<a name="l00409"></a>00409         }
+<a name="l00410"></a>00410 
+<a name="l00411"></a>00411         <span class="keyword">internal</span> <span class="keywordtype">void</span> RaiseOnCollision(CollisionReport Report)
+<a name="l00412"></a>00412         {
+<a name="l00413"></a>00413             <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_geometry.html#a9b20dc8fe56feed97f6fd4a4a7da26e3" title="Událost nastávající při kolizi tělesa.">OnCollision</a> != null)
+<a name="l00414"></a>00414               <a class="code" href="class_phys_lib_1_1_geometry.html#a9b20dc8fe56feed97f6fd4a4a7da26e3" title="Událost nastávající při kolizi tělesa.">OnCollision</a>(<span class="keyword">this</span>,<span class="keyword">new</span> CollisionEventArgs(Report));
+<a name="l00415"></a>00415         }
+<a name="l00416"></a>00416     }
 <a name="l00417"></a>00417 
-<a name="l00418"></a>00418             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num; i++)
-<a name="l00419"></a>00419             {
-<a name="l00420"></a>00420                 <span class="keywordtype">double</span> t = <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Dot(Axis,(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)geom[i]);
-<a name="l00421"></a>00421                 <span class="keywordflow">if</span> (t &lt; min || i == 0)
-<a name="l00422"></a>00422                     min = t;
-<a name="l00423"></a>00423             }
-<a name="l00424"></a>00424 
-<a name="l00425"></a>00425             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num; i++)
-<a name="l00426"></a>00426             {
-<a name="l00427"></a>00427                 <span class="keywordtype">double</span> t = Vector.Dot(Axis,(Vector)geom[i]);
+<a name="l00421"></a>00421     [Serializable]
+<a name="l00422"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html">00422</a>     <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html" title="Popisovač rovinného geometrického útvaru.">GeometryDescriptor</a>
+<a name="l00423"></a>00423     {
+<a name="l00427"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a39dfc00d33ff588e495a20e0ec6a9066">00427</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a988a6e0a503763fc314d72051af91f7e" title="Výška objektu.">Height</a>;
 <a name="l00428"></a>00428 
-<a name="l00429"></a>00429                 <span class="keywordflow">if</span> (t &lt; min + threshold)
-<a name="l00430"></a>00430                 {
-<a name="l00431"></a>00431                     sp.Add(<a class="code" href="class_phys_lib_1_1_geometry.html#af3a7b3e74846ff6610e1d07fff9184eb" title="Absolutní polohy vertexů tvořící fyzický model tělesa.">ObjectGeometry</a>[i]);
-<a name="l00432"></a>00432                     <span class="keywordflow">if</span> (sp.Count == 2) <span class="keywordflow">break</span>;
-<a name="l00433"></a>00433                 }
-<a name="l00434"></a>00434             }
-<a name="l00435"></a>00435 
-<a name="l00436"></a>00436             <span class="keywordflow">return</span> (PointF[])sp.ToArray(typeof(PointF));
-<a name="l00437"></a>00437         }
+<a name="l00432"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#afb6fd90ad9fad15423e8e72837b2d773">00432</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a36d0b136444be5f248f71403d5918b08" title="Šířka objektu.">Width</a>;
+<a name="l00433"></a>00433 
+<a name="l00437"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a4011b6aa5d2cc4f22ab3e22d3c64aa54">00437</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a5434e9ce6b416eb37bbb62090087d3c3" title="Hloubka tělesa.">Depth</a>;
 <a name="l00438"></a>00438 
-<a name="l00439"></a>00439         <span class="keyword">internal</span> <span class="keywordtype">void</span> RaiseOnCollision(CollisionReport Report)
-<a name="l00440"></a>00440         {
-<a name="l00441"></a>00441             <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_geometry.html#a9b20dc8fe56feed97f6fd4a4a7da26e3" title="Událost nastávající při kolizi tělesa.">OnCollision</a> != null)
-<a name="l00442"></a>00442               <a class="code" href="class_phys_lib_1_1_geometry.html#a9b20dc8fe56feed97f6fd4a4a7da26e3" title="Událost nastávající při kolizi tělesa.">OnCollision</a>(<span class="keyword">this</span>,<span class="keyword">new</span> CollisionEventArgs(Report));
-<a name="l00443"></a>00443         }
-<a name="l00444"></a>00444     }
-<a name="l00445"></a>00445 
-<a name="l00449"></a>00449     [Serializable]
-<a name="l00450"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html">00450</a>     <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html" title="Popisovač rovinného geometrického útvaru.">GeometryDescriptor</a>
-<a name="l00451"></a>00451     {
-<a name="l00455"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a39dfc00d33ff588e495a20e0ec6a9066">00455</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a988a6e0a503763fc314d72051af91f7e" title="Výška objektu.">Height</a>;
+<a name="l00442"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b">00442</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a7e86471f6a3ae35ccc693597f571b25b" title="Obsah plochy polygonu.">FrontalArea</a>;
+<a name="l00443"></a>00443 
+<a name="l00447"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a2eb30e8a3f3d450f7203f68c6d4e63c5">00447</a>         <span class="keyword">public</span> PointF Centroid;
+<a name="l00448"></a>00448 
+<a name="l00452"></a>00452         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_geometry.html#adc6b0f749f7b0a0e1e361a78fc4b54bf" title="Indikuje, zda je útvar konvexní.">Convex</a>
+<a name="l00453"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a37c639dc95658f38f9de773dd9a60464">00453</a>         {
+<a name="l00454"></a>00454             <span class="keyword">get</span> { <span class="keywordflow">return</span> <a class="code" href="class_phys_lib_1_1_convex_hull.html" title="Interní třída generující konvexní obal z vertexů.">ConvexHull</a>.Length == DefaultVertices.Length; }
+<a name="l00455"></a>00455         }
 <a name="l00456"></a>00456 
-<a name="l00460"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#afb6fd90ad9fad15423e8e72837b2d773">00460</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a36d0b136444be5f248f71403d5918b08" title="Šířka objektu.">Width</a>;
+<a name="l00460"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a57b3b404c8afd9b33aed0de215b71f49">00460</a>         <span class="keyword">public</span> PointF[] <a class="code" href="class_phys_lib_1_1_convex_hull.html" title="Interní třída generující konvexní obal z vertexů.">ConvexHull</a>;
 <a name="l00461"></a>00461 
-<a name="l00465"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a4011b6aa5d2cc4f22ab3e22d3c64aa54">00465</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a5434e9ce6b416eb37bbb62090087d3c3" title="Hloubka tělesa.">Depth</a>;
+<a name="l00465"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#aed5fd7c998ebcd25cd644ff7c8a0aab8">00465</a>         <span class="keyword">public</span> PointF[] DefaultVertices;
 <a name="l00466"></a>00466 
-<a name="l00470"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ab05b02a7a81a28e3bb302f326d9f810b">00470</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_geometry.html#a7e86471f6a3ae35ccc693597f571b25b" title="Obsah plochy polygonu.">FrontalArea</a>;
-<a name="l00471"></a>00471 
-<a name="l00475"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a2eb30e8a3f3d450f7203f68c6d4e63c5">00475</a>         <span class="keyword">public</span> PointF Centroid;
-<a name="l00476"></a>00476 
-<a name="l00480"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#ad0ff55ef7239fa9c81873da058a0a6c2">00480</a>         <span class="keyword">public</span> <span class="keywordtype">int</span> Farthest;
-<a name="l00481"></a>00481 
-<a name="l00485"></a>00485         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_geometry.html#adc6b0f749f7b0a0e1e361a78fc4b54bf" title="Indikuje, zda je útvar konvexní.">Convex</a>
-<a name="l00486"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a37c639dc95658f38f9de773dd9a60464">00486</a>         {
-<a name="l00487"></a>00487             <span class="keyword">get</span> { <span class="keywordflow">return</span> <a class="code" href="class_phys_lib_1_1_convex_hull.html" title="Interní třída generující konvexní obal z vertexů.">ConvexHull</a>.Length == DefaultVertices.Length; }
-<a name="l00488"></a>00488         }
+<a name="l00470"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#affbc07b4f1a53102740451bd8ba4e5d3">00470</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_geometry_descriptor.html" title="Popisovač rovinného geometrického útvaru.">GeometryDescriptor</a>(PointF[] Default)
+<a name="l00471"></a>00471         {
+<a name="l00472"></a>00472             Centroid = <span class="keyword">new</span> PointF(0, 0);
+<a name="l00473"></a>00473             <a class="code" href="class_phys_lib_1_1_geometry.html#a988a6e0a503763fc314d72051af91f7e" title="Výška objektu.">Height</a> = <a class="code" href="class_phys_lib_1_1_geometry.html#a36d0b136444be5f248f71403d5918b08" title="Šířka objektu.">Width</a> = <a class="code" href="class_phys_lib_1_1_geometry.html#a5434e9ce6b416eb37bbb62090087d3c3" title="Hloubka tělesa.">Depth</a> = <a class="code" href="class_phys_lib_1_1_geometry.html#a7e86471f6a3ae35ccc693597f571b25b" title="Obsah plochy polygonu.">FrontalArea</a> = 0;
+<a name="l00474"></a>00474             
+<a name="l00475"></a>00475             DefaultVertices = <span class="keyword">new</span> PointF[Default.Length];
+<a name="l00476"></a>00476             Default.CopyTo(DefaultVertices, 0);
+<a name="l00477"></a>00477         }
+<a name="l00478"></a>00478     }
+<a name="l00479"></a>00479 
+<a name="l00483"></a><a class="code" href="class_phys_lib_1_1_collision_event_args.html">00483</a>     <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_phys_lib_1_1_collision_event_args.html" title="Třída pro argumenty události kolize těles.">CollisionEventArgs</a> : EventArgs
+<a name="l00484"></a>00484     {
+<a name="l00488"></a><a class="code" href="class_phys_lib_1_1_collision_event_args.html#a24b0bdb17732f0c24ccd658886d9991b">00488</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_collision_report.html" title="Třída hlášení o kolizi.">CollisionReport</a> Report { <span class="keyword">get</span>; <span class="keyword">private</span> <span class="keyword">set</span>; }
 <a name="l00489"></a>00489 
-<a name="l00493"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#a57b3b404c8afd9b33aed0de215b71f49">00493</a>         <span class="keyword">public</span> PointF[] <a class="code" href="class_phys_lib_1_1_convex_hull.html" title="Interní třída generující konvexní obal z vertexů.">ConvexHull</a>;
-<a name="l00494"></a>00494 
-<a name="l00498"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#aed5fd7c998ebcd25cd644ff7c8a0aab8">00498</a>         <span class="keyword">public</span> PointF[] DefaultVertices;
+<a name="l00494"></a><a class="code" href="class_phys_lib_1_1_collision_event_args.html#ac557be30f1c02954d81cdd7ae91cdc10">00494</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_collision_event_args.html" title="Třída pro argumenty události kolize těles.">CollisionEventArgs</a>(<a class="code" href="class_phys_lib_1_1_collision_report.html" title="Třída hlášení o kolizi.">CollisionReport</a> Rep)
+<a name="l00495"></a>00495         {
+<a name="l00496"></a>00496             Report = Rep;
+<a name="l00497"></a>00497         }
+<a name="l00498"></a>00498     }
 <a name="l00499"></a>00499 
-<a name="l00503"></a><a class="code" href="class_phys_lib_1_1_geometry_descriptor.html#affbc07b4f1a53102740451bd8ba4e5d3">00503</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_geometry_descriptor.html" title="Popisovač rovinného geometrického útvaru.">GeometryDescriptor</a>(PointF[] Default)
-<a name="l00504"></a>00504         {
-<a name="l00505"></a>00505             Centroid = <span class="keyword">new</span> PointF(0, 0);
-<a name="l00506"></a>00506             <a class="code" href="class_phys_lib_1_1_geometry.html#a988a6e0a503763fc314d72051af91f7e" title="Výška objektu.">Height</a> = <a class="code" href="class_phys_lib_1_1_geometry.html#a36d0b136444be5f248f71403d5918b08" title="Šířka objektu.">Width</a> = <a class="code" href="class_phys_lib_1_1_geometry.html#a5434e9ce6b416eb37bbb62090087d3c3" title="Hloubka tělesa.">Depth</a> = <a class="code" href="class_phys_lib_1_1_geometry.html#a7e86471f6a3ae35ccc693597f571b25b" title="Obsah plochy polygonu.">FrontalArea</a> = Farthest = 0;
-<a name="l00507"></a>00507             
-<a name="l00508"></a>00508             DefaultVertices = <span class="keyword">new</span> PointF[Default.Length];
-<a name="l00509"></a>00509             Default.CopyTo(DefaultVertices, 0);
-<a name="l00510"></a>00510         }
-<a name="l00511"></a>00511     }
-<a name="l00512"></a>00512 
-<a name="l00516"></a><a class="code" href="class_phys_lib_1_1_collision_event_args.html">00516</a>     <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_phys_lib_1_1_collision_event_args.html" title="Třída pro argumenty události kolize těles.">CollisionEventArgs</a> : EventArgs
-<a name="l00517"></a>00517     {
-<a name="l00521"></a><a class="code" href="class_phys_lib_1_1_collision_event_args.html#a24b0bdb17732f0c24ccd658886d9991b">00521</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_collision_report.html" title="Třída hlášení o kolizi.">CollisionReport</a> Report { <span class="keyword">get</span>; <span class="keyword">private</span> <span class="keyword">set</span>; }
-<a name="l00522"></a>00522 
-<a name="l00527"></a><a class="code" href="class_phys_lib_1_1_collision_event_args.html#ac557be30f1c02954d81cdd7ae91cdc10">00527</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_collision_event_args.html" title="Třída pro argumenty události kolize těles.">CollisionEventArgs</a>(<a class="code" href="class_phys_lib_1_1_collision_report.html" title="Třída hlášení o kolizi.">CollisionReport</a> Rep)
-<a name="l00528"></a>00528         {
-<a name="l00529"></a>00529             Report = Rep;
-<a name="l00530"></a>00530         }
-<a name="l00531"></a>00531     }
-<a name="l00532"></a>00532 
-<a name="l00536"></a><a class="code" href="class_phys_lib_1_1_convex_hull.html">00536</a>     <span class="keyword">internal</span> <span class="keyword">class </span><a class="code" href="class_phys_lib_1_1_convex_hull.html" title="Interní třída generující konvexní obal z vertexů.">ConvexHull</a>
-<a name="l00537"></a>00537     {
-<a name="l00538"></a>00538         <span class="keyword">private</span> <span class="keyword">static</span> <span class="keywordtype">int</span> LexicalPointComparison(PointF a, PointF b)
-<a name="l00539"></a>00539         {
-<a name="l00540"></a>00540             <span class="keywordflow">if</span> (a.X != b.X)
-<a name="l00541"></a>00541                 <span class="keywordflow">return</span> a.X &gt; b.X ? 1 : -1;
-<a name="l00542"></a>00542             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (a.Y != b.Y)
-<a name="l00543"></a>00543                 <span class="keywordflow">return</span> a.Y &gt; b.Y ? 1 : -1;
-<a name="l00544"></a>00544             <span class="keywordflow">else</span> <span class="keywordflow">return</span> 0;
-<a name="l00545"></a>00545         }
-<a name="l00546"></a>00546 
-<a name="l00547"></a>00547         <span class="keyword">private</span> <span class="keyword">static</span> <span class="keywordtype">float</span> zc(PointF O,PointF A,PointF B)
-<a name="l00548"></a>00548         {
-<a name="l00549"></a>00549                 <span class="keywordflow">return</span> (A.X - O.X) * (B.Y - O.Y) - (A.Y - O.Y) * (B.X - O.X);
-<a name="l00550"></a>00550         }
-<a name="l00551"></a>00551 
-<a name="l00552"></a>00552         <span class="keyword">public</span> <span class="keyword">static</span> PointF[] GetConvexHull(PointF[] input)
-<a name="l00553"></a>00553         {
-<a name="l00554"></a>00554             <span class="keywordtype">int</span> n = input.Length, k = 0;
-<a name="l00555"></a>00555             PointF[] Hull = <span class="keyword">new</span> PointF[2 * n],Sorted = <span class="keyword">new</span> PointF[input.Length];
-<a name="l00556"></a>00556             input.CopyTo(Sorted, 0);
-<a name="l00557"></a>00557 
-<a name="l00558"></a>00558             Array.Sort&lt;PointF&gt;(Sorted, <span class="keyword">new</span> Comparison&lt;PointF&gt;(LexicalPointComparison));
-<a name="l00559"></a>00559 
-<a name="l00560"></a>00560             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)
-<a name="l00561"></a>00561             {
-<a name="l00562"></a>00562                 <span class="keywordflow">while</span> (k &gt;= 2 &amp;&amp; zc((PointF)Hull[k - 2],(PointF)Hull[k - 1], Sorted[i]) &lt;= 0) k--;
-<a name="l00563"></a>00563                 Hull[k++] = Sorted[i];
-<a name="l00564"></a>00564             }
-<a name="l00565"></a>00565 
-<a name="l00566"></a>00566             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = n - 2, t = k + 1; i &gt;= 0; i--)
-<a name="l00567"></a>00567             {
-<a name="l00568"></a>00568                 <span class="keywordflow">while</span> (k &gt;= t &amp;&amp; zc((PointF)Hull[k - 2], (PointF)Hull[k - 1], Sorted[i]) &lt;= 0) k--;
-<a name="l00569"></a>00569                 Hull[k++] = Sorted[i];
-<a name="l00570"></a>00570             }
-<a name="l00571"></a>00571 
-<a name="l00572"></a>00572             PointF[] Ret = <span class="keyword">new</span> PointF[k-1];
-<a name="l00573"></a>00573             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; k - 1; i++)
-<a name="l00574"></a>00574             {
-<a name="l00575"></a>00575                 Ret[i].X = Hull[i].X;
-<a name="l00576"></a>00576                 Ret[i].Y = Hull[i].Y;
-<a name="l00577"></a>00577             }
-<a name="l00578"></a>00578             <span class="keywordflow">return</span> Ret;
-<a name="l00579"></a>00579         }
-<a name="l00580"></a>00580     }
-<a name="l00581"></a>00581 }
+<a name="l00503"></a><a class="code" href="class_phys_lib_1_1_convex_hull.html">00503</a>     <span class="keyword">internal</span> <span class="keyword">class </span><a class="code" href="class_phys_lib_1_1_convex_hull.html" title="Interní třída generující konvexní obal z vertexů.">ConvexHull</a>
+<a name="l00504"></a>00504     {
+<a name="l00505"></a>00505         <span class="keyword">private</span> <span class="keyword">static</span> <span class="keywordtype">int</span> LexicalPointComparison(PointF a, PointF b)
+<a name="l00506"></a>00506         {
+<a name="l00507"></a>00507             <span class="keywordflow">if</span> (a.X != b.X)
+<a name="l00508"></a>00508                 <span class="keywordflow">return</span> a.X &gt; b.X ? 1 : -1;
+<a name="l00509"></a>00509             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (a.Y != b.Y)
+<a name="l00510"></a>00510                 <span class="keywordflow">return</span> a.Y &gt; b.Y ? 1 : -1;
+<a name="l00511"></a>00511             <span class="keywordflow">else</span> <span class="keywordflow">return</span> 0;
+<a name="l00512"></a>00512         }
+<a name="l00513"></a>00513 
+<a name="l00514"></a>00514         <span class="keyword">private</span> <span class="keyword">static</span> <span class="keywordtype">float</span> zc(PointF O,PointF A,PointF B)
+<a name="l00515"></a>00515         {
+<a name="l00516"></a>00516                 <span class="keywordflow">return</span> (A.X - O.X) * (B.Y - O.Y) - (A.Y - O.Y) * (B.X - O.X);
+<a name="l00517"></a>00517         }
+<a name="l00518"></a>00518 
+<a name="l00524"></a><a class="code" href="class_phys_lib_1_1_convex_hull.html#a88bd21221a736c783ac3e49916a33872">00524</a>         <span class="keyword">public</span> <span class="keyword">static</span> PointF[] GetConvexHull(PointF[] Vertices)
+<a name="l00525"></a>00525         {
+<a name="l00526"></a>00526             <span class="keywordtype">int</span> n = Vertices.Length, k = 0;
+<a name="l00527"></a>00527             PointF[] Hull = <span class="keyword">new</span> PointF[2 * n],Sorted = <span class="keyword">new</span> PointF[Vertices.Length];
+<a name="l00528"></a>00528             Vertices.CopyTo(Sorted, 0);
+<a name="l00529"></a>00529 
+<a name="l00530"></a>00530             Array.Sort&lt;PointF&gt;(Sorted, <span class="keyword">new</span> Comparison&lt;PointF&gt;(LexicalPointComparison));
+<a name="l00531"></a>00531 
+<a name="l00532"></a>00532             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)
+<a name="l00533"></a>00533             {
+<a name="l00534"></a>00534                 <span class="keywordflow">while</span> (k &gt;= 2 &amp;&amp; zc((PointF)Hull[k - 2],(PointF)Hull[k - 1], Sorted[i]) &lt;= 0) k--;
+<a name="l00535"></a>00535                 Hull[k++] = Sorted[i];
+<a name="l00536"></a>00536             }
+<a name="l00537"></a>00537 
+<a name="l00538"></a>00538             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = n - 2, t = k + 1; i &gt;= 0; i--)
+<a name="l00539"></a>00539             {
+<a name="l00540"></a>00540                 <span class="keywordflow">while</span> (k &gt;= t &amp;&amp; zc((PointF)Hull[k - 2], (PointF)Hull[k - 1], Sorted[i]) &lt;= 0) k--;
+<a name="l00541"></a>00541                 Hull[k++] = Sorted[i];
+<a name="l00542"></a>00542             }
+<a name="l00543"></a>00543 
+<a name="l00544"></a>00544             PointF[] Ret = <span class="keyword">new</span> PointF[k-1];
+<a name="l00545"></a>00545             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; k - 1; i++)
+<a name="l00546"></a>00546             {
+<a name="l00547"></a>00547                 Ret[i].X = Hull[i].X;
+<a name="l00548"></a>00548                 Ret[i].Y = Hull[i].Y;
+<a name="l00549"></a>00549             }
+<a name="l00550"></a>00550             <span class="keywordflow">return</span> Ret;
+<a name="l00551"></a>00551         }
+<a name="l00552"></a>00552     }
+<a name="l00553"></a>00553 }
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generováno Tue Dec 21 13:33:03 2010 pro projekt PhysLib programem&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generováno Sat Dec 25 17:27:09 2010 pro projekt PhysLib programem&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

@@ -298,70 +298,71 @@
 <a name="l00409"></a>00409                             PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a> += PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#a646da127bcf25da97056d4ef573009cb" title="Výslednice všech sil působící na těleso.">TotalForce</a> * (<a class="code" href="class_phys_lib_1_1_world.html#a08b91c2bcb4482f4658fcdf153d8d5ca" title="Velikost kroku simulace (v sekundách).">Delta</a> / PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a>);
 <a name="l00410"></a>00410                         }
 <a name="l00411"></a>00411 
-<a name="l00412"></a>00412                         <span class="keywordflow">if</span> (PhysObjs[i].LinearVelocity.IsNaN)
-<a name="l00413"></a>00413                             <span class="keywordflow">throw</span> <span class="keyword">new</span> DataMisalignedException(<span class="stringliteral">&quot;Tuhle vtipnou vyjímku musím chytit, abych zjistil kdy tenhle divnej stav nastává&quot;</span>);
+<a name="l00412"></a>00412                         PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#a1e8503693216b6a3d578ba51f41851ba" title="Orientace objektu v úhlových stupních.">Orientation</a> += Math.Round((PhysObjs[i].AngularVelocity[2] * 180 / Math.PI) * <a class="code" href="class_phys_lib_1_1_world.html#a08b91c2bcb4482f4658fcdf153d8d5ca" title="Velikost kroku simulace (v sekundách).">Delta</a>, 3);
+<a name="l00413"></a>00413                         PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>   += PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#ac2e341d9ddfbde5022aaeb5899ca3b0b" title="Výslednice všech točivých momentů působící na těleso.">TotalTorque</a> * (<a class="code" href="class_phys_lib_1_1_world.html#a08b91c2bcb4482f4658fcdf153d8d5ca" title="Velikost kroku simulace (v sekundách).">Delta</a> / PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#abebd841b2240bf066ce8f95001981a25" title="Spočítá moment setrvačnosti tělesa v závislosti na rozlišení.">MomentOfInertia</a>);
 <a name="l00414"></a>00414 
-<a name="l00415"></a>00415                         PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#a1e8503693216b6a3d578ba51f41851ba" title="Orientace objektu v úhlových stupních.">Orientation</a> += Math.Round((PhysObjs[i].AngularVelocity[2] * 180 / Math.PI) * <a class="code" href="class_phys_lib_1_1_world.html#a08b91c2bcb4482f4658fcdf153d8d5ca" title="Velikost kroku simulace (v sekundách).">Delta</a>, 3);
-<a name="l00416"></a>00416                         PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>   += PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#ac2e341d9ddfbde5022aaeb5899ca3b0b" title="Výslednice všech točivých momentů působící na těleso.">TotalTorque</a> * (<a class="code" href="class_phys_lib_1_1_world.html#a08b91c2bcb4482f4658fcdf153d8d5ca" title="Velikost kroku simulace (v sekundách).">Delta</a> / PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#abebd841b2240bf066ce8f95001981a25" title="Spočítá moment setrvačnosti tělesa v závislosti na rozlišení.">MomentOfInertia</a>);
-<a name="l00417"></a>00417 
-<a name="l00418"></a>00418                         PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#a63831905d95885b1a525c51f8123ee25" title="Zruší všechny síly působící na těleso.">Reset</a>();
+<a name="l00415"></a>00415                         PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#a63831905d95885b1a525c51f8123ee25" title="Zruší všechny síly působící na těleso.">Reset</a>();
+<a name="l00416"></a>00416 
+<a name="l00417"></a>00417                         <span class="keywordflow">foreach</span> (<a class="code" href="class_phys_lib_1_1_collision_report.html" title="Třída hlášení o kolizi.">CollisionReport</a> rep <span class="keywordflow">in</span> csolve.<a class="code" href="class_phys_lib_1_1_collision_solver.html#aeeb1a408f85dbbd1a1e7943f01f71b3d" title="Sestaví report o kolizích v momentálním stavu systému pro daný objekt.">DetectCollisionsFor</a>(i))
+<a name="l00418"></a>00418                             csolve.<a class="code" href="class_phys_lib_1_1_collision_solver.html#ac608bd2318416a70a860f29510274951" title="Vyřeší konkrétní kolizi.">SolveCollision</a>(rep);
 <a name="l00419"></a>00419 
-<a name="l00420"></a>00420                         <span class="keywordflow">foreach</span> (<a class="code" href="class_phys_lib_1_1_collision_report.html" title="Třída hlášení o kolizi.">CollisionReport</a> rep <span class="keywordflow">in</span> csolve.<a class="code" href="class_phys_lib_1_1_collision_solver.html#aeeb1a408f85dbbd1a1e7943f01f71b3d" title="Sestaví report o kolizích v momentálním stavu systému pro daný objekt.">DetectCollisionsFor</a>(i))
-<a name="l00421"></a>00421                             csolve.<a class="code" href="class_phys_lib_1_1_collision_solver.html#ac608bd2318416a70a860f29510274951" title="Vyřeší konkrétní kolizi.">SolveCollision</a>(rep);
-<a name="l00422"></a>00422 
-<a name="l00423"></a>00423                         <span class="keywordflow">if</span> (PhysObjs[i].Static) PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#a5ff9d1e7de6d07322a65f66aa179aee9" title="Zruší všechny síly a zastaví těleso.">ResetAll</a>();
-<a name="l00424"></a>00424                     }
-<a name="l00425"></a>00425                 }
-<a name="l00426"></a>00426             }
-<a name="l00427"></a>00427 
-<a name="l00428"></a>00428             <a class="code" href="class_phys_lib_1_1_world.html#a9bcae788313108e402f90afdc429ef74" title="Událost nastávající při každém simulačním kroku.">OnTick</a>(<span class="keyword">this</span>, null);
-<a name="l00429"></a>00429         }
-<a name="l00430"></a>00430 
-<a name="l00434"></a>00434         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_world.html#a2589161ff13f9249db504035d413589b" title="Poloha bodu, podle kterého se určuje hladina potenciální energie.">Level</a>
-<a name="l00435"></a><a class="code" href="class_phys_lib_1_1_world.html#a2589161ff13f9249db504035d413589b">00435</a>         {
-<a name="l00436"></a>00436             <span class="keyword">get</span> { <span class="keywordflow">return</span> lv; }
-<a name="l00437"></a>00437             <span class="keyword">set</span>
-<a name="l00438"></a>00438             {
-<a name="l00439"></a>00439                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Objs.Count; i++)
-<a name="l00440"></a>00440                     (Objs[i] as <a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě.">SimObject</a>).InitialEnergy = value[1] - lv[1];
-<a name="l00441"></a>00441                 lv[0] = 0; lv[1] = value[1]; lv[2] = 0;
-<a name="l00442"></a>00442             }
-<a name="l00443"></a>00443         }
-<a name="l00444"></a>00444 
-<a name="l00451"></a><a class="code" href="class_phys_lib_1_1_world.html#abe054bfbe16d40f4f3e51df82212ae3c">00451</a>         <span class="keyword">public</span> <a class="code" href="struct_phys_lib_1_1_object_energy.html" title="Struktura obsahující informace o energiích tělesa.">ObjectEnergy</a> <a class="code" href="class_phys_lib_1_1_world.html#abe054bfbe16d40f4f3e51df82212ae3c" title="Spočítá všechny typy energií pro dané těleso.">GetObjectEnergy</a>(<a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě.">SimObject</a> Object,ConversionType Units = ConversionType.MetersToPixels)
-<a name="l00452"></a>00452         {
-<a name="l00453"></a>00453             <span class="keywordflow">if</span> (Object == null) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentNullException();
-<a name="l00454"></a>00454 
-<a name="l00455"></a>00455             <a class="code" href="struct_phys_lib_1_1_object_energy.html" title="Struktura obsahující informace o energiích tělesa.">ObjectEnergy</a> Ret = <span class="keyword">new</span> <a class="code" href="struct_phys_lib_1_1_object_energy.html" title="Struktura obsahující informace o energiích tělesa.">ObjectEnergy</a>();
-<a name="l00456"></a>00456 
-<a name="l00457"></a>00457             <span class="keywordflow">if</span> (Units == ConversionType.MetersToPixels)
-<a name="l00458"></a>00458             {
-<a name="l00459"></a>00459                 Ret.Kinetic = 0.5 * Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Pow(Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a>, 2);
-<a name="l00460"></a>00460                 Ret.Potential = Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.PointDistance(<span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>(Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>[0], <a class="code" href="class_phys_lib_1_1_world.html#a2589161ff13f9249db504035d413589b" title="Poloha bodu, podle kterého se určuje hladina potenciální energie.">Level</a>[1], 0), Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>) * <a class="code" href="class_phys_lib_1_1_world.html#ae3de84e1eaaf168a9610acf00f2e78e5" title="Vektor gravitace.">Gravity</a>.<a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>;
-<a name="l00461"></a>00461             }
-<a name="l00462"></a>00462             <span class="keywordflow">else</span>
-<a name="l00463"></a>00463             {
-<a name="l00464"></a>00464                 Ret.Kinetic = 0.5 * Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Pow(<a class="code" href="class_phys_lib_1_1_world.html#a0304b913f959a862c9b7eca47bee6a89" title="Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení...">Convert</a>(Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a>,ConversionType.PixelsToMeters), 2);
-<a name="l00465"></a>00465                 Ret.Potential = Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * <a class="code" href="class_phys_lib_1_1_world.html#a0304b913f959a862c9b7eca47bee6a89" title="Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení...">Convert</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.PointDistance(<span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>(Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>[0], <a class="code" href="class_phys_lib_1_1_world.html#a2589161ff13f9249db504035d413589b" title="Poloha bodu, podle kterého se určuje hladina potenciální energie.">Level</a>[1], 0), Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>),ConversionType.PixelsToMeters) * <a class="code" href="class_phys_lib_1_1_world.html#a0304b913f959a862c9b7eca47bee6a89" title="Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení...">Convert</a>(<a class="code" href="class_phys_lib_1_1_world.html#ae3de84e1eaaf168a9610acf00f2e78e5" title="Vektor gravitace.">Gravity</a>,ConversionType.PixelsToMeters).Magnitude;
-<a name="l00466"></a>00466             }
-<a name="l00467"></a>00467             
-<a name="l00468"></a>00468             Ret.Rotational = 0.5 * Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#abebd841b2240bf066ce8f95001981a25" title="Spočítá moment setrvačnosti tělesa v závislosti na rozlišení.">MomentOfInertia</a> * <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Pow(Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>, 2);
-<a name="l00469"></a>00469             <span class="keywordflow">return</span> Ret;
-<a name="l00470"></a>00470         }
-<a name="l00471"></a>00471 
-<a name="l00472"></a>00472     }
-<a name="l00473"></a>00473 
-<a name="l00477"></a><a class="code" href="struct_phys_lib_1_1_object_energy.html">00477</a>     <span class="keyword">public</span> <span class="keyword">struct </span><a class="code" href="struct_phys_lib_1_1_object_energy.html" title="Struktura obsahující informace o energiích tělesa.">ObjectEnergy</a>
-<a name="l00478"></a>00478     {
-<a name="l00479"></a>00479         <span class="keyword">public</span> <span class="keywordtype">double</span> Kinetic, Potential, Rotational;
-<a name="l00480"></a>00480         <span class="keyword">public</span> <span class="keywordtype">double</span> Total
-<a name="l00481"></a>00481         {
-<a name="l00482"></a>00482             <span class="keyword">get</span> { <span class="keywordflow">return</span> Kinetic + Potential + Rotational; }
-<a name="l00483"></a>00483         }
-<a name="l00484"></a>00484     }
-<a name="l00485"></a>00485 }
+<a name="l00420"></a>00420                         <span class="keywordflow">if</span> (PhysObjs[i].Static) PhysObjs[i].<a class="code" href="class_phys_lib_1_1_sim_object.html#a5ff9d1e7de6d07322a65f66aa179aee9" title="Zruší všechny síly a zastaví těleso.">ResetAll</a>();
+<a name="l00421"></a>00421 
+<a name="l00422"></a>00422                         <span class="keywordflow">if</span> (PhysObjs[i].LinearVelocity.IsNaN)
+<a name="l00423"></a>00423                             <span class="keywordflow">throw</span> <span class="keyword">new</span> DataMisalignedException(<span class="stringliteral">&quot;Tuhle vtipnou vyjímku musím chytit, abych zjistil kdy tenhle divnej stav nastává&quot;</span>);
+<a name="l00424"></a>00424 
+<a name="l00425"></a>00425                     }
+<a name="l00426"></a>00426                 }
+<a name="l00427"></a>00427             }
+<a name="l00428"></a>00428 
+<a name="l00429"></a>00429             <a class="code" href="class_phys_lib_1_1_world.html#a9bcae788313108e402f90afdc429ef74" title="Událost nastávající při každém simulačním kroku.">OnTick</a>(<span class="keyword">this</span>, null);
+<a name="l00430"></a>00430         }
+<a name="l00431"></a>00431 
+<a name="l00435"></a>00435         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_world.html#a2589161ff13f9249db504035d413589b" title="Poloha bodu, podle kterého se určuje hladina potenciální energie.">Level</a>
+<a name="l00436"></a><a class="code" href="class_phys_lib_1_1_world.html#a2589161ff13f9249db504035d413589b">00436</a>         {
+<a name="l00437"></a>00437             <span class="keyword">get</span> { <span class="keywordflow">return</span> lv; }
+<a name="l00438"></a>00438             <span class="keyword">set</span>
+<a name="l00439"></a>00439             {
+<a name="l00440"></a>00440                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Objs.Count; i++)
+<a name="l00441"></a>00441                     (Objs[i] as <a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě.">SimObject</a>).InitialEnergy = value[1] - lv[1];
+<a name="l00442"></a>00442                 lv[0] = 0; lv[1] = value[1]; lv[2] = 0;
+<a name="l00443"></a>00443             }
+<a name="l00444"></a>00444         }
+<a name="l00445"></a>00445 
+<a name="l00452"></a><a class="code" href="class_phys_lib_1_1_world.html#abe054bfbe16d40f4f3e51df82212ae3c">00452</a>         <span class="keyword">public</span> <a class="code" href="struct_phys_lib_1_1_object_energy.html" title="Struktura obsahující informace o energiích tělesa.">ObjectEnergy</a> <a class="code" href="class_phys_lib_1_1_world.html#abe054bfbe16d40f4f3e51df82212ae3c" title="Spočítá všechny typy energií pro dané těleso.">GetObjectEnergy</a>(<a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě.">SimObject</a> Object,ConversionType Units = ConversionType.MetersToPixels)
+<a name="l00453"></a>00453         {
+<a name="l00454"></a>00454             <span class="keywordflow">if</span> (Object == null) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentNullException();
+<a name="l00455"></a>00455 
+<a name="l00456"></a>00456             <a class="code" href="struct_phys_lib_1_1_object_energy.html" title="Struktura obsahující informace o energiích tělesa.">ObjectEnergy</a> Ret = <span class="keyword">new</span> <a class="code" href="struct_phys_lib_1_1_object_energy.html" title="Struktura obsahující informace o energiích tělesa.">ObjectEnergy</a>();
+<a name="l00457"></a>00457 
+<a name="l00458"></a>00458             <span class="keywordflow">if</span> (Units == ConversionType.MetersToPixels)
+<a name="l00459"></a>00459             {
+<a name="l00460"></a>00460                 Ret.Kinetic = 0.5 * Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Pow(Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a>, 2);
+<a name="l00461"></a>00461                 Ret.Potential = Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.PointDistance(<span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>(Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>[0], <a class="code" href="class_phys_lib_1_1_world.html#a2589161ff13f9249db504035d413589b" title="Poloha bodu, podle kterého se určuje hladina potenciální energie.">Level</a>[1], 0), Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>) * <a class="code" href="class_phys_lib_1_1_world.html#ae3de84e1eaaf168a9610acf00f2e78e5" title="Vektor gravitace.">Gravity</a>.<a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>;
+<a name="l00462"></a>00462             }
+<a name="l00463"></a>00463             <span class="keywordflow">else</span>
+<a name="l00464"></a>00464             {
+<a name="l00465"></a>00465                 Ret.Kinetic = 0.5 * Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Pow(<a class="code" href="class_phys_lib_1_1_world.html#a0304b913f959a862c9b7eca47bee6a89" title="Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení...">Convert</a>(Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a>,ConversionType.PixelsToMeters), 2);
+<a name="l00466"></a>00466                 Ret.Potential = Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * <a class="code" href="class_phys_lib_1_1_world.html#a0304b913f959a862c9b7eca47bee6a89" title="Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení...">Convert</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.PointDistance(<span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>(Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>[0], <a class="code" href="class_phys_lib_1_1_world.html#a2589161ff13f9249db504035d413589b" title="Poloha bodu, podle kterého se určuje hladina potenciální energie.">Level</a>[1], 0), Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>),ConversionType.PixelsToMeters) * <a class="code" href="class_phys_lib_1_1_world.html#a0304b913f959a862c9b7eca47bee6a89" title="Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení...">Convert</a>(<a class="code" href="class_phys_lib_1_1_world.html#ae3de84e1eaaf168a9610acf00f2e78e5" title="Vektor gravitace.">Gravity</a>,ConversionType.PixelsToMeters).Magnitude;
+<a name="l00467"></a>00467             }
+<a name="l00468"></a>00468             
+<a name="l00469"></a>00469             Ret.Rotational = 0.5 * Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#abebd841b2240bf066ce8f95001981a25" title="Spočítá moment setrvačnosti tělesa v závislosti na rozlišení.">MomentOfInertia</a> * <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Pow(Object.<a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>, 2);
+<a name="l00470"></a>00470             <span class="keywordflow">return</span> Ret;
+<a name="l00471"></a>00471         }
+<a name="l00472"></a>00472 
+<a name="l00473"></a>00473     }
+<a name="l00474"></a>00474 
+<a name="l00478"></a><a class="code" href="struct_phys_lib_1_1_object_energy.html">00478</a>     <span class="keyword">public</span> <span class="keyword">struct </span><a class="code" href="struct_phys_lib_1_1_object_energy.html" title="Struktura obsahující informace o energiích tělesa.">ObjectEnergy</a>
+<a name="l00479"></a>00479     {
+<a name="l00480"></a>00480         <span class="keyword">public</span> <span class="keywordtype">double</span> Kinetic, Potential, Rotational;
+<a name="l00481"></a>00481         <span class="keyword">public</span> <span class="keywordtype">double</span> Total
+<a name="l00482"></a>00482         {
+<a name="l00483"></a>00483             <span class="keyword">get</span> { <span class="keywordflow">return</span> Kinetic + Potential + Rotational; }
+<a name="l00484"></a>00484         }
+<a name="l00485"></a>00485     }
+<a name="l00486"></a>00486 }
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generováno Tue Dec 21 13:33:03 2010 pro projekt PhysLib programem&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generováno Sat Dec 25 17:27:09 2010 pro projekt PhysLib programem&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>
