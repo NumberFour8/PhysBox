@@ -356,6 +356,7 @@ namespace PhysBox
 
         private void LoadScene(string Path)
         {
+            DeselectObject();
             MyWorld.ClearFields();
             MyWorld.ClearObjects();
             menu_pauseSim.Checked = true;
