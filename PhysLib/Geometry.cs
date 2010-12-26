@@ -25,7 +25,12 @@ namespace PhysLib
         
         private Vector center;
         private PointF[] geom;
-        private GeometryDescriptor desc;
+        
+        /// <summary>
+        /// Popisovač útvaru
+        /// </summary>
+        protected GeometryDescriptor Descriptor;
+        
         private double surf, vol, angle;
         private float scale;
 
@@ -42,13 +47,13 @@ namespace PhysLib
             surf = vol = angle = 0;
             scale = 1.0f;
 
-            desc = AnalyzeVertexGroup(Vertices);
+            Descriptor = AnalyzeVertexGroup(Vertices);
             geom = new PointF[Vertices.Length];
             Vertices.CopyTo(geom, 0);
 
             if (COG.HasValue)
                 center = (Vector)COG;
-            else center = (Vector)desc.Centroid;
+            else center = (Vector)Descriptor.Centroid;
 
             Nail = (Vector)InitPosition;
             Position = (Vector)InitPosition;
@@ -63,28 +68,9 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Hloubka tělesa
-        /// </summary>
-        public double Depth
-        {
-            get { return desc.Depth; }
-            set
-            {
-                desc.Depth = Math.Abs(value);
-                if (desc.Depth != 0)
-                {
-                    for (int i = 0; i < geom.Length; i++)
-                        surf += desc.Depth * Geometry.PointDistance(geom[i], geom[i < geom.Length - 1 ? i + 1 : 0]);                    
-                    surf += desc.FrontalArea*2;
-                    vol = desc.FrontalArea * desc.Depth;
-                }
-            }
-        }
-
-        /// <summary>
         /// Pozice těžiště objektu vzhledem k počátku světa
         /// </summary>
-        public Vector Position
+        public virtual Vector Position
         {
             get { return (Vector)center; }
             set
@@ -106,7 +92,7 @@ namespace PhysLib
         /// <summary>
         /// Orientace objektu v úhlových stupních
         /// </summary>
-        public double Orientation
+        public virtual double Orientation
         {
             get { return angle; }
             set {
@@ -133,7 +119,7 @@ namespace PhysLib
         /// Škáluje těleso daným faktorem
         /// </summary>
         /// <param name="Factor">Faktor</param>
-        public float Scale
+        public virtual float Scale
         {
             get { return scale; }
             set
@@ -164,7 +150,7 @@ namespace PhysLib
         /// </summary>
         public PointF[] RelativeGeometry
         {
-            get { return desc.DefaultVertices; }
+            get { return Descriptor.DefaultVertices; }
         }
 
         /// <summary>
@@ -270,14 +256,14 @@ namespace PhysLib
         /// <summary>
         /// Absolutní poloha konvexního útvaru ohraničující těleso
         /// </summary>
-        public PointF[] BoundingBox
+        public virtual PointF[] BoundingBox
         {
             get
             {
                 if (Convex) return geom;
 
-                PointF[] transformedHull = new PointF[desc.ConvexHull.Length];
-                desc.ConvexHull.CopyTo(transformedHull, 0);
+                PointF[] transformedHull = new PointF[Descriptor.ConvexHull.Length];
+                Descriptor.ConvexHull.CopyTo(transformedHull, 0);
 
                 using (System.Drawing.Drawing2D.Matrix rot = new System.Drawing.Drawing2D.Matrix())
                 {
@@ -304,9 +290,28 @@ namespace PhysLib
         /// <summary>
         /// Absolutní poloha bodu osy otáčení v rovině těžiště
         /// </summary>
-        public Vector Nail
+        public virtual Vector Nail
         {
             get; set;
+        }
+
+        /// <summary>
+        /// Hloubka tělesa
+        /// </summary>
+        public virtual double Depth
+        {
+            get { return Descriptor.Depth; }
+            set
+            {
+                Descriptor.Depth = Math.Abs(value);
+                if (Descriptor.Depth != 0)
+                {
+                    for (int i = 0; i < geom.Length; i++)
+                        surf += Descriptor.Depth * Geometry.PointDistance(geom[i], geom[i < geom.Length - 1 ? i + 1 : 0]);
+                    surf += Descriptor.FrontalArea * 2;
+                    vol = Descriptor.FrontalArea * Descriptor.Depth;
+                }
+            }
         }
 
         /// <summary>
@@ -314,7 +319,7 @@ namespace PhysLib
         /// </summary>
         public double Height 
         {
-            get { return desc.Height; }
+            get { return Descriptor.Height; }
         }
 
         /// <summary>
@@ -322,13 +327,13 @@ namespace PhysLib
         /// </summary>
         public double Width
         {
-            get { return desc.Width; }
+            get { return Descriptor.Width; }
         }
 
         /// <summary>
         /// Objem objektu v krychlových pixelech
         /// </summary>
-        public double Volume
+        public virtual double Volume
         {
             get { return vol; }
         }
@@ -338,13 +343,13 @@ namespace PhysLib
         /// </summary>
         public bool Convex
         {
-            get { return desc.Convex; }
+            get { return Descriptor.Convex; }
         }
 
         /// <summary>
         /// Povrch objektu v pixelech čtverečních
         /// </summary>
-        public double Surface
+        public virtual double Surface
         {
             get { return surf; }
         }
@@ -354,7 +359,7 @@ namespace PhysLib
         /// </summary>
         public double FrontalArea
         {
-            get { return desc.FrontalArea; }
+            get { return Descriptor.FrontalArea; }
         }
 
         /// <summary>
@@ -418,7 +423,7 @@ namespace PhysLib
     /// Popisovač rovinného geometrického útvaru
     /// </summary>
     [Serializable]
-    public class GeometryDescriptor
+    public sealed class GeometryDescriptor
     {
         /// <summary>
         /// Výška útvaru
@@ -479,7 +484,7 @@ namespace PhysLib
     /// <summary>
     /// Třída pro argumenty události kolize těles
     /// </summary>
-    public class CollisionEventArgs : EventArgs
+    public sealed class CollisionEventArgs : EventArgs
     {
         /// <summary>
         /// Hlášení o kolizi
@@ -497,9 +502,9 @@ namespace PhysLib
     }
 
     /// <summary>
-    /// Interní třída generující konvexní obal z vertexů
+    /// Třída generující konvexní obal z vertexů
     /// </summary>
-    internal class ConvexHull
+    public class ConvexHull
     {
         private ConvexHull() { }
 

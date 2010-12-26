@@ -28,7 +28,7 @@ namespace PhysBox
         /// <param name="Texture">Barva (ARGB) nebo cesta k souboru s texturou (musí začínat znakem : )</param>
         /// <param name="Geometry">Soubor vertexů tvořící těleso</param>
         /// <param name="COG">Poloha těžiště tělesa nebo null (bude vypočítána)</param>
-        public GraphicObject(string Texture, PointF[] Geometry, PointF? COG)
+        public GraphicObject(string Texture, PointF[] Geometry, PointF COG)
             : base(Geometry, new PointF(0, 0), COG)
         {
             texture = Texture;
