@@ -28,32 +28,32 @@ namespace PhysLib
         /// <summary>
         /// Směr osy X
         /// </summary>
-        public static readonly Vector X = new Vector(1, 0, 0);
+        public static Vector X { get { return new Vector(1, 0, 0); } }
 
         /// <summary>
         /// Směr osy Y
         /// </summary>
-        public static readonly Vector Y = new Vector(0, 1, 0);
+        public static Vector Y { get { return new Vector(0, 1, 0); } }
 
         /// <summary>
         /// Směr osy Z
         /// </summary>
-        public static readonly Vector Z = new Vector(0, 0, 1);
+        public static Vector Z { get { return new Vector(0, 0, 1); } }
 
         /// <summary>
         /// Standardní matice souřadných os
         /// </summary>
-        public static readonly Matrix B = new Matrix(MatrixInitType.VectorsAreRows, X, Y, Z);
+        public static Matrix B { get { return new Matrix(MatrixInitType.VectorsAreRows, X, Y, Z); } }
 
         /// <summary>
         /// Výchozí zobrazovací matice souřadných os na displeji
         /// </summary>
-        public static readonly Matrix DisplayDefault = new Matrix(MatrixInitType.VectorsAreRows, X, -Y, Z);
+        public static Matrix DisplayDefault { get { return new Matrix(MatrixInitType.VectorsAreRows, X, -Y, Z); } }
 
         /// <summary>
         /// Průměrné zemské gravitační zrychlení
         /// </summary>
-        public static readonly Vector EarthG = new Vector(0, -9.89, 0);
+        public static Vector EarthG { get { return new Vector(0, -9.89, 0); } }
 
         private ArrayList Objs, Fields;
 
