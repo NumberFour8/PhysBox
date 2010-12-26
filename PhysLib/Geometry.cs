@@ -130,22 +130,6 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Absolutní polohy vertexů tvořící fyzický model tělesa
-        /// </summary>
-        public PointF[] ObjectGeometry
-        {
-            get { return geom; }           
-        }
-
-        /// <summary>
-        /// Relativní polohy vertexů tvořící fyzický model tělesa vzhledem k centroidu
-        /// </summary>
-        public PointF[] RelativeGeometry
-        {
-            get { return desc.DefaultVertices; }
-        }
-
-        /// <summary>
         /// Škáluje těleso daným faktorem
         /// </summary>
         /// <param name="Factor">Faktor</param>
@@ -165,6 +149,22 @@ namespace PhysLib
                 }
                 scale = value;
             }
+        }
+
+        /// <summary>
+        /// Absolutní polohy vertexů tvořící fyzický model tělesa
+        /// </summary>
+        public PointF[] ObjectGeometry
+        {
+            get { return geom; }           
+        }
+
+        /// <summary>
+        /// Relativní polohy vertexů tvořící fyzický model tělesa vzhledem k centroidu
+        /// </summary>
+        public PointF[] RelativeGeometry
+        {
+            get { return desc.DefaultVertices; }
         }
 
         /// <summary>
