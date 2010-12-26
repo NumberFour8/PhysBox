@@ -502,6 +502,8 @@ namespace PhysLib
     /// </summary>
     internal class ConvexHull
     {
+        private ConvexHull() { }
+
         private static int LexicalPointComparison(PointF a, PointF b)
         {
             if (a.X != b.X)
