@@ -26,10 +26,7 @@ namespace PhysLib
         private Vector center;
         private PointF[] geom;
         
-        /// <summary>
-        /// Popisovač útvaru
-        /// </summary>
-        protected GeometryDescriptor Descriptor;
+        private GeometryDescriptor desc;
         
         private double surf, vol, angle;
         private float scale;
@@ -47,13 +44,13 @@ namespace PhysLib
             surf = vol = angle = 0;
             scale = 1.0f;
 
-            Descriptor = AnalyzeVertexGroup(Vertices);
+            desc = AnalyzeVertexGroup(Vertices);
             geom = new PointF[Vertices.Length];
             Vertices.CopyTo(geom, 0);
 
             if (COG.HasValue)
                 center = (Vector)COG;
-            else center = (Vector)Descriptor.Centroid;
+            else center = (Vector)desc.Centroid;
 
             Nail = (Vector)InitPosition;
             Position = (Vector)InitPosition;
@@ -150,7 +147,7 @@ namespace PhysLib
         /// </summary>
         public PointF[] RelativeGeometry
         {
-            get { return Descriptor.DefaultVertices; }
+            get { return desc.DefaultVertices; }
         }
 
         /// <summary>
@@ -262,8 +259,8 @@ namespace PhysLib
             {
                 if (Convex) return geom;
 
-                PointF[] transformedHull = new PointF[Descriptor.ConvexHull.Length];
-                Descriptor.ConvexHull.CopyTo(transformedHull, 0);
+                PointF[] transformedHull = new PointF[desc.ConvexHull.Length];
+                desc.ConvexHull.CopyTo(transformedHull, 0);
 
                 using (System.Drawing.Drawing2D.Matrix rot = new System.Drawing.Drawing2D.Matrix())
                 {
@@ -300,16 +297,16 @@ namespace PhysLib
         /// </summary>
         public virtual double Depth
         {
-            get { return Descriptor.Depth; }
+            get { return desc.Depth; }
             set
             {
-                Descriptor.Depth = Math.Abs(value);
-                if (Descriptor.Depth != 0)
+                desc.Depth = Math.Abs(value);
+                if (desc.Depth != 0)
                 {
                     for (int i = 0; i < geom.Length; i++)
-                        surf += Descriptor.Depth * Geometry.PointDistance(geom[i], geom[i < geom.Length - 1 ? i + 1 : 0]);
-                    surf += Descriptor.FrontalArea * 2;
-                    vol = Descriptor.FrontalArea * Descriptor.Depth;
+                        surf += desc.Depth * Geometry.PointDistance(geom[i], geom[i < geom.Length - 1 ? i + 1 : 0]);
+                    surf += desc.FrontalArea * 2;
+                    vol = desc.FrontalArea * desc.Depth;
                 }
             }
         }
@@ -319,7 +316,7 @@ namespace PhysLib
         /// </summary>
         public double Height 
         {
-            get { return Descriptor.Height; }
+            get { return desc.Height; }
         }
 
         /// <summary>
@@ -327,7 +324,7 @@ namespace PhysLib
         /// </summary>
         public double Width
         {
-            get { return Descriptor.Width; }
+            get { return desc.Width; }
         }
 
         /// <summary>
@@ -343,7 +340,7 @@ namespace PhysLib
         /// </summary>
         public bool Convex
         {
-            get { return Descriptor.Convex; }
+            get { return desc.Convex; }
         }
 
         /// <summary>
@@ -359,7 +356,7 @@ namespace PhysLib
         /// </summary>
         public double FrontalArea
         {
-            get { return Descriptor.FrontalArea; }
+            get { return desc.FrontalArea; }
         }
 
         /// <summary>
