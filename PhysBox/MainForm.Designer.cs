@@ -32,6 +32,7 @@
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.ukončitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_LoadScene = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_Scenes = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_SaveScene = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_openToolbar = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
@@ -49,6 +50,7 @@
             this.menu_pauseSim = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_setZeroLevel = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_AllowStatics = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_DeleteOutOfBounds = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
             this.menu_ZoomIn = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_ZoomOut = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,8 +76,6 @@
             this.simTime = new System.Windows.Forms.Timer(this.components);
             this.saveScene = new System.Windows.Forms.SaveFileDialog();
             this.openScene = new System.Windows.Forms.OpenFileDialog();
-            this.menu_Scenes = new System.Windows.Forms.ToolStripMenuItem();
-            this.menu_DeleteOutOfBounds = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.stavovyRadek.SuspendLayout();
             this.manipulateObj.SuspendLayout();
@@ -115,6 +115,12 @@
             this.menu_LoadScene.Text = "Načíst scénu";
             this.menu_LoadScene.Click += new System.EventHandler(this.menu_LoadScene_Click);
             // 
+            // menu_Scenes
+            // 
+            this.menu_Scenes.Name = "menu_Scenes";
+            this.menu_Scenes.Size = new System.Drawing.Size(184, 22);
+            this.menu_Scenes.Text = "Scény";
+            // 
             // menu_SaveScene
             // 
             this.menu_SaveScene.Enabled = false;
@@ -151,6 +157,7 @@
             this.menu_Quit.Name = "menu_Quit";
             this.menu_Quit.Size = new System.Drawing.Size(184, 22);
             this.menu_Quit.Text = "Ukončit";
+            this.menu_Quit.Click += new System.EventHandler(this.menu_Quit_Click);
             // 
             // analýzaToolStripMenuItem
             // 
@@ -254,6 +261,15 @@
             this.menu_AllowStatics.Name = "menu_AllowStatics";
             this.menu_AllowStatics.Size = new System.Drawing.Size(234, 22);
             this.menu_AllowStatics.Text = "Povolit výběr statických těles";
+            this.menu_AllowStatics.Click += new System.EventHandler(this.menu_AllowStatics_Click);
+            // 
+            // menu_DeleteOutOfBounds
+            // 
+            this.menu_DeleteOutOfBounds.CheckOnClick = true;
+            this.menu_DeleteOutOfBounds.Name = "menu_DeleteOutOfBounds";
+            this.menu_DeleteOutOfBounds.Size = new System.Drawing.Size(246, 22);
+            this.menu_DeleteOutOfBounds.Text = "Odstraňovat objekty mimo okno";
+            this.menu_DeleteOutOfBounds.CheckedChanged += new System.EventHandler(this.menu_DeleteOutOfBounds_CheckedChanged);
             // 
             // toolStripMenuItem7
             // 
@@ -437,20 +453,6 @@
             // 
             this.openScene.Filter = "Soubory SCE|*.sce";
             this.openScene.InitialDirectory = "scenes";
-            // 
-            // menu_Scenes
-            // 
-            this.menu_Scenes.Name = "menu_Scenes";
-            this.menu_Scenes.Size = new System.Drawing.Size(184, 22);
-            this.menu_Scenes.Text = "Scény";
-            // 
-            // menu_DeleteOutOfBounds
-            // 
-            this.menu_DeleteOutOfBounds.CheckOnClick = true;
-            this.menu_DeleteOutOfBounds.Name = "menu_DeleteOutOfBounds";
-            this.menu_DeleteOutOfBounds.Size = new System.Drawing.Size(234, 22);
-            this.menu_DeleteOutOfBounds.Text = "Odstranit objekty mimo okno";
-            this.menu_DeleteOutOfBounds.CheckedChanged += new System.EventHandler(this.menu_DeleteOutOfBounds_CheckedChanged);
             // 
             // MainForm
             // 

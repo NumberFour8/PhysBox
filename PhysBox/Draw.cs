@@ -122,12 +122,23 @@ namespace PhysBox
             {
                 if (Selected != null)
                 {
-                    ObjectEnergy eng = MyWorld.GetObjectEnergy(Selected,ConversionType.PixelsToMeters);
-                    Tools.prop_Velocity.Text = String.Format("{0} m/s", Math.Round(MyWorld.Convert(Selected.LinearVelocity,ConversionType.PixelsToMeters).Magnitude, 2));
-                    Tools.prop_angularVelocity.Text = String.Format("{0} rad/s", Math.Round(Selected.AngularVelocity.Magnitude,2));
-                    Tools.prop_kineticEnergy.Text = String.Format("{0} J", Math.Round(eng.Kinetic,2));
-                    Tools.prop_potentialEnergy.Text = String.Format("{0} J", Math.Round(eng.Potential,2));
-                    Tools.prop_rotationalEnergy.Text = String.Format("{0} J", Math.Round(eng.Rotational, 2));
+                    if (!Selected.Static)
+                    {
+                        ObjectEnergy eng = MyWorld.GetObjectEnergy(Selected, ConversionType.PixelsToMeters);
+                        Tools.prop_Velocity.Text = String.Format("{0} m/s", Math.Round(MyWorld.Convert(Selected.LinearVelocity, ConversionType.PixelsToMeters).Magnitude, 2));
+                        Tools.prop_angularVelocity.Text = String.Format("{0} rad/s", Math.Round(Selected.AngularVelocity.Magnitude, 2));
+                        Tools.prop_kineticEnergy.Text = String.Format("{0} J", Math.Round(eng.Kinetic, 2));
+                        Tools.prop_potentialEnergy.Text = String.Format("{0} J", Math.Round(eng.Potential, 2));
+                        Tools.prop_rotationalEnergy.Text = String.Format("{0} J", Math.Round(eng.Rotational, 2));
+                    }
+                    else
+                    {
+                        Tools.prop_Velocity.Text = "0 m/s";
+                        Tools.prop_angularVelocity.Text = "0 rad/s";
+                        Tools.prop_kineticEnergy.Text = "-- J";
+                        Tools.prop_potentialEnergy.Text = "-- J";
+                        Tools.prop_rotationalEnergy.Text = "-- J";
+                    }
                 }
                 UpdateCounter = 0;
             }

@@ -19,13 +19,16 @@ namespace PhysBox
 
             if (!Directory.Exists("objects")) Directory.CreateDirectory("objects");
             RefreshGeometries();
+            newObj_Material.SelectedIndex = 0;
         }
 
         public void RefreshGeometries()
         {
-            newobj_Geometry.Items.Clear();
-            foreach (string name in Directory.GetFiles("objects"))
-                newobj_Geometry.Items.Add(Path.GetFileNameWithoutExtension(name));
+            newObj_Geometry.Items.Clear();
+            string[] files = Directory.GetFiles("objects");
+            foreach (string name in files)
+                newObj_Geometry.Items.Add(Path.GetFileNameWithoutExtension(name));
+            if (files.Length > 0) newObj_Geometry.SelectedIndex = 0;
         }
 
         public void RefreshObjects()
@@ -69,8 +72,23 @@ namespace PhysBox
                 {
                     objProps.Text = String.Format("Vlastnosti objektu: {0}", (MyOwner.Selected.Model as GraphicObject).Name);
                     objProps.Enabled = true;
-                    button_Analyze.Enabled = true;
-                    button_SetProps.Enabled = true;
+
+                    prop_Material.Text = MyOwner.Selected.OwnMaterial.ToString();
+
+                    if (!MyOwner.Selected.Static)
+                    {
+                        prop_Mass.Text = String.Format("{0:f2} kg", MyOwner.Selected.Mass);
+                        prop_MomInertia.Text = String.Format("{0:f2} kg . m^2", MyOwner.Selected.MomentOfInertia / Math.Pow(MyOwner.MyWorld.Resolution, 2));
+                        prop_InitialEnergy.Text = String.Format("{0:f2} J", MyOwner.Selected.InitialEnergy / Math.Pow(MyOwner.MyWorld.Resolution, 2));
+                    }
+                    else
+                    {
+                        prop_Mass.Text = "-- kg";
+                        prop_MomInertia.Text = "-- kg . m^2";
+                        prop_InitialEnergy.Text = "-- J";
+                    }
+
+                    button_Analyze.Enabled = !MyOwner.Selected.Static;
                 }
             }
             tab_Toolbox.SelectedIndex = Index;
@@ -78,32 +96,32 @@ namespace PhysBox
 
         private void newObj_Insert_Click(object sender, EventArgs e)
         {
-            if (newobj_Mass.Text.Length == 0 && !newObj_Static.Checked)
+            if (newObj_Mass.Text.Length == 0 && !newObj_Static.Checked)
             {
                 MessageBox.Show("Zadejte hmotnost tělesa","Chyba",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                 return;
             }
 
-            if (newobj_Geometry.SelectedIndex < 0)
+            if (newObj_Geometry.SelectedIndex < 0)
             {
                 MessageBox.Show("Vyberte geometrii pro těleso", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            if (newobj_Material.SelectedIndex < 0)
+            if (newObj_Material.SelectedIndex < 0)
             {
                 MessageBox.Show("Vyberte materiál pro těleso", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            GraphicObject Placing = GraphicObject.LoadFromFile(@"objects\" + newobj_Geometry.SelectedItem.ToString() + ".xml");
+            GraphicObject Placing = GraphicObject.LoadFromFile(@"objects\" + newObj_Geometry.SelectedItem.ToString() + ".xml");
 
             if (newObj_AutoName.Checked)
                 Placing.Name = String.Format("object_#{0}", MyOwner.MyWorld.CountObjects);
             else Placing.Name = newObj_Name.Text;
 
             Material MyMat = Material.Concrete;
-            switch (newobj_Material.SelectedIndex)
+            switch (newObj_Material.SelectedIndex)
             {
                 case 1: MyMat = Material.Wood; break;
                 case 2: MyMat = Material.Concrete; break;
@@ -113,7 +131,7 @@ namespace PhysBox
             }
 
             double MyMass = 0;
-            if (!Double.TryParse(newobj_Mass.Text, out MyMass))
+            if (!Double.TryParse(newObj_Mass.Text, out MyMass))
               MyMass = 1000;
 
             SimObject MyNewObject = new SimObject(Placing, MyMass/1000, MyMat);
@@ -153,7 +171,7 @@ namespace PhysBox
         {
             var sq = from obj in MyOwner.MyWorld.Objects where ((GraphicObject)obj.Model).Name == ObjName select ((GraphicObject)obj.Model).WorldIndex;
             if (sq.Count() == 0) return;
-            MyOwner.Selected = MyOwner.MyWorld.Objects[sq.First()];
+            MyOwner.SelectObject(MyOwner.MyWorld.Objects[sq.First()]);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -177,6 +195,7 @@ namespace PhysBox
             {
                 MyOwner.MyWorld.DeleteObject(sq.First());
                 RefreshObjects();
+                MyOwner.DeselectObject();
             }
         }
 
@@ -193,7 +212,7 @@ namespace PhysBox
 
         private void newObj_Static_CheckedChanged(object sender, EventArgs e)
         {
-            newobj_Mass.Enabled = !newObj_Static.Checked;            
+            newObj_Mass.Enabled = !newObj_Static.Checked;            
         }
 
      }

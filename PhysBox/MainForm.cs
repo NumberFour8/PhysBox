@@ -130,10 +130,9 @@ namespace PhysBox
             {
                 if (MyWorld.CountObjects == 0) return;
                 if (SetLevel) return;
-                Selected = MyWorld.NearestObject(ClickPos,!menu_AllowStatics.Checked);
+                SelectObject(MyWorld.NearestObject(ClickPos,!menu_AllowStatics.Checked));
                 if (Selected == null) return;
 
-                stat_SelObject.Text = manipulateObj_Name.Text = String.Format("Objekt: {0}", (Selected.Model as GraphicObject).Name);
                 manipulateObj_Enabled.Checked = Selected.Enabled;
                 manipulateObj_NoTranslations.Checked = Selected.NoTranslations;
                 
@@ -145,10 +144,24 @@ namespace PhysBox
                 manipulateObj_IsStatic.Checked = Selected.Static;
 
                 manipulateObj.Enabled = true;
-                manipulateObj.Show(new Point(e.X, e.Y));
 
-                if (Tools != null && !Tools.IsDisposed) Tools.ChangeTool(1);
+                manipulateObj.Show(new Point(e.X, e.Y));
             }
+        }
+
+        public void SelectObject(SimObject Obj)
+        {
+            if (Selected == null) DeselectObject();
+            Selected = Obj;
+            stat_SelObject.Text = manipulateObj_Name.Text = String.Format("Objekt: {0}", (Selected.Model as GraphicObject).Name);
+            if (Tools != null && !Tools.IsDisposed) Tools.ChangeTool(1);
+        }
+
+        public void DeselectObject()
+        {
+            Selected = null;
+            stat_SelObject.Text = "Žádný vybraný objekt";
+            Tools.objProps.Enabled = false;
         }
 
         public void přemístitSemToolStripMenuItem_Click(object sender, EventArgs e)
@@ -255,6 +268,9 @@ namespace PhysBox
                 Cursor = Cursors.Default;
                 if (Tools != null && !Tools.IsDisposed) Tools.ActionDone();
             }
+
+            if (e.Control && e.KeyCode == Keys.D && Selected != null)
+                DeselectObject();
 
             if (Placing != null)
             {
@@ -375,6 +391,16 @@ namespace PhysBox
         private void menu_DeleteOutOfBounds_CheckedChanged(object sender, EventArgs e)
         {
             MyWorld.DeleteOutOfBounds = menu_DeleteOutOfBounds.Checked;
+        }
+
+        private void menu_AllowStatics_Click(object sender, EventArgs e)
+        {
+            DeselectObject();
+        }
+
+        private void menu_Quit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }       
     }
 }

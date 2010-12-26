@@ -90,6 +90,7 @@ namespace PhysLib
             set
             {
                 if (value.IsNaN) throw new ArgumentOutOfRangeException();
+                if ((value - center).Magnitude < 0.1) return;
 
                 using (System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix())
                 {
@@ -110,23 +111,21 @@ namespace PhysLib
             get { return angle; }
             set {
                 if (Double.IsNaN(value) || Double.IsInfinity(value)) throw new ArgumentOutOfRangeException();
+                if (Math.Abs(value - angle) < 0.1) return;
 
-                if (Math.Abs(value - angle) > 0.1)
+                using (System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix())
                 {
-                    using (System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix())
-                    {
-                        Mat.RotateAt((float)(value - angle), (PointF)(Nail));
-                        Mat.TransformPoints(geom);
+                    Mat.RotateAt((float)(value - angle), (PointF)(Nail));
+                    Mat.TransformPoints(geom);
 
-                        if (Nail != center)
-                        {
-                            PointF[] t = new PointF[] { (PointF)center };
-                            Mat.TransformPoints(t);
-                            center = new Vector(Math.Round(t[0].X, 2), Math.Round(t[0].Y, 2), 0);
-                        }
+                    if (Nail != center)
+                    {
+                        PointF[] t = new PointF[] { (PointF)center };
+                        Mat.TransformPoints(t);
+                        center = new Vector(Math.Round(t[0].X, 2), Math.Round(t[0].Y, 2), 0);
                     }
-                    angle = value;
                 }
+                angle = value;
             }
         }
 

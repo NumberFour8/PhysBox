@@ -52,7 +52,7 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Hustota matriálu
+        /// Hustota materiálu
         /// </summary>
         public double Density
         {

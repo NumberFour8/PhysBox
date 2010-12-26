@@ -30,8 +30,6 @@
         {
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label2;
-            System.Windows.Forms.Label label19;
-            System.Windows.Forms.Label label18;
             System.Windows.Forms.Label label11;
             System.Windows.Forms.Label label10;
             System.Windows.Forms.Label label9;
@@ -40,26 +38,30 @@
             System.Windows.Forms.Label label6;
             System.Windows.Forms.Label label5;
             System.Windows.Forms.Label label4;
+            System.Windows.Forms.Label propMass;
+            System.Windows.Forms.Label label1;
+            System.Windows.Forms.Label label12;
+            System.Windows.Forms.Label label13;
             this.tab_Toolbox = new System.Windows.Forms.TabControl();
             this.tool_newObj = new System.Windows.Forms.TabPage();
             this.newObj_Insert = new System.Windows.Forms.Button();
             this.newObj = new System.Windows.Forms.GroupBox();
+            this.newObj_Mass = new System.Windows.Forms.TextBox();
             this.newObj_Static = new System.Windows.Forms.CheckBox();
             this.createGeometry = new System.Windows.Forms.Button();
             this.newObj_Enabled = new System.Windows.Forms.CheckBox();
             this.newObj_AutoName = new System.Windows.Forms.CheckBox();
             this.newObj_Name = new System.Windows.Forms.TextBox();
-            this.newobj_Material = new System.Windows.Forms.ComboBox();
-            this.newobj_Mass = new System.Windows.Forms.MaskedTextBox();
-            this.newobj_Geometry = new System.Windows.Forms.ComboBox();
+            this.newObj_Material = new System.Windows.Forms.ComboBox();
+            this.newObj_Geometry = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.objProps = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button_SetProps = new System.Windows.Forms.Button();
-            this.prop_textObjDrag = new System.Windows.Forms.MaskedTextBox();
-            this.prop_comboPropMaterials = new System.Windows.Forms.ComboBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button_ResetObj = new System.Windows.Forms.Button();
+            this.propParams = new System.Windows.Forms.GroupBox();
+            this.prop_InitialEnergy = new System.Windows.Forms.Label();
+            this.prop_Material = new System.Windows.Forms.Label();
+            this.prop_MomInertia = new System.Windows.Forms.Label();
+            this.prop_Mass = new System.Windows.Forms.Label();
+            this.propValues = new System.Windows.Forms.GroupBox();
             this.prop_rotationalEnergy = new System.Windows.Forms.Label();
             this.radio_rotationalEnergy = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -87,8 +89,6 @@
             this.env_G = new System.Windows.Forms.MaskedTextBox();
             label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
-            label19 = new System.Windows.Forms.Label();
-            label18 = new System.Windows.Forms.Label();
             label11 = new System.Windows.Forms.Label();
             label10 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
@@ -97,13 +97,17 @@
             label6 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
+            propMass = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            label12 = new System.Windows.Forms.Label();
+            label13 = new System.Windows.Forms.Label();
             this.tab_Toolbox.SuspendLayout();
             this.tool_newObj.SuspendLayout();
             this.newObj.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.objProps.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.propParams.SuspendLayout();
+            this.propValues.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -131,24 +135,6 @@
             label2.Size = new System.Drawing.Size(73, 13);
             label2.TabIndex = 3;
             label2.Text = "Hmotnost (g) :";
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Location = new System.Drawing.Point(5, 49);
-            label19.Name = "label19";
-            label19.Size = new System.Drawing.Size(96, 13);
-            label19.TabIndex = 2;
-            label19.Text = "Koeficient odporu :";
-            // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Location = new System.Drawing.Point(6, 22);
-            label18.Name = "label18";
-            label18.Size = new System.Drawing.Size(50, 13);
-            label18.TabIndex = 0;
-            label18.Text = "Materiál :";
             // 
             // label11
             // 
@@ -222,6 +208,42 @@
             label4.TabIndex = 1;
             label4.Text = "Gravitační zrychlení :";
             // 
+            // propMass
+            // 
+            propMass.AutoSize = true;
+            propMass.Location = new System.Drawing.Point(6, 32);
+            propMass.Name = "propMass";
+            propMass.Size = new System.Drawing.Size(58, 13);
+            propMass.TabIndex = 0;
+            propMass.Text = "Hmotnost :";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(6, 77);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(53, 13);
+            label1.TabIndex = 1;
+            label1.Text = "Materiál : ";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(6, 54);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(111, 13);
+            label12.TabIndex = 2;
+            label12.Text = "Moment setrvačnosti :";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(6, 99);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(104, 13);
+            label13.TabIndex = 3;
+            label13.Text = "Počáteční energie : ";
+            // 
             // tab_Toolbox
             // 
             this.tab_Toolbox.Controls.Add(this.tool_newObj);
@@ -264,22 +286,30 @@
             this.newObj.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.newObj.Controls.Add(this.newObj_Mass);
             this.newObj.Controls.Add(this.newObj_Static);
             this.newObj.Controls.Add(this.createGeometry);
             this.newObj.Controls.Add(this.newObj_Enabled);
             this.newObj.Controls.Add(this.newObj_AutoName);
             this.newObj.Controls.Add(this.newObj_Name);
             this.newObj.Controls.Add(label3);
-            this.newObj.Controls.Add(this.newobj_Material);
-            this.newObj.Controls.Add(this.newobj_Mass);
+            this.newObj.Controls.Add(this.newObj_Material);
             this.newObj.Controls.Add(label2);
-            this.newObj.Controls.Add(this.newobj_Geometry);
+            this.newObj.Controls.Add(this.newObj_Geometry);
             this.newObj.Location = new System.Drawing.Point(7, 6);
             this.newObj.Name = "newObj";
             this.newObj.Size = new System.Drawing.Size(212, 291);
             this.newObj.TabIndex = 4;
             this.newObj.TabStop = false;
             this.newObj.Text = "Parametry";
+            // 
+            // newObj_Mass
+            // 
+            this.newObj_Mass.Location = new System.Drawing.Point(90, 101);
+            this.newObj_Mass.MaxLength = 10;
+            this.newObj_Mass.Name = "newObj_Mass";
+            this.newObj_Mass.Size = new System.Drawing.Size(116, 20);
+            this.newObj_Mass.TabIndex = 12;
             // 
             // newObj_Static
             // 
@@ -335,45 +365,33 @@
             this.newObj_Name.Size = new System.Drawing.Size(116, 20);
             this.newObj_Name.TabIndex = 7;
             // 
-            // newobj_Material
+            // newObj_Material
             // 
-            this.newobj_Material.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.newObj_Material.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.newobj_Material.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.newobj_Material.FormattingEnabled = true;
-            this.newobj_Material.Items.AddRange(new object[] {
+            this.newObj_Material.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.newObj_Material.FormattingEnabled = true;
+            this.newObj_Material.Items.AddRange(new object[] {
             "Dřevo",
             "Beton",
             "Ocel",
             "Sklo",
             "Guma"});
-            this.newobj_Material.Location = new System.Drawing.Point(11, 74);
-            this.newobj_Material.Name = "newobj_Material";
-            this.newobj_Material.Size = new System.Drawing.Size(195, 21);
-            this.newobj_Material.TabIndex = 5;
+            this.newObj_Material.Location = new System.Drawing.Point(11, 74);
+            this.newObj_Material.Name = "newObj_Material";
+            this.newObj_Material.Size = new System.Drawing.Size(195, 21);
+            this.newObj_Material.TabIndex = 5;
             // 
-            // newobj_Mass
+            // newObj_Geometry
             // 
-            this.newobj_Mass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.newObj_Geometry.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.newobj_Mass.BeepOnError = true;
-            this.newobj_Mass.Location = new System.Drawing.Point(90, 101);
-            this.newobj_Mass.Mask = "0000000";
-            this.newobj_Mass.Name = "newobj_Mass";
-            this.newobj_Mass.PromptChar = ' ';
-            this.newobj_Mass.Size = new System.Drawing.Size(116, 20);
-            this.newobj_Mass.TabIndex = 4;
-            // 
-            // newobj_Geometry
-            // 
-            this.newobj_Geometry.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.newobj_Geometry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.newobj_Geometry.FormattingEnabled = true;
-            this.newobj_Geometry.Location = new System.Drawing.Point(11, 19);
-            this.newobj_Geometry.Name = "newobj_Geometry";
-            this.newobj_Geometry.Size = new System.Drawing.Size(195, 21);
-            this.newobj_Geometry.TabIndex = 1;
+            this.newObj_Geometry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.newObj_Geometry.FormattingEnabled = true;
+            this.newObj_Geometry.Location = new System.Drawing.Point(11, 19);
+            this.newObj_Geometry.Name = "newObj_Geometry";
+            this.newObj_Geometry.Size = new System.Drawing.Size(195, 21);
+            this.newObj_Geometry.TabIndex = 1;
             // 
             // tabPage2
             // 
@@ -388,8 +406,8 @@
             // 
             // objProps
             // 
-            this.objProps.Controls.Add(this.groupBox4);
-            this.objProps.Controls.Add(this.groupBox3);
+            this.objProps.Controls.Add(this.propParams);
+            this.objProps.Controls.Add(this.propValues);
             this.objProps.Location = new System.Drawing.Point(3, 6);
             this.objProps.Name = "objProps";
             this.objProps.Size = new System.Drawing.Size(219, 332);
@@ -397,81 +415,78 @@
             this.objProps.TabStop = false;
             this.objProps.Text = "Žádný objekt";
             // 
-            // groupBox4
+            // propParams
             // 
-            this.groupBox4.Controls.Add(this.button_SetProps);
-            this.groupBox4.Controls.Add(this.prop_textObjDrag);
-            this.groupBox4.Controls.Add(label19);
-            this.groupBox4.Controls.Add(this.prop_comboPropMaterials);
-            this.groupBox4.Controls.Add(label18);
-            this.groupBox4.Location = new System.Drawing.Point(6, 227);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(207, 99);
-            this.groupBox4.TabIndex = 1;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Parametry";
+            this.propParams.Controls.Add(this.prop_InitialEnergy);
+            this.propParams.Controls.Add(this.prop_Material);
+            this.propParams.Controls.Add(this.prop_MomInertia);
+            this.propParams.Controls.Add(this.prop_Mass);
+            this.propParams.Controls.Add(label13);
+            this.propParams.Controls.Add(label12);
+            this.propParams.Controls.Add(label1);
+            this.propParams.Controls.Add(propMass);
+            this.propParams.Location = new System.Drawing.Point(6, 196);
+            this.propParams.Name = "propParams";
+            this.propParams.Size = new System.Drawing.Size(207, 130);
+            this.propParams.TabIndex = 1;
+            this.propParams.TabStop = false;
+            this.propParams.Text = "Parametry";
             // 
-            // button_SetProps
+            // prop_InitialEnergy
             // 
-            this.button_SetProps.Enabled = false;
-            this.button_SetProps.Location = new System.Drawing.Point(126, 72);
-            this.button_SetProps.Name = "button_SetProps";
-            this.button_SetProps.Size = new System.Drawing.Size(75, 20);
-            this.button_SetProps.TabIndex = 16;
-            this.button_SetProps.Text = "Použít";
-            this.button_SetProps.UseVisualStyleBackColor = true;
+            this.prop_InitialEnergy.AutoSize = true;
+            this.prop_InitialEnergy.Location = new System.Drawing.Point(126, 99);
+            this.prop_InitialEnergy.Name = "prop_InitialEnergy";
+            this.prop_InitialEnergy.Size = new System.Drawing.Size(21, 13);
+            this.prop_InitialEnergy.TabIndex = 7;
+            this.prop_InitialEnergy.Text = "0 J";
             // 
-            // prop_textObjDrag
+            // prop_Material
             // 
-            this.prop_textObjDrag.Enabled = false;
-            this.prop_textObjDrag.Location = new System.Drawing.Point(108, 46);
-            this.prop_textObjDrag.Mask = "0.00";
-            this.prop_textObjDrag.Name = "prop_textObjDrag";
-            this.prop_textObjDrag.PromptChar = ' ';
-            this.prop_textObjDrag.Size = new System.Drawing.Size(50, 20);
-            this.prop_textObjDrag.TabIndex = 12;
-            this.prop_textObjDrag.Text = "123";
+            this.prop_Material.AutoSize = true;
+            this.prop_Material.Location = new System.Drawing.Point(126, 77);
+            this.prop_Material.Name = "prop_Material";
+            this.prop_Material.Size = new System.Drawing.Size(35, 13);
+            this.prop_Material.TabIndex = 6;
+            this.prop_Material.Text = "žádný";
             // 
-            // prop_comboPropMaterials
+            // prop_MomInertia
             // 
-            this.prop_comboPropMaterials.Enabled = false;
-            this.prop_comboPropMaterials.FormattingEnabled = true;
-            this.prop_comboPropMaterials.Location = new System.Drawing.Point(65, 19);
-            this.prop_comboPropMaterials.Name = "prop_comboPropMaterials";
-            this.prop_comboPropMaterials.Size = new System.Drawing.Size(136, 21);
-            this.prop_comboPropMaterials.TabIndex = 1;
+            this.prop_MomInertia.AutoSize = true;
+            this.prop_MomInertia.Location = new System.Drawing.Point(126, 54);
+            this.prop_MomInertia.Name = "prop_MomInertia";
+            this.prop_MomInertia.Size = new System.Drawing.Size(57, 13);
+            this.prop_MomInertia.TabIndex = 5;
+            this.prop_MomInertia.Text = "0 kg . m^2";
             // 
-            // groupBox3
+            // prop_Mass
             // 
-            this.groupBox3.Controls.Add(this.button_ResetObj);
-            this.groupBox3.Controls.Add(this.prop_rotationalEnergy);
-            this.groupBox3.Controls.Add(this.radio_rotationalEnergy);
-            this.groupBox3.Controls.Add(this.radioButton1);
-            this.groupBox3.Controls.Add(this.prop_potentialEnergy);
-            this.groupBox3.Controls.Add(this.radio_KineticEnergy);
-            this.groupBox3.Controls.Add(this.radio_AngularVelocity);
-            this.groupBox3.Controls.Add(this.radio_LinearVelocity);
-            this.groupBox3.Controls.Add(this.prop_kineticEnergy);
-            this.groupBox3.Controls.Add(this.prop_angularVelocity);
-            this.groupBox3.Controls.Add(this.prop_Velocity);
-            this.groupBox3.Controls.Add(this.button_Analyze);
-            this.groupBox3.Location = new System.Drawing.Point(6, 19);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(207, 202);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Hodnoty";
+            this.prop_Mass.AutoSize = true;
+            this.prop_Mass.Location = new System.Drawing.Point(126, 32);
+            this.prop_Mass.Name = "prop_Mass";
+            this.prop_Mass.Size = new System.Drawing.Size(28, 13);
+            this.prop_Mass.TabIndex = 4;
+            this.prop_Mass.Text = "0 kg";
             // 
-            // button_ResetObj
+            // propValues
             // 
-            this.button_ResetObj.Enabled = false;
-            this.button_ResetObj.Location = new System.Drawing.Point(6, 176);
-            this.button_ResetObj.Name = "button_ResetObj";
-            this.button_ResetObj.Size = new System.Drawing.Size(75, 20);
-            this.button_ResetObj.TabIndex = 29;
-            this.button_ResetObj.Text = "Resetovat";
-            this.button_ResetObj.UseVisualStyleBackColor = true;
-            this.button_ResetObj.Click += new System.EventHandler(this.button_ResetObj_Click);
+            this.propValues.Controls.Add(this.prop_rotationalEnergy);
+            this.propValues.Controls.Add(this.radio_rotationalEnergy);
+            this.propValues.Controls.Add(this.radioButton1);
+            this.propValues.Controls.Add(this.prop_potentialEnergy);
+            this.propValues.Controls.Add(this.radio_KineticEnergy);
+            this.propValues.Controls.Add(this.radio_AngularVelocity);
+            this.propValues.Controls.Add(this.radio_LinearVelocity);
+            this.propValues.Controls.Add(this.prop_kineticEnergy);
+            this.propValues.Controls.Add(this.prop_angularVelocity);
+            this.propValues.Controls.Add(this.prop_Velocity);
+            this.propValues.Controls.Add(this.button_Analyze);
+            this.propValues.Location = new System.Drawing.Point(6, 19);
+            this.propValues.Name = "propValues";
+            this.propValues.Size = new System.Drawing.Size(207, 171);
+            this.propValues.TabIndex = 0;
+            this.propValues.TabStop = false;
+            this.propValues.Text = "Hodnoty";
             // 
             // prop_rotationalEnergy
             // 
@@ -573,7 +588,7 @@
             // button_Analyze
             // 
             this.button_Analyze.Enabled = false;
-            this.button_Analyze.Location = new System.Drawing.Point(126, 176);
+            this.button_Analyze.Location = new System.Drawing.Point(126, 145);
             this.button_Analyze.Name = "button_Analyze";
             this.button_Analyze.Size = new System.Drawing.Size(75, 20);
             this.button_Analyze.TabIndex = 12;
@@ -749,10 +764,10 @@
             this.newObj.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.objProps.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.propParams.ResumeLayout(false);
+            this.propParams.PerformLayout();
+            this.propValues.ResumeLayout(false);
+            this.propValues.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
@@ -771,12 +786,10 @@
         private System.Windows.Forms.CheckBox newObj_Enabled;
         private System.Windows.Forms.CheckBox newObj_AutoName;
         private System.Windows.Forms.TextBox newObj_Name;
-        private System.Windows.Forms.ComboBox newobj_Material;
-        private System.Windows.Forms.MaskedTextBox newobj_Mass;
-        private System.Windows.Forms.ComboBox newobj_Geometry;
+        private System.Windows.Forms.ComboBox newObj_Material;
+        private System.Windows.Forms.ComboBox newObj_Geometry;
         private System.Windows.Forms.Button createGeometry;
         public System.Windows.Forms.Button newObj_Insert;
-        private System.Windows.Forms.GroupBox objProps;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -790,11 +803,8 @@
         private System.Windows.Forms.Button objs_SelectObject;
         private System.Windows.Forms.Button objs_DeleteObject;
         private System.Windows.Forms.ListBox list_allObjects;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.ComboBox prop_comboPropMaterials;
-        private System.Windows.Forms.Button button_SetProps;
-        private System.Windows.Forms.MaskedTextBox prop_textObjDrag;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox propParams;
+        private System.Windows.Forms.GroupBox propValues;
         private System.Windows.Forms.Button button_Analyze;
         private System.Windows.Forms.CheckBox check_Collisions;
         private System.Windows.Forms.RadioButton radioButton1;
@@ -807,7 +817,12 @@
         public System.Windows.Forms.Label prop_potentialEnergy;
         public System.Windows.Forms.Label prop_rotationalEnergy;
         private System.Windows.Forms.RadioButton radio_rotationalEnergy;
-        private System.Windows.Forms.Button button_ResetObj;
         private System.Windows.Forms.CheckBox newObj_Static;
+        private System.Windows.Forms.TextBox newObj_Mass;
+        private System.Windows.Forms.Label prop_InitialEnergy;
+        private System.Windows.Forms.Label prop_Material;
+        private System.Windows.Forms.Label prop_MomInertia;
+        private System.Windows.Forms.Label prop_Mass;
+        public System.Windows.Forms.GroupBox objProps;
     }
 }
