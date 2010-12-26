@@ -392,52 +392,54 @@
 <a name="l00499"></a>00499 
 <a name="l00503"></a><a class="code" href="class_phys_lib_1_1_convex_hull.html">00503</a>     <span class="keyword">internal</span> <span class="keyword">class </span><a class="code" href="class_phys_lib_1_1_convex_hull.html" title="Interní třída generující konvexní obal z vertexů.">ConvexHull</a>
 <a name="l00504"></a>00504     {
-<a name="l00505"></a>00505         <span class="keyword">private</span> <span class="keyword">static</span> <span class="keywordtype">int</span> LexicalPointComparison(PointF a, PointF b)
-<a name="l00506"></a>00506         {
-<a name="l00507"></a>00507             <span class="keywordflow">if</span> (a.X != b.X)
-<a name="l00508"></a>00508                 <span class="keywordflow">return</span> a.X &gt; b.X ? 1 : -1;
-<a name="l00509"></a>00509             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (a.Y != b.Y)
-<a name="l00510"></a>00510                 <span class="keywordflow">return</span> a.Y &gt; b.Y ? 1 : -1;
-<a name="l00511"></a>00511             <span class="keywordflow">else</span> <span class="keywordflow">return</span> 0;
-<a name="l00512"></a>00512         }
-<a name="l00513"></a>00513 
-<a name="l00514"></a>00514         <span class="keyword">private</span> <span class="keyword">static</span> <span class="keywordtype">float</span> zc(PointF O,PointF A,PointF B)
-<a name="l00515"></a>00515         {
-<a name="l00516"></a>00516                 <span class="keywordflow">return</span> (A.X - O.X) * (B.Y - O.Y) - (A.Y - O.Y) * (B.X - O.X);
-<a name="l00517"></a>00517         }
-<a name="l00518"></a>00518 
-<a name="l00524"></a><a class="code" href="class_phys_lib_1_1_convex_hull.html#a88bd21221a736c783ac3e49916a33872">00524</a>         <span class="keyword">public</span> <span class="keyword">static</span> PointF[] GetConvexHull(PointF[] Vertices)
-<a name="l00525"></a>00525         {
-<a name="l00526"></a>00526             <span class="keywordtype">int</span> n = Vertices.Length, k = 0;
-<a name="l00527"></a>00527             PointF[] Hull = <span class="keyword">new</span> PointF[2 * n],Sorted = <span class="keyword">new</span> PointF[Vertices.Length];
-<a name="l00528"></a>00528             Vertices.CopyTo(Sorted, 0);
-<a name="l00529"></a>00529 
-<a name="l00530"></a>00530             Array.Sort&lt;PointF&gt;(Sorted, <span class="keyword">new</span> Comparison&lt;PointF&gt;(LexicalPointComparison));
+<a name="l00505"></a>00505         <span class="keyword">private</span> <a class="code" href="class_phys_lib_1_1_convex_hull.html" title="Interní třída generující konvexní obal z vertexů.">ConvexHull</a>() { }
+<a name="l00506"></a>00506 
+<a name="l00507"></a>00507         <span class="keyword">private</span> <span class="keyword">static</span> <span class="keywordtype">int</span> LexicalPointComparison(PointF a, PointF b)
+<a name="l00508"></a>00508         {
+<a name="l00509"></a>00509             <span class="keywordflow">if</span> (a.X != b.X)
+<a name="l00510"></a>00510                 <span class="keywordflow">return</span> a.X &gt; b.X ? 1 : -1;
+<a name="l00511"></a>00511             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (a.Y != b.Y)
+<a name="l00512"></a>00512                 <span class="keywordflow">return</span> a.Y &gt; b.Y ? 1 : -1;
+<a name="l00513"></a>00513             <span class="keywordflow">else</span> <span class="keywordflow">return</span> 0;
+<a name="l00514"></a>00514         }
+<a name="l00515"></a>00515 
+<a name="l00516"></a>00516         <span class="keyword">private</span> <span class="keyword">static</span> <span class="keywordtype">float</span> zc(PointF O,PointF A,PointF B)
+<a name="l00517"></a>00517         {
+<a name="l00518"></a>00518                 <span class="keywordflow">return</span> (A.X - O.X) * (B.Y - O.Y) - (A.Y - O.Y) * (B.X - O.X);
+<a name="l00519"></a>00519         }
+<a name="l00520"></a>00520 
+<a name="l00526"></a><a class="code" href="class_phys_lib_1_1_convex_hull.html#a88bd21221a736c783ac3e49916a33872">00526</a>         <span class="keyword">public</span> <span class="keyword">static</span> PointF[] GetConvexHull(PointF[] Vertices)
+<a name="l00527"></a>00527         {
+<a name="l00528"></a>00528             <span class="keywordtype">int</span> n = Vertices.Length, k = 0;
+<a name="l00529"></a>00529             PointF[] Hull = <span class="keyword">new</span> PointF[2 * n],Sorted = <span class="keyword">new</span> PointF[Vertices.Length];
+<a name="l00530"></a>00530             Vertices.CopyTo(Sorted, 0);
 <a name="l00531"></a>00531 
-<a name="l00532"></a>00532             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)
-<a name="l00533"></a>00533             {
-<a name="l00534"></a>00534                 <span class="keywordflow">while</span> (k &gt;= 2 &amp;&amp; zc((PointF)Hull[k - 2],(PointF)Hull[k - 1], Sorted[i]) &lt;= 0) k--;
-<a name="l00535"></a>00535                 Hull[k++] = Sorted[i];
-<a name="l00536"></a>00536             }
-<a name="l00537"></a>00537 
-<a name="l00538"></a>00538             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = n - 2, t = k + 1; i &gt;= 0; i--)
-<a name="l00539"></a>00539             {
-<a name="l00540"></a>00540                 <span class="keywordflow">while</span> (k &gt;= t &amp;&amp; zc((PointF)Hull[k - 2], (PointF)Hull[k - 1], Sorted[i]) &lt;= 0) k--;
-<a name="l00541"></a>00541                 Hull[k++] = Sorted[i];
-<a name="l00542"></a>00542             }
-<a name="l00543"></a>00543 
-<a name="l00544"></a>00544             PointF[] Ret = <span class="keyword">new</span> PointF[k-1];
-<a name="l00545"></a>00545             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; k - 1; i++)
-<a name="l00546"></a>00546             {
-<a name="l00547"></a>00547                 Ret[i].X = Hull[i].X;
-<a name="l00548"></a>00548                 Ret[i].Y = Hull[i].Y;
-<a name="l00549"></a>00549             }
-<a name="l00550"></a>00550             <span class="keywordflow">return</span> Ret;
-<a name="l00551"></a>00551         }
-<a name="l00552"></a>00552     }
-<a name="l00553"></a>00553 }
+<a name="l00532"></a>00532             Array.Sort&lt;PointF&gt;(Sorted, <span class="keyword">new</span> Comparison&lt;PointF&gt;(LexicalPointComparison));
+<a name="l00533"></a>00533 
+<a name="l00534"></a>00534             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)
+<a name="l00535"></a>00535             {
+<a name="l00536"></a>00536                 <span class="keywordflow">while</span> (k &gt;= 2 &amp;&amp; zc((PointF)Hull[k - 2],(PointF)Hull[k - 1], Sorted[i]) &lt;= 0) k--;
+<a name="l00537"></a>00537                 Hull[k++] = Sorted[i];
+<a name="l00538"></a>00538             }
+<a name="l00539"></a>00539 
+<a name="l00540"></a>00540             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = n - 2, t = k + 1; i &gt;= 0; i--)
+<a name="l00541"></a>00541             {
+<a name="l00542"></a>00542                 <span class="keywordflow">while</span> (k &gt;= t &amp;&amp; zc((PointF)Hull[k - 2], (PointF)Hull[k - 1], Sorted[i]) &lt;= 0) k--;
+<a name="l00543"></a>00543                 Hull[k++] = Sorted[i];
+<a name="l00544"></a>00544             }
+<a name="l00545"></a>00545 
+<a name="l00546"></a>00546             PointF[] Ret = <span class="keyword">new</span> PointF[k-1];
+<a name="l00547"></a>00547             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; k - 1; i++)
+<a name="l00548"></a>00548             {
+<a name="l00549"></a>00549                 Ret[i].X = Hull[i].X;
+<a name="l00550"></a>00550                 Ret[i].Y = Hull[i].Y;
+<a name="l00551"></a>00551             }
+<a name="l00552"></a>00552             <span class="keywordflow">return</span> Ret;
+<a name="l00553"></a>00553         }
+<a name="l00554"></a>00554     }
+<a name="l00555"></a>00555 }
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generováno Sun Dec 26 01:21:51 2010 pro projekt PhysLib programem&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generováno Sun Dec 26 18:34:12 2010 pro projekt PhysLib programem&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

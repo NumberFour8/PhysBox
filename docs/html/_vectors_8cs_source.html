@@ -281,77 +281,83 @@
 <a name="l00364"></a>00364 
 <a name="l00365"></a>00365         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator== (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
 <a name="l00366"></a>00366         {
-<a name="l00367"></a>00367             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Math.Max(v.Count, u.Count); i++)
-<a name="l00368"></a>00368                <span class="keywordflow">if</span> (v[i] != u[i]) <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00369"></a>00369             
-<a name="l00370"></a>00370             <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00371"></a>00371         }
-<a name="l00372"></a>00372 
-<a name="l00373"></a>00373         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator!= (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
-<a name="l00374"></a>00374         {
-<a name="l00375"></a>00375             <span class="keywordflow">return</span> !(v == u);
-<a name="l00376"></a>00376         }
-<a name="l00377"></a>00377 
-<a name="l00378"></a>00378         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&lt; (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
-<a name="l00379"></a>00379         {
-<a name="l00380"></a>00380             <span class="keywordflow">return</span> v.Magnitude &lt; u.Magnitude;
-<a name="l00381"></a>00381         }
-<a name="l00382"></a>00382 
-<a name="l00383"></a>00383         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&gt; (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
-<a name="l00384"></a>00384         {
-<a name="l00385"></a>00385             <span class="keywordflow">return</span> v.Magnitude &gt; u.Magnitude;
-<a name="l00386"></a>00386         }
-<a name="l00387"></a>00387 
-<a name="l00388"></a>00388         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&lt;= (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
-<a name="l00389"></a>00389         {
-<a name="l00390"></a>00390             <span class="keywordflow">return</span> v.Magnitude &lt; u.Magnitude || v == u;
-<a name="l00391"></a>00391         }
-<a name="l00392"></a>00392 
-<a name="l00393"></a>00393         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&gt;= (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
-<a name="l00394"></a>00394         {
-<a name="l00395"></a>00395             <span class="keywordflow">return</span> v.Magnitude &gt; u.Magnitude || v == u;
-<a name="l00396"></a>00396         }
-<a name="l00397"></a>00397 
-<a name="l00398"></a>00398         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">bool</span> Equals(<span class="keywordtype">object</span> obj)
-<a name="l00399"></a>00399         {
-<a name="l00400"></a>00400             <span class="keywordflow">return</span> obj as <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> == <span class="keyword">this</span>;
-<a name="l00401"></a>00401         }
-<a name="l00402"></a>00402 
-<a name="l00403"></a>00403         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">int</span> GetHashCode()
-<a name="l00404"></a>00404         {
-<a name="l00405"></a>00405             <span class="keywordflow">return</span> <a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>.ToString().GetHashCode();
-<a name="l00406"></a>00406         }
-<a name="l00407"></a>00407 
-<a name="l00408"></a>00408         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">explicit</span> operator Vector(System.Drawing.PointF p)
-<a name="l00409"></a>00409         {
-<a name="l00410"></a>00410             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(p.X,p.Y,0); <span class="comment">// !</span>
-<a name="l00411"></a>00411         }
-<a name="l00412"></a>00412 
-<a name="l00413"></a>00413         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">explicit</span> operator System.Drawing.PointF(<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v)
-<a name="l00414"></a>00414         {
-<a name="l00415"></a>00415             <span class="keywordflow">return</span> <span class="keyword">new</span> System.Drawing.PointF((<span class="keywordtype">float</span>)v[0],(<span class="keywordtype">float</span>)v[1]);
-<a name="l00416"></a>00416         }
-<a name="l00417"></a>00417 
-<a name="l00422"></a><a class="code" href="class_phys_lib_1_1_vector.html#aae77e1545e2ec35ec3225d9aa54e18d9">00422</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a> <a class="code" href="class_phys_lib_1_1_vector.html#aae77e1545e2ec35ec3225d9aa54e18d9" title="Převede vektor na matici o jednom řádku/sloupci.">ToMatrix</a>(MatrixInitType Type)
-<a name="l00423"></a>00423         {
-<a name="l00424"></a>00424             <span class="keywordflow">if</span> (Type == MatrixInitType.VectorsAreRows)
-<a name="l00425"></a>00425                 <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a>(1, <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>, t);
-<a name="l00426"></a>00426             <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a>(<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>, 1, t);
-<a name="l00427"></a>00427         }
-<a name="l00428"></a>00428 
-<a name="l00433"></a><a class="code" href="class_phys_lib_1_1_vector.html#afb353d3b6452c529dcc03872beab3148">00433</a>         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">string</span> <a class="code" href="class_phys_lib_1_1_vector.html#afb353d3b6452c529dcc03872beab3148" title="Převede vektor na text.">ToString</a>()
-<a name="l00434"></a>00434         {
-<a name="l00435"></a>00435             base.ToString();
-<a name="l00436"></a>00436             <span class="keywordtype">string</span> Ret = String.Empty;
-<a name="l00437"></a>00437             <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a> == 0) <span class="keywordflow">return</span> <span class="stringliteral">&quot;(0)&quot;</span>;
-<a name="l00438"></a>00438             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0;i &lt; <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>;i++)
-<a name="l00439"></a>00439                 Ret += String.Format(<span class="stringliteral">&quot;{0:F2};&quot;</span>, <span class="keyword">this</span>[i]);
-<a name="l00440"></a>00440             <span class="keywordflow">return</span> <span class="stringliteral">&quot;(&quot;</span> + Ret.Remove(Ret.Length-1) + <span class="stringliteral">&quot;)&quot;</span>;
-<a name="l00441"></a>00441         }
-<a name="l00442"></a>00442     }
-<a name="l00443"></a>00443 }
+<a name="l00367"></a>00367             <span class="keywordflow">if</span> (v as <span class="keywordtype">object</span> == null &amp;&amp; u as <span class="keywordtype">object</span> == null) <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00368"></a>00368             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (v as <span class="keywordtype">object</span> == null) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00369"></a>00369             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (u as <span class="keywordtype">object</span> == null) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00370"></a>00370             <span class="keywordflow">else</span>
+<a name="l00371"></a>00371             {
+<a name="l00372"></a>00372                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Math.Max(v.Count, u.Count); i++)
+<a name="l00373"></a>00373                     <span class="keywordflow">if</span> (v[i] != u[i]) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00374"></a>00374 
+<a name="l00375"></a>00375                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00376"></a>00376             }
+<a name="l00377"></a>00377         }
+<a name="l00378"></a>00378 
+<a name="l00379"></a>00379         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator!= (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
+<a name="l00380"></a>00380         {
+<a name="l00381"></a>00381             <span class="keywordflow">return</span> !(v == u);
+<a name="l00382"></a>00382         }
+<a name="l00383"></a>00383 
+<a name="l00384"></a>00384         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&lt; (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
+<a name="l00385"></a>00385         {
+<a name="l00386"></a>00386             <span class="keywordflow">return</span> v.Magnitude &lt; u.Magnitude;
+<a name="l00387"></a>00387         }
+<a name="l00388"></a>00388 
+<a name="l00389"></a>00389         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&gt; (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
+<a name="l00390"></a>00390         {
+<a name="l00391"></a>00391             <span class="keywordflow">return</span> v.Magnitude &gt; u.Magnitude;
+<a name="l00392"></a>00392         }
+<a name="l00393"></a>00393 
+<a name="l00394"></a>00394         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&lt;= (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
+<a name="l00395"></a>00395         {
+<a name="l00396"></a>00396             <span class="keywordflow">return</span> v.Magnitude &lt; u.Magnitude || v == u;
+<a name="l00397"></a>00397         }
+<a name="l00398"></a>00398 
+<a name="l00399"></a>00399         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&gt;= (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
+<a name="l00400"></a>00400         {
+<a name="l00401"></a>00401             <span class="keywordflow">return</span> v.Magnitude &gt; u.Magnitude || v == u;
+<a name="l00402"></a>00402         }
+<a name="l00403"></a>00403 
+<a name="l00404"></a>00404         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">bool</span> Equals(<span class="keywordtype">object</span> obj)
+<a name="l00405"></a>00405         {
+<a name="l00406"></a>00406             <span class="keywordflow">return</span> obj as <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> == <span class="keyword">this</span>;
+<a name="l00407"></a>00407         }
+<a name="l00408"></a>00408 
+<a name="l00409"></a>00409         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">int</span> GetHashCode()
+<a name="l00410"></a>00410         {
+<a name="l00411"></a>00411             <span class="keywordflow">return</span> <a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>.ToString().GetHashCode();
+<a name="l00412"></a>00412         }
+<a name="l00413"></a>00413 
+<a name="l00414"></a>00414         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">explicit</span> operator Vector(System.Drawing.PointF p)
+<a name="l00415"></a>00415         {
+<a name="l00416"></a>00416             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(p.X,p.Y,0); <span class="comment">// !</span>
+<a name="l00417"></a>00417         }
+<a name="l00418"></a>00418 
+<a name="l00419"></a>00419         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">explicit</span> operator System.Drawing.PointF(<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v)
+<a name="l00420"></a>00420         {
+<a name="l00421"></a>00421             <span class="keywordflow">return</span> <span class="keyword">new</span> System.Drawing.PointF((<span class="keywordtype">float</span>)v[0],(<span class="keywordtype">float</span>)v[1]);
+<a name="l00422"></a>00422         }
+<a name="l00423"></a>00423 
+<a name="l00428"></a><a class="code" href="class_phys_lib_1_1_vector.html#aae77e1545e2ec35ec3225d9aa54e18d9">00428</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a> <a class="code" href="class_phys_lib_1_1_vector.html#aae77e1545e2ec35ec3225d9aa54e18d9" title="Převede vektor na matici o jednom řádku/sloupci.">ToMatrix</a>(MatrixInitType Type)
+<a name="l00429"></a>00429         {
+<a name="l00430"></a>00430             <span class="keywordflow">if</span> (Type == MatrixInitType.VectorsAreRows)
+<a name="l00431"></a>00431                 <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a>(1, <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>, t);
+<a name="l00432"></a>00432             <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a>(<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>, 1, t);
+<a name="l00433"></a>00433         }
+<a name="l00434"></a>00434 
+<a name="l00439"></a><a class="code" href="class_phys_lib_1_1_vector.html#afb353d3b6452c529dcc03872beab3148">00439</a>         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">string</span> <a class="code" href="class_phys_lib_1_1_vector.html#afb353d3b6452c529dcc03872beab3148" title="Převede vektor na text.">ToString</a>()
+<a name="l00440"></a>00440         {
+<a name="l00441"></a>00441             base.ToString();
+<a name="l00442"></a>00442             <span class="keywordtype">string</span> Ret = String.Empty;
+<a name="l00443"></a>00443             <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a> == 0) <span class="keywordflow">return</span> <span class="stringliteral">&quot;(0)&quot;</span>;
+<a name="l00444"></a>00444             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0;i &lt; <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>;i++)
+<a name="l00445"></a>00445                 Ret += String.Format(<span class="stringliteral">&quot;{0:F2};&quot;</span>, <span class="keyword">this</span>[i]);
+<a name="l00446"></a>00446             <span class="keywordflow">return</span> <span class="stringliteral">&quot;(&quot;</span> + Ret.Remove(Ret.Length-1) + <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00447"></a>00447         }
+<a name="l00448"></a>00448     }
+<a name="l00449"></a>00449 }
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generováno Sun Dec 26 01:21:51 2010 pro projekt PhysLib programem&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generováno Sun Dec 26 18:34:12 2010 pro projekt PhysLib programem&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

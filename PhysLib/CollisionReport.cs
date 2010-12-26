@@ -9,19 +9,24 @@ namespace PhysLib
     /// </summary>
     public sealed class CollisionReport
     {
-        private Vector mtd;
-
         /// <summary>
         /// Výchozí konstruktor 
         /// </summary>
         /// <param name="ObjA">První účastník kolize</param>
         /// <param name="ObjB">Druhý účastník kolize</param>
-        public CollisionReport(SimObject ObjA, SimObject ObjB)
+        /// <param name="MinimumTranslation">Vektor minimálního posunutí</param>
+        public CollisionReport(SimObject ObjA, SimObject ObjB,Vector MinimumTranslation)
         {
-            mtd = Vector.Zero;
-
             A = ObjA;
             B = ObjB;
+            MTD = MinimumTranslation;
+            N = Vector.Unit(MTD);
+
+            Prepare();
+
+            NAP = ((Vector)Pairs[0].A - A.COG).Perp();
+            NBP = ((Vector)Pairs[0].B - B.COG).Perp();
+            RelativeVelocity = (A.LinearVelocity + Vector.Cross(NAP.Perp(), A.AngularVelocity)) - (B.LinearVelocity + Vector.Cross(NBP.Perp(), B.AngularVelocity));
         }
 
         /// <summary>
@@ -52,14 +57,6 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Možné typy dotyku
-        /// </summary>
-        public enum ContactType
-        {
-            VertexVertex = 1, VertexEdge = 2, EdgeEdge = 3
-        }
-
-        /// <summary>
         /// Typ dotyku
         /// </summary>
         public ContactType TouchType
@@ -73,37 +70,75 @@ namespace PhysLib
         /// </summary>
         public Vector MTD
         {
-            get { return mtd;  }
-            set { mtd = value; }
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Normálový vektor ke spojnici těžiště tělesa A s bodem dotyku
+        /// </summary>
+        public Vector NAP
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Normálový vektor ke spojnici těžiště tělesa B s bodem dotyku
+        /// </summary>
+        public Vector NBP
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Vzájemná relativní rychlost v době kontaktu
+        /// </summary>
+        public Vector RelativeVelocity
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Normálový vektor ke kolizi
+        /// </summary>
+        public Vector N
+        {
+            get;
+            private set;
         }
 
         /// <summary>
         /// Zredukuje kontaktní páry na jeden jediný
         /// </summary>
-        internal void Reduce()
+        private void Reduce()
         {
-            ContactPair Ret = new ContactPair(Pairs[0].a, Pairs[0].b);
+            ContactPair[] Single = new ContactPair[1];
+            Single[0] = new ContactPair(Pairs[0].A, Pairs[0].B);
+
             int len = Pairs.Length;
             for (int i = 1; i < len; i++)
             {
-                Ret.a.X += Pairs[i].a.X;
-                Ret.a.Y += Pairs[i].a.Y;
+                Single[0].A.X += Pairs[i].A.X;
+                Single[0].A.Y += Pairs[i].A.Y;
 
-                Ret.b.X += Pairs[i].b.X;
-                Ret.b.Y += Pairs[i].b.Y;
+                Single[0].B.X += Pairs[i].B.X;
+                Single[0].B.Y += Pairs[i].B.Y;
             }
 
-            Ret.a.X /= len; Ret.b.X /= len;
-            Ret.a.Y /= len; Ret.b.Y /= len;
-            Pairs[0] = Ret;
+            Single[0].A.X /= len; Single[0].B.X /= len;
+            Single[0].A.Y /= len; Single[0].B.Y /= len;
+            Pairs = Single;
         }
 
         /// <summary>
-        /// Spočítá kontaktní páry
+        /// Připraví hlášení o kolizi
         /// </summary>
-        internal void CalculatePairs()
+        private void Prepare()
         {
-            Vector umtd = Vector.Unit(mtd);
+            Vector umtd = Vector.Unit(MTD);
             object c1 = null, c2 = null;
 
             PointF[] supA = A.Model.SupportPoints(umtd), supB = B.Model.SupportPoints(-umtd);
@@ -216,11 +251,25 @@ namespace PhysLib
     /// </summary>
     public struct ContactPair
     {
-        public PointF a, b;
+        /// <summary>
+        /// První bod dotyku
+        /// </summary>
+        public PointF A;
+
+        /// <summary>
+        /// Druhý bod dotyku
+        /// </summary>
+        public PointF B;
+
+        /// <summary>
+        /// Výchozí konstruktor
+        /// </summary>
+        /// <param name="first">První bod v páru</param>
+        /// <param name="second">Druhý bod v páru</param>
         public ContactPair(PointF first, PointF second)
         {
-            a = new PointF(first.X, first.Y);
-            b = new PointF(second.X, second.Y);
+            A = new PointF(first.X, first.Y);
+            B = new PointF(second.X, second.Y);
         }
 
         /// <summary>
@@ -228,7 +277,15 @@ namespace PhysLib
         /// </summary>
         public double DistanceSquared
         {
-            get { return Math.Pow(Geometry.PointDistance(a, b), 2); }
+            get { return Math.Pow(Geometry.PointDistance(A, B), 2); }
         }
+    }
+
+    /// <summary>
+    /// Možné typy dotyku
+    /// </summary>
+    public enum ContactType
+    {
+        VertexVertex = 1, VertexEdge = 2, EdgeEdge = 3
     }
 }

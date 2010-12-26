@@ -70,10 +70,10 @@ namespace PhysLib
         /// Vytvoří fyzikální svět
         /// </summary>
         /// <param name="WorldOrientation">Orientace os zobrazovacího zařízení</param>
-        /// <param name="GravityAccel">Gravitační zrychlení (v jednotkách SI)</param>
-        /// <param name="WorldConstraints">Poloměr světa v pixelech (maximální vzdálnost tělesa od počátku souřadnic)</param>
+        /// <param name="WorldGravity">Gravitační zrychlení (v jednotkách SI)</param>
+        /// <param name="WorldDiameter">Poloměr světa v pixelech (maximální vzdálnost tělesa od počátku souřadnic)</param>
         /// <param name="WorldResolution">Počet pixelů který představuje jeden fyzický metr</param>
-        public World(Matrix WorldOrientation, Vector GravityAccel, double WorldDiameter, double WorldResolution = 30)
+        public World(Matrix WorldOrientation, Vector WorldGravity, double WorldDiameter, double WorldResolution = 30)
         {
             Fields = new ArrayList();
             Objs = new ArrayList();
@@ -84,7 +84,7 @@ namespace PhysLib
             b = WorldOrientation;
             maxRad = WorldDiameter;
 
-            Gravity = Vector.ToBasis(b, GravityAccel) * WorldResolution;
+            Gravity = Vector.ToBasis(b, WorldGravity) * WorldResolution;
             simulationTime = 0;
             r = WorldResolution;
             Delta = 0.01;
@@ -416,10 +416,6 @@ namespace PhysLib
 
                         foreach (CollisionReport rep in csolve.DetectCollisionsFor(i))
                             csolve.SolveCollision(rep);
-
-                        if (PhysObjs[i].LinearVelocity.IsNaN)
-                            throw new DataMisalignedException("Tuhle vtipnou vyjímku musím chytit, abych zjistil kdy tenhle divnej stav nastává");
-
                     }
                 }
             }
@@ -475,7 +471,24 @@ namespace PhysLib
     /// </summary>
     public struct ObjectEnergy
     {
-        public double Kinetic, Potential, Rotational;
+        /// <summary>
+        /// Kinetická energie
+        /// </summary>
+        public double Kinetic { get; set; }
+        
+        /// <summary>
+        /// Potenciální energie
+        /// </summary>
+        public double Potential { get; set; }
+        
+        /// <summary>
+        /// Rotační energie
+        /// </summary>
+        public double Rotational { get; set; }
+        
+        /// <summary>
+        /// Celková energie tělesa
+        /// </summary>
         public double Total
         {
             get { return Kinetic + Potential + Rotational; }

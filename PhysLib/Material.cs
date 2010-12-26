@@ -8,9 +8,24 @@ namespace PhysLib
     [Serializable]
     public struct Material
     {
+        /// <summary>
+        /// Základní materiál - dřevo
+        /// </summary>
         public static Material Wood { get { return new Material(700, 0.4, 0, 0.15, "Dřevo"); } }
+        
+        /// <summary>
+        /// Základní materiál - beton
+        /// </summary>
         public static Material Concrete { get { return new Material(2000, 0.65, 0, 0.1, "Beton"); } }
+        
+        /// <summary>
+        /// Základní materiál - ocel
+        /// </summary>
         public static Material Steel { get { return new Material(7300, 0.43, 0.00720, 0.3, "Ocel"); } }
+        
+        /// <summary>
+        /// Základní materiál - guma
+        /// </summary>
         public static Material Rubber { get { return new Material(1000, 0.7, 0, 0.8, "Guma"); } } 
         
         private double density;
@@ -98,7 +113,7 @@ namespace PhysLib
 
         public override string ToString()
         {
-            return base.ToString();
+            return Name;
         }
 
         public override bool Equals(object obj)

@@ -33,8 +33,8 @@
 <p><a href="class_phys_lib_1_1_world-members.html">Seznam všech členů.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Veřejné metody</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_world.html#a048aee4a33a6fefd3d0cbb5dba56e2c5">World</a> (<a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a> WorldOrientation, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> GravityAccel, double WorldDiameter, double WorldResolution=30)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Vytvoří fyzikální svět.  <a href="#a048aee4a33a6fefd3d0cbb5dba56e2c5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_world.html#a019879d846242fa9e081d7f380de4a67">World</a> (<a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a> WorldOrientation, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> WorldGravity, double WorldDiameter, double WorldResolution=30)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Vytvoří fyzikální svět.  <a href="#a019879d846242fa9e081d7f380de4a67"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_world.html#a0304b913f959a862c9b7eca47bee6a89">Convert</a> (double Input, ConversionType Type)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení světa.  <a href="#a0304b913f959a862c9b7eca47bee6a89"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_world.html#a74b4c9b5acadb0b0565cf3ac339e2617">Convert</a> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> Input, ConversionType Type)</td></tr>
@@ -114,7 +114,7 @@
 
 <p>Definice je uvedena na řádku <a class="el" href="_world_8cs_source.html#l00026">26</a> v souboru <a class="el" href="_world_8cs_source.html">World.cs</a>.</p>
 <hr/><h2>Dokumentace konstruktoru a destruktoru</h2>
-<a class="anchor" id="a048aee4a33a6fefd3d0cbb5dba56e2c5"></a><!-- doxytag: member="PhysLib::World::World" ref="a048aee4a33a6fefd3d0cbb5dba56e2c5" args="(Matrix WorldOrientation, Vector GravityAccel, double WorldDiameter, double WorldResolution=30)" -->
+<a class="anchor" id="a019879d846242fa9e081d7f380de4a67"></a><!-- doxytag: member="PhysLib::World::World" ref="a019879d846242fa9e081d7f380de4a67" args="(Matrix WorldOrientation, Vector WorldGravity, double WorldDiameter, double WorldResolution=30)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -128,7 +128,7 @@
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td>
-          <td class="paramname"> <em>GravityAccel</em>, </td>
+          <td class="paramname"> <em>WorldGravity</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -155,8 +155,8 @@
 <dl><dt><b>Parametry:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>WorldOrientation</em>&nbsp;</td><td>Orientace os zobrazovacího zařízení</td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>GravityAccel</em>&nbsp;</td><td>Gravitační zrychlení (v jednotkách SI)</td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>WorldConstraints</em>&nbsp;</td><td>Poloměr světa v pixelech (maximální vzdálnost tělesa od počátku souřadnic)</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>WorldGravity</em>&nbsp;</td><td>Gravitační zrychlení (v jednotkách SI)</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>WorldDiameter</em>&nbsp;</td><td>Poloměr světa v pixelech (maximální vzdálnost tělesa od počátku souřadnic)</td></tr>
     <tr><td valign="top"></td><td valign="top"><em>WorldResolution</em>&nbsp;</td><td>Počet pixelů který představuje jeden fyzický metr</td></tr>
   </table>
   </dd>
@@ -436,7 +436,7 @@
 </dl>
 <dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Energie</dd></dl>
 
-<p>Definice je uvedena na řádku <a class="el" href="_world_8cs_source.html#l00450">450</a> v souboru <a class="el" href="_world_8cs_source.html">World.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_world_8cs_source.html#l00446">446</a> v souboru <a class="el" href="_world_8cs_source.html">World.cs</a>.</p>
 
 </div>
 </div>
@@ -782,7 +782,7 @@
 
 <p>Poloha bodu, podle kterého se určuje hladina potenciální energie. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_world_8cs_source.html#l00434">434</a> v souboru <a class="el" href="_world_8cs_source.html">World.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_world_8cs_source.html#l00430">430</a> v souboru <a class="el" href="_world_8cs_source.html">World.cs</a>.</p>
 
 </div>
 </div>
@@ -934,7 +934,7 @@
 <li>D:/Dev/PhysBox/PhysLib/<a class="el" href="_world_8cs_source.html">World.cs</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generováno Sun Dec 26 01:21:52 2010 pro projekt PhysLib programem&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generováno Sun Dec 26 18:34:13 2010 pro projekt PhysLib programem&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

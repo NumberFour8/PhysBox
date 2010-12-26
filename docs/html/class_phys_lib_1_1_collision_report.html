@@ -32,16 +32,9 @@
 
 <p><a href="class_phys_lib_1_1_collision_report-members.html">Seznam všech členů.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
-<tr><td colspan="2"><h2>Veřejné typy</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_report.html#a499caac43a5fd437487b9caf87fa6e69">ContactType</a> { <b>VertexVertex</b> =  1, 
-<b>VertexEdge</b> =  2, 
-<b>EdgeEdge</b> =  3
- }</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight"><p>Možné typy dotyku. </p>
- <a href="class_phys_lib_1_1_collision_report.html#a499caac43a5fd437487b9caf87fa6e69">...</a><br/></td></tr>
 <tr><td colspan="2"><h2>Veřejné metody</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_report.html#a220677ef184812228dd36d61bacf4b20">CollisionReport</a> (<a class="el" href="class_phys_lib_1_1_sim_object.html">SimObject</a> ObjA, <a class="el" href="class_phys_lib_1_1_sim_object.html">SimObject</a> ObjB)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Výchozí konstruktor.  <a href="#a220677ef184812228dd36d61bacf4b20"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_report.html#a30cb370f75ffc206ff24da4e9beed4fc">CollisionReport</a> (<a class="el" href="class_phys_lib_1_1_sim_object.html">SimObject</a> ObjA, <a class="el" href="class_phys_lib_1_1_sim_object.html">SimObject</a> ObjB, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> MinimumTranslation)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Výchozí konstruktor.  <a href="#a30cb370f75ffc206ff24da4e9beed4fc"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Vlastnosti</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_sim_object.html">SimObject</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd">A</a><code> [get, set]</code></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">První účastník kolize.  <a href="#a21d95204b3ec2972da88c9ff0c2856bd"></a><br/></td></tr>
@@ -49,35 +42,25 @@
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Druhý účastník kolize.  <a href="#a54d7ab3656a9f3714ad9ba45ae7e6ccb"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_phys_lib_1_1_contact_pair.html">ContactPair</a>[]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5">Pairs</a><code> [get, set]</code></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Páry bodů dotyku.  <a href="#aa23b7c11699565de67c7e4773ccd8df5"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_collision_report.html#a499caac43a5fd437487b9caf87fa6e69">ContactType</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6">TouchType</a><code> [get, set]</code></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ContactType&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6">TouchType</a><code> [get, set]</code></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Typ dotyku.  <a href="#a2970fd94f44dc7463c7106f4b0e0aef6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_report.html#a1dfeedc9dfd7c19b73798b6d4955605a">MTD</a><code> [get, set]</code></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Minimální vektor oddělení.  <a href="#a1dfeedc9dfd7c19b73798b6d4955605a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_report.html#a63e7bd800f4c1a644c645f1766ef1127">NAP</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Normálový vektor ke spojnici těžiště tělesa A s bodem dotyku.  <a href="#a63e7bd800f4c1a644c645f1766ef1127"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_report.html#adb77e2e53ad4b9f3771a22807efd247f">NBP</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Normálový vektor ke spojnici těžiště tělesa B s bodem dotyku.  <a href="#adb77e2e53ad4b9f3771a22807efd247f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_report.html#a20da0e39d3da948edc079788fd787431">RelativeVelocity</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Vzájemná relativní rychlost v době kontaktu.  <a href="#a20da0e39d3da948edc079788fd787431"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_report.html#af38270eb63e8d9bfba175bafa84aaaf8">N</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Normálový vektor ke kolizi.  <a href="#af38270eb63e8d9bfba175bafa84aaaf8"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailní popis</h2>
 <p>Třída hlášení o kolizi. </p>
 
 <p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00010">10</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
-<hr/><h2>Dokumentace k členským výčtům</h2>
-<a class="anchor" id="a499caac43a5fd437487b9caf87fa6e69"></a><!-- doxytag: member="PhysLib::CollisionReport::ContactType" ref="a499caac43a5fd437487b9caf87fa6e69" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="class_phys_lib_1_1_collision_report.html#a499caac43a5fd437487b9caf87fa6e69">PhysLib::CollisionReport::ContactType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Možné typy dotyku. </p>
-
-<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00057">57</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
-
-</div>
-</div>
 <hr/><h2>Dokumentace konstruktoru a destruktoru</h2>
-<a class="anchor" id="a220677ef184812228dd36d61bacf4b20"></a><!-- doxytag: member="PhysLib::CollisionReport::CollisionReport" ref="a220677ef184812228dd36d61bacf4b20" args="(SimObject ObjA, SimObject ObjB)" -->
+<a class="anchor" id="a30cb370f75ffc206ff24da4e9beed4fc"></a><!-- doxytag: member="PhysLib::CollisionReport::CollisionReport" ref="a30cb370f75ffc206ff24da4e9beed4fc" args="(SimObject ObjA, SimObject ObjB, Vector MinimumTranslation)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -91,7 +74,13 @@
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_phys_lib_1_1_sim_object.html">SimObject</a>&nbsp;</td>
-          <td class="paramname"> <em>ObjB</em></td><td>&nbsp;</td>
+          <td class="paramname"> <em>ObjB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td>
+          <td class="paramname"> <em>MinimumTranslation</em></td><td>&nbsp;</td>
         </tr>
         <tr>
           <td></td>
@@ -107,11 +96,12 @@
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>ObjA</em>&nbsp;</td><td>První účastník kolize</td></tr>
     <tr><td valign="top"></td><td valign="top"><em>ObjB</em>&nbsp;</td><td>Druhý účastník kolize</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>MinimumTranslation</em>&nbsp;</td><td>Vektor minimálního posunutí</td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00019">19</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00018">18</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
 
 </div>
 </div>
@@ -129,7 +119,7 @@
 
 <p>První účastník kolize. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00031">31</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00036">36</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
 
 </div>
 </div>
@@ -146,7 +136,7 @@
 
 <p>Druhý účastník kolize. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00040">40</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00045">45</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
 
 </div>
 </div>
@@ -163,7 +153,58 @@
 
 <p>Minimální vektor oddělení. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00075">75</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00072">72</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af38270eb63e8d9bfba175bafa84aaaf8"></a><!-- doxytag: member="PhysLib::CollisionReport::N" ref="af38270eb63e8d9bfba175bafa84aaaf8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> PhysLib.CollisionReport.N<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Normálový vektor ke kolizi. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00108">108</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a63e7bd800f4c1a644c645f1766ef1127"></a><!-- doxytag: member="PhysLib::CollisionReport::NAP" ref="a63e7bd800f4c1a644c645f1766ef1127" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> PhysLib.CollisionReport.NAP<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Normálový vektor ke spojnici těžiště tělesa A s bodem dotyku. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00081">81</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adb77e2e53ad4b9f3771a22807efd247f"></a><!-- doxytag: member="PhysLib::CollisionReport::NBP" ref="adb77e2e53ad4b9f3771a22807efd247f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> PhysLib.CollisionReport.NBP<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Normálový vektor ke spojnici těžiště tělesa B s bodem dotyku. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00090">90</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
 
 </div>
 </div>
@@ -180,7 +221,24 @@
 
 <p>Páry bodů dotyku. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00049">49</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00054">54</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a20da0e39d3da948edc079788fd787431"></a><!-- doxytag: member="PhysLib::CollisionReport::RelativeVelocity" ref="a20da0e39d3da948edc079788fd787431" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> PhysLib.CollisionReport.RelativeVelocity<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vzájemná relativní rychlost v době kontaktu. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00099">99</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
 
 </div>
 </div>
@@ -189,7 +247,7 @@
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_phys_lib_1_1_collision_report.html#a499caac43a5fd437487b9caf87fa6e69">ContactType</a> PhysLib.CollisionReport.TouchType<code> [get, set]</code></td>
+          <td class="memname">ContactType PhysLib.CollisionReport.TouchType<code> [get, set]</code></td>
         </tr>
       </table>
 </div>
@@ -197,7 +255,7 @@
 
 <p>Typ dotyku. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00066">66</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_collision_report_8cs_source.html#l00063">63</a> v souboru <a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a>.</p>
 
 </div>
 </div>
@@ -205,7 +263,7 @@
 <li>D:/Dev/PhysBox/PhysLib/<a class="el" href="_collision_report_8cs_source.html">CollisionReport.cs</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generováno Sun Dec 26 01:21:51 2010 pro projekt PhysLib programem&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generováno Sun Dec 26 18:34:12 2010 pro projekt PhysLib programem&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

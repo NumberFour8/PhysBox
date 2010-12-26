@@ -202,7 +202,7 @@ namespace PhysLib
         /// Převede daný vektor do báze zadané bázovými vektory jakožto sloupce dané diagonální matice
         /// </summary>
         /// <param name="B">Matice báze</param>
-        /// <param name="V">Vektor, který se má převést</param>
+        /// <param name="A">Vektor, který se má převést</param>
         /// <returns>Vektor A v bázi B</returns>
         public static Vector ToBasis(Matrix B, Vector A)
         {
@@ -364,10 +364,16 @@ namespace PhysLib
 
         public static bool operator== (Vector v, Vector u)
         {
-            for (int i = 0; i < Math.Max(v.Count, u.Count); i++)
-               if (v[i] != u[i]) return false;
-            
-            return true;
+            if (v as object == null && u as object == null) return true;
+            else if (v as object == null) return false;
+            else if (u as object == null) return false;
+            else
+            {
+                for (int i = 0; i < Math.Max(v.Count, u.Count); i++)
+                    if (v[i] != u[i]) return false;
+
+                return true;
+            }
         }
 
         public static bool operator!= (Vector v, Vector u)
