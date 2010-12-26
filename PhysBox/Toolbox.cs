@@ -120,6 +120,7 @@ namespace PhysBox
             MyNewObject.Enabled = newObj_Enabled.Checked;
             MyNewObject.Static = newObj_Static.Checked;
 
+            MyOwner.Focus();
             MyOwner.AddObject(MyNewObject);
 
             tab_Toolbox.Enabled = false;

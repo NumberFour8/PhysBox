@@ -179,7 +179,7 @@ namespace PhysBox
             if (e.Button == System.Windows.Forms.MouseButtons.Left && Rotating && Selected != null)
                 Selected.Model.Orientation += 3;
             if (e.Button == System.Windows.Forms.MouseButtons.Left && Moving && Selected != null)
-                Selected.Model.Position = (new Vector(e.X, e.Y, 0)) * ScaleRatio;
+              Selected.Model.Position = (new Vector(e.X, e.Y, 0)) * ScaleRatio;
             //if (e.Button == System.Windows.Forms.MouseButtons.Left && Scaling && Selected != null)
             //    Selected.Model.Scale += 2;
         }        
@@ -254,6 +254,14 @@ namespace PhysBox
                 Placing = null;
                 Cursor = Cursors.Default;
                 if (Tools != null && !Tools.IsDisposed) Tools.ActionDone();
+            }
+
+            if (Placing != null)
+            {
+                if (e.KeyCode == Keys.Up)
+                    Placing.Model.Orientation += 5;
+                else if (e.KeyCode == Keys.Down)
+                    Placing.Model.Orientation -= 5;
             }
         }
 
