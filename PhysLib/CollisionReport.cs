@@ -18,7 +18,7 @@ namespace PhysLib
         /// <param name="ObjB">Druhý účastník kolize</param>
         public CollisionReport(SimObject ObjA, SimObject ObjB)
         {
-            mtd = new Vector(3);
+            mtd = Vector.Zero;
 
             A = ObjA;
             B = ObjB;

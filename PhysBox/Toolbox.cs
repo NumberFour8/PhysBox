@@ -78,7 +78,7 @@ namespace PhysBox
 
         private void newObj_Insert_Click(object sender, EventArgs e)
         {
-            if (newobj_Mass.Text.Length == 0)
+            if (newobj_Mass.Text.Length == 0 && !newObj_Static.Checked)
             {
                 MessageBox.Show("Zadejte hmotnost tělesa","Chyba",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                 return;
@@ -90,13 +90,33 @@ namespace PhysBox
                 return;
             }
 
+            if (newobj_Material.SelectedIndex < 0)
+            {
+                MessageBox.Show("Vyberte materiál pro těleso", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             GraphicObject Placing = GraphicObject.LoadFromFile(@"objects\" + newobj_Geometry.SelectedItem.ToString() + ".xml");
 
             if (newObj_AutoName.Checked)
                 Placing.Name = String.Format("object_#{0}", MyOwner.MyWorld.CountObjects);
             else Placing.Name = newObj_Name.Text;
 
-            SimObject MyNewObject = new SimObject(Placing, double.Parse(newobj_Mass.Text) / 1000);
+            Material MyMat = Material.Concrete;
+            switch (newobj_Material.SelectedIndex)
+            {
+                case 1: MyMat = Material.Wood; break;
+                case 2: MyMat = Material.Concrete; break;
+                case 3: MyMat = Material.Steel; break;
+                case 4: MyMat = Material.Rubber; break;
+                default: MyMat = Material.Concrete; break;
+            }
+
+            double MyMass = 0;
+            if (!Double.TryParse(newobj_Mass.Text, out MyMass))
+              MyMass = 1000;
+
+            SimObject MyNewObject = new SimObject(Placing, MyMass/1000, MyMat);
             MyNewObject.Enabled = newObj_Enabled.Checked;
             MyNewObject.Static = newObj_Static.Checked;
 
@@ -111,7 +131,6 @@ namespace PhysBox
             MyOwner.MyWorld.Aether = Double.Parse(env_Aether.Text);
             MyOwner.MyWorld.Gravity = MyOwner.MyWorld.Convert(new Vector(0, -Double.Parse(env_G.Text), 0), ConversionType.MetersToPixels);
             MyOwner.MyWorld.Solver.Enabled = check_Collisions.Checked;
-            MyOwner.MyWorld.Solver.E = Double.Parse(env_Restitution.Text);
             MyOwner.MyWorld.Delta = Double.Parse(env_StepSize.Text) / 1000;
         }
 
@@ -124,7 +143,6 @@ namespace PhysBox
                 env_Resolution.Text = MyOwner.MyWorld.Resolution.ToString();
                 check_Collisions.Checked = MyOwner.MyWorld.Solver.Enabled;
                 env_StepSize.Text = (1000 * MyOwner.MyWorld.Delta).ToString();
-                env_Restitution.Text = MyOwner.MyWorld.Solver.E.ToString();
             }
             else if (tab_Toolbox.SelectedIndex == 2)
                 RefreshObjects();
@@ -170,6 +188,11 @@ namespace PhysBox
         {
             if (MyOwner.Selected != null)
                 MyOwner.Selected.ResetAll();
+        }
+
+        private void newObj_Static_CheckedChanged(object sender, EventArgs e)
+        {
+            newobj_Mass.Enabled = !newObj_Static.Checked;            
         }
 
      }

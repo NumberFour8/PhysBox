@@ -13,38 +13,40 @@ namespace PhysLib
         private Geometry model;
 
         /// <summary>
-        /// Vytvoří těleso s danou geometrií a hmotností
+        /// Vytvoří těleso s danou geometrií,hmotností a materiálem
         /// </summary>
-        /// <param name="gModel">Model tělesa</param>
-        /// <param name="dMass">Hmotnost tělesa</param>
-        public SimObject(Geometry ObjectModel, double ObjectMass)
+        /// <param name="ObjectModel">Model tělesa</param>
+        /// <param name="ObjectMass">Hmotnost tělesa</param>
+        /// <param name="ObjectMaterial">Materiál tělesa</param>
+        public SimObject(Geometry ObjectModel, double ObjectMass, Material ObjectMaterial)
         {
             if (!ObjectModel.GetType().Attributes.HasFlag(System.Reflection.TypeAttributes.Serializable))
                 throw new ArgumentException();
 
             model = ObjectModel;
             Mass = ObjectMass;
-            
-            totalForce = new Vector(3);
-            totalTorque = new Vector(3);
-            LinearVelocity = new Vector(3);
-            AngularVelocity = new Vector(3);
+            OwnMaterial = ObjectMaterial;
+
+            totalForce = Vector.Zero;
+            totalTorque = Vector.Zero;
+            LinearVelocity = Vector.Zero;
+            AngularVelocity = Vector.Zero;
 
             Enabled = true;
             NoTranslations = false;
             Static = false;
+            
 
-            // Předpočítej část momentu setrvačnosti
-            double denom = 0,nom = 0,factor = 0;
+            double denom = 0,num = 0,factor = 0;
             for (int i = 0, j = 0; i < Model.ObjectGeometry.Length; i++)
             {
                 j = (i + 1) % Model.ObjectGeometry.Length;
                 factor = Vector.Pow((Vector)Model.ObjectGeometry[j], 2) + Vector.Dot((Vector)Model.ObjectGeometry[j], (Vector)Model.ObjectGeometry[i]) + Vector.Pow((Vector)Model.ObjectGeometry[i], 2);
-                nom += Vector.Cross(((Vector)Model.ObjectGeometry[j]), ((Vector)Model.ObjectGeometry[i])).Magnitude * factor;
+                num += Vector.Cross(((Vector)Model.ObjectGeometry[j]), ((Vector)Model.ObjectGeometry[i])).Magnitude * factor;
                 denom += Vector.Cross(((Vector)Model.ObjectGeometry[j]), ((Vector)Model.ObjectGeometry[i])).Magnitude;
 
             }
-            J = nom / denom;
+            J = num / denom;
         }
 
         /// <summary>
@@ -52,12 +54,11 @@ namespace PhysLib
         /// </summary>
         public double Mass
         {
-            get { return m; }
+            get { return Static ? Double.PositiveInfinity : m; }
             set
             {
-                if (value > 0)
-                  m = value;
-                else throw new ArgumentException();
+                if (Double.IsInfinity(value) || Double.IsNaN(value) || value <= 0) throw new ArgumentException();
+                m = value;
             }
         }
 
@@ -70,8 +71,7 @@ namespace PhysLib
         {
             get
             {
-                double d = Math.Round(Vector.PointDistance(RotationPoint, COG),1);
-                return (J * m / 6) + m * Math.Pow(d,2);
+                return Static ? Double.PositiveInfinity : (J * m / 6) + m * Math.Pow(Math.Round(Vector.PointDistance(RotationPoint, COG),1),2);
             }
         }
 
@@ -161,7 +161,7 @@ namespace PhysLib
         /// <summary>
         /// Materiálové konstanty tělesa
         /// </summary>
-        public Material ObjectMaterial
+        public Material OwnMaterial
         {
             get;
             set;
@@ -200,7 +200,7 @@ namespace PhysLib
         public Vector GetTorqueIntersection(Vector Force,Vector Origin)
         {
             if (Force.IsNull) return COG;
-            Vector P = new Vector(3);
+            Vector P = Vector.Zero;
             double c = (Force[0] * (RotationPoint[0] - Origin[0]) + Force[1] * (RotationPoint[1] - Origin[1])) / Math.Pow(Force.Magnitude, 2);
 
             P[0] = Origin[0] + Force[0] * c;

@@ -28,54 +28,84 @@
 <a name="l00008"></a>00008     [Serializable]
 <a name="l00009"></a><a class="code" href="struct_phys_lib_1_1_material.html">00009</a>     <span class="keyword">public</span> <span class="keyword">struct </span><a class="code" href="struct_phys_lib_1_1_material.html" title="Reprezentuje materiál.">Material</a>
 <a name="l00010"></a>00010     {
-<a name="l00011"></a>00011         <span class="keyword">private</span> <span class="keywordtype">double</span> density;
-<a name="l00012"></a>00012         <span class="keyword">private</span> <span class="keywordtype">double</span> frictioncoeff;
-<a name="l00013"></a>00013         <span class="keyword">private</span> <span class="keywordtype">double</span> susceptibility;
-<a name="l00014"></a>00014         <span class="keyword">private</span> <span class="keywordtype">string</span> name;
-<a name="l00015"></a>00015 
-<a name="l00023"></a><a class="code" href="struct_phys_lib_1_1_material.html#a26628cb93c50171e9811371adc92f0ed">00023</a>         <span class="keyword">public</span> <a class="code" href="struct_phys_lib_1_1_material.html#a26628cb93c50171e9811371adc92f0ed" title="Výchozí konstruktor materiálu.">Material</a>(<span class="keywordtype">double</span> dDensity, <span class="keywordtype">double</span> dFriction, <span class="keywordtype">double</span> dSusceptibility, <span class="keywordtype">string</span> sName)
-<a name="l00024"></a>00024         {
-<a name="l00025"></a>00025             density = dDensity;
-<a name="l00026"></a>00026             frictioncoeff = dFriction;
-<a name="l00027"></a>00027             susceptibility = dSusceptibility;
-<a name="l00028"></a>00028             name = sName;
-<a name="l00029"></a>00029         }
-<a name="l00030"></a>00030 
-<a name="l00034"></a>00034         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="struct_phys_lib_1_1_material.html#a1da4f66602638374a6e516c6f8fe9d7b" title="Hustota matriálu.">Density</a>
-<a name="l00035"></a><a class="code" href="struct_phys_lib_1_1_material.html#a1da4f66602638374a6e516c6f8fe9d7b">00035</a>         {
-<a name="l00036"></a>00036             <span class="keyword">get</span>
-<a name="l00037"></a>00037             {
-<a name="l00038"></a>00038                 <span class="keywordflow">return</span> density;
-<a name="l00039"></a>00039             }
-<a name="l00040"></a>00040         }
-<a name="l00041"></a>00041 
-<a name="l00045"></a>00045         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="struct_phys_lib_1_1_material.html#a92ff4cb79ecf9c4ab6436e058a70ff5f" title="Součinitel smykového tření.">FrictionCoefficient</a>
-<a name="l00046"></a><a class="code" href="struct_phys_lib_1_1_material.html#a92ff4cb79ecf9c4ab6436e058a70ff5f">00046</a>         {
-<a name="l00047"></a>00047             <span class="keyword">get</span>
-<a name="l00048"></a>00048             {
-<a name="l00049"></a>00049                 <span class="keywordflow">return</span> frictioncoeff;
-<a name="l00050"></a>00050             }
-<a name="l00051"></a>00051         }
-<a name="l00052"></a>00052 
-<a name="l00056"></a>00056         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="struct_phys_lib_1_1_material.html#aae1d625a31bc0d212e0bda1e1a49d6fc" title="Magnetická susceptibilita.">MagneticSusceptibility</a>
-<a name="l00057"></a><a class="code" href="struct_phys_lib_1_1_material.html#aae1d625a31bc0d212e0bda1e1a49d6fc">00057</a>         {
-<a name="l00058"></a>00058             <span class="keyword">get</span>
-<a name="l00059"></a>00059             {
-<a name="l00060"></a>00060                 <span class="keywordflow">return</span> susceptibility;
-<a name="l00061"></a>00061             }
-<a name="l00062"></a>00062         }
-<a name="l00063"></a>00063 
-<a name="l00067"></a>00067         <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code" href="struct_phys_lib_1_1_material.html#a6ed805b3ce457af431b14246d7e94892" title="Název materiálu.">Name</a>
-<a name="l00068"></a><a class="code" href="struct_phys_lib_1_1_material.html#a6ed805b3ce457af431b14246d7e94892">00068</a>         {
-<a name="l00069"></a>00069             <span class="keyword">get</span>
-<a name="l00070"></a>00070             {
-<a name="l00071"></a>00071                 <span class="keywordflow">return</span> name;
-<a name="l00072"></a>00072             }
-<a name="l00073"></a>00073         }
-<a name="l00074"></a>00074     }
-<a name="l00075"></a>00075 }
+<a name="l00011"></a>00011         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="struct_phys_lib_1_1_material.html" title="Reprezentuje materiál.">Material</a> Wood { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="struct_phys_lib_1_1_material.html#ae76d53b3fce885591f7e8cb7f547d025" title="Výchozí konstruktor materiálu.">Material</a>(700, 0.4, 0, 0.15, <span class="stringliteral">&quot;Dřevo&quot;</span>); } }
+<a name="l00012"></a>00012         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="struct_phys_lib_1_1_material.html" title="Reprezentuje materiál.">Material</a> Concrete { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="struct_phys_lib_1_1_material.html#ae76d53b3fce885591f7e8cb7f547d025" title="Výchozí konstruktor materiálu.">Material</a>(2000, 0.65, 0, 0.1, <span class="stringliteral">&quot;Beton&quot;</span>); } }
+<a name="l00013"></a>00013         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="struct_phys_lib_1_1_material.html" title="Reprezentuje materiál.">Material</a> Steel { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="struct_phys_lib_1_1_material.html#ae76d53b3fce885591f7e8cb7f547d025" title="Výchozí konstruktor materiálu.">Material</a>(7300, 0.43, 0.00720, 0.3, <span class="stringliteral">&quot;Ocel&quot;</span>); } }
+<a name="l00014"></a>00014         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="struct_phys_lib_1_1_material.html" title="Reprezentuje materiál.">Material</a> Rubber { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="struct_phys_lib_1_1_material.html#ae76d53b3fce885591f7e8cb7f547d025" title="Výchozí konstruktor materiálu.">Material</a>(1000, 0.7, 0, 0.8, <span class="stringliteral">&quot;Guma&quot;</span>); } } 
+<a name="l00015"></a>00015         
+<a name="l00016"></a>00016         <span class="keyword">private</span> <span class="keywordtype">double</span> density;
+<a name="l00017"></a>00017         <span class="keyword">private</span> <span class="keywordtype">double</span> frictioncoeff;
+<a name="l00018"></a>00018         <span class="keyword">private</span> <span class="keywordtype">double</span> susceptibility;
+<a name="l00019"></a>00019         <span class="keyword">private</span> <span class="keywordtype">double</span> restitution;
+<a name="l00020"></a>00020         <span class="keyword">private</span> <span class="keywordtype">string</span> name;
+<a name="l00021"></a>00021 
+<a name="l00030"></a><a class="code" href="struct_phys_lib_1_1_material.html#ae76d53b3fce885591f7e8cb7f547d025">00030</a>         <span class="keyword">public</span> <a class="code" href="struct_phys_lib_1_1_material.html#ae76d53b3fce885591f7e8cb7f547d025" title="Výchozí konstruktor materiálu.">Material</a>(<span class="keywordtype">double</span> dDensity, <span class="keywordtype">double</span> dFriction, <span class="keywordtype">double</span> dSusceptibility,<span class="keywordtype">double</span> dRestitution, <span class="keywordtype">string</span> sName)
+<a name="l00031"></a>00031         {
+<a name="l00032"></a>00032             density = dDensity;
+<a name="l00033"></a>00033             frictioncoeff = dFriction;
+<a name="l00034"></a>00034             susceptibility = dSusceptibility;
+<a name="l00035"></a>00035             restitution = dRestitution;
+<a name="l00036"></a>00036             name = sName;
+<a name="l00037"></a>00037         }
+<a name="l00038"></a>00038 
+<a name="l00042"></a>00042         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="struct_phys_lib_1_1_material.html#a1da4f66602638374a6e516c6f8fe9d7b" title="Hustota matriálu.">Density</a>
+<a name="l00043"></a><a class="code" href="struct_phys_lib_1_1_material.html#a1da4f66602638374a6e516c6f8fe9d7b">00043</a>         {
+<a name="l00044"></a>00044             <span class="keyword">get</span>
+<a name="l00045"></a>00045             {
+<a name="l00046"></a>00046                 <span class="keywordflow">return</span> density;
+<a name="l00047"></a>00047             }
+<a name="l00048"></a>00048         }
+<a name="l00049"></a>00049 
+<a name="l00053"></a>00053         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="struct_phys_lib_1_1_material.html#a92ff4cb79ecf9c4ab6436e058a70ff5f" title="Součinitel smykového tření.">FrictionCoefficient</a>
+<a name="l00054"></a><a class="code" href="struct_phys_lib_1_1_material.html#a92ff4cb79ecf9c4ab6436e058a70ff5f">00054</a>         {
+<a name="l00055"></a>00055             <span class="keyword">get</span>
+<a name="l00056"></a>00056             {
+<a name="l00057"></a>00057                 <span class="keywordflow">return</span> frictioncoeff;
+<a name="l00058"></a>00058             }
+<a name="l00059"></a>00059         }
+<a name="l00060"></a>00060 
+<a name="l00064"></a>00064         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="struct_phys_lib_1_1_material.html#a1354e80ddb2627add830d591c0f8c4bb" title="Průměrný koeficient restituce.">RestitutionCoefficient</a>
+<a name="l00065"></a><a class="code" href="struct_phys_lib_1_1_material.html#a1354e80ddb2627add830d591c0f8c4bb">00065</a>         {
+<a name="l00066"></a>00066             <span class="keyword">get</span>
+<a name="l00067"></a>00067             {
+<a name="l00068"></a>00068                 <span class="keywordflow">return</span> restitution;
+<a name="l00069"></a>00069             }
+<a name="l00070"></a>00070         }
+<a name="l00071"></a>00071 
+<a name="l00075"></a>00075         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="struct_phys_lib_1_1_material.html#aae1d625a31bc0d212e0bda1e1a49d6fc" title="Magnetická susceptibilita.">MagneticSusceptibility</a>
+<a name="l00076"></a><a class="code" href="struct_phys_lib_1_1_material.html#aae1d625a31bc0d212e0bda1e1a49d6fc">00076</a>         {
+<a name="l00077"></a>00077             <span class="keyword">get</span>
+<a name="l00078"></a>00078             {
+<a name="l00079"></a>00079                 <span class="keywordflow">return</span> susceptibility;
+<a name="l00080"></a>00080             }
+<a name="l00081"></a>00081         }
+<a name="l00082"></a>00082 
+<a name="l00086"></a>00086         <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code" href="struct_phys_lib_1_1_material.html#a6ed805b3ce457af431b14246d7e94892" title="Název materiálu.">Name</a>
+<a name="l00087"></a><a class="code" href="struct_phys_lib_1_1_material.html#a6ed805b3ce457af431b14246d7e94892">00087</a>         {
+<a name="l00088"></a>00088             <span class="keyword">get</span>
+<a name="l00089"></a>00089             {
+<a name="l00090"></a>00090                 <span class="keywordflow">return</span> name;
+<a name="l00091"></a>00091             }
+<a name="l00092"></a>00092         }
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">int</span> GetHashCode()
+<a name="l00095"></a>00095         {
+<a name="l00096"></a>00096             <span class="keywordflow">return</span> base.GetHashCode();
+<a name="l00097"></a>00097         }
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">string</span> ToString()
+<a name="l00100"></a>00100         {
+<a name="l00101"></a>00101             <span class="keywordflow">return</span> base.ToString();
+<a name="l00102"></a>00102         }
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">bool</span> Equals(<span class="keywordtype">object</span> obj)
+<a name="l00105"></a>00105         {
+<a name="l00106"></a>00106             <span class="keywordflow">return</span> base.Equals(obj);
+<a name="l00107"></a>00107         }
+<a name="l00108"></a>00108     }
+<a name="l00109"></a>00109 }
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generováno Sat Dec 25 17:27:09 2010 pro projekt PhysLib programem&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generováno Sun Dec 26 01:21:51 2010 pro projekt PhysLib programem&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

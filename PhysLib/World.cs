@@ -417,8 +417,6 @@ namespace PhysLib
                         foreach (CollisionReport rep in csolve.DetectCollisionsFor(i))
                             csolve.SolveCollision(rep);
 
-                        if (PhysObjs[i].Static) PhysObjs[i].ResetAll();
-
                         if (PhysObjs[i].LinearVelocity.IsNaN)
                             throw new DataMisalignedException("Tuhle vtipnou vyjímku musím chytit, abych zjistil kdy tenhle divnej stav nastává");
 

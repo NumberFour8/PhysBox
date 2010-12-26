@@ -47,8 +47,8 @@ override bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>Equals</b> (
 override int&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetHashCode</b> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#aae77e1545e2ec35ec3225d9aa54e18d9">ToMatrix</a> (MatrixInitType Type)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Převede vektor na matici o jednom řádku/sloupci.  <a href="#aae77e1545e2ec35ec3225d9aa54e18d9"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb353d3b6452c529dcc03872beab3148"></a><!-- doxytag: member="PhysLib::Vector::ToString" ref="afb353d3b6452c529dcc03872beab3148" args="()" -->
-override string&nbsp;</td><td class="memItemRight" valign="bottom"><b>ToString</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">override string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#afb353d3b6452c529dcc03872beab3148">ToString</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Převede vektor na text.  <a href="#afb353d3b6452c529dcc03872beab3148"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Statické veřejné metody</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#acb06a59683e724487174a0e388901fc1">Unit</a> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Udělá z daného vektoru jednotkový vektor ukazující pouze směr.  <a href="#acb06a59683e724487174a0e388901fc1"></a><br/></td></tr>
@@ -61,7 +61,7 @@ override string&nbsp;</td><td class="memItemRight" valign="bottom"><b>ToString</
 <tr><td class="memItemLeft" align="right" valign="top">static double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#a018a610f7eeb01ec7e1350454e9eda12">Angle</a> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> u)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Zjistí úhel, který svírají dva vektory.  <a href="#a018a610f7eeb01ec7e1350454e9eda12"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#a2a64cd020a0c2286e9985607dcf041b9">ToBasis</a> (<a class="el" href="class_phys_lib_1_1_matrix.html">Matrix</a> B, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> A)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Vyjádří daný vektor v bázi zadané vektory ze sloupců dané diagonální matice.  <a href="#a2a64cd020a0c2286e9985607dcf041b9"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Převede daný vektor do báze zadané bázovými vektory jakožto sloupce dané diagonální matice.  <a href="#a2a64cd020a0c2286e9985607dcf041b9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#ab8a6ddfac501f33d43dff9b10fa6789b">Truncate</a> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Usekne desetinnou část všech prvků ve vektoru.  <a href="#ab8a6ddfac501f33d43dff9b10fa6789b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#a1b99dd35bcba6568f3ce115f3a22ea85">Ceiling</a> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v)</td></tr>
@@ -92,27 +92,30 @@ static <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td>
 static <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator/</b> (double k, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9eb31cc4aacd5156a790218f6b0c575"></a><!-- doxytag: member="PhysLib::Vector::operator==" ref="ab9eb31cc4aacd5156a790218f6b0c575" args="(Vector v, Vector u)" -->
 static bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> u)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a96ee5d7504b225e94e56ee1e10f42cd2"></a><!-- doxytag: member="PhysLib::Vector::operator!=" ref="a96ee5d7504b225e94e56ee1e10f42cd2" args="(Vector v1, Vector v2)" -->
-static bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v1, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v2)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a555eb4b327d5cb18ec74a0f2aaadafae"></a><!-- doxytag: member="PhysLib::Vector::operator Vector" ref="a555eb4b327d5cb18ec74a0f2aaadafae" args="(double d)" -->
-static&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator Vector</b> (double d)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7a10e1cc57ff22f3cc35a3351ad7b653"></a><!-- doxytag: member="PhysLib::Vector::operator!=" ref="a7a10e1cc57ff22f3cc35a3351ad7b653" args="(Vector v, Vector u)" -->
+static bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> u)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb544011d0d666fcda6ea21a0828a7a1"></a><!-- doxytag: member="PhysLib::Vector::operator&lt;" ref="adb544011d0d666fcda6ea21a0828a7a1" args="(Vector v, Vector u)" -->
+static bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> u)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac9770e3580b7eaebdf236739d2f843fd"></a><!-- doxytag: member="PhysLib::Vector::operator&gt;" ref="ac9770e3580b7eaebdf236739d2f843fd" args="(Vector v, Vector u)" -->
+static bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator&gt;</b> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> u)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d52cebced9efe8570e62d9b348f10b6"></a><!-- doxytag: member="PhysLib::Vector::operator&lt;=" ref="a6d52cebced9efe8570e62d9b348f10b6" args="(Vector v, Vector u)" -->
+static bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator&lt;=</b> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> u)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e904a215613c54d658ca4fed42bc82b"></a><!-- doxytag: member="PhysLib::Vector::operator&gt;=" ref="a9e904a215613c54d658ca4fed42bc82b" args="(Vector v, Vector u)" -->
+static bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator&gt;=</b> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> u)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab753f1f358ab2806e0adfab7f9d9c520"></a><!-- doxytag: member="PhysLib::Vector::operator Vector" ref="ab753f1f358ab2806e0adfab7f9d9c520" args="(System.Drawing.PointF p)" -->
 static&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator Vector</b> (System.Drawing.PointF p)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aadcfc74a9cb2fe574113b85ca16f3d96"></a><!-- doxytag: member="PhysLib::Vector::operator System.Drawing.PointF" ref="aadcfc74a9cb2fe574113b85ca16f3d96" args="(Vector v)" -->
 static&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator System.Drawing.PointF</b> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa7198af57b0ddc4a5a2fe8121c6237db"></a><!-- doxytag: member="PhysLib::Vector::operator double" ref="aa7198af57b0ddc4a5a2fe8121c6237db" args="(Vector v)" -->
-static&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator double</b> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> v)</td></tr>
 <tr><td colspan="2"><h2>Veřejné atributy</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const uint&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#a084f4169f3d9f70cbb270355c9390974">MaximumVectorElements</a> = 20</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Maximální počet složek vektoru.  <a href="#a084f4169f3d9f70cbb270355c9390974"></a><br/></td></tr>
-<tr><td colspan="2"><h2>Statické veřejné atributy</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static readonly <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#a7f1b9eb4bab34ea42c9535ac7e1bd888">Zero</a> = new <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>(3)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nulový vektor.  <a href="#a7f1b9eb4bab34ea42c9535ac7e1bd888"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Vlastnosti</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf">Count</a><code> [get]</code></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Počet složek ve vektoru.  <a href="#a2c6e7d62aba567b045724c47552ececf"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#a43b3748c7c5ae0e907f27867abf4ea30">IsNaN</a><code> [get]</code></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Zjistí jestli vektor obsahuje nekonečno nebo nedefinovaný výraz.  <a href="#a43b3748c7c5ae0e907f27867abf4ea30"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#af30ca170d65c44c84fd70b5ed32b14cf">Zero</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Nulový vektor o třech složkách.  <a href="#af30ca170d65c44c84fd70b5ed32b14cf"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8">Magnitude</a><code> [get]</code></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Velikost vektoru.  <a href="#ad655f05c2eff8f8c3e5a61e186cdb6a8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_vector.html#ac4107f20ef32a59a5a3645998e783d5e">IsUnit</a><code> [get]</code></td></tr>
@@ -544,7 +547,7 @@ static&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator double</b>
 </div>
 <div class="memdoc">
 
-<p>Vyjádří daný vektor v bázi zadané vektory ze sloupců dané diagonální matice. </p>
+<p>Převede daný vektor do báze zadané bázovými vektory jakožto sloupce dané diagonální matice. </p>
 <dl><dt><b>Parametry:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>B</em>&nbsp;</td><td>Matice báze</td></tr>
@@ -577,7 +580,29 @@ static&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator double</b>
 <p>Převede vektor na matici o jednom řádku/sloupci. </p>
 <dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Matice</dd></dl>
 
-<p>Definice je uvedena na řádku <a class="el" href="_vectors_8cs_source.html#l00415">415</a> v souboru <a class="el" href="_vectors_8cs_source.html">Vectors.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_vectors_8cs_source.html#l00422">422</a> v souboru <a class="el" href="_vectors_8cs_source.html">Vectors.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afb353d3b6452c529dcc03872beab3148"></a><!-- doxytag: member="PhysLib::Vector::ToString" ref="afb353d3b6452c529dcc03872beab3148" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">override string PhysLib.Vector.ToString </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Převede vektor na text. </p>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Zápis vektoru v řádku</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="_vectors_8cs_source.html#l00433">433</a> v souboru <a class="el" href="_vectors_8cs_source.html">Vectors.cs</a>.</p>
 
 </div>
 </div>
@@ -654,23 +679,6 @@ static&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator double</b>
 <p>Maximální počet složek vektoru. </p>
 
 <p>Definice je uvedena na řádku <a class="el" href="_vectors_8cs_source.html#l00016">16</a> v souboru <a class="el" href="_vectors_8cs_source.html">Vectors.cs</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7f1b9eb4bab34ea42c9535ac7e1bd888"></a><!-- doxytag: member="PhysLib::Vector::Zero" ref="a7f1b9eb4bab34ea42c9535ac7e1bd888" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">readonly <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> <a class="el" href="class_phys_lib_1_1_vector.html#a7f1b9eb4bab34ea42c9535ac7e1bd888">PhysLib.Vector.Zero</a> = new <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>(3)<code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Nulový vektor. </p>
-
-<p>Definice je uvedena na řádku <a class="el" href="_vectors_8cs_source.html#l00078">78</a> v souboru <a class="el" href="_vectors_8cs_source.html">Vectors.cs</a>.</p>
 
 </div>
 </div>
@@ -784,11 +792,28 @@ static&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator double</b>
 
 </div>
 </div>
+<a class="anchor" id="af30ca170d65c44c84fd70b5ed32b14cf"></a><!-- doxytag: member="PhysLib::Vector::Zero" ref="af30ca170d65c44c84fd70b5ed32b14cf" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> PhysLib.Vector.Zero<code> [static, get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Nulový vektor o třech složkách. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="_vectors_8cs_source.html#l00078">78</a> v souboru <a class="el" href="_vectors_8cs_source.html">Vectors.cs</a>.</p>
+
+</div>
+</div>
 <hr/>Dokumentace pro tuto třídu byla generována z následujícího souboru:<ul>
 <li>D:/Dev/PhysBox/PhysLib/<a class="el" href="_vectors_8cs_source.html">Vectors.cs</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generováno Sat Dec 25 17:27:09 2010 pro projekt PhysLib programem&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generováno Sun Dec 26 01:21:52 2010 pro projekt PhysLib programem&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

@@ -111,7 +111,7 @@ namespace PhysLib
             set {
                 if (Double.IsNaN(value) || Double.IsInfinity(value)) throw new ArgumentOutOfRangeException();
 
-                if (Math.Abs(value - angle) > 0.05)
+                if (Math.Abs(value - angle) > 0.1)
                 {
                     using (System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix())
                     {

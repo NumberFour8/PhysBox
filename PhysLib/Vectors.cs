@@ -73,9 +73,9 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Nulový vektor
+        /// Nulový vektor o třech složkách
         /// </summary>
-        public static readonly Vector Zero = new Vector(3);
+        public static Vector Zero { get { return new Vector(3); } }
 
         /// <summary>
         /// Velikost vektoru
@@ -199,7 +199,7 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Vyjádří daný vektor v bázi zadané vektory ze sloupců dané diagonální matice
+        /// Převede daný vektor do báze zadané bázovými vektory jakožto sloupce dané diagonální matice
         /// </summary>
         /// <param name="B">Matice báze</param>
         /// <param name="V">Vektor, který se má převést</param>
@@ -224,7 +224,7 @@ namespace PhysLib
         public static Vector Truncate(Vector v)
         {
             Vector Ret = new Vector(v.Count);
-            if (v.IsNull) return new Vector(v.Count);
+            if (v.IsNull) return Ret;
             for (int i = 0; i < v.Count; i++)            
                 Ret[i] = Math.Truncate(v[i]);
             
@@ -240,7 +240,7 @@ namespace PhysLib
         public static Vector Ceiling(Vector v)
         {
             Vector Ret = new Vector(v.Count);
-            if (v.IsNull) return new Vector(v.Count);
+            if (v.IsNull) return Ret;
             for (int i = 0; i < v.Count; i++)
                 Ret[i] = Math.Ceiling(v[i]);
 
@@ -255,7 +255,7 @@ namespace PhysLib
         public static Vector Floor(Vector v)
         {
             Vector Ret = new Vector(v.Count);
-            if (v.IsNull) return new Vector(v.Count);
+            if (v.IsNull) return Ret;
             for (int i = 0; i < v.Count; i++)
                 Ret[i] = Math.Floor(v[i]);
 
@@ -272,7 +272,7 @@ namespace PhysLib
         public static Vector Round(Vector v,int decimals)
         {
             Vector Ret = new Vector(v.Count);
-            if (v.IsNull) return new Vector(v.Count);
+            if (v.IsNull) return Ret;
             for (int i = 0; i < v.Count; i++)
                 Ret[i] = Math.Round(v[i],decimals);
 
@@ -295,7 +295,7 @@ namespace PhysLib
             return Math.Sqrt(ret);
         }
 
-        public static Vector operator +(Vector v, Vector u)
+        public static Vector operator+ (Vector v, Vector u)
         {
             Vector Ret = new Vector(Math.Max(v.Count,u.Count));
             for (int i = 0; i < Ret.Count; i++)
@@ -304,7 +304,7 @@ namespace PhysLib
             return Ret;
         }
 
-        public static Vector operator -(Vector v)
+        public static Vector operator- (Vector v)
         {
             Vector Ret = new Vector(v.Count);
             for (int i = 0; i < v.Count; i++)
@@ -313,7 +313,7 @@ namespace PhysLib
             return Ret;
         }
 
-        public static Vector operator -(Vector v, Vector u)
+        public static Vector operator- (Vector v, Vector u)
         {
             Vector Ret = new Vector(Math.Max(v.Count, u.Count));
             for (int i = 0; i < Ret.Count; i++)
@@ -322,17 +322,17 @@ namespace PhysLib
             return Ret;
         }     
 
-        public static Vector operator *(Vector v, Vector u)
+        public static Vector operator* (Vector v, Vector u)
         {
             return Cross(v, u);
         }
 
-        public static Vector operator *(Vector v,Matrix M)
+        public static Vector operator* (Vector v,Matrix M)
         {            
             return (M * v.ToMatrix(MatrixInitType.VectorsAreColumns)).ToVector();
         }
 
-        public static Vector operator *(Vector v, double k)
+        public static Vector operator* (Vector v, double k)
         {
             Vector Ret = new Vector(v.Count);
             for (int i = 0; i < v.Count; i++)
@@ -341,7 +341,7 @@ namespace PhysLib
             return Ret;
         }
 
-        public static Vector operator *(double k, Vector v)
+        public static Vector operator* (double k, Vector v)
         {
             Vector Ret = new Vector(v.Count);
             for (int i = 0; i < v.Count; i++)
@@ -350,20 +350,19 @@ namespace PhysLib
             return Ret;
         }
 
-        public static Vector operator /(Vector v, double k)
+        public static Vector operator/ (Vector v, double k)
         {
             if (k == 0) throw new DivideByZeroException();
 
             return v*(1/k);
         }
 
-        public static Vector operator /(double k,Vector v)
+        public static Vector operator/ (double k,Vector v)
         {
             throw new InvalidOperationException();
-
         }
 
-        public static bool operator ==(Vector v, Vector u)
+        public static bool operator== (Vector v, Vector u)
         {
             for (int i = 0; i < Math.Max(v.Count, u.Count); i++)
                if (v[i] != u[i]) return false;
@@ -371,26 +370,39 @@ namespace PhysLib
             return true;
         }
 
+        public static bool operator!= (Vector v, Vector u)
+        {
+            return !(v == u);
+        }
+
+        public static bool operator< (Vector v, Vector u)
+        {
+            return v.Magnitude < u.Magnitude;
+        }
+
+        public static bool operator> (Vector v, Vector u)
+        {
+            return v.Magnitude > u.Magnitude;
+        }
+
+        public static bool operator<= (Vector v, Vector u)
+        {
+            return v.Magnitude < u.Magnitude || v == u;
+        }
+
+        public static bool operator>= (Vector v, Vector u)
+        {
+            return v.Magnitude > u.Magnitude || v == u;
+        }
+
         public override bool Equals(object obj)
         {
-            if (obj is Vector)
-                return (Vector)obj == this;
-            else return false;
+            return obj as Vector == this;
         }
 
         public override int GetHashCode()
         {
             return Magnitude.ToString().GetHashCode();
-        }
-
-        public static bool operator !=(Vector v1, Vector v2)
-        {
-            return !(v1 == v2);
-        }
-
-        public static explicit operator Vector(double d)
-        {
-            return new Vector(d, d, d);
         }
 
         public static explicit operator Vector(System.Drawing.PointF p)
@@ -401,11 +413,6 @@ namespace PhysLib
         public static explicit operator System.Drawing.PointF(Vector v)
         {
             return new System.Drawing.PointF((float)v[0],(float)v[1]);
-        }
-
-        public static explicit operator double(Vector v)
-        {
-            return v.Magnitude;
         }
 
         /// <summary>
@@ -419,6 +426,10 @@ namespace PhysLib
             else return new Matrix(Count, 1, t);
         }
 
+        /// <summary>
+        /// Převede vektor na text
+        /// </summary>
+        /// <returns>Zápis vektoru v řádku</returns>
         public override string ToString()
         {
             base.ToString();

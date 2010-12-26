@@ -35,8 +35,6 @@
 <tr><td colspan="2"><h2>Veřejné metody</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">IEnumerable&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_solver.html#aeeb1a408f85dbbd1a1e7943f01f71b3d">DetectCollisionsFor</a> (int ObjectIndex)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sestaví report o kolizích v momentálním stavu systému pro daný objekt.  <a href="#aeeb1a408f85dbbd1a1e7943f01f71b3d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae7297244d8ac3a274ae9c7f61cb19160"></a><!-- doxytag: member="PhysLib::CollisionSolver::SolveCollision_Experimental" ref="ae7297244d8ac3a274ae9c7f61cb19160" args="(CollisionReport Report)" -->
-void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SolveCollision_Experimental</b> (<a class="el" href="class_phys_lib_1_1_collision_report.html">CollisionReport</a> Report)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_solver.html#ac608bd2318416a70a860f29510274951">SolveCollision</a> (<a class="el" href="class_phys_lib_1_1_collision_report.html">CollisionReport</a> Report)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Vyřeší konkrétní kolizi.  <a href="#ac608bd2318416a70a860f29510274951"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Statické veřejné metody</h2></td></tr>
@@ -47,8 +45,6 @@ void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SolveCollision_Experi
 <tr><td colspan="2"><h2>Vlastnosti</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_solver.html#a11437ee4e8c723458526af3ee790d461">Enabled</a><code> [get, set]</code></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indikuje, zda je detekce kolizí zapnuta.  <a href="#a11437ee4e8c723458526af3ee790d461"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_collision_solver.html#a1090bf08890766a24580bd654b8ce324">E</a><code> [get, set]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Koeficient restituce.  <a href="#a1090bf08890766a24580bd654b8ce324"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailní popis</h2>
 <p>Třída pro řešení kolizí. </p>
@@ -74,7 +70,7 @@ void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SolveCollision_Experi
 <p>Sestaví report o kolizích v momentálním stavu systému pro daný objekt. </p>
 <dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Výčet reportů o kolizích</dd></dl>
 
-<p>Definice je uvedena na řádku <a class="el" href="_collision_solver_8cs_source.html#l00112">112</a> v souboru <a class="el" href="_collision_solver_8cs_source.html">CollisionSolver.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_collision_solver_8cs_source.html#l00105">105</a> v souboru <a class="el" href="_collision_solver_8cs_source.html">CollisionSolver.cs</a>.</p>
 
 </div>
 </div>
@@ -113,7 +109,7 @@ void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SolveCollision_Experi
 </dl>
 <dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Hlášení o kolizi nebo null</dd></dl>
 
-<p>Definice je uvedena na řádku <a class="el" href="_collision_solver_8cs_source.html#l00076">76</a> v souboru <a class="el" href="_collision_solver_8cs_source.html">CollisionSolver.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_collision_solver_8cs_source.html#l00069">69</a> v souboru <a class="el" href="_collision_solver_8cs_source.html">CollisionSolver.cs</a>.</p>
 
 </div>
 </div>
@@ -158,13 +154,15 @@ void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SolveCollision_Experi
 <dl><dt><b>Parametry:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>Axis</em>&nbsp;</td><td>Osa oddělení</td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>Object</em>&nbsp;</td><td>Objekt</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>ObjectA</em>&nbsp;</td><td>Objekt A</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>ObjectB</em>&nbsp;</td><td>Objekt B</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>Rep</em>&nbsp;</td><td>Hlášení o kolizi</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>True pokud je odděleno, False pokud nikoliv</dd></dl>
 
-<p>Definice je uvedena na řádku <a class="el" href="_collision_solver_8cs_source.html#l00048">48</a> v souboru <a class="el" href="_collision_solver_8cs_source.html">CollisionSolver.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_collision_solver_8cs_source.html#l00041">41</a> v souboru <a class="el" href="_collision_solver_8cs_source.html">CollisionSolver.cs</a>.</p>
 
 </div>
 </div>
@@ -192,28 +190,11 @@ void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SolveCollision_Experi
   </dd>
 </dl>
 
-<p>Definice je uvedena na řádku <a class="el" href="_collision_solver_8cs_source.html#l00175">175</a> v souboru <a class="el" href="_collision_solver_8cs_source.html">CollisionSolver.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_collision_solver_8cs_source.html#l00168">168</a> v souboru <a class="el" href="_collision_solver_8cs_source.html">CollisionSolver.cs</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Dokumentace k vlastnosti</h2>
-<a class="anchor" id="a1090bf08890766a24580bd654b8ce324"></a><!-- doxytag: member="PhysLib::CollisionSolver::E" ref="a1090bf08890766a24580bd654b8ce324" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double PhysLib.CollisionSolver.E<code> [get, set]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Koeficient restituce. </p>
-
-<p>Definice je uvedena na řádku <a class="el" href="_collision_solver_8cs_source.html#l00038">38</a> v souboru <a class="el" href="_collision_solver_8cs_source.html">CollisionSolver.cs</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a11437ee4e8c723458526af3ee790d461"></a><!-- doxytag: member="PhysLib::CollisionSolver::Enabled" ref="a11437ee4e8c723458526af3ee790d461" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -227,7 +208,7 @@ void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SolveCollision_Experi
 
 <p>Indikuje, zda je detekce kolizí zapnuta. </p>
 
-<p>Definice je uvedena na řádku <a class="el" href="_collision_solver_8cs_source.html#l00030">30</a> v souboru <a class="el" href="_collision_solver_8cs_source.html">CollisionSolver.cs</a>.</p>
+<p>Definice je uvedena na řádku <a class="el" href="_collision_solver_8cs_source.html#l00029">29</a> v souboru <a class="el" href="_collision_solver_8cs_source.html">CollisionSolver.cs</a>.</p>
 
 </div>
 </div>
@@ -235,7 +216,7 @@ void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SolveCollision_Experi
 <li>D:/Dev/PhysBox/PhysLib/<a class="el" href="_collision_solver_8cs_source.html">CollisionSolver.cs</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generováno Sat Dec 25 17:27:09 2010 pro projekt PhysLib programem&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generováno Sun Dec 26 01:21:52 2010 pro projekt PhysLib programem&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

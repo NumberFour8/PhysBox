@@ -20,7 +20,6 @@ namespace PhysLib
         {
             w = Reference;
             Enabled = true;
-            E = 0.5;
         }
 
         /// <summary>
@@ -32,18 +31,12 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Koeficient restituce
-        /// </summary>
-        public double E
-        {
-            get; set;
-        }
-
-        /// <summary>
         /// Zjistí, zda je jedno těleso od druhého odděleno danou osou
         /// </summary>
         /// <param name="Axis">Osa oddělení</param>
-        /// <param name="Object">Objekt</param>
+        /// <param name="ObjectA">Objekt A</param>
+        /// <param name="ObjectB">Objekt B</param>
+        /// <param name="Rep">Hlášení o kolizi</param>
         /// <returns>True pokud je odděleno, False pokud nikoliv</returns>
         public static bool SeparatedByAxis(Vector Axis, Geometry ObjectA, Geometry ObjectB,ref CollisionReport Rep)
         {
@@ -60,7 +53,7 @@ namespace PhysLib
 
             Vector Sep = Axis * (overlap / Vector.Pow(Axis, 2));
 
-            if (Rep.MTD.IsNull || Vector.Pow(Sep, 2) < Vector.Pow(Rep.MTD, 2))
+            if (Rep.MTD.IsNull || Sep.Magnitude < Rep.MTD.Magnitude)
                 Rep.MTD = Sep;
 
             return false;
@@ -120,9 +113,9 @@ namespace PhysLib
             }
         }
 
-        public void SolveCollision_Experimental(CollisionReport Report) // Experimentální!
+        internal void SolveCollision_Experimental(CollisionReport Report) // Experimentální!
         {
-            double cof = 0.3, cor = E;
+            double cof = 0.3, cor = 0.5;
             double C = 1 / (1/Report.A.Mass + 1/Report.B.Mass);
             double AinvM = 1 / Report.A.Mass, BinvM = 1 / Report.B.Mass,AinvI = 1/Report.A.MomentOfInertia,BinvI = 1/Report.B.MomentOfInertia;
 
@@ -174,27 +167,29 @@ namespace PhysLib
         /// <param name="Report">Hlášení o kolizi</param>
         public void SolveCollision(CollisionReport Report)
         {
+            double k = Math.Max(Report.A.OwnMaterial.RestitutionCoefficient,Report.B.OwnMaterial.RestitutionCoefficient);
+            
             Vector AP = ((Vector)Report.Pairs[0].b - Report.A.COG).Perp(), BP = ((Vector)Report.Pairs[0].a - Report.B.COG).Perp();
 
-            Vector RelativeVelo = (Report.A.LinearVelocity + AP*Report.A.AngularVelocity[2]) - (Report.B.LinearVelocity+BP*Report.B.AngularVelocity[2]);
+            Vector RelativeVelo = (Report.A.LinearVelocity + Vector.Cross(AP.Perp(),Report.A.AngularVelocity)) - (Report.B.LinearVelocity + Vector.Cross(BP.Perp(),Report.B.AngularVelocity));
             Vector N = Vector.Unit(Report.MTD);
 
             double C = 1 / (1 / Report.A.Mass + 1 / Report.B.Mass);
             double I = (Math.Pow(Vector.Dot(AP, N), 2) / Report.A.MomentOfInertia) + (Math.Pow(Vector.Dot(BP, N), 2) / Report.B.MomentOfInertia);
 
-            double Num = (-1 - E) * Vector.Dot(RelativeVelo, N);
+            double Num = (-1 - k) * Vector.Dot(RelativeVelo, N);
             double Denom = Vector.Dot(N, N) * ((1 / Report.A.Mass) + (1 / Report.B.Mass)) + I;
             double Impulse_C = Math.Round(Num / Denom,2);
             
-            Report.A.Model.Position += Report.MTD * (1 / Report.A.Mass) * C;
-            Report.B.Model.Position += -Report.MTD * (1 / Report.B.Mass) * C;
+            Report.A.Model.Position += Report.MTD * (1 / Report.A.Mass) * C * (Report.B.Static ? 2 : 1);
+            Report.B.Model.Position += -Report.MTD * (1 / Report.B.Mass) * C * (Report.A.Static ? 2 : 1);
 
             if (Double.IsNaN(Impulse_C)) return;
 
-            Report.A.LinearVelocity += N * (Impulse_C / Report.A.Mass);
+            Report.A.LinearVelocity += Vector.Floor(N * (Impulse_C / Report.A.Mass));
             Report.A.AngularVelocity[2] += Vector.Dot(N, AP) * (Impulse_C / Report.A.MomentOfInertia);            
 
-            Report.B.LinearVelocity -= N * (Impulse_C / Report.B.Mass);
+            Report.B.LinearVelocity -= Vector.Floor(N * (Impulse_C / Report.B.Mass));
             Report.B.AngularVelocity[2] -= Vector.Dot(N, BP) * (Impulse_C / Report.B.MomentOfInertia);
 
             Report.A.Model.RaiseOnCollision(Report);

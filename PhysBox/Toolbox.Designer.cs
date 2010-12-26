@@ -40,7 +40,6 @@
             System.Windows.Forms.Label label6;
             System.Windows.Forms.Label label5;
             System.Windows.Forms.Label label4;
-            System.Windows.Forms.Label label12;
             this.tab_Toolbox = new System.Windows.Forms.TabControl();
             this.tool_newObj = new System.Windows.Forms.TabPage();
             this.newObj_Insert = new System.Windows.Forms.Button();
@@ -80,7 +79,6 @@
             this.list_allObjects = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.env_Restitution = new System.Windows.Forms.MaskedTextBox();
             this.check_Collisions = new System.Windows.Forms.CheckBox();
             this.button_applyEnv = new System.Windows.Forms.Button();
             this.env_StepSize = new System.Windows.Forms.MaskedTextBox();
@@ -99,7 +97,6 @@
             label6 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
-            label12 = new System.Windows.Forms.Label();
             this.tab_Toolbox.SuspendLayout();
             this.tool_newObj.SuspendLayout();
             this.newObj.SuspendLayout();
@@ -225,15 +222,6 @@
             label4.TabIndex = 1;
             label4.Text = "Gravitační zrychlení :";
             // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new System.Drawing.Point(6, 132);
-            label12.Name = "label12";
-            label12.Size = new System.Drawing.Size(103, 13);
-            label12.TabIndex = 15;
-            label12.Text = "Koeficient restituce :";
-            // 
             // tab_Toolbox
             // 
             this.tab_Toolbox.Controls.Add(this.tool_newObj);
@@ -302,6 +290,7 @@
             this.newObj_Static.TabIndex = 11;
             this.newObj_Static.Text = "Statické";
             this.newObj_Static.UseVisualStyleBackColor = true;
+            this.newObj_Static.CheckedChanged += new System.EventHandler(this.newObj_Static_CheckedChanged);
             // 
             // createGeometry
             // 
@@ -350,13 +339,18 @@
             // 
             this.newobj_Material.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.newobj_Material.Enabled = false;
+            this.newobj_Material.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.newobj_Material.FormattingEnabled = true;
+            this.newobj_Material.Items.AddRange(new object[] {
+            "Dřevo",
+            "Beton",
+            "Ocel",
+            "Sklo",
+            "Guma"});
             this.newobj_Material.Location = new System.Drawing.Point(11, 74);
             this.newobj_Material.Name = "newobj_Material";
             this.newobj_Material.Size = new System.Drawing.Size(195, 21);
             this.newobj_Material.TabIndex = 5;
-            this.newobj_Material.Text = "<vyber materiál>";
             // 
             // newobj_Mass
             // 
@@ -374,12 +368,12 @@
             // 
             this.newobj_Geometry.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.newobj_Geometry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.newobj_Geometry.FormattingEnabled = true;
             this.newobj_Geometry.Location = new System.Drawing.Point(11, 19);
             this.newobj_Geometry.Name = "newobj_Geometry";
             this.newobj_Geometry.Size = new System.Drawing.Size(195, 21);
             this.newobj_Geometry.TabIndex = 1;
-            this.newobj_Geometry.Text = "<vyber geometrii>";
             // 
             // tabPage2
             // 
@@ -662,8 +656,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.env_Restitution);
-            this.groupBox1.Controls.Add(label12);
             this.groupBox1.Controls.Add(this.check_Collisions);
             this.groupBox1.Controls.Add(this.button_applyEnv);
             this.groupBox1.Controls.Add(label11);
@@ -684,15 +676,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parametry simulace";
-            // 
-            // env_Restitution
-            // 
-            this.env_Restitution.Location = new System.Drawing.Point(122, 129);
-            this.env_Restitution.Mask = "0.0";
-            this.env_Restitution.Name = "env_Restitution";
-            this.env_Restitution.PromptChar = ' ';
-            this.env_Restitution.Size = new System.Drawing.Size(51, 20);
-            this.env_Restitution.TabIndex = 16;
             // 
             // check_Collisions
             // 
@@ -824,7 +807,6 @@
         public System.Windows.Forms.Label prop_potentialEnergy;
         public System.Windows.Forms.Label prop_rotationalEnergy;
         private System.Windows.Forms.RadioButton radio_rotationalEnergy;
-        private System.Windows.Forms.MaskedTextBox env_Restitution;
         private System.Windows.Forms.Button button_ResetObj;
         private System.Windows.Forms.CheckBox newObj_Static;
     }
