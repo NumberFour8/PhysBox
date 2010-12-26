@@ -119,8 +119,8 @@ namespace PhysLib
             double C = 1 / (1/Report.A.Mass + 1/Report.B.Mass);
             double AinvM = 1 / Report.A.Mass, BinvM = 1 / Report.B.Mass,AinvI = 1/Report.A.MomentOfInertia,BinvI = 1/Report.B.MomentOfInertia;
 
-            Report.A.Model.Position += Report.MTD * (1 / Report.A.Mass) * C;
-            Report.B.Model.Position -= Report.MTD * (1 / Report.B.Mass) * C;           
+            Report.A.Model.Position += Report.MTD * (1 / Report.A.Mass * C);
+            Report.B.Model.Position -= Report.MTD * (1 / Report.B.Mass * C);           
 
             // apply friction impulses at contacts
             Vector pa = (Vector)Report.Pairs[0].a;
@@ -168,21 +168,22 @@ namespace PhysLib
         public void SolveCollision(CollisionReport Report)
         {
             double k = Math.Max(Report.A.OwnMaterial.RestitutionCoefficient,Report.B.OwnMaterial.RestitutionCoefficient);
+            double f = Math.Max(Report.A.OwnMaterial.FrictionCoefficient, Report.B.OwnMaterial.FrictionCoefficient);
             
-            Vector AP = ((Vector)Report.Pairs[0].b - Report.A.COG).Perp(), BP = ((Vector)Report.Pairs[0].a - Report.B.COG).Perp();
+            Vector AP = ((Vector)Report.Pairs[0].a - Report.A.COG).Perp(), BP = ((Vector)Report.Pairs[0].b - Report.B.COG).Perp();
 
             Vector RelativeVelo = (Report.A.LinearVelocity + Vector.Cross(AP.Perp(),Report.A.AngularVelocity)) - (Report.B.LinearVelocity + Vector.Cross(BP.Perp(),Report.B.AngularVelocity));
             Vector N = Vector.Unit(Report.MTD);
 
             double C = 1 / (1 / Report.A.Mass + 1 / Report.B.Mass);
+            
             double I = (Math.Pow(Vector.Dot(AP, N), 2) / Report.A.MomentOfInertia) + (Math.Pow(Vector.Dot(BP, N), 2) / Report.B.MomentOfInertia);
-
             double Num = (-1 - k) * Vector.Dot(RelativeVelo, N);
             double Denom = Vector.Dot(N, N) * ((1 / Report.A.Mass) + (1 / Report.B.Mass)) + I;
             double Impulse_C = Math.Round(Num / Denom,2);
             
-            Report.A.Model.Position += Report.MTD * (1 / Report.A.Mass) * C * (Report.B.Static ? 2 : 1);
-            Report.B.Model.Position += -Report.MTD * (1 / Report.B.Mass) * C * (Report.A.Static ? 2 : 1);
+            Report.A.Model.Position += Report.MTD / Report.A.Mass * C * (Report.B.Static ? 2 : 1);
+            Report.B.Model.Position += -Report.MTD / Report.B.Mass * C * (Report.A.Static ? 2 : 1);
 
             if (Double.IsNaN(Impulse_C)) return;
 
