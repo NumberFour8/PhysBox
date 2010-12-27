@@ -21,7 +21,7 @@ namespace PhysLib
         /// <param name="Values">Jednotlivé složky v novém vektoru</param>
         public Vector(params double[] Values)
         {
-            if (Values.Length > MaximumVectorElements)
+            if (Values.Length > MaximumVectorElements || Values.Length == 0)
                 throw new ArgumentException();
 
             t = new double[Values.Length];
@@ -34,12 +34,23 @@ namespace PhysLib
         /// <param name="Count">Počet složek v novém vektoru inicializované na 0</param>
         public Vector(int Count)
         {
-            if (Count > MaximumVectorElements)
+            if (Count > MaximumVectorElements || Count <= 0)
                 throw new ArgumentException();
 
             t = new double[Count];
             for (int i = 0; i < Count; i++)
                 t[i] = 0;
+        }
+
+        /// <summary>
+        /// Konstruktor vektoru
+        /// </summary>
+        /// <param name="Copy">Vzor pro nový vektor</param>
+        public Vector(Vector Copy)
+        {
+            t = new double[Copy.Count];
+            for (int i = 0; i < Copy.Count; i++)
+                t[i] = Copy[i];
         }
 
         /// <summary>
@@ -419,6 +430,17 @@ namespace PhysLib
         public static explicit operator System.Drawing.PointF(Vector v)
         {
             return new System.Drawing.PointF((float)v[0],(float)v[1]);
+        }
+
+        public static explicit operator double(Vector V)
+        {
+            if (V.Count != 1) throw new InvalidCastException();
+            return V[0];
+        }
+
+        public static explicit operator Vector(double k)
+        {
+            return new Vector(k);
         }
 
         /// <summary>

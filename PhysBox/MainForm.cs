@@ -161,7 +161,7 @@ namespace PhysBox
         {
             Selected = null;
             stat_SelObject.Text = "Žádný vybraný objekt";
-            Tools.objProps.Enabled = false;
+            if (Tools != null && !Tools.IsDisposed)  Tools.objProps.Enabled = false;
         }
 
         public void přemístitSemToolStripMenuItem_Click(object sender, EventArgs e)
@@ -289,6 +289,7 @@ namespace PhysBox
 
         private void menu_restartSim_Click(object sender, EventArgs e)
         {
+            DeselectObject();
             MyWorld.ClearFields();
             MyWorld.ClearObjects();
         }
