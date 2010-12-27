@@ -376,47 +376,46 @@ namespace PhysLib
         /// </summary>
         public void Tick()
         {
-            if (!paused)
+            if (paused) { OnTick(this, null); return; }
+
+            lock (SimLock)
             {
-                lock (SimLock)
+                SimObject[] PhysObjs = (SimObject[])Objs.ToArray(typeof(SimObject));
+                for (int i = 0; i < Objs.Count; i++)
                 {
-                    SimObject[] PhysObjs = (SimObject[])Objs.ToArray(typeof(SimObject));
-                    for (int i = 0; i < Objs.Count; i++)
+                    if (PhysObjs[i].Model.Position.Magnitude > maxRad && PhysObjs[i].Enabled)
                     {
-                        if (PhysObjs[i].Model.Position.Magnitude > maxRad && PhysObjs[i].Enabled)
-                        {
-                            PhysObjs[i].LinearVelocity = PhysObjs[i].AngularVelocity = Vector.Zero;
-                            PhysObjs[i].Enabled = false;
-                            if (DeleteOutOfBounds) Objs.RemoveAt(i);
-                        }
-                        if (!PhysObjs[i].Enabled) continue;
-
-                        foreach (Field f in ForceFields)
-                        {
-                            if (f.Enabled)
-                                PhysObjs[i].ApplyForce(f.GetForce(f, PhysObjs[i]), PhysObjs[i].COG);
-                        }
-
-                        PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity, PhysObjs[i].COG);
-                        PhysObjs[i].ApplyDrag(Aether);
-                        
-                        if (Aether != 0)
-                          PhysObjs[i].TotalTorque -= Vector.Round(20 * PhysObjs[i].AngularVelocity,2);
-                        
-                        if (!PhysObjs[i].NoTranslations)
-                        {
-                            PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
-                            PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * (Delta / PhysObjs[i].Mass);
-                        }
-
-                        PhysObjs[i].Model.Orientation += Math.Round((PhysObjs[i].AngularVelocity[2] * 180 / Math.PI) * Delta, 3);
-                        PhysObjs[i].AngularVelocity   += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);
-
-                        PhysObjs[i].Reset();
-
-                        foreach (CollisionReport rep in csolve.DetectCollisionsFor(i))
-                            csolve.SolveCollision(rep);
+                        PhysObjs[i].LinearVelocity = PhysObjs[i].AngularVelocity = Vector.Zero;
+                        PhysObjs[i].Enabled = false;
+                        if (DeleteOutOfBounds) Objs.RemoveAt(i);
                     }
+                    if (!PhysObjs[i].Enabled) continue;
+
+                    foreach (Field f in ForceFields)
+                    {
+                        if (f.Enabled)
+                            PhysObjs[i].ApplyForce(f.GetForce(f, PhysObjs[i]), PhysObjs[i].COG);
+                    }
+
+                    PhysObjs[i].ApplyForce(PhysObjs[i].Mass * Gravity, PhysObjs[i].COG);
+                    PhysObjs[i].ApplyDrag(Aether);
+                        
+                    if (Aether != 0)
+                        PhysObjs[i].TotalTorque -= Vector.Round(20 * PhysObjs[i].AngularVelocity,2);
+                        
+                    if (!PhysObjs[i].NoTranslations)
+                    {
+                        PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;
+                        PhysObjs[i].LinearVelocity += PhysObjs[i].TotalForce * (Delta / PhysObjs[i].Mass);
+                    }
+
+                    PhysObjs[i].Model.Orientation += Math.Round((PhysObjs[i].AngularVelocity[2] * 180 / Math.PI) * Delta, 3);
+                    PhysObjs[i].AngularVelocity   += PhysObjs[i].TotalTorque * (Delta / PhysObjs[i].MomentOfInertia);
+
+                    PhysObjs[i].Reset();
+
+                    foreach (CollisionReport rep in csolve.DetectCollisionsFor(i))
+                        csolve.SolveCollision(rep);
                 }
             }
 
