@@ -48,6 +48,7 @@ namespace PhysLib
         /// <param name="Copy">Vzor pro nový vektor</param>
         public Vector(Vector Copy)
         {
+            if (Copy == null) throw new ArgumentException();
             t = new double[Copy.Count];
             for (int i = 0; i < Copy.Count; i++)
                 t[i] = Copy[i];
