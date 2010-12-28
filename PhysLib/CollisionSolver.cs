@@ -106,7 +106,7 @@ namespace PhysLib
             if (!Enabled || w.CountObjects < 2) yield break;
             for (int i = 0; i < w.CountObjects; i++)
             {
-                if (i == ObjectIndex) continue;
+                if (i == ObjectIndex || !w[i].Enabled || w[i].Static) continue;
                 CollisionReport rpt = ObjectsCollide(w[ObjectIndex],w[i]);
                 if (rpt != null) yield return rpt;
             }

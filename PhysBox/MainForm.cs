@@ -151,7 +151,12 @@ namespace PhysBox
 
         public void SelectObject(SimObject Obj)
         {
-            if (Selected == null) DeselectObject();
+            if (Obj == null)
+            {
+                DeselectObject();
+                return;
+            }
+
             Selected = Obj;
             stat_SelObject.Text = manipulateObj_Name.Text = String.Format("Objekt: {0}", (Selected.Model as GraphicObject).Name);
             if (Tools != null && !Tools.IsDisposed) Tools.ChangeTool(1);
