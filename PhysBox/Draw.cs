@@ -43,6 +43,18 @@ namespace PhysBox
                     // Je-li třeba vykresli i ohraničující box tělesa
                     if (menu_showBounds.Checked && !obj.Convex)
                       Destination.DrawClosedCurve(Pens.Gray, obj.BoundingBox, 0, FillMode.Alternate);
+
+                    if (menu_showVectors.Checked && !o.Static){
+                        Vector v = o.LinearVelocity/10;
+                        Destination.DrawLine(Pens.DarkOliveGreen, (PointF)o.COG, (PointF)(o.COG+v));
+                        
+                        Vector textPos = new Vector(o.COG); 
+                        textPos[1] += 5*ScaleRatio;
+
+                        Destination.DrawString(String.Format("{0:f2} m/s", MyWorld.Convert(o.LinearVelocity.Magnitude, ConversionType.PixelsToMeters)), new Font(FontFamily.GenericSansSerif, 6 * ScaleRatio), Brushes.DarkOliveGreen, (PointF)textPos);
+                        textPos[1] += 7*ScaleRatio;
+                        Destination.DrawString(String.Format("{0:f2} rad/s", o.AngularVelocity.Magnitude), new Font(FontFamily.GenericSansSerif, 6 * ScaleRatio), Brushes.DarkOrange, (PointF)textPos);
+                    }
                 }
                 else Destination.FillPath(obj.Fill, obj.MakePath()); // Jinak nakresli objekt vyplněný texturou/barvou
             }
