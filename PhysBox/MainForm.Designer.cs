@@ -45,6 +45,7 @@
             this.menu_drawInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_showBounds = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_showVersion = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_showVectors = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_showPhantom = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.menu_pauseSim = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,7 +77,6 @@
             this.simTime = new System.Windows.Forms.Timer(this.components);
             this.saveScene = new System.Windows.Forms.SaveFileDialog();
             this.openScene = new System.Windows.Forms.OpenFileDialog();
-            this.menu_showVectors = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.stavovyRadek.SuspendLayout();
             this.manipulateObj.SuspendLayout();
@@ -225,6 +225,13 @@
             this.menu_showVersion.Name = "menu_showVersion";
             this.menu_showVersion.Size = new System.Drawing.Size(246, 22);
             this.menu_showVersion.Text = "Zobrazit verzi";
+            // 
+            // menu_showVectors
+            // 
+            this.menu_showVectors.CheckOnClick = true;
+            this.menu_showVectors.Name = "menu_showVectors";
+            this.menu_showVectors.Size = new System.Drawing.Size(246, 22);
+            this.menu_showVectors.Text = "Zobrazovat vektory";
             // 
             // menu_showPhantom
             // 
@@ -453,15 +460,9 @@
             // 
             // openScene
             // 
-            this.openScene.Filter = "Soubory SCE|*.sce";
+            this.openScene.DefaultExt = "sce";
+            this.openScene.Filter = "Komprimovaná scéna SCE|*.sce|Nekomprimovaná scéna SC|*.sc";
             this.openScene.InitialDirectory = "scenes";
-            // 
-            // menu_showVectors
-            // 
-            this.menu_showVectors.CheckOnClick = true;
-            this.menu_showVectors.Name = "menu_showVectors";
-            this.menu_showVectors.Size = new System.Drawing.Size(246, 22);
-            this.menu_showVectors.Text = "Zobrazovat vektory";
             // 
             // MainForm
             // 

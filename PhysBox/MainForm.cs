@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 
 using PhysLib;
@@ -34,13 +35,13 @@ namespace PhysBox
         private void RefreshScenes()
         {
             menu_Scenes.DropDownItems.Clear();
-            foreach (string name in from string n in Directory.GetFiles("scenes") where n.Contains(".sce") select Path.GetFileNameWithoutExtension(n))
+            foreach (string name in from string n in Directory.GetFiles("scenes") where n.Contains(".sce") || n.Contains(".sc") select Path.GetFileName(n))
                 menu_Scenes.DropDownItems.Add(new ToolStripMenuItem(name,null,new EventHandler(QuickLoadScene)));
         }
 
         private void QuickLoadScene(object Sender, EventArgs args)
         {
-            LoadScene(@"scenes\" + (Sender as ToolStripMenuItem).Text + ".sce");
+            LoadScene(@"scenes\" + (Sender as ToolStripMenuItem).Text);
         }
 
         private void ShowToolbox()
@@ -336,7 +337,10 @@ namespace PhysBox
             menu_pauseSim.Checked = true;
             if (saveScene.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
 
-            XmlTextWriter Wri = new XmlTextWriter(saveScene.FileName, System.Text.Encoding.UTF8);
+            FileStream Str = new FileStream(saveScene.FileName, FileMode.Create);
+            GZipStream Compress = new GZipStream(Str, CompressionMode.Compress);
+
+            XmlTextWriter Wri = new XmlTextWriter(Compress, System.Text.Encoding.UTF8);
             Wri.Formatting = Formatting.Indented;
             
             Wri.WriteStartDocument();
@@ -358,16 +362,21 @@ namespace PhysBox
             Wri.WriteEndElement();
             Wri.WriteEndDocument();
             Wri.Close();
+            Str.Close();
         }
 
-        private void LoadScene(string Path)
+        private void LoadScene(string Location)
         {
             DeselectObject();
             MyWorld.ClearFields();
             MyWorld.ClearObjects();
             menu_pauseSim.Checked = true;
 
-            XmlTextReader Rdr = new XmlTextReader(Path);
+            FileStream Str = new FileStream(Location, FileMode.Open);
+            Stream Rd = Str;
+            if (Path.GetExtension(Location) == ".sce") Rd = new GZipStream(Str, CompressionMode.Decompress,false);
+
+            XmlTextReader Rdr = new XmlTextReader(Rd);
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter fmt = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             while (Rdr.Read())
             {
@@ -386,6 +395,7 @@ namespace PhysBox
                 else continue;
             }
             Rdr.Close();
+            Rd.Close();
         }
 
         private void menu_LoadScene_Click(object sender, EventArgs e)
