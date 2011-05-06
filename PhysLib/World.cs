@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace PhysLib
 {     
@@ -55,7 +55,8 @@ namespace PhysLib
         /// </summary>
         public static Vector EarthG { get { return new Vector(0, -9.89, 0); } }
 
-        private ArrayList Objs, Fields;
+        private List<SimObject> Objs;
+        private List<Field> Fields;
 
         private Matrix b;
         private double simulationTime, maxRad, r,density;
@@ -75,8 +76,8 @@ namespace PhysLib
         /// <param name="WorldResolution">Počet pixelů který představuje jeden fyzický metr</param>
         public World(Matrix WorldOrientation, Vector WorldGravity, double WorldDiameter, double WorldResolution = 30)
         {
-            Fields = new ArrayList();
-            Objs = new ArrayList();
+            Fields = new List<Field>();
+            Objs = new List<SimObject>();
             lv = new Vector(0, WorldDiameter, 0);
             SimLock = new object();
             csolve = new CollisionSolver(this);
@@ -177,7 +178,7 @@ namespace PhysLib
         /// <returns>Úhel</returns>
         public double OrientationOf(Axes Axis)
         {
-            return Vector.Angle(B.GetRow((int)Axis - 1), Orientation.GetRow((int)Axis - 1));
+            return Vector.Angle(B.GetRowAsVector((int)Axis - 1), Orientation.GetRowAsVector((int)Axis - 1));
         }
 
         /// <summary>
@@ -192,12 +193,12 @@ namespace PhysLib
         /// <summary>
         /// Silová pole
         /// </summary>
-        public Field[] ForceFields { get { return (Field[])Fields.ToArray(typeof(Field)); } }
+        public Field[] ForceFields { get { return Fields.ToArray(); } }
 
         /// <summary>
         /// Všechna tělesa ve světě
         /// </summary>
-        public SimObject[] Objects { get { return (SimObject[])Objs.ToArray(typeof(SimObject)); } }
+        public SimObject[] Objects { get { return Objs.ToArray(); } }
 
 
         /// <summary>
@@ -380,7 +381,7 @@ namespace PhysLib
 
             lock (SimLock)
             {
-                SimObject[] PhysObjs = (SimObject[])Objs.ToArray(typeof(SimObject));
+                SimObject[] PhysObjs = Objs.ToArray();
                 for (int i = 0; i < Objs.Count; i++)
                 {
                     if (PhysObjs[i].Model.Position.Magnitude > maxRad && PhysObjs[i].Enabled)

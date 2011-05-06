@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace PhysLib
 {
@@ -174,6 +174,9 @@ namespace PhysLib
         /// <returns>Výsledek analýzy polygonu</returns>
         public static GeometryDescriptor AnalyzeVertexGroup(PointF[] Vertices)
         {
+            if (Vertices.Length <= 1)
+                throw new ArgumentException();
+
             GeometryDescriptor Description = new GeometryDescriptor(Vertices);
             Description.FrontalArea = PolygonArea(Vertices);
 
@@ -386,7 +389,7 @@ namespace PhysLib
             const double threshold = 1.0E-1;            
             PointF[] supGeom = BoundingBox;
 
-            ArrayList sp = new ArrayList();
+            List<PointF> sp = new List<PointF>();
 
             for (int i = 0; i < supGeom.Length; i++)
             {
@@ -406,7 +409,7 @@ namespace PhysLib
                 }
             }
 
-            return (PointF[])sp.ToArray(typeof(PointF));
+            return sp.ToArray();
         }
 
         internal void RaiseOnCollision(CollisionReport Report)

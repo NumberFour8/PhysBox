@@ -216,6 +216,46 @@ namespace PhysLib
         }
 
         /// <summary>
+        /// Vytvoří rotační matici podle dané osy o daný úhel
+        /// </summary>
+        /// <param name="Angle">Úhel otočení</param>
+        /// <param name="Axis">Osa otočení</param>
+        /// <returns>Transformační matice rotace</returns>
+        public static Matrix RotationAt(double Angle, Vector Axis)
+        {
+            throw new NotImplementedException();    
+        }
+
+        /// <summary>
+        /// Vytvoří translační matici o daný vektor posunutí
+        /// </summary>
+        /// <param name="To">Vektor posunutí</param>
+        /// <returns>Transformační matice translace</returns>
+        public static Matrix Translation(Vector To)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Vytvoří škálovací matici s daným škálovacím faktorem
+        /// </summary>
+        /// <param name="Factor">Škálovací faktor</param>
+        /// <returns>Transformační matice škálování</returns>
+        public static Matrix Scaling(float Factor)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Aplikuje transformaci dané touto maticí na vektory
+        /// </summary>
+        /// <param name="Vectors">Vektory, na které má být aplikována transformace</param>
+        public void TransformVectors(ref Vector[] Vectors)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Transponuje matici danou matici
         /// </summary>
         /// <param name="M">Matice, která se má transponovat</param>
@@ -246,7 +286,7 @@ namespace PhysLib
         /// </summary>
         /// <param name="Row">Souřadnice řádku</param>
         /// <returns>Vektor</returns>
-        public Vector GetRow(int Row)
+        public Vector GetRowAsVector(int Row)
         {
             if (Row >= rows) throw new MatrixException();
 
@@ -263,7 +303,7 @@ namespace PhysLib
         /// </summary>
         /// <param name="Column">Souřadnice sloupce</param>
         /// <returns>Vektor</returns>
-        public Vector GetColumn(int Column)
+        public Vector GetColumnAsVector(int Column)
         {
             if (Column >= cols) throw new MatrixException();
 
@@ -276,7 +316,7 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Získá prvek totálně antisymetrického tenzoru (Levi-Civitův symbol)
+        /// Získá prvek totálně antisymetrického tenzoru (Levi-Civitův)
         /// </summary>
         /// <param name="i">i-tá součadnice</param>
         /// <param name="j">j-tá souřadnice</param>

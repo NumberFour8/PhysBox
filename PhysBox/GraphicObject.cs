@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -72,10 +72,9 @@ namespace PhysBox
         /// <returns>Načtený objekt</returns>
         public static GraphicObject LoadFromFile(string Path)
         {
-            ArrayList points = new ArrayList();
+            List<PointF> points = new List<PointF>();
             float drag = 0, depth = 0, tension = 0, h = 0, w = 0;
             string fill = String.Empty;
-            Guid guid = Guid.Empty;
             PointF COG = new PointF();
             using (XmlTextReader rdr = new XmlTextReader(Path))
             {
@@ -109,7 +108,7 @@ namespace PhysBox
                 }
             }
 
-            GraphicObject Ret = new GraphicObject(fill, (PointF[])points.ToArray(typeof(PointF)), COG);
+            GraphicObject Ret = new GraphicObject(fill, points.ToArray(), COG);
             Ret.Depth = depth;
             Ret.DragCoefficient = drag;
             Ret.Tension = tension;

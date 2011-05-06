@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -12,7 +12,7 @@ namespace PhysBox
 
     public partial class CreateObject : Form
     {
-        private ArrayList pts;
+        private List<PointF> pts;
         private PointF? COG;
         private GeometryDescriptor Desc;        
         private string col;
@@ -21,7 +21,7 @@ namespace PhysBox
         {
             InitializeComponent();
                        
-            pts = new ArrayList();
+            pts = new List<PointF>();
            
             COG = null;
             col = Color.Brown.ToArgb().ToString();
@@ -43,10 +43,17 @@ namespace PhysBox
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
                 COG = e.Location;
-                Desc = Geometry.AnalyzeVertexGroup((PointF[])pts.ToArray(typeof(PointF)));
-
-                label_cCOG.Text = String.Format("Centroid: [{0:f1};{1:f1}]", Desc.Centroid.X, Desc.Centroid.Y);
-                label_COG.Text = String.Format("Určené těžiště: [{0};{1}]", COG.Value.X, COG.Value.Y);
+                try
+                {
+                    Desc = Geometry.AnalyzeVertexGroup(pts.ToArray());
+    
+                    label_cCOG.Text = String.Format("Centroid: [{0:f1};{1:f1}]", Desc.Centroid.X, Desc.Centroid.Y);
+                    label_COG.Text = String.Format("Určené těžiště: [{0};{1}]", COG.Value.X, COG.Value.Y);
+                }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show("Neplatný počet vertexů!");
+                }
             }
             
             text_objName.Enabled = COG != null;
