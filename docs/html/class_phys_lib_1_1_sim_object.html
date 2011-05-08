@@ -7,81 +7,106 @@
 <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<!-- Generováno programem Doxygen 1.6.1 -->
-<div class="navigation" id="top">
-  <div class="tabs">
-    <ul>
-      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+<!-- Generováno programem Doxygen 1.7.4 -->
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PhysLib&#160;<span id="projectnumber">0.2</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hlavní&#160;stránka</span></a></li>
+      <li><a href="namespaces.html"><span>Balíky</span></a></li>
       <li class="current"><a href="annotated.html"><span>Třídy</span></a></li>
       <li><a href="files.html"><span>Soubory</span></a></li>
     </ul>
   </div>
-  <div class="tabs">
-    <ul>
-      <li><a href="annotated.html"><span>Seznam&nbsp;tříd</span></a></li>
-      <li><a href="functions.html"><span>Seznam&nbsp;členů&nbsp;tříd</span></a></li>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Seznam&#160;tříd</span></a></li>
+      <li><a href="functions.html"><span>Seznam&#160;členů&#160;tříd</span></a></li>
     </ul>
   </div>
-  <div class="navpath"><b>PhysLib</b>.<a class="el" href="class_phys_lib_1_1_sim_object.html">SimObject</a>
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><a class="el" href="namespace_phys_lib.html">PhysLib</a>      </li>
+      <li class="navelem"><a class="el" href="class_phys_lib_1_1_sim_object.html">SimObject</a>      </li>
+    </ul>
   </div>
 </div>
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Veřejné metody</a> &#124;
+<a href="#properties">Vlastnosti</a>  </div>
+  <div class="headertitle">
+<div class="title">Dokumentace třídy PhysLib.SimObject</div>  </div>
+</div>
 <div class="contents">
-<h1>Dokumentace třídy PhysLib.SimObject</h1><!-- doxytag: class="PhysLib::SimObject" -->
-<p>Reprezentuje těleso ve fyzikálním světě.  
-<a href="#_details">...</a></p>
+<!-- doxytag: class="PhysLib::SimObject" -->
+<p>Reprezentuje těleso ve fyzikálním světě  
+ <a href="class_phys_lib_1_1_sim_object.html#details">...</a></p>
 
 <p><a href="class_phys_lib_1_1_sim_object-members.html">Seznam všech členů.</a></p>
-<table border="0" cellpadding="0" cellspacing="0">
-<tr><td colspan="2"><h2>Veřejné metody</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a4b6d02af6946907bff5204ac0ec6f11b">SimObject</a> (<a class="el" href="class_phys_lib_1_1_geometry.html">Geometry</a> ObjectModel, double ObjectMass, <a class="el" href="struct_phys_lib_1_1_material.html">Material</a> ObjectMaterial)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Vytvoří těleso s danou geometrií,hmotností a materiálem.  <a href="#a4b6d02af6946907bff5204ac0ec6f11b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a5ff717de4eca507be090b3436c2a22f2">ApplyForce</a> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> Force, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> Origin)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Aplikuje sílu na těleso.  <a href="#a5ff717de4eca507be090b3436c2a22f2"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a332e0cdbcf1ac2d6de1cab5154e93a83">ApplyDrag</a> (double EnvDensity)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Aplikuje na těleso odporovou sílu pohybuje-li se v prostředí o dané hustotě.  <a href="#a332e0cdbcf1ac2d6de1cab5154e93a83"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#ae94585d0d75670d021d4ce0cf5de99db">GetTorqueIntersection</a> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> Force, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> Origin)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Získá bod ve kterém se protíná prodloužený vektor síly a vektor ramene síly.  <a href="#ae94585d0d75670d021d4ce0cf5de99db"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a63831905d95885b1a525c51f8123ee25">Reset</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Zruší všechny síly působící na těleso.  <a href="#a63831905d95885b1a525c51f8123ee25"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a5ff9d1e7de6d07322a65f66aa179aee9">ResetAll</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Zruší všechny síly a zastaví těleso.  <a href="#a5ff9d1e7de6d07322a65f66aa179aee9"></a><br/></td></tr>
-<tr><td colspan="2"><h2>Vlastnosti</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f">Mass</a><code> [get, set]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Hmotnost tělesa.  <a href="#a8b0a9464ade64ba8d4f4c88d0f946c0f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#abebd841b2240bf066ce8f95001981a25">MomentOfInertia</a><code> [get]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Spočítá moment setrvačnosti tělesa v závislosti na rozlišení.  <a href="#abebd841b2240bf066ce8f95001981a25"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d">COG</a><code> [get]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Absolutní souřadnice těžiště tělesa (poloha tělesa).  <a href="#a97d09c95bba2f5cc487c3c30eadb635d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a646da127bcf25da97056d4ef573009cb">TotalForce</a><code> [get, set]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Výslednice všech sil působící na těleso.  <a href="#a646da127bcf25da97056d4ef573009cb"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#ac2e341d9ddfbde5022aaeb5899ca3b0b">TotalTorque</a><code> [get, set]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Výslednice všech točivých momentů působící na těleso.  <a href="#ac2e341d9ddfbde5022aaeb5899ca3b0b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a025d9bd5e25819030ac7d4d31b54a059">Enabled</a><code> [get, set]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indikuje, zda je těleso zapnuté.  <a href="#a025d9bd5e25819030ac7d4d31b54a059"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#ae31b3ac1217d33a21791cef02e0a0810">NoTranslations</a><code> [get, set]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indikuje, zda zakázány lineární translační pohyby tělesa.  <a href="#ae31b3ac1217d33a21791cef02e0a0810"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_geometry.html">Geometry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2">Model</a><code> [get]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Fyzický model tělesa.  <a href="#aafbef38c82477dfcef291ce49fbcd9d2"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a7c087d937d4d2df67d6d3ae66cf11778">RotationPoint</a><code> [get, set]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Absolutní poloha bodu, jímž prochází osa otáčení.  <a href="#a7c087d937d4d2df67d6d3ae66cf11778"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730">LinearVelocity</a><code> [get, set]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Rychlost tělesa.  <a href="#a349d6f14cd31847f16928e3cf3cea730"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc">AngularVelocity</a><code> [get, set]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Úhlová rychlost tělesa.  <a href="#ad84e0ea2b37c0fd3b98e792e3649b1fc"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">object[]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a5e61a98eabd0a7b3ac5e718273686d74">Parameters</a><code> [get, set]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Libovolné parametry.  <a href="#a5e61a98eabd0a7b3ac5e718273686d74"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_phys_lib_1_1_material.html">Material</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#ae1cc6a6d1575f4c3c61f4666b44de568">OwnMaterial</a><code> [get, set]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Materiálové konstanty tělesa.  <a href="#ae1cc6a6d1575f4c3c61f4666b44de568"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#aa7d2adfed844cc23d664dd397a7d451a">Static</a><code> [get, set]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Indikuje, zda je těleso nehybné (např. zeď).  <a href="#aa7d2adfed844cc23d664dd397a7d451a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a30741b3569bd9445559d925fcc3c560d">InitialEnergy</a><code> [get, set]</code></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Potenciální energie tělesa v místě vložení.  <a href="#a30741b3569bd9445559d925fcc3c560d"></a><br/></td></tr>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Veřejné metody</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a4b6d02af6946907bff5204ac0ec6f11b">SimObject</a> (<a class="el" href="class_phys_lib_1_1_geometry.html">Geometry</a> ObjectModel, double ObjectMass, <a class="el" href="struct_phys_lib_1_1_material.html">Material</a> ObjectMaterial)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Vytvoří těleso s danou geometrií,hmotností a materiálem.  <a href="#a4b6d02af6946907bff5204ac0ec6f11b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a5ff717de4eca507be090b3436c2a22f2">ApplyForce</a> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> Force, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> Origin)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Aplikuje sílu na těleso.  <a href="#a5ff717de4eca507be090b3436c2a22f2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a332e0cdbcf1ac2d6de1cab5154e93a83">ApplyDrag</a> (double EnvDensity)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Aplikuje na těleso odporovou sílu pohybuje-li se v prostředí o dané hustotě  <a href="#a332e0cdbcf1ac2d6de1cab5154e93a83"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#ae94585d0d75670d021d4ce0cf5de99db">GetTorqueIntersection</a> (<a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> Force, <a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> Origin)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Získá bod ve kterém se protíná prodloužený vektor síly a vektor ramene síly.  <a href="#ae94585d0d75670d021d4ce0cf5de99db"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a63831905d95885b1a525c51f8123ee25">Reset</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Zruší všechny síly působící na těleso.  <a href="#a63831905d95885b1a525c51f8123ee25"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a5ff9d1e7de6d07322a65f66aa179aee9">ResetAll</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Zruší všechny síly a zastaví těleso.  <a href="#a5ff9d1e7de6d07322a65f66aa179aee9"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="properties"></a>
+Vlastnosti</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a8b0a9464ade64ba8d4f4c88d0f946c0f">Mass</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Hmotnost tělesa.  <a href="#a8b0a9464ade64ba8d4f4c88d0f946c0f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#abebd841b2240bf066ce8f95001981a25">MomentOfInertia</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Spočítá moment setrvačnosti tělesa v závislosti na rozlišení  <a href="#abebd841b2240bf066ce8f95001981a25"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d">COG</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolutní souřadnice těžiště tělesa (poloha tělesa)  <a href="#a97d09c95bba2f5cc487c3c30eadb635d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a646da127bcf25da97056d4ef573009cb">TotalForce</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Výslednice všech sil působící na těleso.  <a href="#a646da127bcf25da97056d4ef573009cb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#ac2e341d9ddfbde5022aaeb5899ca3b0b">TotalTorque</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Výslednice všech točivých momentů působící na těleso.  <a href="#ac2e341d9ddfbde5022aaeb5899ca3b0b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a025d9bd5e25819030ac7d4d31b54a059">Enabled</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Indikuje, zda je těleso zapnuté  <a href="#a025d9bd5e25819030ac7d4d31b54a059"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#ae31b3ac1217d33a21791cef02e0a0810">NoTranslations</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Indikuje, zda zakázány lineární translační pohyby tělesa.  <a href="#ae31b3ac1217d33a21791cef02e0a0810"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_geometry.html">Geometry</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#aafbef38c82477dfcef291ce49fbcd9d2">Model</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Fyzický model tělesa.  <a href="#aafbef38c82477dfcef291ce49fbcd9d2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a7c087d937d4d2df67d6d3ae66cf11778">RotationPoint</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolutní poloha bodu, jímž prochází osa otáčení  <a href="#a7c087d937d4d2df67d6d3ae66cf11778"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730">LinearVelocity</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Rychlost tělesa.  <a href="#a349d6f14cd31847f16928e3cf3cea730"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc">AngularVelocity</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Úhlová rychlost tělesa.  <a href="#ad84e0ea2b37c0fd3b98e792e3649b1fc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">object[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a5e61a98eabd0a7b3ac5e718273686d74">Parameters</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Libovolné parametry.  <a href="#a5e61a98eabd0a7b3ac5e718273686d74"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_phys_lib_1_1_material.html">Material</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#ae1cc6a6d1575f4c3c61f4666b44de568">OwnMaterial</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Materiálové konstanty tělesa.  <a href="#ae1cc6a6d1575f4c3c61f4666b44de568"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#aa7d2adfed844cc23d664dd397a7d451a">Static</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Indikuje, zda je těleso nehybné (např. zeď)  <a href="#aa7d2adfed844cc23d664dd397a7d451a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_phys_lib_1_1_sim_object.html#a30741b3569bd9445559d925fcc3c560d">InitialEnergy</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Potenciální energie tělesa v místě vložení  <a href="#a30741b3569bd9445559d925fcc3c560d"></a><br/></td></tr>
 </table>
-<hr/><a name="_details"></a><h2>Detailní popis</h2>
-<p>Reprezentuje těleso ve fyzikálním světě. </p>
+<hr/><a name="details" id="details"></a><h2>Detailní popis</h2>
+<div class="textblock"><p>Reprezentuje těleso ve fyzikálním světě </p>
 
 <p>Definice je uvedena na řádku <a class="el" href="_sim_object_8cs_source.html#l00009">9</a> v souboru <a class="el" href="_sim_object_8cs_source.html">SimObject.cs</a>.</p>
-<hr/><h2>Dokumentace konstruktoru a destruktoru</h2>
+</div><hr/><h2>Dokumentace konstruktoru a destruktoru</h2>
 <a class="anchor" id="a4b6d02af6946907bff5204ac0ec6f11b"></a><!-- doxytag: member="PhysLib::SimObject::SimObject" ref="a4b6d02af6946907bff5204ac0ec6f11b" args="(Geometry ObjectModel, double ObjectMass, Material ObjectMaterial)" -->
 <div class="memitem">
 <div class="memproto">
@@ -89,25 +114,25 @@
         <tr>
           <td class="memname">PhysLib.SimObject.SimObject </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_geometry.html">Geometry</a>&nbsp;</td>
-          <td class="paramname"> <em>ObjectModel</em>, </td>
+          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_geometry.html">Geometry</a>&#160;</td>
+          <td class="paramname"><em>ObjectModel</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&nbsp;</td>
-          <td class="paramname"> <em>ObjectMass</em>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>ObjectMass</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_phys_lib_1_1_material.html">Material</a>&nbsp;</td>
-          <td class="paramname"> <em>ObjectMaterial</em></td><td>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="struct_phys_lib_1_1_material.html">Material</a>&#160;</td>
+          <td class="paramname"><em>ObjectMaterial</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td><td></td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -115,10 +140,10 @@
 
 <p>Vytvoří těleso s danou geometrií,hmotností a materiálem. </p>
 <dl><dt><b>Parametry:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>ObjectModel</em>&nbsp;</td><td>Model tělesa</td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>ObjectMass</em>&nbsp;</td><td>Hmotnost tělesa</td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>ObjectMaterial</em>&nbsp;</td><td>Materiál tělesa</td></tr>
+  <table class="params">
+    <tr><td class="paramname">ObjectModel</td><td>Model tělesa</td></tr>
+    <tr><td class="paramname">ObjectMass</td><td>Hmotnost tělesa</td></tr>
+    <tr><td class="paramname">ObjectMaterial</td><td>Materiál tělesa</td></tr>
   </table>
   </dd>
 </dl>
@@ -135,19 +160,18 @@
         <tr>
           <td class="memname">void PhysLib.SimObject.ApplyDrag </td>
           <td>(</td>
-          <td class="paramtype">double&nbsp;</td>
-          <td class="paramname"> <em>EnvDensity</em></td>
-          <td>&nbsp;)&nbsp;</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>EnvDensity</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Aplikuje na těleso odporovou sílu pohybuje-li se v prostředí o dané hustotě. </p>
+<p>Aplikuje na těleso odporovou sílu pohybuje-li se v prostředí o dané hustotě </p>
 <dl><dt><b>Parametry:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>EnvDensity</em>&nbsp;</td><td>Hustota prostředí, ve kterém se těleso pohybuje</td></tr>
+  <table class="params">
+    <tr><td class="paramname">EnvDensity</td><td>Hustota prostředí, ve kterém se těleso pohybuje</td></tr>
   </table>
   </dd>
 </dl>
@@ -163,19 +187,19 @@
         <tr>
           <td class="memname">void PhysLib.SimObject.ApplyForce </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td>
-          <td class="paramname"> <em>Force</em>, </td>
+          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>Force</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td>
-          <td class="paramname"> <em>Origin</em></td><td>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>Origin</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td><td></td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -183,9 +207,9 @@
 
 <p>Aplikuje sílu na těleso. </p>
 <dl><dt><b>Parametry:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>Force</em>&nbsp;</td><td>Vektor síly</td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>Origin</em>&nbsp;</td><td>Působiště síly</td></tr>
+  <table class="params">
+    <tr><td class="paramname">Force</td><td>Vektor síly</td></tr>
+    <tr><td class="paramname">Origin</td><td>Působiště síly</td></tr>
   </table>
   </dd>
 </dl>
@@ -201,19 +225,19 @@
         <tr>
           <td class="memname"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a> PhysLib.SimObject.GetTorqueIntersection </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td>
-          <td class="paramname"> <em>Force</em>, </td>
+          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>Force</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&nbsp;</td>
-          <td class="paramname"> <em>Origin</em></td><td>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="class_phys_lib_1_1_vector.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>Origin</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td><td></td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -221,9 +245,9 @@
 
 <p>Získá bod ve kterém se protíná prodloužený vektor síly a vektor ramene síly. </p>
 <dl><dt><b>Parametry:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>Force</em>&nbsp;</td><td>Síla působící na těleso</td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>Origin</em>&nbsp;</td><td>Působiště síly</td></tr>
+  <table class="params">
+    <tr><td class="paramname">Force</td><td>Síla působící na těleso</td></tr>
+    <tr><td class="paramname">Origin</td><td>Působiště síly</td></tr>
   </table>
   </dd>
 </dl>
@@ -240,8 +264,7 @@
         <tr>
           <td class="memname">void PhysLib.SimObject.Reset </td>
           <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -261,8 +284,7 @@
         <tr>
           <td class="memname">void PhysLib.SimObject.ResetAll </td>
           <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -304,7 +326,7 @@
 </div>
 <div class="memdoc">
 
-<p>Absolutní souřadnice těžiště tělesa (poloha tělesa). </p>
+<p>Absolutní souřadnice těžiště tělesa (poloha tělesa) </p>
 
 <p>Definice je uvedena na řádku <a class="el" href="_sim_object_8cs_source.html#l00082">82</a> v souboru <a class="el" href="_sim_object_8cs_source.html">SimObject.cs</a>.</p>
 
@@ -321,7 +343,7 @@
 </div>
 <div class="memdoc">
 
-<p>Indikuje, zda je těleso zapnuté. </p>
+<p>Indikuje, zda je těleso zapnuté </p>
 
 <p>Definice je uvedena na řádku <a class="el" href="_sim_object_8cs_source.html#l00108">108</a> v souboru <a class="el" href="_sim_object_8cs_source.html">SimObject.cs</a>.</p>
 
@@ -338,7 +360,7 @@
 </div>
 <div class="memdoc">
 
-<p>Potenciální energie tělesa v místě vložení. </p>
+<p>Potenciální energie tělesa v místě vložení </p>
 
 <p>Definice je uvedena na řádku <a class="el" href="_sim_object_8cs_source.html#l00247">247</a> v souboru <a class="el" href="_sim_object_8cs_source.html">SimObject.cs</a>.</p>
 
@@ -406,10 +428,10 @@
 </div>
 <div class="memdoc">
 
-<p>Spočítá moment setrvačnosti tělesa v závislosti na rozlišení. </p>
+<p>Spočítá moment setrvačnosti tělesa v závislosti na rozlišení </p>
 <dl><dt><b>Parametry:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>Resolution</em>&nbsp;</td><td>Rozlišení</td></tr>
+  <table class="params">
+    <tr><td class="paramname">Resolution</td><td>Rozlišení</td></tr>
   </table>
   </dd>
 </dl>
@@ -481,7 +503,7 @@
 </div>
 <div class="memdoc">
 
-<p>Absolutní poloha bodu, jímž prochází osa otáčení. </p>
+<p>Absolutní poloha bodu, jímž prochází osa otáčení </p>
 
 <p>Definice je uvedena na řádku <a class="el" href="_sim_object_8cs_source.html#l00132">132</a> v souboru <a class="el" href="_sim_object_8cs_source.html">SimObject.cs</a>.</p>
 
@@ -498,7 +520,7 @@
 </div>
 <div class="memdoc">
 
-<p>Indikuje, zda je těleso nehybné (např. zeď). </p>
+<p>Indikuje, zda je těleso nehybné (např. zeď) </p>
 
 <p>Definice je uvedena na řádku <a class="el" href="_sim_object_8cs_source.html#l00239">239</a> v souboru <a class="el" href="_sim_object_8cs_source.html">SimObject.cs</a>.</p>
 
@@ -539,11 +561,11 @@
 </div>
 </div>
 <hr/>Dokumentace pro tuto třídu byla generována z následujícího souboru:<ul>
-<li>D:/Dev/PhysBox/PhysLib/<a class="el" href="_sim_object_8cs_source.html">SimObject.cs</a></li>
+<li>C:/Documents and Settings/Luc/Desktop/PhysBox/PhysLib/<a class="el" href="_sim_object_8cs_source.html">SimObject.cs</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generováno Tue Dec 28 01:29:59 2010 pro projekt PhysLib programem&nbsp;
+<hr class="footer"/><address class="footer"><small>Generováno ne 8. kvě 2011 17.39:00 pro projekt PhysLib programem&#160;
 <a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
 </html>

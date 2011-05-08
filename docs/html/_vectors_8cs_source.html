@@ -2,382 +2,459 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>PhysLib: Zdrojový soubor D:/Dev/PhysBox/PhysLib/Vectors.cs</title>
+<title>PhysLib: Zdrojový soubor C:/Documents and Settings/Luc/Desktop/PhysBox/PhysLib/Vectors.cs</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<!-- Generováno programem Doxygen 1.6.1 -->
-<div class="navigation" id="top">
-  <div class="tabs">
-    <ul>
-      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+<!-- Generováno programem Doxygen 1.7.4 -->
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PhysLib&#160;<span id="projectnumber">0.2</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hlavní&#160;stránka</span></a></li>
+      <li><a href="namespaces.html"><span>Balíky</span></a></li>
       <li><a href="annotated.html"><span>Třídy</span></a></li>
       <li class="current"><a href="files.html"><span>Soubory</span></a></li>
     </ul>
   </div>
-  <div class="tabs">
-    <ul>
-      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Seznam&#160;souborů</span></a></li>
     </ul>
   </div>
-<h1>D:/Dev/PhysBox/PhysLib/Vectors.cs</h1><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 ﻿using System;
-<a name="l00002"></a>00002 
-<a name="l00003"></a>00003 <span class="keyword">namespace </span>PhysLib
-<a name="l00004"></a>00004 {
-<a name="l00008"></a>00008     [Serializable]
-<a name="l00009"></a><a class="code" href="class_phys_lib_1_1_vector.html">00009</a>     <span class="keyword">public</span> sealed <span class="keyword">class </span><a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>
-<a name="l00010"></a>00010     {
-<a name="l00011"></a>00011         <span class="keyword">private</span> <span class="keywordtype">double</span>[] t;
-<a name="l00012"></a>00012         
-<a name="l00016"></a><a class="code" href="class_phys_lib_1_1_vector.html#a084f4169f3d9f70cbb270355c9390974">00016</a>         <span class="keyword">public</span> <span class="keyword">const</span> uint <a class="code" href="class_phys_lib_1_1_vector.html#a084f4169f3d9f70cbb270355c9390974" title="Maximální počet složek vektoru.">MaximumVectorElements</a> = 20;
-<a name="l00017"></a>00017 
-<a name="l00022"></a><a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3">00022</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(params <span class="keywordtype">double</span>[] Values)
-<a name="l00023"></a>00023         {
-<a name="l00024"></a>00024             <span class="keywordflow">if</span> (Values.Length &gt; <a class="code" href="class_phys_lib_1_1_vector.html#a084f4169f3d9f70cbb270355c9390974" title="Maximální počet složek vektoru.">MaximumVectorElements</a> || Values.Length == 0)
-<a name="l00025"></a>00025                 <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027             t = <span class="keyword">new</span> <span class="keywordtype">double</span>[Values.Length];
-<a name="l00028"></a>00028             t = Values;
-<a name="l00029"></a>00029         }
-<a name="l00030"></a>00030 
-<a name="l00035"></a><a class="code" href="class_phys_lib_1_1_vector.html#a1bf6a666e8be2001ccdf65fff2e0d3fe">00035</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(<span class="keywordtype">int</span> <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>)
-<a name="l00036"></a>00036         {
-<a name="l00037"></a>00037             <span class="keywordflow">if</span> (Count &gt; <a class="code" href="class_phys_lib_1_1_vector.html#a084f4169f3d9f70cbb270355c9390974" title="Maximální počet složek vektoru.">MaximumVectorElements</a> || Count &lt;= 0)
-<a name="l00038"></a>00038                 <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040             t = <span class="keyword">new</span> <span class="keywordtype">double</span>[Count];
-<a name="l00041"></a>00041             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Count; i++)
-<a name="l00042"></a>00042                 t[i] = 0;
-<a name="l00043"></a>00043         }
-<a name="l00044"></a>00044 
-<a name="l00049"></a><a class="code" href="class_phys_lib_1_1_vector.html#a8e4b03c68c7c4979bd6ad14a120835a5">00049</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Copy)
-<a name="l00050"></a>00050         {
-<a name="l00051"></a>00051             <span class="keywordflow">if</span> (Copy == null) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
-<a name="l00052"></a>00052             t = <span class="keyword">new</span> <span class="keywordtype">double</span>[Copy.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>];
-<a name="l00053"></a>00053             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Copy.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>; i++)
-<a name="l00054"></a>00054                 t[i] = Copy[i];
-<a name="l00055"></a>00055         }
-<a name="l00056"></a>00056 
-<a name="l00060"></a>00060         <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>
-<a name="l00061"></a><a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf">00061</a>         {
-<a name="l00062"></a>00062             <span class="keyword">get</span> { <span class="keywordflow">return</span> t.Length; }
-<a name="l00063"></a>00063         }
-<a name="l00064"></a>00064 
-<a name="l00068"></a><a class="code" href="class_phys_lib_1_1_vector.html#af3b198d4029f3119bf79a74b9b7549eb">00068</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_phys_lib_1_1_vector.html#af3b198d4029f3119bf79a74b9b7549eb" title="Vynuluje všechny složky vektoru (vytvoří z něj nulový).">Null</a>()
-<a name="l00069"></a>00069         {
-<a name="l00070"></a>00070             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; t.Length; i++)
-<a name="l00071"></a>00071                 t[i] = 0;
-<a name="l00072"></a>00072         }
-<a name="l00073"></a>00073 
-<a name="l00077"></a>00077         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_vector.html#a43b3748c7c5ae0e907f27867abf4ea30" title="Zjistí jestli vektor obsahuje nekonečno nebo nedefinovaný výraz.">IsNaN</a>
-<a name="l00078"></a><a class="code" href="class_phys_lib_1_1_vector.html#a43b3748c7c5ae0e907f27867abf4ea30">00078</a>         {
-<a name="l00079"></a>00079             <span class="keyword">get</span>
-<a name="l00080"></a>00080             {
-<a name="l00081"></a>00081                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>; i++)
-<a name="l00082"></a>00082                     <span class="keywordflow">if</span> (Double.IsNaN(t[i]) || Double.IsInfinity(t[i])) <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00083"></a>00083                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00084"></a>00084             }
-<a name="l00085"></a>00085         }
-<a name="l00086"></a>00086 
-<a name="l00090"></a><a class="code" href="class_phys_lib_1_1_vector.html#af30ca170d65c44c84fd70b5ed32b14cf">00090</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#af30ca170d65c44c84fd70b5ed32b14cf" title="Nulový vektor o třech složkách.">Zero</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(3); } }
-<a name="l00091"></a>00091 
-<a name="l00095"></a>00095         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>
-<a name="l00096"></a><a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8">00096</a>         {
-<a name="l00097"></a>00097             <span class="keyword">get</span> 
-<a name="l00098"></a>00098             {   
-<a name="l00099"></a>00099                 <span class="keywordtype">double</span> agg = 0;
-<a name="l00100"></a>00100                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; t.Length; i++)
-<a name="l00101"></a>00101                     agg += Math.Pow(t[i], 2);
-<a name="l00102"></a>00102                 <span class="keywordflow">return</span> Math.Sqrt(agg);
-<a name="l00103"></a>00103             }
-<a name="l00104"></a>00104         }
-<a name="l00105"></a>00105 
-<a name="l00109"></a>00109         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_vector.html#ac4107f20ef32a59a5a3645998e783d5e" title="Indikuje, zda je vektor jednotkový.">IsUnit</a>
-<a name="l00110"></a><a class="code" href="class_phys_lib_1_1_vector.html#ac4107f20ef32a59a5a3645998e783d5e">00110</a>         {
-<a name="l00111"></a>00111             <span class="keyword">get</span> { <span class="keywordflow">return</span> <a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a> == 1; }
-<a name="l00112"></a>00112         }
-<a name="l00113"></a>00113 
-<a name="l00117"></a>00117         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový.">IsNull</a>
-<a name="l00118"></a><a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78">00118</a>         {
-<a name="l00119"></a>00119             <span class="keyword">get</span> { <span class="keywordflow">return</span> <a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a> == 0; }
-<a name="l00120"></a>00120         }
-<a name="l00121"></a>00121 
-<a name="l00127"></a>00127         <span class="keyword">public</span> <span class="keywordtype">double</span> <span class="keyword">this</span>[<span class="keywordtype">int</span> index]
-<a name="l00128"></a><a class="code" href="class_phys_lib_1_1_vector.html#a80b7fe2aae79662cb75a721685cd427d">00128</a>         {
-<a name="l00129"></a>00129             <span class="keyword">get</span>
-<a name="l00130"></a>00130             {
-<a name="l00131"></a>00131                 <span class="keywordflow">if</span> (index &gt;= <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>)
-<a name="l00132"></a>00132                     <span class="keywordflow">return</span> 0;
-<a name="l00133"></a>00133                 <span class="keywordflow">else</span> <span class="keywordflow">return</span> t[index]; 
-<a name="l00134"></a>00134             }
-<a name="l00135"></a>00135             <span class="keyword">set</span> { t[index] = value; }
-<a name="l00136"></a>00136         }
-<a name="l00137"></a>00137 
-<a name="l00143"></a><a class="code" href="class_phys_lib_1_1_vector.html#acb06a59683e724487174a0e388901fc1">00143</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#acb06a59683e724487174a0e388901fc1" title="Udělá z daného vektoru jednotkový vektor ukazující pouze směr.">Unit</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v)
-<a name="l00144"></a>00144         {
-<a name="l00145"></a>00145             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový.">IsNull</a>) <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>);
+<div class="header">
+  <div class="headertitle">
+<div class="title">C:/Documents and Settings/Luc/Desktop/PhysBox/PhysLib/Vectors.cs</div>  </div>
+</div>
+<div class="contents">
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 ﻿using System;
+<a name="l00002"></a>00002 <span class="keyword">using</span> System.Collections.Generic;
+<a name="l00003"></a>00003 
+<a name="l00004"></a>00004 <span class="keyword">namespace </span>PhysLib
+<a name="l00005"></a>00005 {
+<a name="l00009"></a>00009     [Serializable]
+<a name="l00010"></a><a class="code" href="class_phys_lib_1_1_vector.html">00010</a>     <span class="keyword">public</span> sealed <span class="keyword">class </span><a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>
+<a name="l00011"></a>00011     {
+<a name="l00012"></a>00012         <span class="keyword">private</span> <span class="keywordtype">double</span>[] t;
+<a name="l00013"></a>00013         
+<a name="l00017"></a><a class="code" href="class_phys_lib_1_1_vector.html#a084f4169f3d9f70cbb270355c9390974">00017</a>         <span class="keyword">public</span> <span class="keyword">const</span> uint <a class="code" href="class_phys_lib_1_1_vector.html#a084f4169f3d9f70cbb270355c9390974" title="Maximální počet složek vektoru.">MaximumVectorElements</a> = 20;
+<a name="l00018"></a>00018 
+<a name="l00023"></a><a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3">00023</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(params <span class="keywordtype">double</span>[] Values)
+<a name="l00024"></a>00024         {
+<a name="l00025"></a>00025             <span class="keywordflow">if</span> (Values.Length &gt; <a class="code" href="class_phys_lib_1_1_vector.html#a084f4169f3d9f70cbb270355c9390974" title="Maximální počet složek vektoru.">MaximumVectorElements</a> || Values.Length == 0)
+<a name="l00026"></a>00026                 <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028             t = <span class="keyword">new</span> <span class="keywordtype">double</span>[Values.Length];
+<a name="l00029"></a>00029             t = Values;
+<a name="l00030"></a>00030         }
+<a name="l00031"></a>00031 
+<a name="l00036"></a><a class="code" href="class_phys_lib_1_1_vector.html#a1bf6a666e8be2001ccdf65fff2e0d3fe">00036</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(<span class="keywordtype">int</span> <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>)
+<a name="l00037"></a>00037         {
+<a name="l00038"></a>00038             <span class="keywordflow">if</span> (Count &gt; <a class="code" href="class_phys_lib_1_1_vector.html#a084f4169f3d9f70cbb270355c9390974" title="Maximální počet složek vektoru.">MaximumVectorElements</a> || Count &lt;= 0)
+<a name="l00039"></a>00039                 <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041             t = <span class="keyword">new</span> <span class="keywordtype">double</span>[<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>];
+<a name="l00042"></a>00042             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>; i++)
+<a name="l00043"></a>00043                 t[i] = 0;
+<a name="l00044"></a>00044         }
+<a name="l00045"></a>00045 
+<a name="l00050"></a><a class="code" href="class_phys_lib_1_1_vector.html#a8e4b03c68c7c4979bd6ad14a120835a5">00050</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Copy)
+<a name="l00051"></a>00051         {
+<a name="l00052"></a>00052             <span class="keywordflow">if</span> (Copy == null) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentNullException();
+<a name="l00053"></a>00053             t = <span class="keyword">new</span> <span class="keywordtype">double</span>[Copy.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>];
+<a name="l00054"></a>00054             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Copy.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>; i++)
+<a name="l00055"></a>00055                 t[i] = Copy[i];
+<a name="l00056"></a>00056         }
+<a name="l00057"></a>00057 
+<a name="l00062"></a><a class="code" href="class_phys_lib_1_1_vector.html#a911261a3293548b391976f1a08338f19">00062</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(System.Drawing.PointF Point)
+<a name="l00063"></a>00063         {
+<a name="l00064"></a>00064             <span class="keywordflow">if</span> (Point == null) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentNullException();
+<a name="l00065"></a>00065             t = <span class="keyword">new</span> <span class="keywordtype">double</span>[2];
+<a name="l00066"></a>00066             t[0] = Point.X; t[1] = Point.Y;
+<a name="l00067"></a>00067         }
+<a name="l00068"></a>00068 
+<a name="l00072"></a>00072         <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>
+<a name="l00073"></a><a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf">00073</a>         {
+<a name="l00074"></a>00074             <span class="keyword">get</span> { <span class="keywordflow">return</span> t.Length; }
+<a name="l00075"></a>00075             <span class="keyword">set</span>
+<a name="l00076"></a>00076             {
+<a name="l00077"></a>00077                 <span class="keywordflow">if</span> (value != t.Length)
+<a name="l00078"></a>00078                 {
+<a name="l00079"></a>00079                     <span class="keywordtype">double</span>[] d = <span class="keyword">new</span> <span class="keywordtype">double</span>[value];
+<a name="l00080"></a>00080                     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; value; i++)
+<a name="l00081"></a>00081                     {
+<a name="l00082"></a>00082                         <span class="keywordflow">if</span> (i &gt;= t.Length) d[i] = 0;
+<a name="l00083"></a>00083                         <span class="keywordflow">else</span> d[i] = t[i];
+<a name="l00084"></a>00084                     }
+<a name="l00085"></a>00085                     t = d;
+<a name="l00086"></a>00086                 }
+<a name="l00087"></a>00087             }
+<a name="l00088"></a>00088         }
+<a name="l00089"></a>00089 
+<a name="l00093"></a><a class="code" href="class_phys_lib_1_1_vector.html#af3b198d4029f3119bf79a74b9b7549eb">00093</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_phys_lib_1_1_vector.html#af3b198d4029f3119bf79a74b9b7549eb" title="Vynuluje všechny složky vektoru (vytvoří z něj nulový)">Null</a>()
+<a name="l00094"></a>00094         {
+<a name="l00095"></a>00095             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; t.Length; i++)
+<a name="l00096"></a>00096                 t[i] = 0;
+<a name="l00097"></a>00097         }
+<a name="l00098"></a>00098 
+<a name="l00102"></a>00102         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_vector.html#a43b3748c7c5ae0e907f27867abf4ea30" title="Zjistí jestli vektor obsahuje nekonečno nebo nedefinovaný výraz.">IsNaN</a>
+<a name="l00103"></a><a class="code" href="class_phys_lib_1_1_vector.html#a43b3748c7c5ae0e907f27867abf4ea30">00103</a>         {
+<a name="l00104"></a>00104             <span class="keyword">get</span>
+<a name="l00105"></a>00105             {
+<a name="l00106"></a>00106                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>; i++)
+<a name="l00107"></a>00107                     <span class="keywordflow">if</span> (Double.IsNaN(t[i]) || Double.IsInfinity(t[i])) <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00108"></a>00108                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00109"></a>00109             }
+<a name="l00110"></a>00110         }
+<a name="l00111"></a>00111 
+<a name="l00115"></a><a class="code" href="class_phys_lib_1_1_vector.html#af30ca170d65c44c84fd70b5ed32b14cf">00115</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#af30ca170d65c44c84fd70b5ed32b14cf" title="Nulový vektor o třech složkách.">Zero</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(3); } }
+<a name="l00116"></a>00116 
+<a name="l00120"></a>00120         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>
+<a name="l00121"></a><a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8">00121</a>         {
+<a name="l00122"></a>00122             <span class="keyword">get</span> 
+<a name="l00123"></a>00123             {   
+<a name="l00124"></a>00124                 <span class="keywordtype">double</span> agg = 0;
+<a name="l00125"></a>00125                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; t.Length; i++)
+<a name="l00126"></a>00126                     agg += Math.Pow(t[i], 2);
+<a name="l00127"></a>00127                 <span class="keywordflow">return</span> Math.Sqrt(agg);
+<a name="l00128"></a>00128             }
+<a name="l00129"></a>00129         }
+<a name="l00130"></a>00130 
+<a name="l00134"></a>00134         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_vector.html#ac4107f20ef32a59a5a3645998e783d5e" title="Indikuje, zda je vektor jednotkový">IsUnit</a>
+<a name="l00135"></a><a class="code" href="class_phys_lib_1_1_vector.html#ac4107f20ef32a59a5a3645998e783d5e">00135</a>         {
+<a name="l00136"></a>00136             <span class="keyword">get</span> { <span class="keywordflow">return</span> <a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a> == 1; }
+<a name="l00137"></a>00137         }
+<a name="l00138"></a>00138 
+<a name="l00142"></a>00142         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový">IsNull</a>
+<a name="l00143"></a><a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78">00143</a>         {
+<a name="l00144"></a>00144             <span class="keyword">get</span> { <span class="keywordflow">return</span> <a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a> == 0; }
+<a name="l00145"></a>00145         }
 <a name="l00146"></a>00146 
-<a name="l00147"></a>00147             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>);
-<a name="l00148"></a>00148             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>;i++)
-<a name="l00149"></a>00149                Ret[i] = v[i]/v.<a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>;
-<a name="l00150"></a>00150 
-<a name="l00151"></a>00151             <span class="keywordflow">return</span> Ret;
-<a name="l00152"></a>00152         }
-<a name="l00153"></a>00153 
-<a name="l00160"></a><a class="code" href="class_phys_lib_1_1_vector.html#acab7fffacc529e6d71bc3f2efec2d2fd">00160</a>         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_vector.html#acab7fffacc529e6d71bc3f2efec2d2fd" title="Provede skalární součin dvou vektorů.">Dot</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> u)
-<a name="l00161"></a>00161         {
-<a name="l00162"></a>00162             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a> != u.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
-<a name="l00163"></a>00163             <span class="keywordtype">double</span> Ret = 0;
-<a name="l00164"></a>00164             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>; i++)
-<a name="l00165"></a>00165                 Ret += v[i] * u[i];
-<a name="l00166"></a>00166             <span class="keywordflow">return</span> Ret;
-<a name="l00167"></a>00167         }
-<a name="l00168"></a>00168 
-<a name="l00173"></a><a class="code" href="class_phys_lib_1_1_vector.html#aed27e9ce4d607f2de9803ded2f57d0cc">00173</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#aed27e9ce4d607f2de9803ded2f57d0cc" title="Vrátí 2D kolmý vektor.">Perp</a>()
-<a name="l00174"></a>00174         {
-<a name="l00175"></a>00175             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(-t[1],t[0],0);
-<a name="l00176"></a>00176         }
-<a name="l00177"></a>00177 
-<a name="l00184"></a><a class="code" href="class_phys_lib_1_1_vector.html#ad61fe2fbc8030da213076b0a922d3df8">00184</a>         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_vector.html#ad61fe2fbc8030da213076b0a922d3df8" title="Spočítá &amp;quot;skalární mocninu&amp;quot; vektoru.">Pow</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v, uint n)
-<a name="l00185"></a>00185         {
-<a name="l00186"></a>00186             <span class="keywordflow">return</span> Math.Pow(v.<a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>, n);
-<a name="l00187"></a>00187         }
-<a name="l00188"></a>00188 
-<a name="l00195"></a><a class="code" href="class_phys_lib_1_1_vector.html#a73d079f3213ad2a12627b1a13ba7192d">00195</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#a73d079f3213ad2a12627b1a13ba7192d" title="Provede vektorový součin dvou vektorů.">Cross</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> u, <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v)
-<a name="l00196"></a>00196         {
-<a name="l00197"></a>00197             <span class="keywordflow">if</span> (u.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a> &gt; 3 || v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a> &gt; 3) <span class="keywordflow">throw</span> <span class="keyword">new</span> NotImplementedException();            
-<a name="l00198"></a>00198             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v[2] * u[1] - v[1] * u[2], v[0] * u[2] - v[2] * u[0], v[1] * u[0] - v[0] * u[1]);
-<a name="l00199"></a>00199         }
-<a name="l00200"></a>00200 
-<a name="l00207"></a><a class="code" href="class_phys_lib_1_1_vector.html#a018a610f7eeb01ec7e1350454e9eda12">00207</a>         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_vector.html#a018a610f7eeb01ec7e1350454e9eda12" title="Zjistí úhel, který svírají dva vektory.">Angle</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> u)
-<a name="l00208"></a>00208         {
-<a name="l00209"></a>00209             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový.">IsNull</a> || u.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový.">IsNull</a>) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
-<a name="l00210"></a>00210             <span class="keywordflow">return</span> Math.Acos(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.Dot(v,u) / (v.<a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a> * u.<a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>));
-<a name="l00211"></a>00211         }
-<a name="l00212"></a>00212 
-<a name="l00219"></a><a class="code" href="class_phys_lib_1_1_vector.html#a2a64cd020a0c2286e9985607dcf041b9">00219</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#a2a64cd020a0c2286e9985607dcf041b9" title="Převede daný vektor do báze zadané bázovými vektory jakožto sloupce dané...">ToBasis</a>(<a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a> B, <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> A)
-<a name="l00220"></a>00220         {
-<a name="l00221"></a>00221             <span class="keywordflow">if</span> (!B.<a class="code" href="class_phys_lib_1_1_matrix.html#a05a68cc4da082ba7a3b64fc2c3ea285d" title="Indikuje zda je daná matice v diagonálním tvaru.">Diagonal</a> || B.<a class="code" href="class_phys_lib_1_1_matrix.html#a392dbd4febf5530d43d22986caa74b86" title="Počet sloupců matice.">Columns</a> != A.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>)
-<a name="l00222"></a>00222                 <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_matrix_exception.html" title="Vyjímka nastávající při operaci s maticí.">MatrixException</a>();
-<a name="l00223"></a>00223 
-<a name="l00224"></a>00224             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(A.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>);
-<a name="l00225"></a>00225             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0, j = 0; i &lt; B.<a class="code" href="class_phys_lib_1_1_matrix.html#a16843ba1338978ac21241a8c2947e011" title="Dimenze matice.">Dimension</a>; i += B.<a class="code" href="class_phys_lib_1_1_matrix.html#a392dbd4febf5530d43d22986caa74b86" title="Počet sloupců matice.">Columns</a> + 1, j++)
-<a name="l00226"></a>00226                 Ret[j] = B[i] * A[j];
-<a name="l00227"></a>00227 
-<a name="l00228"></a>00228             <span class="keywordflow">return</span> Ret;
-<a name="l00229"></a>00229         }
-<a name="l00230"></a>00230 
-<a name="l00236"></a><a class="code" href="class_phys_lib_1_1_vector.html#ab8a6ddfac501f33d43dff9b10fa6789b">00236</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#ab8a6ddfac501f33d43dff9b10fa6789b" title="Usekne desetinnou část všech prvků ve vektoru.">Truncate</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v)
-<a name="l00237"></a>00237         {
-<a name="l00238"></a>00238             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>);
-<a name="l00239"></a>00239             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový.">IsNull</a>) <span class="keywordflow">return</span> Ret;
-<a name="l00240"></a>00240             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>; i++)            
-<a name="l00241"></a>00241                 Ret[i] = Math.<a class="code" href="class_phys_lib_1_1_vector.html#ab8a6ddfac501f33d43dff9b10fa6789b" title="Usekne desetinnou část všech prvků ve vektoru.">Truncate</a>(v[i]);
-<a name="l00242"></a>00242             
-<a name="l00243"></a>00243             <span class="keywordflow">return</span> Ret;
-<a name="l00244"></a>00244         }
-<a name="l00245"></a>00245 
-<a name="l00246"></a>00246 
-<a name="l00252"></a><a class="code" href="class_phys_lib_1_1_vector.html#a1b99dd35bcba6568f3ce115f3a22ea85">00252</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#a1b99dd35bcba6568f3ce115f3a22ea85" title="Převede všechny prvky ve vektoru na jejich horní celé části.">Ceiling</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v)
-<a name="l00253"></a>00253         {
-<a name="l00254"></a>00254             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>);
-<a name="l00255"></a>00255             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový.">IsNull</a>) <span class="keywordflow">return</span> Ret;
-<a name="l00256"></a>00256             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>; i++)
-<a name="l00257"></a>00257                 Ret[i] = Math.<a class="code" href="class_phys_lib_1_1_vector.html#a1b99dd35bcba6568f3ce115f3a22ea85" title="Převede všechny prvky ve vektoru na jejich horní celé části.">Ceiling</a>(v[i]);
-<a name="l00258"></a>00258 
-<a name="l00259"></a>00259             <span class="keywordflow">return</span> Ret;
-<a name="l00260"></a>00260         }
-<a name="l00261"></a>00261         
-<a name="l00267"></a><a class="code" href="class_phys_lib_1_1_vector.html#a9090212c79c10515ac1fb51299d52acb">00267</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#a9090212c79c10515ac1fb51299d52acb" title="Převede všechny prvky ve vektoru na jejich dolní celé části.">Floor</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v)
-<a name="l00268"></a>00268         {
-<a name="l00269"></a>00269             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>);
-<a name="l00270"></a>00270             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový.">IsNull</a>) <span class="keywordflow">return</span> Ret;
-<a name="l00271"></a>00271             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>; i++)
-<a name="l00272"></a>00272                 Ret[i] = Math.<a class="code" href="class_phys_lib_1_1_vector.html#a9090212c79c10515ac1fb51299d52acb" title="Převede všechny prvky ve vektoru na jejich dolní celé části.">Floor</a>(v[i]);
-<a name="l00273"></a>00273 
-<a name="l00274"></a>00274             <span class="keywordflow">return</span> Ret;
-<a name="l00275"></a>00275         }
-<a name="l00276"></a>00276 
-<a name="l00277"></a>00277 
-<a name="l00284"></a><a class="code" href="class_phys_lib_1_1_vector.html#a9fe17303abc37266159211d7e9f6d242">00284</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#a9fe17303abc37266159211d7e9f6d242" title="Zaokrouhlí všechny prvky vektoru s danou přesností.">Round</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v,<span class="keywordtype">int</span> decimals)
-<a name="l00285"></a>00285         {
-<a name="l00286"></a>00286             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>);
-<a name="l00287"></a>00287             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový.">IsNull</a>) <span class="keywordflow">return</span> Ret;
-<a name="l00288"></a>00288             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>; i++)
-<a name="l00289"></a>00289                 Ret[i] = Math.<a class="code" href="class_phys_lib_1_1_vector.html#a9fe17303abc37266159211d7e9f6d242" title="Zaokrouhlí všechny prvky vektoru s danou přesností.">Round</a>(v[i],decimals);
-<a name="l00290"></a>00290 
-<a name="l00291"></a>00291             <span class="keywordflow">return</span> Ret;
-<a name="l00292"></a>00292         }
-<a name="l00293"></a>00293 
-<a name="l00300"></a><a class="code" href="class_phys_lib_1_1_vector.html#affbdf4fb2128038554ba52027a6145fe">00300</a>         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_vector.html#affbdf4fb2128038554ba52027a6145fe" title="Spočítá vzdálenost mezi dvěma body.">PointDistance</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> a, <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> b)
-<a name="l00301"></a>00301         {
-<a name="l00302"></a>00302             <span class="keywordflow">if</span> (a.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a> != b.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
-<a name="l00303"></a>00303             <span class="keywordtype">double</span> ret = 0;
-<a name="l00304"></a>00304             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; a.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>; i++)
-<a name="l00305"></a>00305                 ret += Math.Pow(a[i] - b[i], 2);
-<a name="l00306"></a>00306             
-<a name="l00307"></a>00307             <span class="keywordflow">return</span> Math.Sqrt(ret);
-<a name="l00308"></a>00308         }
-<a name="l00309"></a>00309 
-<a name="l00310"></a>00310         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> operator+ (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> u)
-<a name="l00311"></a>00311         {
-<a name="l00312"></a>00312             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(Math.Max(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>,u.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>));
-<a name="l00313"></a>00313             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Ret.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>; i++)
-<a name="l00314"></a>00314                Ret[i] = v[i]+u[i];
-<a name="l00315"></a>00315             
+<a name="l00152"></a>00152         <span class="keyword">public</span> <span class="keywordtype">double</span> <span class="keyword">this</span>[<span class="keywordtype">int</span> index]
+<a name="l00153"></a><a class="code" href="class_phys_lib_1_1_vector.html#a80b7fe2aae79662cb75a721685cd427d">00153</a>         {
+<a name="l00154"></a>00154             <span class="keyword">get</span>
+<a name="l00155"></a>00155             {
+<a name="l00156"></a>00156                 <span class="keywordflow">if</span> (index &gt;= <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>)
+<a name="l00157"></a>00157                     <span class="keywordflow">return</span> 0;
+<a name="l00158"></a>00158                 <span class="keywordflow">else</span> <span class="keywordflow">return</span> t[index]; 
+<a name="l00159"></a>00159             }
+<a name="l00160"></a>00160             <span class="keyword">set</span> { t[index] = value; }
+<a name="l00161"></a>00161         }
+<a name="l00162"></a>00162 
+<a name="l00168"></a><a class="code" href="class_phys_lib_1_1_vector.html#acb06a59683e724487174a0e388901fc1">00168</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#acb06a59683e724487174a0e388901fc1" title="Udělá z daného vektoru jednotkový vektor ukazující pouze směr.">Unit</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v)
+<a name="l00169"></a>00169         {
+<a name="l00170"></a>00170             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový">IsNull</a>) <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>);
+<a name="l00171"></a>00171 
+<a name="l00172"></a>00172             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>);
+<a name="l00173"></a>00173             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>;i++)
+<a name="l00174"></a>00174                Ret[i] = v[i]/v.<a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>;
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176             <span class="keywordflow">return</span> Ret;
+<a name="l00177"></a>00177         }
+<a name="l00178"></a>00178 
+<a name="l00185"></a><a class="code" href="class_phys_lib_1_1_vector.html#acab7fffacc529e6d71bc3f2efec2d2fd">00185</a>         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_vector.html#acab7fffacc529e6d71bc3f2efec2d2fd" title="Provede skalární součin dvou vektorů">Dot</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> u)
+<a name="l00186"></a>00186         {
+<a name="l00187"></a>00187             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a> != u.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
+<a name="l00188"></a>00188             <span class="keywordtype">double</span> Ret = 0;
+<a name="l00189"></a>00189             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>; i++)
+<a name="l00190"></a>00190                 Ret += v[i] * u[i];
+<a name="l00191"></a>00191             <span class="keywordflow">return</span> Ret;
+<a name="l00192"></a>00192         }
+<a name="l00193"></a>00193 
+<a name="l00198"></a><a class="code" href="class_phys_lib_1_1_vector.html#aed27e9ce4d607f2de9803ded2f57d0cc">00198</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#aed27e9ce4d607f2de9803ded2f57d0cc" title="Vrátí 2D kolmý vektor.">Perp</a>()
+<a name="l00199"></a>00199         {
+<a name="l00200"></a>00200             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(-t[1],t[0],0);
+<a name="l00201"></a>00201         }
+<a name="l00202"></a>00202 
+<a name="l00209"></a><a class="code" href="class_phys_lib_1_1_vector.html#ad61fe2fbc8030da213076b0a922d3df8">00209</a>         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_vector.html#ad61fe2fbc8030da213076b0a922d3df8" title="Spočítá &quot;skalární mocninu&quot; vektoru.">Pow</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v, uint n)
+<a name="l00210"></a>00210         {
+<a name="l00211"></a>00211             <span class="keywordflow">return</span> Math.Pow(v.<a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>, n);
+<a name="l00212"></a>00212         }
+<a name="l00213"></a>00213 
+<a name="l00220"></a><a class="code" href="class_phys_lib_1_1_vector.html#a73d079f3213ad2a12627b1a13ba7192d">00220</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#a73d079f3213ad2a12627b1a13ba7192d" title="Provede vektorový součin dvou vektorů">Cross</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> u, <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v)
+<a name="l00221"></a>00221         {
+<a name="l00222"></a>00222             <span class="keywordflow">if</span> (u.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a> &gt; 3 || v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a> &gt; 3) <span class="keywordflow">throw</span> <span class="keyword">new</span> NotImplementedException();            
+<a name="l00223"></a>00223             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v[2] * u[1] - v[1] * u[2], v[0] * u[2] - v[2] * u[0], v[1] * u[0] - v[0] * u[1]);
+<a name="l00224"></a>00224         }
+<a name="l00225"></a>00225 
+<a name="l00232"></a><a class="code" href="class_phys_lib_1_1_vector.html#a018a610f7eeb01ec7e1350454e9eda12">00232</a>         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_vector.html#a018a610f7eeb01ec7e1350454e9eda12" title="Zjistí úhel, který svírají dva vektory.">Angle</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> u)
+<a name="l00233"></a>00233         {
+<a name="l00234"></a>00234             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový">IsNull</a> || u.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový">IsNull</a>) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
+<a name="l00235"></a>00235             <span class="keywordflow">return</span> Math.Acos(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="class_phys_lib_1_1_vector.html#acab7fffacc529e6d71bc3f2efec2d2fd" title="Provede skalární součin dvou vektorů">Dot</a>(v,u) / (v.<a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a> * u.<a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>));
+<a name="l00236"></a>00236         }
+<a name="l00237"></a>00237 
+<a name="l00244"></a><a class="code" href="class_phys_lib_1_1_vector.html#a2a64cd020a0c2286e9985607dcf041b9">00244</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#a2a64cd020a0c2286e9985607dcf041b9" title="Převede daný vektor do báze zadané bázovými vektory jakožto sloupce dané diagonální matice...">ToBasis</a>(<a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a> B, <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> A)
+<a name="l00245"></a>00245         {
+<a name="l00246"></a>00246             <span class="keywordflow">if</span> (!B.<a class="code" href="class_phys_lib_1_1_matrix.html#a05a68cc4da082ba7a3b64fc2c3ea285d" title="Indikuje zda je daná čtvercová matice diagonální">Diagonal</a> || B.<a class="code" href="class_phys_lib_1_1_matrix.html#a392dbd4febf5530d43d22986caa74b86" title="Počet sloupců matice.">Columns</a> != A.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>)
+<a name="l00247"></a>00247                 <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_matrix_exception.html" title="Vyjímka nastávající při operaci s maticí">MatrixException</a>();
+<a name="l00248"></a>00248 
+<a name="l00249"></a>00249             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(A.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>);
+<a name="l00250"></a>00250             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0, j = 0; i &lt; B.<a class="code" href="class_phys_lib_1_1_matrix.html#a16843ba1338978ac21241a8c2947e011" title="Dimenze matice.">Dimension</a>; i += B.<a class="code" href="class_phys_lib_1_1_matrix.html#a392dbd4febf5530d43d22986caa74b86" title="Počet sloupců matice.">Columns</a> + 1, j++)
+<a name="l00251"></a>00251                 Ret[j] = B[i] * A[j];
+<a name="l00252"></a>00252 
+<a name="l00253"></a>00253             <span class="keywordflow">return</span> Ret;
+<a name="l00254"></a>00254         }
+<a name="l00255"></a>00255 
+<a name="l00261"></a><a class="code" href="class_phys_lib_1_1_vector.html#ab8a6ddfac501f33d43dff9b10fa6789b">00261</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#ab8a6ddfac501f33d43dff9b10fa6789b" title="Usekne desetinnou část všech prvků ve vektoru.">Truncate</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v)
+<a name="l00262"></a>00262         {
+<a name="l00263"></a>00263             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>);
+<a name="l00264"></a>00264             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový">IsNull</a>) <span class="keywordflow">return</span> Ret;
+<a name="l00265"></a>00265             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>; i++)            
+<a name="l00266"></a>00266                 Ret[i] = Math.<a class="code" href="class_phys_lib_1_1_vector.html#ab8a6ddfac501f33d43dff9b10fa6789b" title="Usekne desetinnou část všech prvků ve vektoru.">Truncate</a>(v[i]);
+<a name="l00267"></a>00267             
+<a name="l00268"></a>00268             <span class="keywordflow">return</span> Ret;
+<a name="l00269"></a>00269         }
+<a name="l00270"></a>00270 
+<a name="l00271"></a>00271 
+<a name="l00277"></a><a class="code" href="class_phys_lib_1_1_vector.html#a1b99dd35bcba6568f3ce115f3a22ea85">00277</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#a1b99dd35bcba6568f3ce115f3a22ea85" title="Převede všechny prvky ve vektoru na jejich horní celé části.">Ceiling</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v)
+<a name="l00278"></a>00278         {
+<a name="l00279"></a>00279             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>);
+<a name="l00280"></a>00280             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový">IsNull</a>) <span class="keywordflow">return</span> Ret;
+<a name="l00281"></a>00281             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>; i++)
+<a name="l00282"></a>00282                 Ret[i] = Math.<a class="code" href="class_phys_lib_1_1_vector.html#a1b99dd35bcba6568f3ce115f3a22ea85" title="Převede všechny prvky ve vektoru na jejich horní celé části.">Ceiling</a>(v[i]);
+<a name="l00283"></a>00283 
+<a name="l00284"></a>00284             <span class="keywordflow">return</span> Ret;
+<a name="l00285"></a>00285         }
+<a name="l00286"></a>00286         
+<a name="l00292"></a><a class="code" href="class_phys_lib_1_1_vector.html#a9090212c79c10515ac1fb51299d52acb">00292</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#a9090212c79c10515ac1fb51299d52acb" title="Převede všechny prvky ve vektoru na jejich dolní celé části.">Floor</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v)
+<a name="l00293"></a>00293         {
+<a name="l00294"></a>00294             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>);
+<a name="l00295"></a>00295             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový">IsNull</a>) <span class="keywordflow">return</span> Ret;
+<a name="l00296"></a>00296             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>; i++)
+<a name="l00297"></a>00297                 Ret[i] = Math.<a class="code" href="class_phys_lib_1_1_vector.html#a9090212c79c10515ac1fb51299d52acb" title="Převede všechny prvky ve vektoru na jejich dolní celé části.">Floor</a>(v[i]);
+<a name="l00298"></a>00298 
+<a name="l00299"></a>00299             <span class="keywordflow">return</span> Ret;
+<a name="l00300"></a>00300         }
+<a name="l00301"></a>00301 
+<a name="l00302"></a>00302 
+<a name="l00309"></a><a class="code" href="class_phys_lib_1_1_vector.html#a9fe17303abc37266159211d7e9f6d242">00309</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_vector.html#a9fe17303abc37266159211d7e9f6d242" title="Zaokrouhlí všechny prvky vektoru s danou přesností">Round</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v,<span class="keywordtype">int</span> decimals)
+<a name="l00310"></a>00310         {
+<a name="l00311"></a>00311             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>);
+<a name="l00312"></a>00312             <span class="keywordflow">if</span> (v.<a class="code" href="class_phys_lib_1_1_vector.html#a286da80523dcd9123c251fa0103f3c78" title="Indikuje, zda je vektor nulový">IsNull</a>) <span class="keywordflow">return</span> Ret;
+<a name="l00313"></a>00313             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>; i++)
+<a name="l00314"></a>00314                 Ret[i] = Math.<a class="code" href="class_phys_lib_1_1_vector.html#a9fe17303abc37266159211d7e9f6d242" title="Zaokrouhlí všechny prvky vektoru s danou přesností">Round</a>(v[i],decimals);
+<a name="l00315"></a>00315 
 <a name="l00316"></a>00316             <span class="keywordflow">return</span> Ret;
 <a name="l00317"></a>00317         }
 <a name="l00318"></a>00318 
-<a name="l00319"></a>00319         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator- (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v)
-<a name="l00320"></a>00320         {
-<a name="l00321"></a>00321             <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.Count);
-<a name="l00322"></a>00322             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.Count; i++)
-<a name="l00323"></a>00323                 Ret[i] = -v[i];
-<a name="l00324"></a>00324             
-<a name="l00325"></a>00325             <span class="keywordflow">return</span> Ret;
-<a name="l00326"></a>00326         }
-<a name="l00327"></a>00327 
-<a name="l00328"></a>00328         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator- (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
-<a name="l00329"></a>00329         {
-<a name="l00330"></a>00330             <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(Math.Max(v.Count, u.Count));
-<a name="l00331"></a>00331             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Ret.Count; i++)
-<a name="l00332"></a>00332                 Ret[i] = v[i] - u[i];
-<a name="l00333"></a>00333 
-<a name="l00334"></a>00334             <span class="keywordflow">return</span> Ret;
-<a name="l00335"></a>00335         }     
-<a name="l00336"></a>00336 
-<a name="l00337"></a>00337         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator* (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
-<a name="l00338"></a>00338         {
-<a name="l00339"></a>00339             <span class="keywordflow">return</span> <a class="code" href="class_phys_lib_1_1_vector.html#a73d079f3213ad2a12627b1a13ba7192d" title="Provede vektorový součin dvou vektorů.">Cross</a>(v, u);
-<a name="l00340"></a>00340         }
-<a name="l00341"></a>00341 
-<a name="l00342"></a>00342         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator* (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v,Matrix M)
-<a name="l00343"></a>00343         {            
-<a name="l00344"></a>00344             <span class="keywordflow">return</span> (M * v.ToMatrix(MatrixInitType.VectorsAreColumns)).ToVector();
-<a name="l00345"></a>00345         }
-<a name="l00346"></a>00346 
-<a name="l00347"></a>00347         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator* (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <span class="keywordtype">double</span> k)
-<a name="l00348"></a>00348         {
-<a name="l00349"></a>00349             <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.Count);
-<a name="l00350"></a>00350             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.Count; i++)
-<a name="l00351"></a>00351                 Ret[i] = v[i]*k;
-<a name="l00352"></a>00352             
-<a name="l00353"></a>00353             <span class="keywordflow">return</span> Ret;
-<a name="l00354"></a>00354         }
-<a name="l00355"></a>00355 
-<a name="l00356"></a>00356         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator* (<span class="keywordtype">double</span> k, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v)
-<a name="l00357"></a>00357         {
-<a name="l00358"></a>00358             <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.Count);
-<a name="l00359"></a>00359             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.Count; i++)
-<a name="l00360"></a>00360                 Ret[i] = v[i] * k;
+<a name="l00325"></a><a class="code" href="class_phys_lib_1_1_vector.html#affbdf4fb2128038554ba52027a6145fe">00325</a>         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="class_phys_lib_1_1_vector.html#affbdf4fb2128038554ba52027a6145fe" title="Spočítá vzdálenost mezi dvěma body.">PointDistance</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> a, <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> b)
+<a name="l00326"></a>00326         {
+<a name="l00327"></a>00327             <span class="keywordflow">if</span> (a.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a> != b.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
+<a name="l00328"></a>00328             <span class="keywordtype">double</span> ret = 0;
+<a name="l00329"></a>00329             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; a.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>; i++)
+<a name="l00330"></a>00330                 ret += Math.Pow(a[i] - b[i], 2);
+<a name="l00331"></a>00331             
+<a name="l00332"></a>00332             <span class="keywordflow">return</span> Math.Sqrt(ret);
+<a name="l00333"></a>00333         }
+<a name="l00334"></a>00334 
+<a name="l00335"></a>00335         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> operator+ (<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> u)
+<a name="l00336"></a>00336         {
+<a name="l00337"></a>00337             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(Math.Max(v.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>,u.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>));
+<a name="l00338"></a>00338             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Ret.<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>; i++)
+<a name="l00339"></a>00339                Ret[i] = v[i]+u[i];
+<a name="l00340"></a>00340             
+<a name="l00341"></a>00341             <span class="keywordflow">return</span> Ret;
+<a name="l00342"></a>00342         }
+<a name="l00343"></a>00343 
+<a name="l00344"></a>00344         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator- (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v)
+<a name="l00345"></a>00345         {
+<a name="l00346"></a>00346             <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.Count);
+<a name="l00347"></a>00347             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.Count; i++)
+<a name="l00348"></a>00348                 Ret[i] = -v[i];
+<a name="l00349"></a>00349             
+<a name="l00350"></a>00350             <span class="keywordflow">return</span> Ret;
+<a name="l00351"></a>00351         }
+<a name="l00352"></a>00352 
+<a name="l00353"></a>00353         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator- (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
+<a name="l00354"></a>00354         {
+<a name="l00355"></a>00355             <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(Math.Max(v.Count, u.Count));
+<a name="l00356"></a>00356             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Ret.Count; i++)
+<a name="l00357"></a>00357                 Ret[i] = v[i] - u[i];
+<a name="l00358"></a>00358 
+<a name="l00359"></a>00359             <span class="keywordflow">return</span> Ret;
+<a name="l00360"></a>00360         }     
 <a name="l00361"></a>00361 
-<a name="l00362"></a>00362             <span class="keywordflow">return</span> Ret;
-<a name="l00363"></a>00363         }
-<a name="l00364"></a>00364 
-<a name="l00365"></a>00365         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator/ (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <span class="keywordtype">double</span> k)
-<a name="l00366"></a>00366         {
-<a name="l00367"></a>00367             <span class="keywordflow">if</span> (k == 0) <span class="keywordflow">throw</span> <span class="keyword">new</span> DivideByZeroException();
-<a name="l00368"></a>00368 
-<a name="l00369"></a>00369             <span class="keywordflow">return</span> v*(1/k);
+<a name="l00362"></a>00362         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator* (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
+<a name="l00363"></a>00363         {
+<a name="l00364"></a>00364             <span class="keywordflow">return</span> <a class="code" href="class_phys_lib_1_1_vector.html#a73d079f3213ad2a12627b1a13ba7192d" title="Provede vektorový součin dvou vektorů">Cross</a>(v, u);
+<a name="l00365"></a>00365         }
+<a name="l00366"></a>00366 
+<a name="l00367"></a>00367         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator* (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v,Matrix M)
+<a name="l00368"></a>00368         {            
+<a name="l00369"></a>00369             <span class="keywordflow">return</span> (M * v.ToMatrix(<a class="code" href="namespace_phys_lib.html#a8d0d4da3cbdf4c2acad3872a1bdc5bd0" title="Typ inicializace matice pomocí vektorů">MatrixInitType</a>.VectorsAreColumns)).ToVector();
 <a name="l00370"></a>00370         }
 <a name="l00371"></a>00371 
-<a name="l00372"></a>00372         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator/ (<span class="keywordtype">double</span> k,<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v)
+<a name="l00372"></a>00372         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator* (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <span class="keywordtype">double</span> k)
 <a name="l00373"></a>00373         {
-<a name="l00374"></a>00374             <span class="keywordflow">throw</span> <span class="keyword">new</span> InvalidOperationException();
-<a name="l00375"></a>00375         }
-<a name="l00376"></a>00376 
-<a name="l00377"></a>00377         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator== (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
-<a name="l00378"></a>00378         {
-<a name="l00379"></a>00379             <span class="keywordflow">if</span> (v as <span class="keywordtype">object</span> == null &amp;&amp; u as <span class="keywordtype">object</span> == null) <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00380"></a>00380             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (v as <span class="keywordtype">object</span> == null) <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00381"></a>00381             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (u as <span class="keywordtype">object</span> == null) <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00382"></a>00382             <span class="keywordflow">else</span>
-<a name="l00383"></a>00383             {
-<a name="l00384"></a>00384                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Math.Max(v.Count, u.Count); i++)
-<a name="l00385"></a>00385                     <span class="keywordflow">if</span> (v[i] != u[i]) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00374"></a>00374             <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.Count);
+<a name="l00375"></a>00375             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.Count; i++)
+<a name="l00376"></a>00376                 Ret[i] = v[i]*k;
+<a name="l00377"></a>00377             
+<a name="l00378"></a>00378             <span class="keywordflow">return</span> Ret;
+<a name="l00379"></a>00379         }
+<a name="l00380"></a>00380 
+<a name="l00381"></a>00381         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator* (<span class="keywordtype">double</span> k, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v)
+<a name="l00382"></a>00382         {
+<a name="l00383"></a>00383             <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> Ret = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(v.Count);
+<a name="l00384"></a>00384             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; v.Count; i++)
+<a name="l00385"></a>00385                 Ret[i] = v[i] * k;
 <a name="l00386"></a>00386 
-<a name="l00387"></a>00387                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00388"></a>00388             }
-<a name="l00389"></a>00389         }
-<a name="l00390"></a>00390 
-<a name="l00391"></a>00391         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator!= (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
-<a name="l00392"></a>00392         {
-<a name="l00393"></a>00393             <span class="keywordflow">return</span> !(v == u);
-<a name="l00394"></a>00394         }
-<a name="l00395"></a>00395 
-<a name="l00396"></a>00396         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&lt; (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
-<a name="l00397"></a>00397         {
-<a name="l00398"></a>00398             <span class="keywordflow">return</span> v.Magnitude &lt; u.Magnitude;
-<a name="l00399"></a>00399         }
-<a name="l00400"></a>00400 
-<a name="l00401"></a>00401         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&gt; (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
-<a name="l00402"></a>00402         {
-<a name="l00403"></a>00403             <span class="keywordflow">return</span> v.Magnitude &gt; u.Magnitude;
-<a name="l00404"></a>00404         }
-<a name="l00405"></a>00405 
-<a name="l00406"></a>00406         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&lt;= (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
-<a name="l00407"></a>00407         {
-<a name="l00408"></a>00408             <span class="keywordflow">return</span> v.Magnitude &lt; u.Magnitude || v == u;
-<a name="l00409"></a>00409         }
-<a name="l00410"></a>00410 
-<a name="l00411"></a>00411         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&gt;= (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
-<a name="l00412"></a>00412         {
-<a name="l00413"></a>00413             <span class="keywordflow">return</span> v.Magnitude &gt; u.Magnitude || v == u;
+<a name="l00387"></a>00387             <span class="keywordflow">return</span> Ret;
+<a name="l00388"></a>00388         }
+<a name="l00389"></a>00389 
+<a name="l00390"></a>00390         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator/ (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <span class="keywordtype">double</span> k)
+<a name="l00391"></a>00391         {
+<a name="l00392"></a>00392             <span class="keywordflow">if</span> (k == 0) <span class="keywordflow">throw</span> <span class="keyword">new</span> DivideByZeroException();
+<a name="l00393"></a>00393 
+<a name="l00394"></a>00394             <span class="keywordflow">return</span> v*(1/k);
+<a name="l00395"></a>00395         }
+<a name="l00396"></a>00396 
+<a name="l00397"></a>00397         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> operator/ (<span class="keywordtype">double</span> k,<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v)
+<a name="l00398"></a>00398         {
+<a name="l00399"></a>00399             <span class="keywordflow">throw</span> <span class="keyword">new</span> InvalidOperationException();
+<a name="l00400"></a>00400         }
+<a name="l00401"></a>00401 
+<a name="l00402"></a>00402         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator== (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
+<a name="l00403"></a>00403         {
+<a name="l00404"></a>00404             <span class="keywordflow">if</span> (v as <span class="keywordtype">object</span> == null &amp;&amp; u as <span class="keywordtype">object</span> == null) <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00405"></a>00405             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (v as <span class="keywordtype">object</span> == null) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00406"></a>00406             <span class="keywordflow">else</span> <span class="keywordflow">if</span> (u as <span class="keywordtype">object</span> == null) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00407"></a>00407             <span class="keywordflow">else</span>
+<a name="l00408"></a>00408             {
+<a name="l00409"></a>00409                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Math.Max(v.Count, u.Count); i++)
+<a name="l00410"></a>00410                     <span class="keywordflow">if</span> (v[i] != u[i]) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00411"></a>00411 
+<a name="l00412"></a>00412                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00413"></a>00413             }
 <a name="l00414"></a>00414         }
 <a name="l00415"></a>00415 
-<a name="l00416"></a>00416         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">bool</span> Equals(<span class="keywordtype">object</span> obj)
+<a name="l00416"></a>00416         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator!= (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
 <a name="l00417"></a>00417         {
-<a name="l00418"></a>00418             <span class="keywordflow">return</span> obj as <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> == <span class="keyword">this</span>;
+<a name="l00418"></a>00418             <span class="keywordflow">return</span> !(v == u);
 <a name="l00419"></a>00419         }
 <a name="l00420"></a>00420 
-<a name="l00421"></a>00421         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">int</span> GetHashCode()
+<a name="l00421"></a>00421         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&lt; (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
 <a name="l00422"></a>00422         {
-<a name="l00423"></a>00423             <span class="keywordflow">return</span> <a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>.ToString().GetHashCode();
+<a name="l00423"></a>00423             <span class="keywordflow">return</span> v.Magnitude &lt; u.Magnitude;
 <a name="l00424"></a>00424         }
 <a name="l00425"></a>00425 
-<a name="l00426"></a>00426         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">explicit</span> operator Vector(System.Drawing.PointF p)
+<a name="l00426"></a>00426         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&gt; (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
 <a name="l00427"></a>00427         {
-<a name="l00428"></a>00428             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(p.X,p.Y,0); <span class="comment">// !</span>
+<a name="l00428"></a>00428             <span class="keywordflow">return</span> v.Magnitude &gt; u.Magnitude;
 <a name="l00429"></a>00429         }
 <a name="l00430"></a>00430 
-<a name="l00431"></a>00431         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">explicit</span> operator System.Drawing.PointF(<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v)
+<a name="l00431"></a>00431         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&lt;= (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
 <a name="l00432"></a>00432         {
-<a name="l00433"></a>00433             <span class="keywordflow">return</span> <span class="keyword">new</span> System.Drawing.PointF((<span class="keywordtype">float</span>)v[0],(<span class="keywordtype">float</span>)v[1]);
+<a name="l00433"></a>00433             <span class="keywordflow">return</span> v.Magnitude &lt; u.Magnitude || v == u;
 <a name="l00434"></a>00434         }
 <a name="l00435"></a>00435 
-<a name="l00436"></a>00436         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">explicit</span> operator double(<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> V)
+<a name="l00436"></a>00436         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> operator&gt;= (<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v, <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> u)
 <a name="l00437"></a>00437         {
-<a name="l00438"></a>00438             <span class="keywordflow">if</span> (V.Count != 1) <span class="keywordflow">throw</span> <span class="keyword">new</span> InvalidCastException();
-<a name="l00439"></a>00439             <span class="keywordflow">return</span> V[0];
-<a name="l00440"></a>00440         }
-<a name="l00441"></a>00441 
-<a name="l00442"></a>00442         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">explicit</span> operator Vector(<span class="keywordtype">double</span> k)
-<a name="l00443"></a>00443         {
-<a name="l00444"></a>00444             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(k);
-<a name="l00445"></a>00445         }
-<a name="l00446"></a>00446 
-<a name="l00451"></a><a class="code" href="class_phys_lib_1_1_vector.html#aae77e1545e2ec35ec3225d9aa54e18d9">00451</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a> <a class="code" href="class_phys_lib_1_1_vector.html#aae77e1545e2ec35ec3225d9aa54e18d9" title="Převede vektor na matici o jednom řádku/sloupci.">ToMatrix</a>(MatrixInitType Type)
+<a name="l00438"></a>00438             <span class="keywordflow">return</span> v.Magnitude &gt; u.Magnitude || v == u;
+<a name="l00439"></a>00439         }
+<a name="l00440"></a>00440 
+<a name="l00441"></a>00441         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">bool</span> Equals(<span class="keywordtype">object</span> obj)
+<a name="l00442"></a>00442         {
+<a name="l00443"></a>00443             <span class="keywordflow">return</span> obj as <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> == <span class="keyword">this</span>;
+<a name="l00444"></a>00444         }
+<a name="l00445"></a>00445 
+<a name="l00446"></a>00446         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">int</span> GetHashCode()
+<a name="l00447"></a>00447         {
+<a name="l00448"></a>00448             <span class="keywordflow">return</span> <a class="code" href="class_phys_lib_1_1_vector.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>.ToString().GetHashCode();
+<a name="l00449"></a>00449         }
+<a name="l00450"></a>00450 
+<a name="l00451"></a>00451         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">explicit</span> operator Vector(System.Drawing.PointF p)
 <a name="l00452"></a>00452         {
-<a name="l00453"></a>00453             <span class="keywordflow">if</span> (Type == MatrixInitType.VectorsAreRows)
-<a name="l00454"></a>00454                 <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a>(1, <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>, t);
-<a name="l00455"></a>00455             <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a>(<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>, 1, t);
-<a name="l00456"></a>00456         }
-<a name="l00457"></a>00457 
-<a name="l00462"></a><a class="code" href="class_phys_lib_1_1_vector.html#afb353d3b6452c529dcc03872beab3148">00462</a>         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">string</span> <a class="code" href="class_phys_lib_1_1_vector.html#afb353d3b6452c529dcc03872beab3148" title="Převede vektor na text.">ToString</a>()
-<a name="l00463"></a>00463         {
-<a name="l00464"></a>00464             base.ToString();
-<a name="l00465"></a>00465             <span class="keywordtype">string</span> Ret = String.Empty;
-<a name="l00466"></a>00466             <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a> == 0) <span class="keywordflow">return</span> <span class="stringliteral">&quot;(0)&quot;</span>;
-<a name="l00467"></a>00467             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0;i &lt; <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru.">Count</a>;i++)
-<a name="l00468"></a>00468                 Ret += String.Format(<span class="stringliteral">&quot;{0:F2};&quot;</span>, <span class="keyword">this</span>[i]);
-<a name="l00469"></a>00469             <span class="keywordflow">return</span> <span class="stringliteral">&quot;(&quot;</span> + Ret.Remove(Ret.Length-1) + <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00453"></a>00453             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(p.X,p.Y,1); <span class="comment">// Homogenní souřadnice!</span>
+<a name="l00454"></a>00454         }
+<a name="l00455"></a>00455 
+<a name="l00456"></a>00456         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">explicit</span> operator System.Drawing.PointF(<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> v)
+<a name="l00457"></a>00457         {
+<a name="l00458"></a>00458             <span class="keywordflow">return</span> <span class="keyword">new</span> System.Drawing.PointF((<span class="keywordtype">float</span>)v[0],(<span class="keywordtype">float</span>)v[1]);
+<a name="l00459"></a>00459         }
+<a name="l00460"></a>00460 
+<a name="l00461"></a>00461         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">explicit</span> operator double(<a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a> V)
+<a name="l00462"></a>00462         {
+<a name="l00463"></a>00463             <span class="keywordflow">if</span> (V.Count != 1) <span class="keywordflow">throw</span> <span class="keyword">new</span> InvalidCastException();
+<a name="l00464"></a>00464             <span class="keywordflow">return</span> V[0];
+<a name="l00465"></a>00465         }
+<a name="l00466"></a>00466 
+<a name="l00467"></a>00467         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">explicit</span> operator Vector(<span class="keywordtype">double</span> k)
+<a name="l00468"></a>00468         {
+<a name="l00469"></a>00469             <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html#abb4f894a28fa2331d8a4f106b3f5abc3" title="Konstruktor vektoru.">Vector</a>(k);
 <a name="l00470"></a>00470         }
-<a name="l00471"></a>00471     }
-<a name="l00472"></a>00472 }
+<a name="l00471"></a>00471 
+<a name="l00476"></a><a class="code" href="class_phys_lib_1_1_vector.html#aae77e1545e2ec35ec3225d9aa54e18d9">00476</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a> <a class="code" href="class_phys_lib_1_1_vector.html#aae77e1545e2ec35ec3225d9aa54e18d9" title="Převede vektor na matici o jednom řádku/sloupci.">ToMatrix</a>(<a class="code" href="namespace_phys_lib.html#a8d0d4da3cbdf4c2acad3872a1bdc5bd0" title="Typ inicializace matice pomocí vektorů">MatrixInitType</a> Type)
+<a name="l00477"></a>00477         {
+<a name="l00478"></a>00478             <span class="keywordflow">if</span> (Type == <a class="code" href="namespace_phys_lib.html#a8d0d4da3cbdf4c2acad3872a1bdc5bd0" title="Typ inicializace matice pomocí vektorů">MatrixInitType</a>.VectorsAreRows)
+<a name="l00479"></a>00479                 <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a>(1, <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>, t);
+<a name="l00480"></a>00480             <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_matrix.html" title="Reprezentuje matici.">Matrix</a>(<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>, 1, t);
+<a name="l00481"></a>00481         }
+<a name="l00482"></a>00482 
+<a name="l00487"></a><a class="code" href="class_phys_lib_1_1_vector.html#afb353d3b6452c529dcc03872beab3148">00487</a>         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">string</span> <a class="code" href="class_phys_lib_1_1_vector.html#afb353d3b6452c529dcc03872beab3148" title="Převede vektor na text.">ToString</a>()
+<a name="l00488"></a>00488         {
+<a name="l00489"></a>00489             base.ToString();
+<a name="l00490"></a>00490             <span class="keywordtype">string</span> Ret = String.Empty;
+<a name="l00491"></a>00491             <span class="keywordflow">if</span> (<a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a> == 0) <span class="keywordflow">return</span> <span class="stringliteral">&quot;(0)&quot;</span>;
+<a name="l00492"></a>00492             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0;i &lt; <a class="code" href="class_phys_lib_1_1_vector.html#a2c6e7d62aba567b045724c47552ececf" title="Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.">Count</a>;i++)
+<a name="l00493"></a>00493                 Ret += String.Format(<span class="stringliteral">&quot;{0:F2};&quot;</span>, <span class="keyword">this</span>[i]);
+<a name="l00494"></a>00494             <span class="keywordflow">return</span> <span class="stringliteral">&quot;(&quot;</span> + Ret.Remove(Ret.Length-1) + <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00495"></a>00495         }
+<a name="l00496"></a>00496     }
+<a name="l00497"></a>00497     
+<a name="l00501"></a><a class="code" href="class_phys_lib_1_1_vector_converter.html">00501</a>     <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_phys_lib_1_1_vector_converter.html" title="Konvertor mezi polem vektorů a různými poli s vektorem ekvivalentních typů">VectorConverter</a>
+<a name="l00502"></a>00502     {
+<a name="l00503"></a>00503         <span class="keyword">private</span> <a class="code" href="class_phys_lib_1_1_vector_converter.html" title="Konvertor mezi polem vektorů a různými poli s vektorem ekvivalentních typů">VectorConverter</a>() { }
+<a name="l00504"></a>00504 
+<a name="l00510"></a><a class="code" href="class_phys_lib_1_1_vector_converter.html#a622467b5a64fbe2feab81af45d9b486c">00510</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>[] <a class="code" href="class_phys_lib_1_1_vector_converter.html#a622467b5a64fbe2feab81af45d9b486c" title="Převede pole třídy Point na pole vektorů">PointsToVectors</a>(System.Drawing.Point[] Points)
+<a name="l00511"></a>00511         {
+<a name="l00512"></a>00512             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>[] Out = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>[Points.Length];
+<a name="l00513"></a>00513             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Points.Length; i++)            
+<a name="l00514"></a>00514                 Out[i] = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>((<span class="keywordtype">double</span>)Points[i].X, (<span class="keywordtype">double</span>)Points[i].Y);
+<a name="l00515"></a>00515             <span class="keywordflow">return</span> Out;
+<a name="l00516"></a>00516         }
+<a name="l00517"></a>00517 
+<a name="l00523"></a><a class="code" href="class_phys_lib_1_1_vector_converter.html#a414b59dace3e9e66f3cdc23aa35330d1">00523</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>[] <a class="code" href="class_phys_lib_1_1_vector_converter.html#a622467b5a64fbe2feab81af45d9b486c" title="Převede pole třídy Point na pole vektorů">PointsToVectors</a>(System.Drawing.PointF[] Points)
+<a name="l00524"></a>00524         {
+<a name="l00525"></a>00525             <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>[] Out = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>[Points.Length];
+<a name="l00526"></a>00526             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Points.Length; i++)
+<a name="l00527"></a>00527                 Out[i] = <span class="keyword">new</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>((<span class="keywordtype">double</span>)Points[i].X, (<span class="keywordtype">double</span>)Points[i].Y);
+<a name="l00528"></a>00528             <span class="keywordflow">return</span> Out;
+<a name="l00529"></a>00529         }
+<a name="l00530"></a>00530 
+<a name="l00536"></a><a class="code" href="class_phys_lib_1_1_vector_converter.html#a0e251f5cc03590ccd361b530b6801142">00536</a>         <span class="keyword">public</span> <span class="keyword">static</span> System.Drawing.Point[] <a class="code" href="class_phys_lib_1_1_vector_converter.html#a0e251f5cc03590ccd361b530b6801142" title="Převede vektory na pole třídy Point.">VectorsToPoints</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>[] Vectors)
+<a name="l00537"></a>00537         {
+<a name="l00538"></a>00538             System.Drawing.Point[] Out = <span class="keyword">new</span> System.Drawing.Point[Vectors.Length];
+<a name="l00539"></a>00539             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Vectors.Length; i++)
+<a name="l00540"></a>00540                 Out[i] = <span class="keyword">new</span> System.Drawing.Point((<span class="keywordtype">int</span>)Vectors[i][0], (<span class="keywordtype">int</span>)Vectors[i][1]);
+<a name="l00541"></a>00541             <span class="keywordflow">return</span> Out;
+<a name="l00542"></a>00542         }
+<a name="l00543"></a>00543 
+<a name="l00549"></a><a class="code" href="class_phys_lib_1_1_vector_converter.html#a8e716c8dba0386d6e94613df1d6cdf9f">00549</a>         <span class="keyword">public</span> <span class="keyword">static</span> System.Drawing.PointF[] <a class="code" href="class_phys_lib_1_1_vector_converter.html#a8e716c8dba0386d6e94613df1d6cdf9f" title="Převede vektory na pole třídy PointF.">VectorsToPointFs</a>(<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>[] Vectors)
+<a name="l00550"></a>00550         {
+<a name="l00551"></a>00551             System.Drawing.PointF[] Out = <span class="keyword">new</span> System.Drawing.PointF[Vectors.Length];
+<a name="l00552"></a>00552             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Vectors.Length; i++)
+<a name="l00553"></a>00553                 Out[i] = <span class="keyword">new</span> System.Drawing.PointF((<span class="keywordtype">int</span>)Vectors[i][0], (<span class="keywordtype">int</span>)Vectors[i][1]);
+<a name="l00554"></a>00554             <span class="keywordflow">return</span> Out;
+<a name="l00555"></a>00555         }
+<a name="l00556"></a>00556 
+<a name="l00557"></a>00557     }
+<a name="l00558"></a>00558 }
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generováno Tue Dec 28 01:29:58 2010 pro projekt PhysLib programem&nbsp;
+</div>
+<hr class="footer"/><address class="footer"><small>Generováno ne 8. kvě 2011 17.39:00 pro projekt PhysLib programem&#160;
 <a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
 </html>

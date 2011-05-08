@@ -2,72 +2,89 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>PhysLib: Zdrojový soubor D:/Dev/PhysBox/PhysLib/CollisionReport.cs</title>
+<title>PhysLib: Zdrojový soubor C:/Documents and Settings/Luc/Desktop/PhysBox/PhysLib/CollisionReport.cs</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<!-- Generováno programem Doxygen 1.6.1 -->
-<div class="navigation" id="top">
-  <div class="tabs">
-    <ul>
-      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+<!-- Generováno programem Doxygen 1.7.4 -->
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PhysLib&#160;<span id="projectnumber">0.2</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hlavní&#160;stránka</span></a></li>
+      <li><a href="namespaces.html"><span>Balíky</span></a></li>
       <li><a href="annotated.html"><span>Třídy</span></a></li>
       <li class="current"><a href="files.html"><span>Soubory</span></a></li>
     </ul>
   </div>
-  <div class="tabs">
-    <ul>
-      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Seznam&#160;souborů</span></a></li>
     </ul>
   </div>
-<h1>D:/Dev/PhysBox/PhysLib/CollisionReport.cs</h1><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 ﻿using System;
+<div class="header">
+  <div class="headertitle">
+<div class="title">C:/Documents and Settings/Luc/Desktop/PhysBox/PhysLib/CollisionReport.cs</div>  </div>
+</div>
+<div class="contents">
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 ﻿using System;
 <a name="l00002"></a>00002 <span class="keyword">using</span> System.Drawing;
 <a name="l00003"></a>00003 <span class="keyword">using</span> System.Collections;
 <a name="l00004"></a>00004 
-<a name="l00005"></a>00005 <span class="keyword">namespace </span>PhysLib
+<a name="l00005"></a><a class="code" href="namespace_phys_lib.html">00005</a> <span class="keyword">namespace </span>PhysLib
 <a name="l00006"></a>00006 {
 <a name="l00010"></a><a class="code" href="class_phys_lib_1_1_collision_report.html">00010</a>     <span class="keyword">public</span> sealed <span class="keyword">class </span><a class="code" href="class_phys_lib_1_1_collision_report.html" title="Třída hlášení o kolizi.">CollisionReport</a>
 <a name="l00011"></a>00011     {
-<a name="l00018"></a><a class="code" href="class_phys_lib_1_1_collision_report.html#a30cb370f75ffc206ff24da4e9beed4fc">00018</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_collision_report.html#a30cb370f75ffc206ff24da4e9beed4fc" title="Výchozí konstruktor.">CollisionReport</a>(<a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě.">SimObject</a> ObjA, <a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě.">SimObject</a> ObjB,<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> MinimumTranslation)
+<a name="l00018"></a><a class="code" href="class_phys_lib_1_1_collision_report.html#a30cb370f75ffc206ff24da4e9beed4fc">00018</a>         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_collision_report.html#a30cb370f75ffc206ff24da4e9beed4fc" title="Výchozí konstruktor.">CollisionReport</a>(<a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a> ObjA, <a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a> ObjB,<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> MinimumTranslation)
 <a name="l00019"></a>00019         {
 <a name="l00020"></a>00020             <a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a> = ObjA;
 <a name="l00021"></a>00021             <a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a> = ObjB;
-<a name="l00022"></a>00022             <a class="code" href="class_phys_lib_1_1_collision_report.html#a1dfeedc9dfd7c19b73798b6d4955605a" title="Minimální vektor oddělení.">MTD</a> = MinimumTranslation;
-<a name="l00023"></a>00023             <a class="code" href="class_phys_lib_1_1_collision_report.html#af38270eb63e8d9bfba175bafa84aaaf8" title="Normálový vektor ke kolizi.">N</a> = <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="class_phys_lib_1_1_vector.html#acb06a59683e724487174a0e388901fc1" title="Udělá z daného vektoru jednotkový vektor ukazující pouze směr.">Unit</a>(<a class="code" href="class_phys_lib_1_1_collision_report.html#a1dfeedc9dfd7c19b73798b6d4955605a" title="Minimální vektor oddělení.">MTD</a>);
+<a name="l00022"></a>00022             <a class="code" href="class_phys_lib_1_1_collision_report.html#a1dfeedc9dfd7c19b73798b6d4955605a" title="Minimální vektor oddělení">MTD</a> = MinimumTranslation;
+<a name="l00023"></a>00023             <a class="code" href="class_phys_lib_1_1_collision_report.html#af38270eb63e8d9bfba175bafa84aaaf8" title="Normálový vektor ke kolizi.">N</a> = <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="class_phys_lib_1_1_vector.html#acb06a59683e724487174a0e388901fc1" title="Udělá z daného vektoru jednotkový vektor ukazující pouze směr.">Unit</a>(<a class="code" href="class_phys_lib_1_1_collision_report.html#a1dfeedc9dfd7c19b73798b6d4955605a" title="Minimální vektor oddělení">MTD</a>);
 <a name="l00024"></a>00024 
 <a name="l00025"></a>00025             Prepare();
 <a name="l00026"></a>00026 
-<a name="l00027"></a>00027             <a class="code" href="class_phys_lib_1_1_collision_report.html#a63e7bd800f4c1a644c645f1766ef1127" title="Normálový vektor ke spojnici těžiště tělesa A s bodem dotyku.">NAP</a> = ((<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)<a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>[0].<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a> - <a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>).<a class="code" href="class_phys_lib_1_1_vector.html#aed27e9ce4d607f2de9803ded2f57d0cc" title="Vrátí 2D kolmý vektor.">Perp</a>();
-<a name="l00028"></a>00028             <a class="code" href="class_phys_lib_1_1_collision_report.html#adb77e2e53ad4b9f3771a22807efd247f" title="Normálový vektor ke spojnici těžiště tělesa B s bodem dotyku.">NBP</a> = ((<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)<a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>[0].<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a> - <a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa).">COG</a>).<a class="code" href="class_phys_lib_1_1_vector.html#aed27e9ce4d607f2de9803ded2f57d0cc" title="Vrátí 2D kolmý vektor.">Perp</a>();
-<a name="l00029"></a>00029             <a class="code" href="class_phys_lib_1_1_collision_report.html#a20da0e39d3da948edc079788fd787431" title="Vzájemná relativní rychlost v době kontaktu.">RelativeVelocity</a> = (<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a> + <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="class_phys_lib_1_1_vector.html#a73d079f3213ad2a12627b1a13ba7192d" title="Provede vektorový součin dvou vektorů.">Cross</a>(<a class="code" href="class_phys_lib_1_1_collision_report.html#a63e7bd800f4c1a644c645f1766ef1127" title="Normálový vektor ke spojnici těžiště tělesa A s bodem dotyku.">NAP</a>.<a class="code" href="class_phys_lib_1_1_vector.html#aed27e9ce4d607f2de9803ded2f57d0cc" title="Vrátí 2D kolmý vektor.">Perp</a>(), <a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>)) - (<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a> + <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="class_phys_lib_1_1_vector.html#a73d079f3213ad2a12627b1a13ba7192d" title="Provede vektorový součin dvou vektorů.">Cross</a>(<a class="code" href="class_phys_lib_1_1_collision_report.html#adb77e2e53ad4b9f3771a22807efd247f" title="Normálový vektor ke spojnici těžiště tělesa B s bodem dotyku.">NBP</a>.<a class="code" href="class_phys_lib_1_1_vector.html#aed27e9ce4d607f2de9803ded2f57d0cc" title="Vrátí 2D kolmý vektor.">Perp</a>(), <a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>));
+<a name="l00027"></a>00027             <a class="code" href="class_phys_lib_1_1_collision_report.html#a63e7bd800f4c1a644c645f1766ef1127" title="Normálový vektor ke spojnici těžiště tělesa A s bodem dotyku.">NAP</a> = ((<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)<a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>[0].<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a> - <a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa)">COG</a>).<a class="code" href="class_phys_lib_1_1_vector.html#aed27e9ce4d607f2de9803ded2f57d0cc" title="Vrátí 2D kolmý vektor.">Perp</a>();
+<a name="l00028"></a>00028             <a class="code" href="class_phys_lib_1_1_collision_report.html#adb77e2e53ad4b9f3771a22807efd247f" title="Normálový vektor ke spojnici těžiště tělesa B s bodem dotyku.">NBP</a> = ((<a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>)<a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>[0].<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a> - <a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa)">COG</a>).<a class="code" href="class_phys_lib_1_1_vector.html#aed27e9ce4d607f2de9803ded2f57d0cc" title="Vrátí 2D kolmý vektor.">Perp</a>();
+<a name="l00029"></a>00029             <a class="code" href="class_phys_lib_1_1_collision_report.html#a20da0e39d3da948edc079788fd787431" title="Vzájemná relativní rychlost v době kontaktu.">RelativeVelocity</a> = (<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a> + <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="class_phys_lib_1_1_vector.html#a73d079f3213ad2a12627b1a13ba7192d" title="Provede vektorový součin dvou vektorů">Cross</a>(<a class="code" href="class_phys_lib_1_1_collision_report.html#a63e7bd800f4c1a644c645f1766ef1127" title="Normálový vektor ke spojnici těžiště tělesa A s bodem dotyku.">NAP</a>.<a class="code" href="class_phys_lib_1_1_vector.html#aed27e9ce4d607f2de9803ded2f57d0cc" title="Vrátí 2D kolmý vektor.">Perp</a>(), <a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>)) - (<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a> + <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="class_phys_lib_1_1_vector.html#a73d079f3213ad2a12627b1a13ba7192d" title="Provede vektorový součin dvou vektorů">Cross</a>(<a class="code" href="class_phys_lib_1_1_collision_report.html#adb77e2e53ad4b9f3771a22807efd247f" title="Normálový vektor ke spojnici těžiště tělesa B s bodem dotyku.">NBP</a>.<a class="code" href="class_phys_lib_1_1_vector.html#aed27e9ce4d607f2de9803ded2f57d0cc" title="Vrátí 2D kolmý vektor.">Perp</a>(), <a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.<a class="code" href="class_phys_lib_1_1_sim_object.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>));
 <a name="l00030"></a>00030         }
 <a name="l00031"></a>00031 
-<a name="l00035"></a>00035         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě.">SimObject</a> <a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>
+<a name="l00035"></a>00035         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a> <a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>
 <a name="l00036"></a><a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd">00036</a>         {
 <a name="l00037"></a>00037             <span class="keyword">get</span>;
 <a name="l00038"></a>00038             <span class="keyword">private</span> <span class="keyword">set</span>;
 <a name="l00039"></a>00039         }
 <a name="l00040"></a>00040 
-<a name="l00044"></a>00044         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě.">SimObject</a> <a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>
+<a name="l00044"></a>00044         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_sim_object.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a> <a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>
 <a name="l00045"></a><a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb">00045</a>         {
 <a name="l00046"></a>00046             <span class="keyword">get</span>;
 <a name="l00047"></a>00047             <span class="keyword">private</span> <span class="keyword">set</span>;
 <a name="l00048"></a>00048         }
 <a name="l00049"></a>00049 
-<a name="l00053"></a>00053         <span class="keyword">public</span> <a class="code" href="struct_phys_lib_1_1_contact_pair.html" title="Struktura pro pár kontaktních bodů.">ContactPair</a>[] <a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>
+<a name="l00053"></a>00053         <span class="keyword">public</span> <a class="code" href="struct_phys_lib_1_1_contact_pair.html" title="Struktura pro pár kontaktních bodů">ContactPair</a>[] <a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>
 <a name="l00054"></a><a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5">00054</a>         {
 <a name="l00055"></a>00055             <span class="keyword">get</span>;
 <a name="l00056"></a>00056             <span class="keyword">private</span> <span class="keyword">set</span>;
 <a name="l00057"></a>00057         }
 <a name="l00058"></a>00058 
-<a name="l00062"></a>00062         <span class="keyword">public</span> ContactType <a class="code" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6" title="Typ dotyku.">TouchType</a>
+<a name="l00062"></a>00062         <span class="keyword">public</span> <a class="code" href="namespace_phys_lib.html#ab76c52800c25619d09fc40c19297fa66" title="Možné typy dotyku.">ContactType</a> <a class="code" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6" title="Typ dotyku.">TouchType</a>
 <a name="l00063"></a><a class="code" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6">00063</a>         {
 <a name="l00064"></a>00064             <span class="keyword">get</span>;
 <a name="l00065"></a>00065             <span class="keyword">private</span> <span class="keyword">set</span>;
 <a name="l00066"></a>00066         }
 <a name="l00067"></a>00067 
-<a name="l00071"></a>00071         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_collision_report.html#a1dfeedc9dfd7c19b73798b6d4955605a" title="Minimální vektor oddělení.">MTD</a>
+<a name="l00071"></a>00071         <span class="keyword">public</span> <a class="code" href="class_phys_lib_1_1_vector.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="class_phys_lib_1_1_collision_report.html#a1dfeedc9dfd7c19b73798b6d4955605a" title="Minimální vektor oddělení">MTD</a>
 <a name="l00072"></a><a class="code" href="class_phys_lib_1_1_collision_report.html#a1dfeedc9dfd7c19b73798b6d4955605a">00072</a>         {
 <a name="l00073"></a>00073             <span class="keyword">get</span>;
 <a name="l00074"></a>00074             <span class="keyword">private</span> <span class="keyword">set</span>;
@@ -99,8 +116,8 @@
 <a name="l00112"></a>00112 
 <a name="l00116"></a>00116         <span class="keyword">private</span> <span class="keywordtype">void</span> Reduce()
 <a name="l00117"></a>00117         {
-<a name="l00118"></a>00118             <a class="code" href="struct_phys_lib_1_1_contact_pair.html" title="Struktura pro pár kontaktních bodů.">ContactPair</a>[] Single = <span class="keyword">new</span> <a class="code" href="struct_phys_lib_1_1_contact_pair.html" title="Struktura pro pár kontaktních bodů.">ContactPair</a>[1];
-<a name="l00119"></a>00119             Single[0] = <span class="keyword">new</span> <a class="code" href="struct_phys_lib_1_1_contact_pair.html" title="Struktura pro pár kontaktních bodů.">ContactPair</a>(<a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>[0].<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>, <a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>[0].<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>);
+<a name="l00118"></a>00118             <a class="code" href="struct_phys_lib_1_1_contact_pair.html" title="Struktura pro pár kontaktních bodů">ContactPair</a>[] Single = <span class="keyword">new</span> <a class="code" href="struct_phys_lib_1_1_contact_pair.html" title="Struktura pro pár kontaktních bodů">ContactPair</a>[1];
+<a name="l00119"></a>00119             Single[0] = <span class="keyword">new</span> <a class="code" href="struct_phys_lib_1_1_contact_pair.html" title="Struktura pro pár kontaktních bodů">ContactPair</a>(<a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>[0].<a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>, <a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>[0].<a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>);
 <a name="l00120"></a>00120 
 <a name="l00121"></a>00121             <span class="keywordtype">int</span> len = <a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>.Length;
 <a name="l00122"></a>00122             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; len; i++)
@@ -119,7 +136,7 @@
 <a name="l00135"></a>00135 
 <a name="l00139"></a>00139         <span class="keyword">private</span> <span class="keywordtype">void</span> Prepare()
 <a name="l00140"></a>00140         {
-<a name="l00141"></a>00141             Vector umtd = Vector.Unit(<a class="code" href="class_phys_lib_1_1_collision_report.html#a1dfeedc9dfd7c19b73798b6d4955605a" title="Minimální vektor oddělení.">MTD</a>);
+<a name="l00141"></a>00141             Vector umtd = Vector.Unit(<a class="code" href="class_phys_lib_1_1_collision_report.html#a1dfeedc9dfd7c19b73798b6d4955605a" title="Minimální vektor oddělení">MTD</a>);
 <a name="l00142"></a>00142             <span class="keywordtype">object</span> c1 = null, c2 = null;
 <a name="l00143"></a>00143 
 <a name="l00144"></a>00144             PointF[] supA = <a class="code" href="class_phys_lib_1_1_collision_report.html#a21d95204b3ec2972da88c9ff0c2856bd" title="První účastník kolize.">A</a>.Model.SupportPoints(umtd), supB = <a class="code" href="class_phys_lib_1_1_collision_report.html#a54d7ab3656a9f3714ad9ba45ae7e6ccb" title="Druhý účastník kolize.">B</a>.Model.SupportPoints(-umtd);
@@ -127,12 +144,12 @@
 <a name="l00146"></a>00146             {
 <a name="l00147"></a>00147                 <span class="keywordflow">if</span> (supB.Length == 1)
 <a name="l00148"></a>00148                 {
-<a name="l00149"></a>00149                     <a class="code" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6" title="Typ dotyku.">TouchType</a> = ContactType.VertexVertex;
+<a name="l00149"></a>00149                     <a class="code" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6" title="Typ dotyku.">TouchType</a> = <a class="code" href="namespace_phys_lib.html#ab76c52800c25619d09fc40c19297fa66" title="Možné typy dotyku.">ContactType</a>.VertexVertex;
 <a name="l00150"></a>00150                     c1 = supA[0]; c2 = supB[0];
 <a name="l00151"></a>00151                 }
 <a name="l00152"></a>00152                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (supB.Length == 2)
 <a name="l00153"></a>00153                 {
-<a name="l00154"></a>00154                     <a class="code" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6" title="Typ dotyku.">TouchType</a> = ContactType.VertexEdge;
+<a name="l00154"></a>00154                     <a class="code" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6" title="Typ dotyku.">TouchType</a> = <a class="code" href="namespace_phys_lib.html#ab76c52800c25619d09fc40c19297fa66" title="Možné typy dotyku.">ContactType</a>.VertexEdge;
 <a name="l00155"></a>00155                     c1 = supA[0]; c2 = supB;
 <a name="l00156"></a>00156                 }
 <a name="l00157"></a>00157                 <span class="keywordflow">else</span> <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
@@ -141,12 +158,12 @@
 <a name="l00160"></a>00160             {
 <a name="l00161"></a>00161                 <span class="keywordflow">if</span> (supB.Length == 1)
 <a name="l00162"></a>00162                 {
-<a name="l00163"></a>00163                     <a class="code" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6" title="Typ dotyku.">TouchType</a> = ContactType.VertexEdge;
+<a name="l00163"></a>00163                     <a class="code" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6" title="Typ dotyku.">TouchType</a> = <a class="code" href="namespace_phys_lib.html#ab76c52800c25619d09fc40c19297fa66" title="Možné typy dotyku.">ContactType</a>.VertexEdge;
 <a name="l00164"></a>00164                     c1 = supA; c2 = supB[0];
 <a name="l00165"></a>00165                 }
 <a name="l00166"></a>00166                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (supB.Length == 2)
 <a name="l00167"></a>00167                 {
-<a name="l00168"></a>00168                     <a class="code" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6" title="Typ dotyku.">TouchType</a> = ContactType.EdgeEdge;
+<a name="l00168"></a>00168                     <a class="code" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6" title="Typ dotyku.">TouchType</a> = <a class="code" href="namespace_phys_lib.html#ab76c52800c25619d09fc40c19297fa66" title="Možné typy dotyku.">ContactType</a>.EdgeEdge;
 <a name="l00169"></a>00169                     c1 = supA; c2 = supB;
 <a name="l00170"></a>00170                 }
 <a name="l00171"></a>00171                 <span class="keywordflow">else</span> <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
@@ -177,11 +194,11 @@
 <a name="l00213"></a>00213         {
 <a name="l00214"></a>00214             <span class="keywordflow">switch</span> (<a class="code" href="class_phys_lib_1_1_collision_report.html#a2970fd94f44dc7463c7106f4b0e0aef6" title="Typ dotyku.">TouchType</a>)
 <a name="l00215"></a>00215             {
-<a name="l00216"></a>00216                 <span class="keywordflow">case</span> ContactType.VertexVertex:
+<a name="l00216"></a>00216                 <span class="keywordflow">case</span> <a class="code" href="namespace_phys_lib.html#ab76c52800c25619d09fc40c19297fa66" title="Možné typy dotyku.">ContactType</a>.VertexVertex:
 <a name="l00217"></a>00217                     <a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a> = <span class="keyword">new</span> ContactPair[1];
 <a name="l00218"></a>00218                     <a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a>[0] = <span class="keyword">new</span> ContactPair((PointF)e1, (PointF)e2);
 <a name="l00219"></a>00219                     <span class="keywordflow">break</span>;
-<a name="l00220"></a>00220                 <span class="keywordflow">case</span> ContactType.VertexEdge:
+<a name="l00220"></a>00220                 <span class="keywordflow">case</span> <a class="code" href="namespace_phys_lib.html#ab76c52800c25619d09fc40c19297fa66" title="Možné typy dotyku.">ContactType</a>.VertexEdge:
 <a name="l00221"></a>00221                     <span class="keywordflow">if</span> (e1.GetType() == typeof(PointF[]))
 <a name="l00222"></a>00222                     {
 <a name="l00223"></a>00223                         <a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a> = <span class="keyword">new</span> ContactPair[1];
@@ -194,7 +211,7 @@
 <a name="l00230"></a>00230                     }
 <a name="l00231"></a>00231                     <span class="keywordflow">else</span> <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentException();
 <a name="l00232"></a>00232                     <span class="keywordflow">break</span>;
-<a name="l00233"></a>00233                 <span class="keywordflow">case</span> ContactType.EdgeEdge:
+<a name="l00233"></a>00233                 <span class="keywordflow">case</span> <a class="code" href="namespace_phys_lib.html#ab76c52800c25619d09fc40c19297fa66" title="Možné typy dotyku.">ContactType</a>.EdgeEdge:
 <a name="l00234"></a>00234                     <a class="code" href="class_phys_lib_1_1_collision_report.html#aa23b7c11699565de67c7e4773ccd8df5" title="Páry bodů dotyku.">Pairs</a> = <span class="keyword">new</span> ContactPair[4];
 <a name="l00235"></a>00235                     PointF[] Edge1 = (PointF[])e1, Edge2 = (PointF[])e2;
 <a name="l00236"></a>00236 
@@ -210,7 +227,7 @@
 <a name="l00246"></a>00246 
 <a name="l00247"></a>00247     }
 <a name="l00248"></a>00248 
-<a name="l00252"></a><a class="code" href="struct_phys_lib_1_1_contact_pair.html">00252</a>     <span class="keyword">public</span> <span class="keyword">struct </span><a class="code" href="struct_phys_lib_1_1_contact_pair.html" title="Struktura pro pár kontaktních bodů.">ContactPair</a>
+<a name="l00252"></a><a class="code" href="struct_phys_lib_1_1_contact_pair.html">00252</a>     <span class="keyword">public</span> <span class="keyword">struct </span><a class="code" href="struct_phys_lib_1_1_contact_pair.html" title="Struktura pro pár kontaktních bodů">ContactPair</a>
 <a name="l00253"></a>00253     {
 <a name="l00257"></a><a class="code" href="struct_phys_lib_1_1_contact_pair.html#ae85d8d1bee9389b4935c731a2d57dfb6">00257</a>         <span class="keyword">public</span> PointF <a class="code" href="struct_phys_lib_1_1_contact_pair.html#ae85d8d1bee9389b4935c731a2d57dfb6" title="První bod dotyku.">A</a>;
 <a name="l00258"></a>00258 
@@ -222,20 +239,21 @@
 <a name="l00272"></a>00272             <a class="code" href="struct_phys_lib_1_1_contact_pair.html#a7a3a050935464a7b46c092eda918cf71" title="Druhý bod dotyku.">B</a> = <span class="keyword">new</span> PointF(second.X, second.Y);
 <a name="l00273"></a>00273         }
 <a name="l00274"></a>00274 
-<a name="l00278"></a>00278         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="struct_phys_lib_1_1_contact_pair.html#a6be7746735fb5fb1287f4499c0da1c5e" title="Druhá mocnina vzdálenosti bodů.">DistanceSquared</a>
+<a name="l00278"></a>00278         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="struct_phys_lib_1_1_contact_pair.html#a6be7746735fb5fb1287f4499c0da1c5e" title="Druhá mocnina vzdálenosti bodů">DistanceSquared</a>
 <a name="l00279"></a><a class="code" href="struct_phys_lib_1_1_contact_pair.html#a6be7746735fb5fb1287f4499c0da1c5e">00279</a>         {
-<a name="l00280"></a>00280             <span class="keyword">get</span> { <span class="keywordflow">return</span> Math.Pow(<a class="code" href="class_phys_lib_1_1_geometry.html" title="Abstraktní třída reprezentující fyzický model tělesa.">Geometry</a>.PointDistance(<a class="code" href="struct_phys_lib_1_1_contact_pair.html#ae85d8d1bee9389b4935c731a2d57dfb6" title="První bod dotyku.">A</a>, <a class="code" href="struct_phys_lib_1_1_contact_pair.html#a7a3a050935464a7b46c092eda918cf71" title="Druhý bod dotyku.">B</a>), 2); }
+<a name="l00280"></a>00280             <span class="keyword">get</span> { <span class="keywordflow">return</span> Math.Pow(<a class="code" href="class_phys_lib_1_1_geometry.html" title="Abstraktní třída reprezentující 2D fyzický model tělesa.">Geometry</a>.<a class="code" href="class_phys_lib_1_1_geometry.html#af85267217006c70bf21a251bcf422f11" title="Spočte vzdálenost dvou bodů">PointDistance</a>(<a class="code" href="struct_phys_lib_1_1_contact_pair.html#ae85d8d1bee9389b4935c731a2d57dfb6" title="První bod dotyku.">A</a>, <a class="code" href="struct_phys_lib_1_1_contact_pair.html#a7a3a050935464a7b46c092eda918cf71" title="Druhý bod dotyku.">B</a>), 2); }
 <a name="l00281"></a>00281         }
 <a name="l00282"></a>00282     }
 <a name="l00283"></a>00283 
-<a name="l00287"></a>00287     <span class="keyword">public</span> <span class="keyword">enum</span> ContactType
+<a name="l00287"></a><a class="code" href="namespace_phys_lib.html#ab76c52800c25619d09fc40c19297fa66">00287</a>     <span class="keyword">public</span> <span class="keyword">enum</span> <a class="code" href="namespace_phys_lib.html#ab76c52800c25619d09fc40c19297fa66" title="Možné typy dotyku.">ContactType</a>
 <a name="l00288"></a>00288     {
 <a name="l00289"></a>00289         VertexVertex = 1, VertexEdge = 2, EdgeEdge = 3
 <a name="l00290"></a>00290     }
 <a name="l00291"></a>00291 }
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generováno Tue Dec 28 01:29:58 2010 pro projekt PhysLib programem&nbsp;
+</div>
+<hr class="footer"/><address class="footer"><small>Generováno ne 8. kvě 2011 17.39:00 pro projekt PhysLib programem&#160;
 <a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
 </html>
