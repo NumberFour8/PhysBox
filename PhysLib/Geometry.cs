@@ -6,7 +6,7 @@ namespace PhysLib
 {
     
     /// <summary>
-    /// Abstraktní třída reprezentující fyzický model tělesa
+    /// Abstraktní třída reprezentující 2D fyzický model tělesa
     /// </summary>
     [Serializable]
     public abstract class Geometry
@@ -67,7 +67,7 @@ namespace PhysLib
         /// <summary>
         /// Pozice těžiště objektu vzhledem k počátku světa
         /// </summary>
-        public virtual Vector Position
+        public Vector Position
         {
             get { return (Vector)center; }
             set
@@ -86,14 +86,14 @@ namespace PhysLib
         /// <summary>
         /// Orientace objektu v úhlových stupních
         /// </summary>
-        public virtual double Orientation
+        public double Orientation
         {
             get { return angle; }
             set {
                 if (Double.IsNaN(value) || Double.IsInfinity(value)) throw new ArgumentOutOfRangeException();
                 if (Math.Abs(value - angle) < 0.1) return;
 
-                Matrix Rotation = Transform2D.Rotate(value - angle, Nail);
+                Matrix Rotation = Transform2D.Rotate((value - angle)*Math.PI/180, Nail);
                 geom = Transform2D.TransformPoints(Rotation,geom);
                 center = Vector.Round(Transform2D.TransformVectors(Rotation,center)[0],2);
 
@@ -105,7 +105,7 @@ namespace PhysLib
         /// Škáluje těleso daným faktorem
         /// </summary>
         /// <param name="Factor">Faktor</param>
-        public virtual float Scale
+        public float Scale
         {
             get { return scale; }
             set
@@ -239,23 +239,14 @@ namespace PhysLib
         /// <summary>
         /// Absolutní poloha konvexního útvaru ohraničující těleso
         /// </summary>
-        public virtual PointF[] BoundingBox
+        public PointF[] BoundingBox
         {
             get
             {
                 if (Convex) return geom;
+                Matrix T = Transform2D.TranslateAndRotate(center, angle * Math.PI / 180, Nail);
 
-                PointF[] transformedHull = new PointF[desc.ConvexHull.Length];
-                desc.ConvexHull.CopyTo(transformedHull, 0);
-
-                using (System.Drawing.Drawing2D.Matrix rot = new System.Drawing.Drawing2D.Matrix())
-                {
-                    rot.Translate((float)center[0], (float)center[1]);
-                    rot.RotateAt((float)angle, (PointF)Nail, System.Drawing.Drawing2D.MatrixOrder.Append);
-                    rot.TransformPoints(transformedHull);
-                }
-
-                return transformedHull;
+                return Transform2D.TransformPoints(T, desc.ConvexHull);
             }
         }
 
@@ -273,7 +264,7 @@ namespace PhysLib
         /// <summary>
         /// Absolutní poloha bodu osy otáčení v rovině těžiště
         /// </summary>
-        public virtual Vector Nail
+        public Vector Nail
         {
             get; set;
         }
@@ -281,7 +272,7 @@ namespace PhysLib
         /// <summary>
         /// Hloubka tělesa
         /// </summary>
-        public virtual double Depth
+        public double Depth
         {
             get { return desc.Depth; }
             set

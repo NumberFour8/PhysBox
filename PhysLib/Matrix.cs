@@ -372,7 +372,7 @@ namespace PhysLib
 
 
     /// <summary>
-    /// Statická třída pro běžné 2D transformace
+    /// Pomocná statická třída pro běžné 2D transformace
     /// </summary>
     public class Transform2D
     {
@@ -407,6 +407,23 @@ namespace PhysLib
             Rot[2, 0] = 0; Rot[2, 1] = 0; Rot[2, 2] = 1;
 
             return Rot ;
+        }
+
+        /// <summary>
+        /// Vytvoří 2D transformační matici součastného posunutí a rotace okolo daného bodu
+        /// </summary>
+        /// <param name="MoveBy">Vektor posunutí</param>
+        /// <param name="RotateBy">Úhel otočení v radiánech</param>
+        /// <param name="RotationAxis">Osa otočení</param>
+        /// <returns>Transformační matice posunutí a rotace</returns>
+        public static Matrix TranslateAndRotate(Vector MoveBy, double RotateBy, Vector RotationAxis)
+        {
+            Matrix Rot = new Matrix(3);
+            Rot[0, 0] = Math.Cos(RotateBy); Rot[0, 1] = -Math.Sin(RotateBy); Rot[0, 2] = -RotationAxis[0] * Math.Cos(RotateBy) + RotationAxis[1] * Math.Sin(RotateBy) + RotationAxis[0] + MoveBy[0];
+            Rot[1, 0] = Math.Sin(RotateBy); Rot[1, 1] = Math.Cos(RotateBy); Rot[1, 2] = -RotationAxis[0] * Math.Sin(RotateBy) - RotationAxis[1] * Math.Cos(RotateBy) + RotationAxis[1] + MoveBy[1];
+            Rot[2, 0] = 0; Rot[2, 1] = 0; Rot[2, 2] = 1;
+
+            return Rot;
         }
 
         /// <summary>
