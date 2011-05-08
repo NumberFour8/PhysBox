@@ -67,13 +67,13 @@ namespace PhysBox
             Graphics g = e.Graphics;
             if (COG == null)
             {
-                foreach (PointF pt in pts.ToArray(typeof(PointF)))                
+                foreach (PointF pt in pts.ToArray())                
                    g.FillRectangle(Brushes.Black, new RectangleF(pt.X - 2, pt.Y - 2, 4, 4));
             }
             else
             {                                
                 System.Drawing.Drawing2D.GraphicsPath Path = new System.Drawing.Drawing2D.GraphicsPath();
-                Path.AddClosedCurve((PointF[])pts.ToArray(typeof(PointF)),float.Parse(text_objTension.Text));                
+                Path.AddClosedCurve((PointF[])pts.ToArray(),float.Parse(text_objTension.Text));                
                 g.DrawPath(Pens.Black, Path);
 
                 g.FillEllipse(Brushes.Red, new RectangleF(COG.Value.X - 2, COG.Value.Y - 2, 4, 4));

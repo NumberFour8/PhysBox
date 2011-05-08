@@ -386,8 +386,8 @@ namespace PhysLib
         public static Matrix Rotate(double Angle)
         {
             Matrix Rot = new Matrix(3);
-            Rot[0, 0] = Math.Cos(Angle); Rot[0, 1] = -Math.Sin(Angle); Rot[0, 2] = 1;
-            Rot[1, 0] = Math.Sin(Angle); Rot[1, 1] = Math.Cos(Angle); Rot[1, 2] = 0;
+            Rot[0, 0] = Math.Cos(Angle); Rot[0, 1] = Math.Sin(Angle); Rot[0, 2] = 1;
+            Rot[1, 0] = -Math.Sin(Angle); Rot[1, 1] = Math.Cos(Angle); Rot[1, 2] = 0;
             Rot[2, 0] = 0; Rot[2, 1] = 0; Rot[2, 2] = 0;
 
             return Rot;
@@ -399,14 +399,13 @@ namespace PhysLib
         /// <param name="Angle">Úhel otočení v radiánech</param>
         /// <param name="Axis">Osa otočení</param>
         /// <returns>Transformační matice rotace</returns>
-        public static Matrix RotateAt(double Angle, Vector Axis)
+        public static Matrix Rotate(double Angle, Vector Axis)
         {
             Matrix Rot = new Matrix(3);
             Rot[0, 0] = Math.Cos(Angle); Rot[0, 1] = -Math.Sin(Angle); Rot[0, 2] = -Axis[0] * Math.Cos(Angle) + Axis[1] * Math.Sin(Angle) + Axis[0];
             Rot[1, 0] = Math.Sin(Angle); Rot[1, 1] = Math.Cos(Angle);  Rot[1, 2] =  -Axis[0] * Math.Sin(Angle) - Axis[1] * Math.Cos(Angle) + Axis[1];
             Rot[2, 0] = 0; Rot[2, 1] = 0; Rot[2, 2] = 1;
 
-            
             return Rot ;
         }
 
@@ -430,14 +429,30 @@ namespace PhysLib
         /// </summary>
         /// <param name="Factor">Škálovací faktor</param>
         /// <returns>Transformační matice škálování</returns>
-        public static Matrix Scale(float Factor)
+        public static Matrix Scale(Vector Factor)
         {
-            Vector SF = new Vector(Factor, Factor);
             Matrix Scale = new Matrix(3);
 
-            Scale[0, 0] = SF[0]; Scale[0, 1] = 0;     Scale[0, 2] = 0;
-            Scale[1, 0] = 0;     Scale[1, 1] = SF[1]; Scale[1, 2] = 0;
-            Scale[2, 0] = 0;     Scale[2, 1] = 0;     Scale[2, 2] = 1;
+            Scale[0, 0] = Factor[0]; Scale[0, 1] = 0;         Scale[0, 2] = 0;
+            Scale[1, 0] = 0;         Scale[1, 1] = Factor[1]; Scale[1, 2] = 0;
+            Scale[2, 0] = 0;         Scale[2, 1] = 0;         Scale[2, 2] = 1;
+
+            return Scale;
+        }
+
+        /// <summary>
+        /// Vytvoří 2D transformační matici škálování a translace s daným škálovacím faktorem a posunutím
+        /// </summary>
+        /// <param name="Factor">Škálovací faktor</param>
+        /// <param name="At">Vektor posunutí</param>
+        /// <returns>Transformační matice škálování a translace</returns>
+        public static Matrix Scale(Vector Factor, Vector At)
+        {
+            Matrix Scale = new Matrix(3);
+
+            Scale[0, 0] = Factor[0]; Scale[0, 1] = 0;         Scale[0, 2] = -At[0] * Factor[0] + At[0] ;
+            Scale[1, 0] = 0;         Scale[1, 1] = Factor[1]; Scale[1, 2] = -At[1] * Factor[1] + At[1];
+            Scale[2, 0] = 0;         Scale[2, 1] = 0;         Scale[2, 2] = 1;
 
             return Scale;
         }

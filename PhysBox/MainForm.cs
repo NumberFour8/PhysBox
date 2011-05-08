@@ -49,7 +49,7 @@ namespace PhysBox
             if (Tools == null || Tools.IsDisposed) Tools = new Toolbox();
                 
             Tools.Location = new Point(Size.Width - Tools.Width - 20, mainMenu.Height + 30);
-            Tools.Show(this);
+            if (!Tools.Visible) Tools.Show(this);
         }
 
         public void AddObject(SimObject O)

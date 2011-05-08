@@ -56,23 +56,14 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Vytvoří vektor z 2D bodu.
+        /// Vytvoří dvousložkový vektor z 2D bodu.
         /// </summary>
         /// <param name="Point">2D bod</param>
-        /// <param name="Triplet">Indikuje, zda se má uměle přidat 3. jednotková souřadnice (pro homogenní soustavu souřadnou).</param>
-        public Vector(System.Drawing.PointF Point, bool Triplet = true)
+        public Vector(System.Drawing.PointF Point)
         {
             if (Point == null) throw new ArgumentNullException();
-            if (Triplet)
-            {
-                t = new double[3];
-                t[0] = Point.X; t[1] = Point.Y; t[2] = 0;
-            }
-            else
-            {
-                t = new double[2];
-                t[0] = Point.X; t[1] = Point.Y;
-            }
+            t = new double[2];
+            t[0] = Point.X; t[1] = Point.Y;
         }
 
         /// <summary>
@@ -459,7 +450,7 @@ namespace PhysLib
 
         public static explicit operator Vector(System.Drawing.PointF p)
         {
-            return new Vector(p.X,p.Y,0); // !
+            return new Vector(p.X,p.Y,1); // Homogenní souřadnice!
         }
 
         public static explicit operator System.Drawing.PointF(Vector v)

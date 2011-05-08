@@ -93,7 +93,7 @@ namespace PhysLib
                 if (Double.IsNaN(value) || Double.IsInfinity(value)) throw new ArgumentOutOfRangeException();
                 if (Math.Abs(value - angle) < 0.1) return;
 
-                Matrix Rotation = Transform2D.RotateAt(value - angle, Nail);
+                Matrix Rotation = Transform2D.Rotate(value - angle, Nail);
                 geom = Transform2D.TransformPoints(Rotation,geom);
                 center = Vector.Round(Transform2D.TransformVectors(Rotation,center)[0],2);
 
@@ -112,13 +112,7 @@ namespace PhysLib
             {
                 if (Double.IsNaN(value) || Double.IsInfinity(value)) throw new ArgumentOutOfRangeException();
 
-                using (System.Drawing.Drawing2D.Matrix mat = new System.Drawing.Drawing2D.Matrix())
-                {
-                    mat.Translate((float)-Position[0], (float)-Position[1]);
-                    mat.Scale(Math.Abs(value - scale), Math.Abs(value - scale), System.Drawing.Drawing2D.MatrixOrder.Append);
-                    mat.Translate((float)Position[0], (float)Position[1], System.Drawing.Drawing2D.MatrixOrder.Append);
-                    mat.TransformPoints(geom);
-                }
+                geom = Transform2D.TransformPoints(Transform2D.Scale(new Vector(Scale, Scale), Position),geom);
                 scale = value;
             }
         }
