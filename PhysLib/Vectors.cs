@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PhysLib
 {
@@ -48,18 +49,51 @@ namespace PhysLib
         /// <param name="Copy">Vzor pro nový vektor</param>
         public Vector(Vector Copy)
         {
-            if (Copy == null) throw new ArgumentException();
+            if (Copy == null) throw new ArgumentNullException();
             t = new double[Copy.Count];
             for (int i = 0; i < Copy.Count; i++)
                 t[i] = Copy[i];
         }
 
         /// <summary>
-        /// Počet složek ve vektoru
+        /// Vytvoří vektor z 2D bodu.
+        /// </summary>
+        /// <param name="Point">2D bod</param>
+        /// <param name="Triplet">Indikuje, zda se má uměle přidat 3. jednotková souřadnice (pro homogenní soustavu souřadnou).</param>
+        public Vector(System.Drawing.PointF Point, bool Triplet = true)
+        {
+            if (Point == null) throw new ArgumentNullException();
+            if (Triplet)
+            {
+                t = new double[3];
+                t[0] = Point.X; t[1] = Point.Y; t[2] = 0;
+            }
+            else
+            {
+                t = new double[2];
+                t[0] = Point.X; t[1] = Point.Y;
+            }
+        }
+
+        /// <summary>
+        /// Počet složek ve vektoru. Změnou hodnoty lze přidávat nulové složky nebo složky odebírat.
         /// </summary>
         public int Count
         {
             get { return t.Length; }
+            set
+            {
+                if (value != t.Length)
+                {
+                    double[] d = new double[value];
+                    for (int i = 0; i < value; i++)
+                    {
+                        if (i >= t.Length) d[i] = 0;
+                        else d[i] = t[i];
+                    }
+                    t = d;
+                }
+            }
         }
 
         /// <summary>
@@ -468,5 +502,66 @@ namespace PhysLib
                 Ret += String.Format("{0:F2};", this[i]);
             return "(" + Ret.Remove(Ret.Length-1) + ")";
         }
+    }
+    
+    /// <summary>
+    /// Konvertor mezi polem vektorů a různými poli s vektorem ekvivalentních typů
+    /// </summary>
+    public class VectorConverter
+    {
+        private VectorConverter() { }
+
+        /// <summary>
+        /// Převede pole třídy Point na pole vektorů
+        /// </summary>
+        /// <param name="Points">Pole bodů</param>
+        /// <returns>Pole vektorů</returns>
+        public static Vector[] PointsToVectors(System.Drawing.Point[] Points)
+        {
+            Vector[] Out = new Vector[Points.Length];
+            for (int i = 0; i < Points.Length; i++)            
+                Out[i] = new Vector((double)Points[i].X, (double)Points[i].Y);
+            return Out;
+        }
+
+        /// <summary>
+        /// Převede pole třídy PointF na pole vektorů
+        /// </summary>
+        /// <param name="Points">Pole bodů</param>
+        /// <returns>Pole vektorů</returns>
+        public static Vector[] PointsToVectors(System.Drawing.PointF[] Points)
+        {
+            Vector[] Out = new Vector[Points.Length];
+            for (int i = 0; i < Points.Length; i++)
+                Out[i] = new Vector((double)Points[i].X, (double)Points[i].Y);
+            return Out;
+        }
+
+        /// <summary>
+        /// Převede vektory na pole třídy Point
+        /// </summary>
+        /// <param name="Points">Pole vektorů</param>
+        /// <returns>Pole Point</returns>
+        public static System.Drawing.Point[] VectorsToPoints(Vector[] Vectors)
+        {
+            System.Drawing.Point[] Out = new System.Drawing.Point[Vectors.Length];
+            for (int i = 0; i < Vectors.Length; i++)
+                Out[i] = new System.Drawing.Point((int)Vectors[i][0], (int)Vectors[i][1]);
+            return Out;
+        }
+
+        /// <summary>
+        /// Převede vektory na pole třídy PointF
+        /// </summary>
+        /// <param name="Points">Pole vektorů</param>
+        /// <returns>Pole PointF</returns>
+        public static System.Drawing.PointF[] VectorsToPointFs(Vector[] Vectors)
+        {
+            System.Drawing.PointF[] Out = new System.Drawing.PointF[Vectors.Length];
+            for (int i = 0; i < Vectors.Length; i++)
+                Out[i] = new System.Drawing.PointF((int)Vectors[i][0], (int)Vectors[i][1]);
+            return Out;
+        }
+
     }
 }

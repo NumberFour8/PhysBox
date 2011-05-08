@@ -17,7 +17,7 @@ namespace PhysLib
         private double[] t;
 
         /// <summary>
-        /// Vytvoří matici MxN a vyplní ji nulami
+        /// Vytvoří nulovou matici MxN
         /// </summary>
         /// <param name="NumRows">Počet M řádku</param>
         /// <param name="NumColumns">Počet N sloupců</param>
@@ -32,6 +32,19 @@ namespace PhysLib
 
             rows = NumRows;
             cols = NumColumns;
+        }
+
+        /// <summary>
+        /// Vytvoří jednotkovou čtvercovou matici daného řádu.
+        /// </summary>
+        /// <param name="MatOrder">Řád matice</param>
+        public Matrix(int MatOrder)
+        {
+            if (MatOrder < 1) throw new ArgumentException();
+            t = new double[MatOrder * MatOrder];
+            rows = cols = MatOrder;
+            
+            Reset();
         }
 
         /// <summary>
@@ -138,7 +151,27 @@ namespace PhysLib
         {
             get { return cols; }
         }
-        
+
+        /// <summary>
+        /// Zjistí, zda je matice čtvercová
+        /// </summary>
+        public bool Square
+        {
+            get { return rows == cols; }
+        }
+
+        /// <summary>
+        /// Zjistí řád čtvercové matice
+        /// </summary>
+        public int Order
+        {
+            get
+            {
+                if (!Square) return 0;
+                return rows;
+            }
+        }
+
         /// <summary>
         /// Dimenze matice
         /// </summary>
@@ -149,7 +182,7 @@ namespace PhysLib
 
         public static Matrix operator +(Matrix A, Matrix B)
         {
-            if (A.Dimension != B.Dimension) throw new MatrixException();
+            if (!A.Square || !B.Square) throw new MatrixException();
 
             for (int i = 0; i < A.Dimension; i++)
                 A[i] += B[i];
@@ -159,7 +192,7 @@ namespace PhysLib
 
         public static Matrix operator -(Matrix A, Matrix B)
         {
-            if (A.Dimension != B.Dimension) throw new MatrixException();
+            if (!A.Square || !B.Square) throw new MatrixException();
 
             for (int i = 0; i < A.Dimension; i++)
                 A[i] -= B[i];
@@ -169,7 +202,7 @@ namespace PhysLib
 
         public static Matrix operator *(Matrix A, Matrix B)
         {
-            if (A.Rows != B.Columns) throw new MatrixException();
+            if (A.Columns != B.Rows) throw new MatrixException();
 
             Matrix C = new Matrix(A.Rows, B.Columns);
 
@@ -194,65 +227,47 @@ namespace PhysLib
             cols = M.Columns;
             rows = M.Rows;
             
-            t = new double[cols * rows];
-            for (int i = 0; i < rows*cols; i++)            
+            t = new double[Dimension];
+            for (int i = 0; i < Dimension; i++)            
                 t[i] = M[i];            
         }
 
         /// <summary>
-        /// Indikuje zda je daná matice v diagonálním tvaru
+        /// Indikuje zda je daná čtvercová matice diagonální
         /// </summary>
         public bool Diagonal
         {
             get
             {
-                if (rows != cols) return false;
-                for (int i = 0; i < rows * cols; i++)
+                if (!Square) return false;
+                for (int i = 0; i < Dimension; i++)
                 {
-                    if (t[i] != 0 && i % (rows + 1) != 0) return false;
+                    if (t[i] != 0 && i % (Order + 1) != 0) return false;
                 }
                 return true;
             }
         }
 
         /// <summary>
-        /// Vytvoří rotační matici podle dané osy o daný úhel
+        /// Vynuluje matici
         /// </summary>
-        /// <param name="Angle">Úhel otočení</param>
-        /// <param name="Axis">Osa otočení</param>
-        /// <returns>Transformační matice rotace</returns>
-        public static Matrix RotationAt(double Angle, Vector Axis)
+        public void Null()
         {
-            throw new NotImplementedException();    
+            for (int i = 0; i < Dimension; i++)
+                t[i] = 0;
         }
 
         /// <summary>
-        /// Vytvoří translační matici o daný vektor posunutí
+        /// Vytvoří diagonální čtvercovou jednotkovou matici
         /// </summary>
-        /// <param name="To">Vektor posunutí</param>
-        /// <returns>Transformační matice translace</returns>
-        public static Matrix Translation(Vector To)
+        public void Reset()
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Vytvoří škálovací matici s daným škálovacím faktorem
-        /// </summary>
-        /// <param name="Factor">Škálovací faktor</param>
-        /// <returns>Transformační matice škálování</returns>
-        public static Matrix Scaling(float Factor)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Aplikuje transformaci dané touto maticí na vektory
-        /// </summary>
-        /// <param name="Vectors">Vektory, na které má být aplikována transformace</param>
-        public void TransformVectors(ref Vector[] Vectors)
-        {
-            throw new NotImplementedException();
+            if (!Square) throw new MatrixException();
+            for (int i = 0; i < Dimension; i++)
+            {
+                if (i % (Order + 1) == 0) t[i] = 1;
+                else t[i] = 0;
+            }
         }
 
         /// <summary>
@@ -272,12 +287,12 @@ namespace PhysLib
         }
 
         /// <summary>
-        /// Převede matici o jednom řádku na vektor
+        /// Převede matici o jednom řádku nebo sloupci na vektor
         /// </summary>
         /// <returns>Vektor</returns>
         public Vector ToVector()
         {
-            if (rows > 1) throw new MatrixException();
+            if (rows > 1 && cols > 1) throw new MatrixException();
             return new Vector(t);
         }
 
@@ -353,5 +368,119 @@ namespace PhysLib
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context)
             : base(info, context) { }
+    }
+
+
+    /// <summary>
+    /// Statická třída pro běžné 2D transformace
+    /// </summary>
+    public class Transform2D
+    {
+        private Transform2D() { }
+
+        /// <summary>
+        /// Vytvoří 2D transformační matici rotace podle počátku o daný úhel (pro homogenní souřadnice)
+        /// </summary>
+        /// <param name="Angle">Úhel otočení v radiánech</param>
+        /// <returns>Transformační matice rotace</returns>
+        public static Matrix Rotate(double Angle)
+        {
+            Matrix Rot = new Matrix(3);
+            Rot[0, 0] = Math.Cos(Angle); Rot[0, 1] = -Math.Sin(Angle); Rot[0, 2] = 1;
+            Rot[1, 0] = Math.Sin(Angle); Rot[1, 1] = Math.Cos(Angle); Rot[1, 2] = 0;
+            Rot[2, 0] = 0; Rot[2, 1] = 0; Rot[2, 2] = 0;
+
+            return Rot;
+        }
+        
+        /// <summary>
+        /// Vytvoří 2D transformační matici rotace podle dané osy o daný úhel (pro homogenní souřadnice)
+        /// </summary>
+        /// <param name="Angle">Úhel otočení v radiánech</param>
+        /// <param name="Axis">Osa otočení</param>
+        /// <returns>Transformační matice rotace</returns>
+        public static Matrix RotateAt(double Angle, Vector Axis)
+        {
+            Matrix Rot = new Matrix(3);
+            Rot[0, 0] = Math.Cos(Angle); Rot[0, 1] = -Math.Sin(Angle); Rot[0, 2] = -Axis[0] * Math.Cos(Angle) + Axis[1] * Math.Sin(Angle) + Axis[0];
+            Rot[1, 0] = Math.Sin(Angle); Rot[1, 1] = Math.Cos(Angle);  Rot[1, 2] =  -Axis[0] * Math.Sin(Angle) - Axis[1] * Math.Cos(Angle) + Axis[1];
+            Rot[2, 0] = 0; Rot[2, 1] = 0; Rot[2, 2] = 1;
+
+            
+            return Rot ;
+        }
+
+        /// <summary>
+        /// Vytvoří 2D transformační matici posunutí o daný vektor (pro homogenní souřadnice)
+        /// </summary>
+        /// <param name="To">Vektor posunutí</param>
+        /// <returns>Transformační matice translace</returns>
+        public static Matrix Translate(Vector To)
+        {
+            Matrix Trans = new Matrix(3);
+            Trans[0, 0] = 1; Trans[0, 1] = 0; Trans[0, 2] = To[0];
+            Trans[1, 0] = 0; Trans[1, 1] = 1; Trans[1, 2] = To[1];
+            Trans[2, 0] = 0; Trans[2, 1] = 0; Trans[2, 2] = 1;
+
+            return Trans;
+        }
+
+        /// <summary>
+        /// Vytvoří 2D transformační matici škálování s daným škálovacím faktorem (pro homogenní souřadnice)
+        /// </summary>
+        /// <param name="Factor">Škálovací faktor</param>
+        /// <returns>Transformační matice škálování</returns>
+        public static Matrix Scale(float Factor)
+        {
+            Vector SF = new Vector(Factor, Factor);
+            Matrix Scale = new Matrix(3);
+
+            Scale[0, 0] = SF[0]; Scale[0, 1] = 0;     Scale[0, 2] = 0;
+            Scale[1, 0] = 0;     Scale[1, 1] = SF[1]; Scale[1, 2] = 0;
+            Scale[2, 0] = 0;     Scale[2, 1] = 0;     Scale[2, 2] = 1;
+
+            return Scale;
+        }
+
+        /// <summary>
+        /// Aplikuje 2D transformaci danou maticí na vektory v homogenní soustavě souřadné
+        /// </summary>
+        /// <param name="Vectors">Vektory, na které má být aplikována transformace</param>
+        public static Vector[] TransformVectors(Matrix Transform,params Vector[] Vectors)
+        {
+            if (Transform.Order != 3) throw new MatrixException();
+
+            for (int i = 0,c = 0; i < Vectors.Length; i++)
+            {
+                Vector T = Vectors[i];
+                c = T.Count;
+                
+                T.Count = 3; T[2] = 1;
+                Vectors[i] = (Transform * T.ToMatrix(MatrixInitType.VectorsAreColumns)).ToVector();
+                
+                Vectors[i].Count = c;
+            }
+            return Vectors;
+        }
+
+        /// <summary>
+        /// Aplikuje 2D transformaci danou maticí na body v homogenní soustavě souřadné
+        /// </summary>
+        /// <param name="Points">Body, na které má být aplikována transformace</param>
+        public static System.Drawing.PointF[] TransformPoints(Matrix Transform, params System.Drawing.PointF[] Points)
+        {
+            if (Transform.Order != 3) throw new MatrixException();
+
+            for (int i = 0; i < Points.Length; i++)
+            {
+                Vector T = new Vector(Points[i].X, Points[i].Y, 1);
+                T = (Transform * T.ToMatrix(MatrixInitType.VectorsAreColumns)).ToVector();
+
+                Points[i].X = (float)T[0]; Points[i].Y = (float)T[1];
+            }
+            return Points;
+        }
+
+
     }
 }
