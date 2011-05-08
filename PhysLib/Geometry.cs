@@ -75,13 +75,10 @@ namespace PhysLib
                 if (value.IsNaN) throw new ArgumentOutOfRangeException();
                 if ((value - center).Magnitude < 0.1) return;
 
-                using (System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix())
-                {
-                    Mat.Translate((float)(value[0] - center[0]), (float)(value[1] - center[1]));
-                    Mat.TransformPoints(geom);
-                    if (Nail != center) Nail += value - center;
-                    else Nail = value;
-                }
+                geom = Transform2D.TransformPoints(Transform2D.Translate(value - center), geom);
+                if (Nail != center) Nail += value - center;
+                else Nail = value;
+
                 center = value; 
             }
         }
@@ -96,18 +93,10 @@ namespace PhysLib
                 if (Double.IsNaN(value) || Double.IsInfinity(value)) throw new ArgumentOutOfRangeException();
                 if (Math.Abs(value - angle) < 0.1) return;
 
-                using (System.Drawing.Drawing2D.Matrix Mat = new System.Drawing.Drawing2D.Matrix())
-                {
-                    Mat.RotateAt((float)(value - angle), (PointF)(Nail));
-                    Mat.TransformPoints(geom);
+                Matrix Rotation = Transform2D.RotateAt(value - angle, Nail);
+                geom = Transform2D.TransformPoints(Rotation,geom);
+                center = Vector.Round(Transform2D.TransformVectors(Rotation,center)[0],2);
 
-                    if (Nail != center)
-                    {
-                        PointF[] t = new PointF[] { (PointF)center };
-                        Mat.TransformPoints(t);
-                        center = new Vector(Math.Round(t[0].X, 2), Math.Round(t[0].Y, 2), 0);
-                    }
-                }
                 angle = value;
             }
         }
