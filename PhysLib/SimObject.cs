@@ -25,7 +25,7 @@ namespace PhysLib
 
             model = ObjectModel;
             Mass = ObjectMass;
-            OwnMaterial = ObjectMaterial;
+            ObjMaterial = ObjectMaterial;
 
             totalForce = Vector.Zero;
             totalTorque = Vector.Zero;
@@ -65,13 +65,11 @@ namespace PhysLib
         /// <summary>
         /// Spočítá moment setrvačnosti tělesa v závislosti na rozlišení
         /// </summary>
-        /// <param name="Resolution">Rozlišení</param>
-        /// <returns>Moment setrvačnosti</returns>
         public double MomentOfInertia
         {
             get
             {
-                return Static ? Double.PositiveInfinity : (J * m / 6) + m * Math.Pow(Math.Round(Vector.PointDistance(RotationPoint, COG),1),2);
+                return Static ? Double.PositiveInfinity : Math.Floor((J * m / 6) + m * Math.Pow(Math.Round(Vector.PointDistance(RotationPoint, COG),1),2));
             }
         }
 
@@ -161,7 +159,7 @@ namespace PhysLib
         /// <summary>
         /// Materiálové konstanty tělesa
         /// </summary>
-        public Material OwnMaterial
+        public Material ObjMaterial
         {
             get;
             set;

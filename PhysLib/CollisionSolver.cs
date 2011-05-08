@@ -166,8 +166,8 @@ namespace PhysLib
         /// <param name="Report">Hlášení o kolizi</param>
         public void SolveCollision(CollisionReport Report)
         {
-            double k = Math.Max(Report.A.OwnMaterial.RestitutionCoefficient,Report.B.OwnMaterial.RestitutionCoefficient);
-            double f = Math.Max(Report.A.OwnMaterial.FrictionCoefficient, Report.B.OwnMaterial.FrictionCoefficient);
+            double k = Math.Max(Report.A.ObjMaterial.RestitutionCoefficient,Report.B.ObjMaterial.RestitutionCoefficient);
+            double f = Math.Max(Report.A.ObjMaterial.FrictionCoefficient, Report.B.ObjMaterial.FrictionCoefficient);
             double M = 1 / (1 / Report.A.Mass + 1 / Report.B.Mass);
             
             double I = (Math.Pow(Vector.Dot(Report.NAP, Report.N), 2) / Report.A.MomentOfInertia) + (Math.Pow(Vector.Dot(Report.NBP, Report.N), 2) / Report.B.MomentOfInertia);

@@ -73,7 +73,7 @@ namespace PhysBox
                     objProps.Text = String.Format("Vlastnosti objektu: {0}", (MyOwner.Selected.Model as GraphicObject).Name);
                     objProps.Enabled = true;
 
-                    prop_Material.Text = MyOwner.Selected.OwnMaterial.ToString();
+                    prop_Material.Text = MyOwner.Selected.ObjMaterial.ToString();
 
                     if (!MyOwner.Selected.Static)
                     {

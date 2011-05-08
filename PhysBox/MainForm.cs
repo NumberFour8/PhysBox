@@ -418,6 +418,15 @@ namespace PhysBox
         private void menu_Quit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void menuNoMotion_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < MyWorld.Objects.Length; i++)
+            {
+                MyWorld.Objects[i].LinearVelocity.Null();
+                MyWorld.Objects[i].AngularVelocity.Null();
+            }
         }       
     }
 }
