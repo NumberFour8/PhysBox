@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>PhysLib: Dokumentace třídy PhysLib.Transform2D</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Generováno programem Doxygen 1.7.4 -->
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PhysLib&#160;<span id="projectnumber">0.2</span></div>
+   <div id="projectbrief">Knihovna pro 2D simulaci mechaniky tuhých těles</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hlavní&#160;stránka</span></a></li>
+      <li><a href="namespaces.html"><span>Balíky</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Třídy</span></a></li>
+      <li><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Seznam&#160;tříd</span></a></li>
+      <li><a href="functions.html"><span>Seznam&#160;členů&#160;tříd</span></a></li>
+    </ul>
+  </div>
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><a class="el" href="a00027.html">PhysLib</a>      </li>
+      <li class="navelem"><a class="el" href="a00014.html">Transform2D</a>      </li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#pub-static-methods">Statické veřejné metody</a>  </div>
+  <div class="headertitle">
+<div class="title">Dokumentace třídy PhysLib.Transform2D</div>  </div>
+</div>
+<div class="contents">
+<!-- doxytag: class="PhysLib::Transform2D" -->
+<p>Pomocná statická třída pro běžné 2D transformace.  
+ <a href="a00014.html#details">...</a></p>
+
+<p><a href="a00043.html">Seznam všech členů.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-static-methods"></a>
+Statické veřejné metody</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00010.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a7694e57f74b824e1b3d5d951e514b93a">Rotate</a> (double Angle)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Vytvoří 2D transformační matici rotace podle počátku o daný úhel (pro homogenní souřadnice)  <a href="#a7694e57f74b824e1b3d5d951e514b93a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00010.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a2c6ed3db0b53adc337f1593ea7c705f6">Rotate</a> (double Angle, <a class="el" href="a00015.html">Vector</a> Axis)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Vytvoří 2D transformační matici rotace podle dané osy o daný úhel (pro homogenní souřadnice)  <a href="#a2c6ed3db0b53adc337f1593ea7c705f6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00010.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a8fc26d38b1756e4de58f85a9a4627af3">TranslateAndRotate</a> (<a class="el" href="a00015.html">Vector</a> MoveBy, double RotateBy, <a class="el" href="a00015.html">Vector</a> RotationAxis)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Vytvoří 2D transformační matici součastného posunutí a rotace okolo daného bodu.  <a href="#a8fc26d38b1756e4de58f85a9a4627af3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00010.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a1287410132b857a912dd482d42662ad7">Translate</a> (<a class="el" href="a00015.html">Vector</a> To)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Vytvoří 2D transformační matici posunutí o daný vektor (pro homogenní souřadnice)  <a href="#a1287410132b857a912dd482d42662ad7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00010.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a0ef33fc7905951ed809d3d05c3cd9c07">Scale</a> (<a class="el" href="a00015.html">Vector</a> Factor)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Vytvoří 2D transformační matici škálování s daným škálovacím faktorem (pro homogenní souřadnice)  <a href="#a0ef33fc7905951ed809d3d05c3cd9c07"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00010.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#ad232fedbdf9a64d8f58fb0b4b8fe1216">Scale</a> (<a class="el" href="a00015.html">Vector</a> Factor, <a class="el" href="a00015.html">Vector</a> At)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Vytvoří 2D transformační matici škálování a translace s daným škálovacím faktorem a posunutím.  <a href="#ad232fedbdf9a64d8f58fb0b4b8fe1216"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00015.html">Vector</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#aced41bce1ca0faa0b68f34a48cda6190">TransformVectors</a> (<a class="el" href="a00010.html">Matrix</a> Transform, params <a class="el" href="a00015.html">Vector</a>[] Vectors)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Aplikuje 2D transformaci danou maticí na vektory v homogenní soustavě souřadné  <a href="#aced41bce1ca0faa0b68f34a48cda6190"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static System.Drawing.PointF[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#ada78080260591810ef758a94c1555d28">TransformPoints</a> (<a class="el" href="a00010.html">Matrix</a> Transform, params System.Drawing.PointF[] Points)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Aplikuje 2D transformaci danou maticí na body v homogenní soustavě souřadné  <a href="#ada78080260591810ef758a94c1555d28"></a><br/></td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Detailní popis</h2>
+<div class="textblock"><p>Pomocná statická třída pro běžné 2D transformace. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00023_source.html#l00377">377</a> v souboru <a class="el" href="a00023_source.html">Matrix.cs</a>.</p>
+</div><hr/><h2>Dokumentace k metodám</h2>
+<a class="anchor" id="a7694e57f74b824e1b3d5d951e514b93a"></a><!-- doxytag: member="PhysLib::Transform2D::Rotate" ref="a7694e57f74b824e1b3d5d951e514b93a" args="(double Angle)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="a00010.html">Matrix</a> PhysLib.Transform2D.Rotate </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>Angle</em></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vytvoří 2D transformační matici rotace podle počátku o daný úhel (pro homogenní souřadnice) </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Angle</td><td>Úhel otočení v radiánech</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Transformační matice rotace</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00023_source.html#l00386">386</a> v souboru <a class="el" href="a00023_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2c6ed3db0b53adc337f1593ea7c705f6"></a><!-- doxytag: member="PhysLib::Transform2D::Rotate" ref="a2c6ed3db0b53adc337f1593ea7c705f6" args="(double Angle, Vector Axis)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="a00010.html">Matrix</a> PhysLib.Transform2D.Rotate </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>Angle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>Axis</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vytvoří 2D transformační matici rotace podle dané osy o daný úhel (pro homogenní souřadnice) </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Angle</td><td>Úhel otočení v radiánech</td></tr>
+    <tr><td class="paramname">Axis</td><td>Osa otočení</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Transformační matice rotace</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00023_source.html#l00402">402</a> v souboru <a class="el" href="a00023_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0ef33fc7905951ed809d3d05c3cd9c07"></a><!-- doxytag: member="PhysLib::Transform2D::Scale" ref="a0ef33fc7905951ed809d3d05c3cd9c07" args="(Vector Factor)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="a00010.html">Matrix</a> PhysLib.Transform2D.Scale </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>Factor</em></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vytvoří 2D transformační matici škálování s daným škálovacím faktorem (pro homogenní souřadnice) </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Factor</td><td>Škálovací faktor</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Transformační matice škálování</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00023_source.html#l00449">449</a> v souboru <a class="el" href="a00023_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad232fedbdf9a64d8f58fb0b4b8fe1216"></a><!-- doxytag: member="PhysLib::Transform2D::Scale" ref="ad232fedbdf9a64d8f58fb0b4b8fe1216" args="(Vector Factor, Vector At)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="a00010.html">Matrix</a> PhysLib.Transform2D.Scale </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>Factor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>At</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vytvoří 2D transformační matici škálování a translace s daným škálovacím faktorem a posunutím. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Factor</td><td>Škálovací faktor</td></tr>
+    <tr><td class="paramname">At</td><td>Vektor posunutí</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Transformační matice škálování a translace</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00023_source.html#l00466">466</a> v souboru <a class="el" href="a00023_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ada78080260591810ef758a94c1555d28"></a><!-- doxytag: member="PhysLib::Transform2D::TransformPoints" ref="ada78080260591810ef758a94c1555d28" args="(Matrix Transform, params System.Drawing.PointF[] Points)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static System.Drawing.PointF [] PhysLib.Transform2D.TransformPoints </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00010.html">Matrix</a>&#160;</td>
+          <td class="paramname"><em>Transform</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">params System.Drawing.PointF[]&#160;</td>
+          <td class="paramname"><em>Points</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Aplikuje 2D transformaci danou maticí na body v homogenní soustavě souřadné </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Points</td><td>Body, na které má být aplikována transformace</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00023_source.html#l00502">502</a> v souboru <a class="el" href="a00023_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aced41bce1ca0faa0b68f34a48cda6190"></a><!-- doxytag: member="PhysLib::Transform2D::TransformVectors" ref="aced41bce1ca0faa0b68f34a48cda6190" args="(Matrix Transform, params Vector[] Vectors)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="a00015.html">Vector</a> [] PhysLib.Transform2D.TransformVectors </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00010.html">Matrix</a>&#160;</td>
+          <td class="paramname"><em>Transform</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">params <a class="el" href="a00015.html">Vector</a>[]&#160;</td>
+          <td class="paramname"><em>Vectors</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Aplikuje 2D transformaci danou maticí na vektory v homogenní soustavě souřadné </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Vectors</td><td>Vektory, na které má být aplikována transformace</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00023_source.html#l00481">481</a> v souboru <a class="el" href="a00023_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1287410132b857a912dd482d42662ad7"></a><!-- doxytag: member="PhysLib::Transform2D::Translate" ref="a1287410132b857a912dd482d42662ad7" args="(Vector To)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="a00010.html">Matrix</a> PhysLib.Transform2D.Translate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>To</em></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vytvoří 2D transformační matici posunutí o daný vektor (pro homogenní souřadnice) </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">To</td><td>Vektor posunutí</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Transformační matice translace</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00023_source.html#l00434">434</a> v souboru <a class="el" href="a00023_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8fc26d38b1756e4de58f85a9a4627af3"></a><!-- doxytag: member="PhysLib::Transform2D::TranslateAndRotate" ref="a8fc26d38b1756e4de58f85a9a4627af3" args="(Vector MoveBy, double RotateBy, Vector RotationAxis)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="a00010.html">Matrix</a> PhysLib.Transform2D.TranslateAndRotate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>MoveBy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>RotateBy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>RotationAxis</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vytvoří 2D transformační matici součastného posunutí a rotace okolo daného bodu. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">MoveBy</td><td>Vektor posunutí</td></tr>
+    <tr><td class="paramname">RotateBy</td><td>Úhel otočení v radiánech</td></tr>
+    <tr><td class="paramname">RotationAxis</td><td>Osa otočení</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Transformační matice posunutí a rotace</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00023_source.html#l00419">419</a> v souboru <a class="el" href="a00023_source.html">Matrix.cs</a>.</p>
+
+</div>
+</div>
+<hr/>Dokumentace pro tuto třídu byla generována z následujícího souboru:<ul>
+<li><a class="el" href="a00023_source.html">Matrix.cs</a></li>
+</ul>
+</div>
+<hr class="footer"/><address class="footer"><small>Generováno st 11. kvě 2011 14.02:06 pro projekt PhysLib programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
+</body>
+</html>

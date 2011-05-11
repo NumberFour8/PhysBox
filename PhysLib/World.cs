@@ -404,6 +404,8 @@ namespace PhysLib
                     if (Aether != 0)
                         PhysObjs[i].TotalTorque -= Vector.Round(20 * PhysObjs[i].AngularVelocity,2);
                         
+
+                    // Integrace
                     if (!PhysObjs[i].NoTranslations)
                     {
                         PhysObjs[i].Model.Position += PhysObjs[i].LinearVelocity * Delta;

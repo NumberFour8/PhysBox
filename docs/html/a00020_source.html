@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>PhysLib: Zdrojový soubor Field.cs</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Generováno programem Doxygen 1.7.4 -->
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PhysLib&#160;<span id="projectnumber">0.2</span></div>
+   <div id="projectbrief">Knihovna pro 2D simulaci mechaniky tuhých těles</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hlavní&#160;stránka</span></a></li>
+      <li><a href="namespaces.html"><span>Balíky</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Seznam&#160;souborů</span></a></li>
+    </ul>
+  </div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">Field.cs</div>  </div>
+</div>
+<div class="contents">
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 ﻿using System;
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 <span class="keyword">namespace </span>PhysLib
+<a name="l00004"></a>00004 {
+<a name="l00005"></a>00005 
+<a name="l00012"></a>00012     <span class="keyword">public</span> delegate Vector <a class="code" href="a00027.html#a28f99e9d320bcbb8bef50fd84e66bea0" title="Delegát zastupující silovou funkci pole.">ForceFunction</a>(Field F,SimObject Object);
+<a name="l00013"></a>00013     
+<a name="l00017"></a><a class="code" href="a00006.html">00017</a>     <span class="keyword">public</span> <span class="keyword">struct </span><a class="code" href="a00006.html" title="Reprezentuje fyzikální silové pole.">Field</a>
+<a name="l00018"></a>00018     {
+<a name="l00019"></a>00019         <span class="keyword">private</span> <a class="code" href="a00027.html#a28f99e9d320bcbb8bef50fd84e66bea0" title="Delegát zastupující silovou funkci pole.">ForceFunction</a> F;
+<a name="l00020"></a>00020         <span class="keyword">private</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> center;
+<a name="l00021"></a>00021         <span class="keyword">private</span> <span class="keywordtype">object</span>[] iparams;
+<a name="l00022"></a>00022         <span class="keyword">private</span> <span class="keywordtype">bool</span> enabled;
+<a name="l00023"></a>00023 
+<a name="l00030"></a><a class="code" href="a00006.html#a3410fa5a80abad0f5e0c85d0558195fa">00030</a>         <span class="keyword">public</span> <a class="code" href="a00006.html#a3410fa5a80abad0f5e0c85d0558195fa" title="Vytvoří nové fyzikální pole sil.">Field</a>(<a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> Center, <a class="code" href="a00027.html#a28f99e9d320bcbb8bef50fd84e66bea0" title="Delegát zastupující silovou funkci pole.">ForceFunction</a> FieldFunction, params <span class="keywordtype">object</span>[] FieldParams)
+<a name="l00031"></a>00031         {
+<a name="l00032"></a>00032             <span class="keywordflow">if</span> (FieldFunction == null) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentNullException();
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034             F = FieldFunction;
+<a name="l00035"></a>00035             center = Center;
+<a name="l00036"></a>00036             iparams = FieldParams;
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038             enabled = <span class="keyword">true</span>;
+<a name="l00039"></a>00039         }
+<a name="l00040"></a>00040         
+<a name="l00044"></a><a class="code" href="a00006.html#a6384146d7d5ba18ea724731c1d3c95e5">00044</a>         <span class="keyword">public</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="a00006.html#a6384146d7d5ba18ea724731c1d3c95e5" title="Centrum pole.">FieldCenter</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> center; } <span class="keyword">set</span> { center = value; } }
+<a name="l00045"></a>00045         
+<a name="l00049"></a><a class="code" href="a00006.html#a39f247ae2e08884e9a2ab4f5a792ecc7">00049</a>         <span class="keyword">public</span> <a class="code" href="a00027.html#a28f99e9d320bcbb8bef50fd84e66bea0" title="Delegát zastupující silovou funkci pole.">ForceFunction</a> <a class="code" href="a00006.html#a39f247ae2e08884e9a2ab4f5a792ecc7" title="Síla působící na těleso v poli.">GetForce</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> F; } }
+<a name="l00050"></a>00050         
+<a name="l00054"></a><a class="code" href="a00006.html#a2b0206ba2e35f7efcc282706e9c918d3">00054</a>         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="a00006.html#a2b0206ba2e35f7efcc282706e9c918d3" title="Indikuje, zda je pole zapnuté">Enabled</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> enabled; } <span class="keyword">set</span> { enabled = value; } }
+<a name="l00055"></a>00055 
+<a name="l00059"></a><a class="code" href="a00006.html#a3e8ea359aabd59c9ce3fd95c6271c9bc">00059</a>         <span class="keyword">public</span> <span class="keywordtype">object</span>[] <a class="code" href="a00006.html#a3e8ea359aabd59c9ce3fd95c6271c9bc" title="Libovolné parametry pole.">Parameters</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> iparams; } <span class="keyword">set</span> { iparams = value; } }
+<a name="l00060"></a>00060     }
+<a name="l00061"></a>00061 }
+</pre></div></div>
+</div>
+<hr class="footer"/><address class="footer"><small>Generováno st 11. kvě 2011 14.02:05 pro projekt PhysLib programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
+</body>
+</html>

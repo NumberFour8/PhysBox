@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>PhysLib: Zdrojový soubor Material.cs</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Generováno programem Doxygen 1.7.4 -->
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PhysLib&#160;<span id="projectnumber">0.2</span></div>
+   <div id="projectbrief">Knihovna pro 2D simulaci mechaniky tuhých těles</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hlavní&#160;stránka</span></a></li>
+      <li><a href="namespaces.html"><span>Balíky</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Seznam&#160;souborů</span></a></li>
+    </ul>
+  </div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">Material.cs</div>  </div>
+</div>
+<div class="contents">
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 ﻿using System;
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 <span class="keyword">namespace </span>PhysLib
+<a name="l00004"></a>00004 {
+<a name="l00008"></a>00008     [Serializable]
+<a name="l00009"></a><a class="code" href="a00009.html">00009</a>     <span class="keyword">public</span> <span class="keyword">struct </span><a class="code" href="a00009.html" title="Reprezentuje materiál.">Material</a>
+<a name="l00010"></a>00010     {
+<a name="l00014"></a><a class="code" href="a00009.html#a2e4fed310548ee09d0f8a7f70a95236e">00014</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="a00009.html" title="Reprezentuje materiál.">Material</a> <a class="code" href="a00009.html#a2e4fed310548ee09d0f8a7f70a95236e" title="Základní materiál - dřevo.">Wood</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="a00009.html#ae76d53b3fce885591f7e8cb7f547d025" title="Výchozí konstruktor materiálu.">Material</a>(700, 0.4, 0, 0.15, <span class="stringliteral">&quot;Dřevo&quot;</span>); } }
+<a name="l00015"></a>00015         
+<a name="l00019"></a><a class="code" href="a00009.html#a8979e764532abbf72798886ae47f704d">00019</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="a00009.html" title="Reprezentuje materiál.">Material</a> <a class="code" href="a00009.html#a8979e764532abbf72798886ae47f704d" title="Základní materiál - beton.">Concrete</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="a00009.html#ae76d53b3fce885591f7e8cb7f547d025" title="Výchozí konstruktor materiálu.">Material</a>(2000, 0.65, 0, 0.1, <span class="stringliteral">&quot;Beton&quot;</span>); } }
+<a name="l00020"></a>00020         
+<a name="l00024"></a><a class="code" href="a00009.html#a07a6610b7c14681b6a13a7e644695629">00024</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="a00009.html" title="Reprezentuje materiál.">Material</a> <a class="code" href="a00009.html#a07a6610b7c14681b6a13a7e644695629" title="Základní materiál - ocel.">Steel</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="a00009.html#ae76d53b3fce885591f7e8cb7f547d025" title="Výchozí konstruktor materiálu.">Material</a>(7300, 0.43, 0.00720, 0.3, <span class="stringliteral">&quot;Ocel&quot;</span>); } }
+<a name="l00025"></a>00025         
+<a name="l00029"></a><a class="code" href="a00009.html#a577c8f031805a0d07a6e17b6109813f5">00029</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="a00009.html" title="Reprezentuje materiál.">Material</a> <a class="code" href="a00009.html#a577c8f031805a0d07a6e17b6109813f5" title="Základní materiál - guma.">Rubber</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="a00009.html#ae76d53b3fce885591f7e8cb7f547d025" title="Výchozí konstruktor materiálu.">Material</a>(1000, 0.7, 0, 0.8, <span class="stringliteral">&quot;Guma&quot;</span>); } } 
+<a name="l00030"></a>00030         
+<a name="l00031"></a>00031         <span class="keyword">private</span> <span class="keywordtype">double</span> density;
+<a name="l00032"></a>00032         <span class="keyword">private</span> <span class="keywordtype">double</span> frictioncoeff;
+<a name="l00033"></a>00033         <span class="keyword">private</span> <span class="keywordtype">double</span> susceptibility;
+<a name="l00034"></a>00034         <span class="keyword">private</span> <span class="keywordtype">double</span> restitution;
+<a name="l00035"></a>00035         <span class="keyword">private</span> <span class="keywordtype">string</span> name;
+<a name="l00036"></a>00036 
+<a name="l00045"></a><a class="code" href="a00009.html#ae76d53b3fce885591f7e8cb7f547d025">00045</a>         <span class="keyword">public</span> <a class="code" href="a00009.html#ae76d53b3fce885591f7e8cb7f547d025" title="Výchozí konstruktor materiálu.">Material</a>(<span class="keywordtype">double</span> dDensity, <span class="keywordtype">double</span> dFriction, <span class="keywordtype">double</span> dSusceptibility,<span class="keywordtype">double</span> dRestitution, <span class="keywordtype">string</span> sName)
+<a name="l00046"></a>00046         {
+<a name="l00047"></a>00047             density = dDensity;
+<a name="l00048"></a>00048             frictioncoeff = dFriction;
+<a name="l00049"></a>00049             susceptibility = dSusceptibility;
+<a name="l00050"></a>00050             restitution = dRestitution;
+<a name="l00051"></a>00051             name = sName;
+<a name="l00052"></a>00052         }
+<a name="l00053"></a>00053 
+<a name="l00057"></a>00057         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00009.html#a1da4f66602638374a6e516c6f8fe9d7b" title="Hustota materiálu.">Density</a>
+<a name="l00058"></a><a class="code" href="a00009.html#a1da4f66602638374a6e516c6f8fe9d7b">00058</a>         {
+<a name="l00059"></a>00059             <span class="keyword">get</span>
+<a name="l00060"></a>00060             {
+<a name="l00061"></a>00061                 <span class="keywordflow">return</span> density;
+<a name="l00062"></a>00062             }
+<a name="l00063"></a>00063         }
+<a name="l00064"></a>00064 
+<a name="l00068"></a>00068         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00009.html#a92ff4cb79ecf9c4ab6436e058a70ff5f" title="Součinitel smykového tření">FrictionCoefficient</a>
+<a name="l00069"></a><a class="code" href="a00009.html#a92ff4cb79ecf9c4ab6436e058a70ff5f">00069</a>         {
+<a name="l00070"></a>00070             <span class="keyword">get</span>
+<a name="l00071"></a>00071             {
+<a name="l00072"></a>00072                 <span class="keywordflow">return</span> frictioncoeff;
+<a name="l00073"></a>00073             }
+<a name="l00074"></a>00074         }
+<a name="l00075"></a>00075 
+<a name="l00079"></a>00079         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00009.html#a1354e80ddb2627add830d591c0f8c4bb" title="Průměrný koeficient restituce.">RestitutionCoefficient</a>
+<a name="l00080"></a><a class="code" href="a00009.html#a1354e80ddb2627add830d591c0f8c4bb">00080</a>         {
+<a name="l00081"></a>00081             <span class="keyword">get</span>
+<a name="l00082"></a>00082             {
+<a name="l00083"></a>00083                 <span class="keywordflow">return</span> restitution;
+<a name="l00084"></a>00084             }
+<a name="l00085"></a>00085         }
+<a name="l00086"></a>00086 
+<a name="l00090"></a>00090         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00009.html#aae1d625a31bc0d212e0bda1e1a49d6fc" title="Magnetická susceptibilita.">MagneticSusceptibility</a>
+<a name="l00091"></a><a class="code" href="a00009.html#aae1d625a31bc0d212e0bda1e1a49d6fc">00091</a>         {
+<a name="l00092"></a>00092             <span class="keyword">get</span>
+<a name="l00093"></a>00093             {
+<a name="l00094"></a>00094                 <span class="keywordflow">return</span> susceptibility;
+<a name="l00095"></a>00095             }
+<a name="l00096"></a>00096         }
+<a name="l00097"></a>00097 
+<a name="l00101"></a>00101         <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code" href="a00009.html#a6ed805b3ce457af431b14246d7e94892" title="Název materiálu.">Name</a>
+<a name="l00102"></a><a class="code" href="a00009.html#a6ed805b3ce457af431b14246d7e94892">00102</a>         {
+<a name="l00103"></a>00103             <span class="keyword">get</span>
+<a name="l00104"></a>00104             {
+<a name="l00105"></a>00105                 <span class="keywordflow">return</span> name;
+<a name="l00106"></a>00106             }
+<a name="l00107"></a>00107         }
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">int</span> GetHashCode()
+<a name="l00110"></a>00110         {
+<a name="l00111"></a>00111             <span class="keywordflow">return</span> base.GetHashCode();
+<a name="l00112"></a>00112         }
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">string</span> ToString()
+<a name="l00115"></a>00115         {
+<a name="l00116"></a>00116             <span class="keywordflow">return</span> <a class="code" href="a00009.html#a6ed805b3ce457af431b14246d7e94892" title="Název materiálu.">Name</a>;
+<a name="l00117"></a>00117         }
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">bool</span> Equals(<span class="keywordtype">object</span> obj)
+<a name="l00120"></a>00120         {
+<a name="l00121"></a>00121             <span class="keywordflow">return</span> base.Equals(obj);
+<a name="l00122"></a>00122         }
+<a name="l00123"></a>00123     }
+<a name="l00124"></a>00124 }
+</pre></div></div>
+</div>
+<hr class="footer"/><address class="footer"><small>Generováno st 11. kvě 2011 14.02:05 pro projekt PhysLib programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>PhysLib: Dokumentace třídy PhysLib.CollisionSolver</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Generováno programem Doxygen 1.7.4 -->
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PhysLib&#160;<span id="projectnumber">0.2</span></div>
+   <div id="projectbrief">Knihovna pro 2D simulaci mechaniky tuhých těles</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hlavní&#160;stránka</span></a></li>
+      <li><a href="namespaces.html"><span>Balíky</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Třídy</span></a></li>
+      <li><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Seznam&#160;tříd</span></a></li>
+      <li><a href="functions.html"><span>Seznam&#160;členů&#160;tříd</span></a></li>
+    </ul>
+  </div>
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><a class="el" href="a00027.html">PhysLib</a>      </li>
+      <li class="navelem"><a class="el" href="a00003.html">CollisionSolver</a>      </li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Veřejné metody</a> &#124;
+<a href="#pub-static-methods">Statické veřejné metody</a> &#124;
+<a href="#properties">Vlastnosti</a>  </div>
+  <div class="headertitle">
+<div class="title">Dokumentace třídy PhysLib.CollisionSolver</div>  </div>
+</div>
+<div class="contents">
+<!-- doxytag: class="PhysLib::CollisionSolver" -->
+<p>Třída pro řešení kolizí  
+ <a href="a00003.html#details">...</a></p>
+
+<p><a href="a00034.html">Seznam všech členů.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Veřejné metody</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">IEnumerable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#aeeb1a408f85dbbd1a1e7943f01f71b3d">DetectCollisionsFor</a> (int ObjectIndex)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sestaví report o kolizích v momentálním stavu systému pro daný objekt.  <a href="#aeeb1a408f85dbbd1a1e7943f01f71b3d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#ac608bd2318416a70a860f29510274951">SolveCollision</a> (<a class="el" href="a00002.html">CollisionReport</a> Report)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Vyřeší konkrétní kolizi.  <a href="#ac608bd2318416a70a860f29510274951"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="pub-static-methods"></a>
+Statické veřejné metody</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a164abd35a532905c4c22225dcde1bcc7">SeparatedByAxis</a> (<a class="el" href="a00015.html">Vector</a> Axis, <a class="el" href="a00007.html">Geometry</a> ObjectA, <a class="el" href="a00007.html">Geometry</a> ObjectB, ref <a class="el" href="a00015.html">Vector</a> MTD)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Zjistí, zda je jedno těleso od druhého odděleno danou osou.  <a href="#a164abd35a532905c4c22225dcde1bcc7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00002.html">CollisionReport</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a215893ee68a9535015a31ef0b15d622a">ObjectsCollide</a> (<a class="el" href="a00013.html">SimObject</a> ObjectA, <a class="el" href="a00013.html">SimObject</a> ObjectB)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Zjistí, zda objekt koliduje s jiným - daným objektem.  <a href="#a215893ee68a9535015a31ef0b15d622a"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="properties"></a>
+Vlastnosti</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00003.html#a11437ee4e8c723458526af3ee790d461">Enabled</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Indikuje, zda je detekce kolizí zapnuta.  <a href="#a11437ee4e8c723458526af3ee790d461"></a><br/></td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Detailní popis</h2>
+<div class="textblock"><p>Třída pro řešení kolizí </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00019_source.html#l00011">11</a> v souboru <a class="el" href="a00019_source.html">CollisionSolver.cs</a>.</p>
+</div><hr/><h2>Dokumentace k metodám</h2>
+<a class="anchor" id="aeeb1a408f85dbbd1a1e7943f01f71b3d"></a><!-- doxytag: member="PhysLib::CollisionSolver::DetectCollisionsFor" ref="aeeb1a408f85dbbd1a1e7943f01f71b3d" args="(int ObjectIndex)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IEnumerable PhysLib.CollisionSolver.DetectCollisionsFor </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ObjectIndex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sestaví report o kolizích v momentálním stavu systému pro daný objekt. </p>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Výčet reportů o kolizích</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00019_source.html#l00104">104</a> v souboru <a class="el" href="a00019_source.html">CollisionSolver.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a215893ee68a9535015a31ef0b15d622a"></a><!-- doxytag: member="PhysLib::CollisionSolver::ObjectsCollide" ref="a215893ee68a9535015a31ef0b15d622a" args="(SimObject ObjectA, SimObject ObjectB)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="a00002.html">CollisionReport</a> PhysLib.CollisionSolver.ObjectsCollide </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00013.html">SimObject</a>&#160;</td>
+          <td class="paramname"><em>ObjectA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00013.html">SimObject</a>&#160;</td>
+          <td class="paramname"><em>ObjectB</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Zjistí, zda objekt koliduje s jiným - daným objektem. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ObjectA</td><td>Účastník kolize</td></tr>
+    <tr><td class="paramname">ObjectB</td><td>Účastník kolize</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Hlášení o kolizi nebo null</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00019_source.html#l00069">69</a> v souboru <a class="el" href="a00019_source.html">CollisionSolver.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a164abd35a532905c4c22225dcde1bcc7"></a><!-- doxytag: member="PhysLib::CollisionSolver::SeparatedByAxis" ref="a164abd35a532905c4c22225dcde1bcc7" args="(Vector Axis, Geometry ObjectA, Geometry ObjectB, ref Vector MTD)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool PhysLib.CollisionSolver.SeparatedByAxis </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>Axis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00007.html">Geometry</a>&#160;</td>
+          <td class="paramname"><em>ObjectA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00007.html">Geometry</a>&#160;</td>
+          <td class="paramname"><em>ObjectB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ref <a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>MTD</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Zjistí, zda je jedno těleso od druhého odděleno danou osou. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Axis</td><td>Osa oddělení</td></tr>
+    <tr><td class="paramname">ObjectA</td><td>Objekt A</td></tr>
+    <tr><td class="paramname">ObjectB</td><td>Objekt B</td></tr>
+    <tr><td class="paramname">MTD</td><td>Minimální vektor oddělení</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>True pokud je odděleno, False pokud nikoliv</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00019_source.html#l00041">41</a> v souboru <a class="el" href="a00019_source.html">CollisionSolver.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac608bd2318416a70a860f29510274951"></a><!-- doxytag: member="PhysLib::CollisionSolver::SolveCollision" ref="ac608bd2318416a70a860f29510274951" args="(CollisionReport Report)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhysLib.CollisionSolver.SolveCollision </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00002.html">CollisionReport</a>&#160;</td>
+          <td class="paramname"><em>Report</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vyřeší konkrétní kolizi. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Report</td><td>Hlášení o kolizi</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00019_source.html#l00167">167</a> v souboru <a class="el" href="a00019_source.html">CollisionSolver.cs</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Dokumentace k vlastnosti</h2>
+<a class="anchor" id="a11437ee4e8c723458526af3ee790d461"></a><!-- doxytag: member="PhysLib::CollisionSolver::Enabled" ref="a11437ee4e8c723458526af3ee790d461" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PhysLib.CollisionSolver.Enabled<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Indikuje, zda je detekce kolizí zapnuta. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00019_source.html#l00029">29</a> v souboru <a class="el" href="a00019_source.html">CollisionSolver.cs</a>.</p>
+
+</div>
+</div>
+<hr/>Dokumentace pro tuto třídu byla generována z následujícího souboru:<ul>
+<li><a class="el" href="a00019_source.html">CollisionSolver.cs</a></li>
+</ul>
+</div>
+<hr class="footer"/><address class="footer"><small>Generováno st 11. kvě 2011 14.02:05 pro projekt PhysLib programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
+</body>
+</html>

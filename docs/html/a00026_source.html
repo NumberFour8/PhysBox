@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>PhysLib: Zdrojový soubor World.cs</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Generováno programem Doxygen 1.7.4 -->
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PhysLib&#160;<span id="projectnumber">0.2</span></div>
+   <div id="projectbrief">Knihovna pro 2D simulaci mechaniky tuhých těles</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hlavní&#160;stránka</span></a></li>
+      <li><a href="namespaces.html"><span>Balíky</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Seznam&#160;souborů</span></a></li>
+    </ul>
+  </div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">World.cs</div>  </div>
+</div>
+<div class="contents">
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 ﻿using System;
+<a name="l00002"></a>00002 <span class="keyword">using</span> System.Collections.Generic;
+<a name="l00003"></a>00003 
+<a name="l00004"></a>00004 <span class="keyword">namespace </span>PhysLib
+<a name="l00005"></a>00005 {     
+<a name="l00006"></a>00006 
+<a name="l00010"></a><a class="code" href="a00027.html#aa1626a0fb162178b21a9121cd1ea8e6d">00010</a>     <span class="keyword">public</span> <span class="keyword">enum</span> <a class="code" href="a00027.html#aa1626a0fb162178b21a9121cd1ea8e6d" title="Výčet všech prostorových os.">Axes</a>
+<a name="l00011"></a>00011     {
+<a name="l00012"></a>00012         X = 1, Y = 2, Z = 3
+<a name="l00013"></a>00013     }
+<a name="l00014"></a>00014 
+<a name="l00018"></a><a class="code" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca">00018</a>     <span class="keyword">public</span> <span class="keyword">enum</span> <a class="code" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca" title="Definuje typ převodu podle rozlišení">ConversionType</a>
+<a name="l00019"></a>00019     {
+<a name="l00020"></a>00020         MetersToPixels = 0, PixelsToMeters = 1
+<a name="l00021"></a>00021     }
+<a name="l00022"></a>00022 
+<a name="l00026"></a><a class="code" href="a00017.html">00026</a>     <span class="keyword">public</span> sealed <span class="keyword">class </span><a class="code" href="a00017.html" title="Reprezentuje fyzikální svět.">World</a>
+<a name="l00027"></a>00027     {
+<a name="l00031"></a><a class="code" href="a00017.html#a139704aae3670f6af84e68479ba4200f">00031</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="a00017.html#a139704aae3670f6af84e68479ba4200f" title="Směr osy X.">X</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>(1, 0, 0); } }
+<a name="l00032"></a>00032 
+<a name="l00036"></a><a class="code" href="a00017.html#affdacd648a414e1fa9a8f11d764586d8">00036</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="a00017.html#affdacd648a414e1fa9a8f11d764586d8" title="Směr osy Y.">Y</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>(0, 1, 0); } }
+<a name="l00037"></a>00037 
+<a name="l00041"></a><a class="code" href="a00017.html#abc358161c6c99ba15a653998e8bdae73">00041</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="a00017.html#abc358161c6c99ba15a653998e8bdae73" title="Směr osy Z.">Z</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>(0, 0, 1); } }
+<a name="l00042"></a>00042 
+<a name="l00046"></a><a class="code" href="a00017.html#a1c93734b986d5338035675866774860b">00046</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="a00010.html" title="Reprezentuje matici.">Matrix</a> <a class="code" href="a00017.html#a1c93734b986d5338035675866774860b" title="Standardní matice souřadných os.">B</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="a00010.html" title="Reprezentuje matici.">Matrix</a>(<a class="code" href="a00027.html#a8d0d4da3cbdf4c2acad3872a1bdc5bd0" title="Typ inicializace matice pomocí vektorů">MatrixInitType</a>.VectorsAreRows, <a class="code" href="a00017.html#a139704aae3670f6af84e68479ba4200f" title="Směr osy X.">X</a>, <a class="code" href="a00017.html#affdacd648a414e1fa9a8f11d764586d8" title="Směr osy Y.">Y</a>, <a class="code" href="a00017.html#abc358161c6c99ba15a653998e8bdae73" title="Směr osy Z.">Z</a>); } }
+<a name="l00047"></a>00047 
+<a name="l00051"></a><a class="code" href="a00017.html#ae6676aec4dd7d0e316fcb8629a201fc8">00051</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="a00010.html" title="Reprezentuje matici.">Matrix</a> <a class="code" href="a00017.html#ae6676aec4dd7d0e316fcb8629a201fc8" title="Výchozí zobrazovací matice souřadných os na displeji.">DisplayDefault</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="a00010.html" title="Reprezentuje matici.">Matrix</a>(<a class="code" href="a00027.html#a8d0d4da3cbdf4c2acad3872a1bdc5bd0" title="Typ inicializace matice pomocí vektorů">MatrixInitType</a>.VectorsAreRows, <a class="code" href="a00017.html#a139704aae3670f6af84e68479ba4200f" title="Směr osy X.">X</a>, -<a class="code" href="a00017.html#affdacd648a414e1fa9a8f11d764586d8" title="Směr osy Y.">Y</a>, <a class="code" href="a00017.html#abc358161c6c99ba15a653998e8bdae73" title="Směr osy Z.">Z</a>); } }
+<a name="l00052"></a>00052 
+<a name="l00056"></a><a class="code" href="a00017.html#aa6ca4044f10cf7980f5d77ffd1b16da8">00056</a>         <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="a00017.html#aa6ca4044f10cf7980f5d77ffd1b16da8" title="Průměrné zemské gravitační zrychlení">EarthG</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>(0, -9.89, 0); } }
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058         <span class="keyword">private</span> List&lt;SimObject&gt; Objs;
+<a name="l00059"></a>00059         <span class="keyword">private</span> List&lt;Field&gt; Fields;
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061         <span class="keyword">private</span> <a class="code" href="a00010.html" title="Reprezentuje matici.">Matrix</a> b;
+<a name="l00062"></a>00062         <span class="keyword">private</span> <span class="keywordtype">double</span> simulationTime, maxRad, r,density;
+<a name="l00063"></a>00063         <span class="keyword">private</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> lv;
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065         <span class="keyword">private</span> <span class="keywordtype">object</span> SimLock = null;
+<a name="l00066"></a>00066         <span class="keyword">private</span> <span class="keywordtype">bool</span> paused;
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068         <span class="keyword">private</span> <a class="code" href="a00003.html" title="Třída pro řešení kolizí">CollisionSolver</a> csolve;
+<a name="l00069"></a>00069 
+<a name="l00077"></a><a class="code" href="a00017.html#a019879d846242fa9e081d7f380de4a67">00077</a>         <span class="keyword">public</span> <a class="code" href="a00017.html#a019879d846242fa9e081d7f380de4a67" title="Vytvoří fyzikální svět.">World</a>(<a class="code" href="a00010.html" title="Reprezentuje matici.">Matrix</a> WorldOrientation, <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> WorldGravity, <span class="keywordtype">double</span> WorldDiameter, <span class="keywordtype">double</span> WorldResolution = 30)
+<a name="l00078"></a>00078         {
+<a name="l00079"></a>00079             Fields = <span class="keyword">new</span> List&lt;Field&gt;();
+<a name="l00080"></a>00080             Objs = <span class="keyword">new</span> List&lt;SimObject&gt;();
+<a name="l00081"></a>00081             lv = <span class="keyword">new</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>(0, WorldDiameter, 0);
+<a name="l00082"></a>00082             SimLock = <span class="keyword">new</span> object();
+<a name="l00083"></a>00083             csolve = <span class="keyword">new</span> <a class="code" href="a00003.html" title="Třída pro řešení kolizí">CollisionSolver</a>(<span class="keyword">this</span>);
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085             b = WorldOrientation;
+<a name="l00086"></a>00086             maxRad = WorldDiameter;
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088             <a class="code" href="a00017.html#ae3de84e1eaaf168a9610acf00f2e78e5" title="Vektor gravitace.">Gravity</a> = <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="a00015.html#a2a64cd020a0c2286e9985607dcf041b9" title="Převede daný vektor do báze zadané bázovými vektory jakožto sloupce dané diagonální matice...">ToBasis</a>(b, WorldGravity) * WorldResolution;
+<a name="l00089"></a>00089             simulationTime = 0;
+<a name="l00090"></a>00090             r = WorldResolution;
+<a name="l00091"></a>00091             <a class="code" href="a00017.html#a08b91c2bcb4482f4658fcdf153d8d5ca" title="Velikost kroku simulace (v sekundách)">Delta</a> = 0.01;
+<a name="l00092"></a>00092             paused = <span class="keyword">false</span>;
+<a name="l00093"></a>00093             <a class="code" href="a00017.html#ac4d441ca3ae5bc1d6cd6aa44571f40de" title="Indikuje, zda objekty mimo simulační okno budou smazány místo vypnutí">DeleteOutOfBounds</a> = <span class="keyword">false</span>;
+<a name="l00094"></a>00094         }
+<a name="l00095"></a>00095 
+<a name="l00102"></a><a class="code" href="a00017.html#a0304b913f959a862c9b7eca47bee6a89">00102</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00017.html#a0304b913f959a862c9b7eca47bee6a89" title="Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení světa.">Convert</a>(<span class="keywordtype">double</span> Input, <a class="code" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca" title="Definuje typ převodu podle rozlišení">ConversionType</a> Type)
+<a name="l00103"></a>00103         {
+<a name="l00104"></a>00104             <span class="keywordflow">if</span> (Type == <a class="code" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca" title="Definuje typ převodu podle rozlišení">ConversionType</a>.MetersToPixels)
+<a name="l00105"></a>00105                 <span class="keywordflow">return</span> Input * r;
+<a name="l00106"></a>00106             <span class="keywordflow">else</span> <span class="keywordflow">return</span> Input / r;
+<a name="l00107"></a>00107         }
+<a name="l00108"></a>00108 
+<a name="l00115"></a><a class="code" href="a00017.html#a74b4c9b5acadb0b0565cf3ac339e2617">00115</a>         <span class="keyword">public</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="a00017.html#a0304b913f959a862c9b7eca47bee6a89" title="Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení světa.">Convert</a>(<a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> Input, <a class="code" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca" title="Definuje typ převodu podle rozlišení">ConversionType</a> Type)
+<a name="l00116"></a>00116         {
+<a name="l00117"></a>00117             <span class="keywordflow">if</span> (Type == <a class="code" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca" title="Definuje typ převodu podle rozlišení">ConversionType</a>.MetersToPixels)
+<a name="l00118"></a>00118                 <span class="keywordflow">return</span> Input * r;
+<a name="l00119"></a>00119             <span class="keywordflow">else</span> <span class="keywordflow">return</span> Input / r;
+<a name="l00120"></a>00120         }
+<a name="l00121"></a>00121 
+<a name="l00125"></a><a class="code" href="a00017.html#ad93dceb2bb66640be80f5df14f356799">00125</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00017.html#ad93dceb2bb66640be80f5df14f356799" title="Rozlišení světa.">Resolution</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> r; } <span class="keyword">set</span> { r = value; } }
+<a name="l00126"></a>00126 
+<a name="l00130"></a>00130         <span class="keyword">public</span> <a class="code" href="a00003.html" title="Třída pro řešení kolizí">CollisionSolver</a> <a class="code" href="a00017.html#a17e98ed91c35e085461efed0cfd08655" title="Třída pro vyhodnocení kolizí">Solver</a>
+<a name="l00131"></a><a class="code" href="a00017.html#a17e98ed91c35e085461efed0cfd08655">00131</a>         {
+<a name="l00132"></a>00132             <span class="keyword">get</span> { <span class="keywordflow">return</span> csolve; }
+<a name="l00133"></a>00133         }
+<a name="l00134"></a>00134 
+<a name="l00138"></a>00138         <span class="keyword">public</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="a00017.html#ae3de84e1eaaf168a9610acf00f2e78e5" title="Vektor gravitace.">Gravity</a>
+<a name="l00139"></a><a class="code" href="a00017.html#ae3de84e1eaaf168a9610acf00f2e78e5">00139</a>         {
+<a name="l00140"></a>00140             <span class="keyword">get</span>;
+<a name="l00141"></a>00141             <span class="keyword">set</span>;
+<a name="l00142"></a>00142         }
+<a name="l00143"></a>00143 
+<a name="l00147"></a>00147         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00017.html#a41bed8efe3c4dcacbf57fab99090e9ac" title="Aktuální krok simulace.">CurrentTimeFrame</a>
+<a name="l00148"></a><a class="code" href="a00017.html#a41bed8efe3c4dcacbf57fab99090e9ac">00148</a>         {
+<a name="l00149"></a>00149             <span class="keyword">get</span> { <span class="keywordflow">return</span> simulationTime; }
+<a name="l00150"></a>00150         }
+<a name="l00151"></a>00151 
+<a name="l00155"></a>00155         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00017.html#acc31f79361976080fbb775cdaaa5b1cb" title="Maximální vzdálenost tělesa od počátku.">MaximumRadius</a>
+<a name="l00156"></a><a class="code" href="a00017.html#acc31f79361976080fbb775cdaaa5b1cb">00156</a>         {
+<a name="l00157"></a>00157             <span class="keyword">get</span> { <span class="keywordflow">return</span> maxRad; }
+<a name="l00158"></a>00158             <span class="keyword">set</span>
+<a name="l00159"></a>00159             {
+<a name="l00160"></a>00160                 <span class="keywordflow">if</span> (value &lt; r * 30)
+<a name="l00161"></a>00161                     maxRad = r * 30;
+<a name="l00162"></a>00162                 <span class="keywordflow">else</span> maxRad = value;
+<a name="l00163"></a>00163             }
+<a name="l00164"></a>00164         }
+<a name="l00165"></a>00165 
+<a name="l00169"></a>00169         <span class="keyword">public</span> <a class="code" href="a00010.html" title="Reprezentuje matici.">Matrix</a> <a class="code" href="a00017.html#ae56d5c021fa932c4bc1962d4f143079e" title="Orientace světa.">Orientation</a>
+<a name="l00170"></a><a class="code" href="a00017.html#ae56d5c021fa932c4bc1962d4f143079e">00170</a>         {
+<a name="l00171"></a>00171             <span class="keyword">get</span> { <span class="keywordflow">return</span> b; }
+<a name="l00172"></a>00172         }
+<a name="l00173"></a>00173 
+<a name="l00179"></a><a class="code" href="a00017.html#aa0fddc9a66ce8b4146c3dcafd534c36b">00179</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00017.html#aa0fddc9a66ce8b4146c3dcafd534c36b" title="Získá úhel orientace dané osy vzhledem k bázovému směru osy.">OrientationOf</a>(<a class="code" href="a00027.html#aa1626a0fb162178b21a9121cd1ea8e6d" title="Výčet všech prostorových os.">Axes</a> Axis)
+<a name="l00180"></a>00180         {
+<a name="l00181"></a>00181             <span class="keywordflow">return</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="a00015.html#a018a610f7eeb01ec7e1350454e9eda12" title="Zjistí úhel, který svírají dva vektory.">Angle</a>(<a class="code" href="a00017.html#a1c93734b986d5338035675866774860b" title="Standardní matice souřadných os.">B</a>.<a class="code" href="a00010.html#a4d43b6732089cc6324b0290a8c63ab89" title="Získá řádek matice jako vektor.">GetRowAsVector</a>((<span class="keywordtype">int</span>)Axis - 1), <a class="code" href="a00017.html#ae56d5c021fa932c4bc1962d4f143079e" title="Orientace světa.">Orientation</a>.<a class="code" href="a00010.html#a4d43b6732089cc6324b0290a8c63ab89" title="Získá řádek matice jako vektor.">GetRowAsVector</a>((<span class="keywordtype">int</span>)Axis - 1));
+<a name="l00182"></a>00182         }
+<a name="l00183"></a>00183 
+<a name="l00187"></a>00187         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00017.html#ae0627807d62480261dbf7b50519c4dd4" title="Hustota prostředí (v jednotkách SI)">Aether</a>
+<a name="l00188"></a><a class="code" href="a00017.html#ae0627807d62480261dbf7b50519c4dd4">00188</a>         {
+<a name="l00189"></a>00189             <span class="keyword">get</span> { <span class="keywordflow">return</span> density; }
+<a name="l00190"></a>00190             <span class="keyword">set</span> { density = value/Math.Pow(<a class="code" href="a00017.html#ad93dceb2bb66640be80f5df14f356799" title="Rozlišení světa.">Resolution</a>, 3); }
+<a name="l00191"></a>00191         }
+<a name="l00192"></a>00192 
+<a name="l00196"></a><a class="code" href="a00017.html#a4d4ce7495b98535a2941d031526c660f">00196</a>         <span class="keyword">public</span> <a class="code" href="a00006.html" title="Reprezentuje fyzikální silové pole.">Field</a>[] <a class="code" href="a00017.html#a4d4ce7495b98535a2941d031526c660f" title="Silová pole.">ForceFields</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> Fields.ToArray(); } }
+<a name="l00197"></a>00197 
+<a name="l00201"></a><a class="code" href="a00017.html#ad212e78d2f10329bcd5f2b5270da498e">00201</a>         <span class="keyword">public</span> <a class="code" href="a00013.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a>[] <a class="code" href="a00017.html#ad212e78d2f10329bcd5f2b5270da498e" title="Všechna tělesa ve světě">Objects</a> { <span class="keyword">get</span> { <span class="keywordflow">return</span> Objs.ToArray(); } }
+<a name="l00202"></a>00202 
+<a name="l00203"></a>00203 
+<a name="l00207"></a>00207         <span class="keyword">public</span> uint <a class="code" href="a00017.html#a0fbab9547603842f4a45ec58e52150f6" title="Počet těles ve světě">CountObjects</a>
+<a name="l00208"></a><a class="code" href="a00017.html#a0fbab9547603842f4a45ec58e52150f6">00208</a>         {
+<a name="l00209"></a>00209             <span class="keyword">get</span> { <span class="keywordflow">return</span> (uint)Objs.Count; }
+<a name="l00210"></a>00210         }
+<a name="l00211"></a>00211 
+<a name="l00215"></a>00215         <span class="keyword">public</span> uint <a class="code" href="a00017.html#a22ff97b800117ca8ca007715e13ce278" title="Počet polí ve světě">CountFields</a>
+<a name="l00216"></a><a class="code" href="a00017.html#a22ff97b800117ca8ca007715e13ce278">00216</a>         {
+<a name="l00217"></a>00217             <span class="keyword">get</span> { <span class="keywordflow">return</span> (uint)Fields.Count; }
+<a name="l00218"></a>00218         }
+<a name="l00219"></a>00219 
+<a name="l00223"></a><a class="code" href="a00017.html#ade1ac2f54d91433a59da9c12aa12f961">00223</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="a00017.html#ade1ac2f54d91433a59da9c12aa12f961" title="Smaže všechna tělesa.">ClearObjects</a>()
+<a name="l00224"></a>00224         {
+<a name="l00225"></a>00225             lock (SimLock)
+<a name="l00226"></a>00226             {
+<a name="l00227"></a>00227                 Objs.Clear();
+<a name="l00228"></a>00228             }
+<a name="l00229"></a>00229         }
+<a name="l00230"></a>00230 
+<a name="l00235"></a><a class="code" href="a00017.html#a566232b6f5624ff486ffad4d6920c517">00235</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="a00017.html#a566232b6f5624ff486ffad4d6920c517" title="Smaže těleso s daným indexem.">DeleteObject</a>(<span class="keywordtype">int</span> Index)
+<a name="l00236"></a>00236         {
+<a name="l00237"></a>00237             <span class="keywordflow">if</span> (Index &lt; 0 || Index &gt;= Objs.Count) <span class="keywordflow">throw</span> <span class="keyword">new</span> IndexOutOfRangeException();
+<a name="l00238"></a>00238             lock (SimLock)
+<a name="l00239"></a>00239             {
+<a name="l00240"></a>00240                 Objs.RemoveAt(Index);
+<a name="l00241"></a>00241             }
+<a name="l00242"></a>00242         }
+<a name="l00243"></a>00243 
+<a name="l00248"></a><a class="code" href="a00017.html#a2bcec0c439821acca9d11cc0855d5c0c">00248</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="a00017.html#a2bcec0c439821acca9d11cc0855d5c0c" title="Smaže silové pole s daným indexem.">DeleteField</a>(<span class="keywordtype">int</span> Index)
+<a name="l00249"></a>00249         {
+<a name="l00250"></a>00250             <span class="keywordflow">if</span> (Index &lt; 0 || Index &gt;= Fields.Count) <span class="keywordflow">throw</span> <span class="keyword">new</span> IndexOutOfRangeException();
+<a name="l00251"></a>00251             lock (SimLock)
+<a name="l00252"></a>00252             {
+<a name="l00253"></a>00253                 Fields.RemoveAt(Index);
+<a name="l00254"></a>00254             }
+<a name="l00255"></a>00255         }
+<a name="l00256"></a>00256 
+<a name="l00260"></a><a class="code" href="a00017.html#abe07f9f53380e291e59e3e0e02ae31a1">00260</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="a00017.html#abe07f9f53380e291e59e3e0e02ae31a1" title="Smaže všechna silová pole.">ClearFields</a>()
+<a name="l00261"></a>00261         {
+<a name="l00262"></a>00262             lock (SimLock)
+<a name="l00263"></a>00263             {
+<a name="l00264"></a>00264                 Fields.Clear();
+<a name="l00265"></a>00265             }
+<a name="l00266"></a>00266         }
+<a name="l00267"></a>00267 
+<a name="l00271"></a>00271         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="a00017.html#a824644987a31ae273191a7a3a0010fc1" title="Indikuje, zda je simulace pozastavena.">Paused</a>
+<a name="l00272"></a><a class="code" href="a00017.html#a824644987a31ae273191a7a3a0010fc1">00272</a>         {
+<a name="l00273"></a>00273             <span class="keyword">get</span> { <span class="keywordflow">return</span> paused; }
+<a name="l00274"></a>00274             <span class="keyword">set</span> { paused = value; }
+<a name="l00275"></a>00275         }
+<a name="l00276"></a>00276 
+<a name="l00282"></a>00282         <span class="keyword">public</span> <a class="code" href="a00013.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a> <span class="keyword">this</span>[<span class="keywordtype">int</span> index]
+<a name="l00283"></a><a class="code" href="a00017.html#ade4f980c1f2ede06114acfca7955359e">00283</a>         {
+<a name="l00284"></a>00284             <span class="keyword">get</span> { <span class="keywordflow">return</span> (<a class="code" href="a00013.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a>)Objs[index]; }
+<a name="l00285"></a>00285             <span class="keyword">set</span>
+<a name="l00286"></a>00286             {
+<a name="l00287"></a>00287                 lock (SimLock)
+<a name="l00288"></a>00288                 {
+<a name="l00289"></a>00289                     Objs[index] = value;
+<a name="l00290"></a>00290                 }
+<a name="l00291"></a>00291             }
+<a name="l00292"></a>00292         }
+<a name="l00293"></a>00293 
+<a name="l00299"></a><a class="code" href="a00017.html#aac0d1406a8bbc24bf605f3298982f2eb">00299</a>         <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code" href="a00017.html#aac0d1406a8bbc24bf605f3298982f2eb" title="Přidá fyzikální pole.">AddField</a>(<a class="code" href="a00006.html" title="Reprezentuje fyzikální silové pole.">Field</a> F)
+<a name="l00300"></a>00300         {
+<a name="l00301"></a>00301             lock (SimLock)
+<a name="l00302"></a>00302             {
+<a name="l00303"></a>00303                 Fields.Add(F);
+<a name="l00304"></a>00304             }
+<a name="l00305"></a>00305             <span class="keywordflow">return</span> Fields.Count - 1;
+<a name="l00306"></a>00306         }
+<a name="l00307"></a>00307 
+<a name="l00311"></a><a class="code" href="a00017.html#a9bcae788313108e402f90afdc429ef74">00311</a>         <span class="keyword">public</span> <span class="keyword">event</span> EventHandler <a class="code" href="a00017.html#a9bcae788313108e402f90afdc429ef74" title="Událost nastávající při každém simulačním kroku.">OnTick</a>;
+<a name="l00312"></a>00312 
+<a name="l00318"></a><a class="code" href="a00017.html#a840588a33e049e6438eb84a92e6f9511">00318</a>         <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code" href="a00017.html#a840588a33e049e6438eb84a92e6f9511" title="Přidá těleso do světa.">AddObject</a>(<a class="code" href="a00013.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a> O)
+<a name="l00319"></a>00319         {
+<a name="l00320"></a>00320             lock (SimLock)
+<a name="l00321"></a>00321             {
+<a name="l00322"></a>00322                 O.<a class="code" href="a00013.html#a30741b3569bd9445559d925fcc3c560d" title="Potenciální energie tělesa v místě vložení">InitialEnergy</a> = O.<a class="code" href="a00013.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * <a class="code" href="a00017.html#ae3de84e1eaaf168a9610acf00f2e78e5" title="Vektor gravitace.">Gravity</a>.<a class="code" href="a00015.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a> * <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="a00015.html#affbdf4fb2128038554ba52027a6145fe" title="Spočítá vzdálenost mezi dvěma body.">PointDistance</a>(<span class="keyword">new</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>(O.<a class="code" href="a00013.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa)">COG</a>[0], <a class="code" href="a00017.html#a2589161ff13f9249db504035d413589b" title="Poloha bodu, podle kterého se určuje hladina potenciální energie.">Level</a>[1], 0), O.<a class="code" href="a00013.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa)">COG</a>);
+<a name="l00323"></a>00323                 Objs.Add(O);
+<a name="l00324"></a>00324             }
+<a name="l00325"></a>00325             <span class="keywordflow">return</span> Objs.Count - 1;
+<a name="l00326"></a>00326         }
+<a name="l00327"></a>00327 
+<a name="l00334"></a><a class="code" href="a00017.html#a0cd942568d2efb8b9942bccaad9841a6">00334</a>         <span class="keyword">public</span> <a class="code" href="a00013.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a> <a class="code" href="a00017.html#a0cd942568d2efb8b9942bccaad9841a6" title="Najde první nejbližší těžiště objektu ve světě k dané pozici.">NearestObject</a>(<a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> Position,<span class="keywordtype">bool</span> SkipStatic = <span class="keyword">true</span>)
+<a name="l00335"></a>00335         {
+<a name="l00336"></a>00336             <span class="keywordtype">double</span> distance = Double.PositiveInfinity;
+<a name="l00337"></a>00337             <span class="keywordtype">int</span> index = -1;
+<a name="l00338"></a>00338             <span class="keywordflow">if</span> (Objs.Count == 0)
+<a name="l00339"></a>00339                 <span class="keywordflow">throw</span> <span class="keyword">new</span> InvalidOperationException();
+<a name="l00340"></a>00340 
+<a name="l00341"></a>00341             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Objs.Count; i++)
+<a name="l00342"></a>00342             {
+<a name="l00343"></a>00343                 <span class="keywordflow">if</span> (((<a class="code" href="a00013.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a>)Objs[i]).Static &amp;&amp; SkipStatic) <span class="keywordflow">continue</span>;
+<a name="l00344"></a>00344                 <span class="keywordtype">double</span> dist = (((<a class="code" href="a00013.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a>)Objs[i]).Model.Position - Position).Magnitude;
+<a name="l00345"></a>00345                 <span class="keywordflow">if</span> (dist == 0) <span class="keywordflow">return</span> Objs[i] as <a class="code" href="a00013.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a>;
+<a name="l00346"></a>00346 
+<a name="l00347"></a>00347                 <span class="keywordflow">if</span> (dist &lt; distance)
+<a name="l00348"></a>00348                 {
+<a name="l00349"></a>00349                     distance = dist;
+<a name="l00350"></a>00350                     index = i;
+<a name="l00351"></a>00351                 }
+<a name="l00352"></a>00352             }
+<a name="l00353"></a>00353             <span class="keywordflow">if</span> (index &lt; 0) <span class="keywordflow">return</span> null;
+<a name="l00354"></a>00354             <span class="keywordflow">return</span> Objs[index] as <a class="code" href="a00013.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a>;
+<a name="l00355"></a>00355         }
+<a name="l00356"></a>00356 
+<a name="l00360"></a>00360         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00017.html#a08b91c2bcb4482f4658fcdf153d8d5ca" title="Velikost kroku simulace (v sekundách)">Delta</a>
+<a name="l00361"></a><a class="code" href="a00017.html#a08b91c2bcb4482f4658fcdf153d8d5ca">00361</a>         {
+<a name="l00362"></a>00362             <span class="keyword">get</span>;
+<a name="l00363"></a>00363             <span class="keyword">set</span>;
+<a name="l00364"></a>00364         }
+<a name="l00365"></a>00365 
+<a name="l00369"></a>00369         <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="a00017.html#ac4d441ca3ae5bc1d6cd6aa44571f40de" title="Indikuje, zda objekty mimo simulační okno budou smazány místo vypnutí">DeleteOutOfBounds</a>
+<a name="l00370"></a><a class="code" href="a00017.html#ac4d441ca3ae5bc1d6cd6aa44571f40de">00370</a>         {
+<a name="l00371"></a>00371             <span class="keyword">get</span>;
+<a name="l00372"></a>00372             <span class="keyword">set</span>;
+<a name="l00373"></a>00373         }
+<a name="l00374"></a>00374 
+<a name="l00378"></a><a class="code" href="a00017.html#a741051dddcf5be1458403d764d2d93c4">00378</a>         <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="a00017.html#a741051dddcf5be1458403d764d2d93c4" title="Provede simulační krok.">Tick</a>()
+<a name="l00379"></a>00379         {
+<a name="l00380"></a>00380             <span class="keywordflow">if</span> (paused) { <a class="code" href="a00017.html#a9bcae788313108e402f90afdc429ef74" title="Událost nastávající při každém simulačním kroku.">OnTick</a>(<span class="keyword">this</span>, null); <span class="keywordflow">return</span>; }
+<a name="l00381"></a>00381 
+<a name="l00382"></a>00382             lock (SimLock)
+<a name="l00383"></a>00383             {
+<a name="l00384"></a>00384                 <a class="code" href="a00013.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a>[] PhysObjs = Objs.ToArray();
+<a name="l00385"></a>00385                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Objs.Count; i++)
+<a name="l00386"></a>00386                 {
+<a name="l00387"></a>00387                     <span class="keywordflow">if</span> (PhysObjs[i].Model.Position.Magnitude &gt; maxRad &amp;&amp; PhysObjs[i].<a class="code" href="a00013.html#a025d9bd5e25819030ac7d4d31b54a059" title="Indikuje, zda je těleso zapnuté">Enabled</a>)
+<a name="l00388"></a>00388                     {
+<a name="l00389"></a>00389                         PhysObjs[i].<a class="code" href="a00013.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a> = PhysObjs[i].<a class="code" href="a00013.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a> = <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="a00015.html#af30ca170d65c44c84fd70b5ed32b14cf" title="Nulový vektor o třech složkách.">Zero</a>;
+<a name="l00390"></a>00390                         PhysObjs[i].<a class="code" href="a00013.html#a025d9bd5e25819030ac7d4d31b54a059" title="Indikuje, zda je těleso zapnuté">Enabled</a> = <span class="keyword">false</span>;
+<a name="l00391"></a>00391                         <span class="keywordflow">if</span> (<a class="code" href="a00017.html#ac4d441ca3ae5bc1d6cd6aa44571f40de" title="Indikuje, zda objekty mimo simulační okno budou smazány místo vypnutí">DeleteOutOfBounds</a>) Objs.RemoveAt(i);
+<a name="l00392"></a>00392                     }
+<a name="l00393"></a>00393                     <span class="keywordflow">if</span> (!PhysObjs[i].Enabled) <span class="keywordflow">continue</span>;
+<a name="l00394"></a>00394 
+<a name="l00395"></a>00395                     <span class="keywordflow">foreach</span> (<a class="code" href="a00006.html" title="Reprezentuje fyzikální silové pole.">Field</a> f <span class="keywordflow">in</span> <a class="code" href="a00017.html#a4d4ce7495b98535a2941d031526c660f" title="Silová pole.">ForceFields</a>)
+<a name="l00396"></a>00396                     {
+<a name="l00397"></a>00397                         <span class="keywordflow">if</span> (f.<a class="code" href="a00006.html#a2b0206ba2e35f7efcc282706e9c918d3" title="Indikuje, zda je pole zapnuté">Enabled</a>)
+<a name="l00398"></a>00398                             PhysObjs[i].<a class="code" href="a00013.html#a5ff717de4eca507be090b3436c2a22f2" title="Aplikuje sílu na těleso.">ApplyForce</a>(f.<a class="code" href="a00006.html#a39f247ae2e08884e9a2ab4f5a792ecc7" title="Síla působící na těleso v poli.">GetForce</a>(f, PhysObjs[i]), PhysObjs[i].<a class="code" href="a00013.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa)">COG</a>);
+<a name="l00399"></a>00399                     }
+<a name="l00400"></a>00400 
+<a name="l00401"></a>00401                     PhysObjs[i].<a class="code" href="a00013.html#a5ff717de4eca507be090b3436c2a22f2" title="Aplikuje sílu na těleso.">ApplyForce</a>(PhysObjs[i].Mass * <a class="code" href="a00017.html#ae3de84e1eaaf168a9610acf00f2e78e5" title="Vektor gravitace.">Gravity</a>, PhysObjs[i].COG);
+<a name="l00402"></a>00402                     PhysObjs[i].<a class="code" href="a00013.html#a332e0cdbcf1ac2d6de1cab5154e93a83" title="Aplikuje na těleso odporovou sílu pohybuje-li se v prostředí o dané hustotě">ApplyDrag</a>(<a class="code" href="a00017.html#ae0627807d62480261dbf7b50519c4dd4" title="Hustota prostředí (v jednotkách SI)">Aether</a>);
+<a name="l00403"></a>00403                         
+<a name="l00404"></a>00404                     <span class="keywordflow">if</span> (<a class="code" href="a00017.html#ae0627807d62480261dbf7b50519c4dd4" title="Hustota prostředí (v jednotkách SI)">Aether</a> != 0)
+<a name="l00405"></a>00405                         PhysObjs[i].<a class="code" href="a00013.html#ac2e341d9ddfbde5022aaeb5899ca3b0b" title="Výslednice všech točivých momentů působící na těleso.">TotalTorque</a> -= <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="a00015.html#a9fe17303abc37266159211d7e9f6d242" title="Zaokrouhlí všechny prvky vektoru s danou přesností">Round</a>(20 * PhysObjs[i].AngularVelocity,2);
+<a name="l00406"></a>00406                         
+<a name="l00407"></a>00407 
+<a name="l00408"></a>00408                     <span class="comment">// Integrace</span>
+<a name="l00409"></a>00409                     <span class="keywordflow">if</span> (!PhysObjs[i].NoTranslations)
+<a name="l00410"></a>00410                     {
+<a name="l00411"></a>00411                         PhysObjs[i].<a class="code" href="a00013.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="a00007.html#a47fb00258f8f196b43d82fc5967eda21" title="Pozice těžiště objektu vzhledem k počátku světa.">Position</a> += PhysObjs[i].<a class="code" href="a00013.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a> * <a class="code" href="a00017.html#a08b91c2bcb4482f4658fcdf153d8d5ca" title="Velikost kroku simulace (v sekundách)">Delta</a>;
+<a name="l00412"></a>00412                         PhysObjs[i].<a class="code" href="a00013.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a> += PhysObjs[i].<a class="code" href="a00013.html#a646da127bcf25da97056d4ef573009cb" title="Výslednice všech sil působící na těleso.">TotalForce</a> * (<a class="code" href="a00017.html#a08b91c2bcb4482f4658fcdf153d8d5ca" title="Velikost kroku simulace (v sekundách)">Delta</a> / PhysObjs[i].<a class="code" href="a00013.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a>);
+<a name="l00413"></a>00413                     }
+<a name="l00414"></a>00414 
+<a name="l00415"></a>00415                     PhysObjs[i].<a class="code" href="a00013.html#aafbef38c82477dfcef291ce49fbcd9d2" title="Fyzický model tělesa.">Model</a>.<a class="code" href="a00007.html#a1e8503693216b6a3d578ba51f41851ba" title="Orientace objektu v úhlových stupních.">Orientation</a> += Math.Round((PhysObjs[i].AngularVelocity[2] * 180 / Math.PI) * <a class="code" href="a00017.html#a08b91c2bcb4482f4658fcdf153d8d5ca" title="Velikost kroku simulace (v sekundách)">Delta</a>, 3);
+<a name="l00416"></a>00416                     PhysObjs[i].<a class="code" href="a00013.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>   += PhysObjs[i].<a class="code" href="a00013.html#ac2e341d9ddfbde5022aaeb5899ca3b0b" title="Výslednice všech točivých momentů působící na těleso.">TotalTorque</a> * (<a class="code" href="a00017.html#a08b91c2bcb4482f4658fcdf153d8d5ca" title="Velikost kroku simulace (v sekundách)">Delta</a> / PhysObjs[i].<a class="code" href="a00013.html#abebd841b2240bf066ce8f95001981a25" title="Spočítá moment setrvačnosti tělesa v závislosti na rozlišení">MomentOfInertia</a>);
+<a name="l00417"></a>00417 
+<a name="l00418"></a>00418                     PhysObjs[i].<a class="code" href="a00013.html#a63831905d95885b1a525c51f8123ee25" title="Zruší všechny síly působící na těleso.">Reset</a>();
+<a name="l00419"></a>00419 
+<a name="l00420"></a>00420                     <span class="keywordflow">foreach</span> (<a class="code" href="a00002.html" title="Třída hlášení o kolizi.">CollisionReport</a> rep <span class="keywordflow">in</span> csolve.<a class="code" href="a00003.html#aeeb1a408f85dbbd1a1e7943f01f71b3d" title="Sestaví report o kolizích v momentálním stavu systému pro daný objekt.">DetectCollisionsFor</a>(i))
+<a name="l00421"></a>00421                         csolve.<a class="code" href="a00003.html#ac608bd2318416a70a860f29510274951" title="Vyřeší konkrétní kolizi.">SolveCollision</a>(rep);
+<a name="l00422"></a>00422                 }
+<a name="l00423"></a>00423             }
+<a name="l00424"></a>00424 
+<a name="l00425"></a>00425             <a class="code" href="a00017.html#a9bcae788313108e402f90afdc429ef74" title="Událost nastávající při každém simulačním kroku.">OnTick</a>(<span class="keyword">this</span>, null);
+<a name="l00426"></a>00426         }
+<a name="l00427"></a>00427 
+<a name="l00431"></a>00431         <span class="keyword">public</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a> <a class="code" href="a00017.html#a2589161ff13f9249db504035d413589b" title="Poloha bodu, podle kterého se určuje hladina potenciální energie.">Level</a>
+<a name="l00432"></a><a class="code" href="a00017.html#a2589161ff13f9249db504035d413589b">00432</a>         {
+<a name="l00433"></a>00433             <span class="keyword">get</span> { <span class="keywordflow">return</span> lv; }
+<a name="l00434"></a>00434             <span class="keyword">set</span>
+<a name="l00435"></a>00435             {
+<a name="l00436"></a>00436                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Objs.Count; i++)
+<a name="l00437"></a>00437                     (Objs[i] as <a class="code" href="a00013.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a>).InitialEnergy = value[1] - lv[1];
+<a name="l00438"></a>00438                 lv[0] = 0; lv[1] = value[1]; lv[2] = 0;
+<a name="l00439"></a>00439             }
+<a name="l00440"></a>00440         }
+<a name="l00441"></a>00441 
+<a name="l00448"></a><a class="code" href="a00017.html#abe054bfbe16d40f4f3e51df82212ae3c">00448</a>         <span class="keyword">public</span> <a class="code" href="a00012.html" title="Struktura obsahující informace o energiích tělesa.">ObjectEnergy</a> <a class="code" href="a00017.html#abe054bfbe16d40f4f3e51df82212ae3c" title="Spočítá všechny typy energií pro dané těleso.">GetObjectEnergy</a>(<a class="code" href="a00013.html" title="Reprezentuje těleso ve fyzikálním světě">SimObject</a> Object,<a class="code" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca" title="Definuje typ převodu podle rozlišení">ConversionType</a> Units = <a class="code" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca" title="Definuje typ převodu podle rozlišení">ConversionType</a>.MetersToPixels)
+<a name="l00449"></a>00449         {
+<a name="l00450"></a>00450             <span class="keywordflow">if</span> (Object == null) <span class="keywordflow">throw</span> <span class="keyword">new</span> ArgumentNullException();
+<a name="l00451"></a>00451 
+<a name="l00452"></a>00452             <a class="code" href="a00012.html" title="Struktura obsahující informace o energiích tělesa.">ObjectEnergy</a> Ret = <span class="keyword">new</span> <a class="code" href="a00012.html" title="Struktura obsahující informace o energiích tělesa.">ObjectEnergy</a>();
+<a name="l00453"></a>00453 
+<a name="l00454"></a>00454             <span class="keywordflow">if</span> (Units == <a class="code" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca" title="Definuje typ převodu podle rozlišení">ConversionType</a>.MetersToPixels)
+<a name="l00455"></a>00455             {
+<a name="l00456"></a>00456                 Ret.<a class="code" href="a00012.html#a12235cbd7316cad43bd3b154684565e3" title="Kinetická energie.">Kinetic</a> = 0.5 * Object.<a class="code" href="a00013.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="a00015.html#ad61fe2fbc8030da213076b0a922d3df8" title="Spočítá &quot;skalární mocninu&quot; vektoru.">Pow</a>(Object.<a class="code" href="a00013.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a>, 2);
+<a name="l00457"></a>00457                 Ret.<a class="code" href="a00012.html#aceb308de0603e076476418df59ad68df" title="Potenciální energie.">Potential</a> = Object.<a class="code" href="a00013.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="a00015.html#affbdf4fb2128038554ba52027a6145fe" title="Spočítá vzdálenost mezi dvěma body.">PointDistance</a>(<span class="keyword">new</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>(Object.<a class="code" href="a00013.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa)">COG</a>[0], <a class="code" href="a00017.html#a2589161ff13f9249db504035d413589b" title="Poloha bodu, podle kterého se určuje hladina potenciální energie.">Level</a>[1], 0), Object.<a class="code" href="a00013.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa)">COG</a>) * <a class="code" href="a00017.html#ae3de84e1eaaf168a9610acf00f2e78e5" title="Vektor gravitace.">Gravity</a>.<a class="code" href="a00015.html#ad655f05c2eff8f8c3e5a61e186cdb6a8" title="Velikost vektoru.">Magnitude</a>;
+<a name="l00458"></a>00458             }
+<a name="l00459"></a>00459             <span class="keywordflow">else</span>
+<a name="l00460"></a>00460             {
+<a name="l00461"></a>00461                 Ret.<a class="code" href="a00012.html#a12235cbd7316cad43bd3b154684565e3" title="Kinetická energie.">Kinetic</a> = 0.5 * Object.<a class="code" href="a00013.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="a00015.html#ad61fe2fbc8030da213076b0a922d3df8" title="Spočítá &quot;skalární mocninu&quot; vektoru.">Pow</a>(<a class="code" href="a00017.html#a0304b913f959a862c9b7eca47bee6a89" title="Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení světa.">Convert</a>(Object.<a class="code" href="a00013.html#a349d6f14cd31847f16928e3cf3cea730" title="Rychlost tělesa.">LinearVelocity</a>,<a class="code" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca" title="Definuje typ převodu podle rozlišení">ConversionType</a>.PixelsToMeters), 2);
+<a name="l00462"></a>00462                 Ret.<a class="code" href="a00012.html#aceb308de0603e076476418df59ad68df" title="Potenciální energie.">Potential</a> = Object.<a class="code" href="a00013.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * <a class="code" href="a00017.html#a0304b913f959a862c9b7eca47bee6a89" title="Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení světa.">Convert</a>(<a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="a00015.html#affbdf4fb2128038554ba52027a6145fe" title="Spočítá vzdálenost mezi dvěma body.">PointDistance</a>(<span class="keyword">new</span> <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>(Object.<a class="code" href="a00013.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa)">COG</a>[0], <a class="code" href="a00017.html#a2589161ff13f9249db504035d413589b" title="Poloha bodu, podle kterého se určuje hladina potenciální energie.">Level</a>[1], 0), Object.<a class="code" href="a00013.html#a97d09c95bba2f5cc487c3c30eadb635d" title="Absolutní souřadnice těžiště tělesa (poloha tělesa)">COG</a>),<a class="code" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca" title="Definuje typ převodu podle rozlišení">ConversionType</a>.PixelsToMeters) * <a class="code" href="a00017.html#a0304b913f959a862c9b7eca47bee6a89" title="Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení světa.">Convert</a>(<a class="code" href="a00017.html#ae3de84e1eaaf168a9610acf00f2e78e5" title="Vektor gravitace.">Gravity</a>,<a class="code" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca" title="Definuje typ převodu podle rozlišení">ConversionType</a>.PixelsToMeters).Magnitude;
+<a name="l00463"></a>00463             }
+<a name="l00464"></a>00464             
+<a name="l00465"></a>00465             Ret.<a class="code" href="a00012.html#afcfda707932cb606ecf50ef0ce325c44" title="Rotační energie.">Rotational</a> = 0.5 * Object.<a class="code" href="a00013.html#a8b0a9464ade64ba8d4f4c88d0f946c0f" title="Hmotnost tělesa.">Mass</a> * Object.<a class="code" href="a00013.html#abebd841b2240bf066ce8f95001981a25" title="Spočítá moment setrvačnosti tělesa v závislosti na rozlišení">MomentOfInertia</a> * <a class="code" href="a00015.html" title="Třída reprezentující vektor.">Vector</a>.<a class="code" href="a00015.html#ad61fe2fbc8030da213076b0a922d3df8" title="Spočítá &quot;skalární mocninu&quot; vektoru.">Pow</a>(Object.<a class="code" href="a00013.html#ad84e0ea2b37c0fd3b98e792e3649b1fc" title="Úhlová rychlost tělesa.">AngularVelocity</a>, 2);
+<a name="l00466"></a>00466             <span class="keywordflow">return</span> Ret;
+<a name="l00467"></a>00467         }
+<a name="l00468"></a>00468 
+<a name="l00469"></a>00469     }
+<a name="l00470"></a>00470 
+<a name="l00474"></a><a class="code" href="a00012.html">00474</a>     <span class="keyword">public</span> <span class="keyword">struct </span><a class="code" href="a00012.html" title="Struktura obsahující informace o energiích tělesa.">ObjectEnergy</a>
+<a name="l00475"></a>00475     {
+<a name="l00479"></a><a class="code" href="a00012.html#a12235cbd7316cad43bd3b154684565e3">00479</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00012.html#a12235cbd7316cad43bd3b154684565e3" title="Kinetická energie.">Kinetic</a> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+<a name="l00480"></a>00480         
+<a name="l00484"></a><a class="code" href="a00012.html#aceb308de0603e076476418df59ad68df">00484</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00012.html#aceb308de0603e076476418df59ad68df" title="Potenciální energie.">Potential</a> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+<a name="l00485"></a>00485         
+<a name="l00489"></a><a class="code" href="a00012.html#afcfda707932cb606ecf50ef0ce325c44">00489</a>         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00012.html#afcfda707932cb606ecf50ef0ce325c44" title="Rotační energie.">Rotational</a> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+<a name="l00490"></a>00490         
+<a name="l00494"></a>00494         <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code" href="a00012.html#a663a7916a2b47f4ec36374762fbf62c0" title="Celková energie tělesa.">Total</a>
+<a name="l00495"></a><a class="code" href="a00012.html#a663a7916a2b47f4ec36374762fbf62c0">00495</a>         {
+<a name="l00496"></a>00496             <span class="keyword">get</span> { <span class="keywordflow">return</span> <a class="code" href="a00012.html#a12235cbd7316cad43bd3b154684565e3" title="Kinetická energie.">Kinetic</a> + <a class="code" href="a00012.html#aceb308de0603e076476418df59ad68df" title="Potenciální energie.">Potential</a> + <a class="code" href="a00012.html#afcfda707932cb606ecf50ef0ce325c44" title="Rotační energie.">Rotational</a>; }
+<a name="l00497"></a>00497         }
+<a name="l00498"></a>00498     }
+<a name="l00499"></a>00499 }
+</pre></div></div>
+</div>
+<hr class="footer"/><address class="footer"><small>Generováno st 11. kvě 2011 14.02:05 pro projekt PhysLib programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
+</body>
+</html>

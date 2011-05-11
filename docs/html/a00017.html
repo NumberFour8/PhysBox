@@ -1,0 +1,959 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>PhysLib: Dokumentace třídy PhysLib.World</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Generováno programem Doxygen 1.7.4 -->
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PhysLib&#160;<span id="projectnumber">0.2</span></div>
+   <div id="projectbrief">Knihovna pro 2D simulaci mechaniky tuhých těles</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hlavní&#160;stránka</span></a></li>
+      <li><a href="namespaces.html"><span>Balíky</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Třídy</span></a></li>
+      <li><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Seznam&#160;tříd</span></a></li>
+      <li><a href="functions.html"><span>Seznam&#160;členů&#160;tříd</span></a></li>
+    </ul>
+  </div>
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><a class="el" href="a00027.html">PhysLib</a>      </li>
+      <li class="navelem"><a class="el" href="a00017.html">World</a>      </li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Veřejné metody</a> &#124;
+<a href="#properties">Vlastnosti</a> &#124;
+<a href="#events">Události</a>  </div>
+  <div class="headertitle">
+<div class="title">Dokumentace třídy PhysLib.World</div>  </div>
+</div>
+<div class="contents">
+<!-- doxytag: class="PhysLib::World" -->
+<p>Reprezentuje fyzikální svět.  
+ <a href="a00017.html#details">...</a></p>
+
+<p><a href="a00047.html">Seznam všech členů.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Veřejné metody</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a019879d846242fa9e081d7f380de4a67">World</a> (<a class="el" href="a00010.html">Matrix</a> WorldOrientation, <a class="el" href="a00015.html">Vector</a> WorldGravity, double WorldDiameter, double WorldResolution=30)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Vytvoří fyzikální svět.  <a href="#a019879d846242fa9e081d7f380de4a67"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a0304b913f959a862c9b7eca47bee6a89">Convert</a> (double Input, <a class="el" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca">ConversionType</a> Type)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení světa.  <a href="#a0304b913f959a862c9b7eca47bee6a89"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00015.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a74b4c9b5acadb0b0565cf3ac339e2617">Convert</a> (<a class="el" href="a00015.html">Vector</a> Input, <a class="el" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca">ConversionType</a> Type)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provede převod vektoru z metrů na pixely nebo z pixelů na metry podle daného rozlišení světa.  <a href="#a74b4c9b5acadb0b0565cf3ac339e2617"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#aa0fddc9a66ce8b4146c3dcafd534c36b">OrientationOf</a> (<a class="el" href="a00027.html#aa1626a0fb162178b21a9121cd1ea8e6d">Axes</a> Axis)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Získá úhel orientace dané osy vzhledem k bázovému směru osy.  <a href="#aa0fddc9a66ce8b4146c3dcafd534c36b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#ade1ac2f54d91433a59da9c12aa12f961">ClearObjects</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Smaže všechna tělesa.  <a href="#ade1ac2f54d91433a59da9c12aa12f961"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a566232b6f5624ff486ffad4d6920c517">DeleteObject</a> (int Index)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Smaže těleso s daným indexem.  <a href="#a566232b6f5624ff486ffad4d6920c517"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a2bcec0c439821acca9d11cc0855d5c0c">DeleteField</a> (int Index)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Smaže silové pole s daným indexem.  <a href="#a2bcec0c439821acca9d11cc0855d5c0c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#abe07f9f53380e291e59e3e0e02ae31a1">ClearFields</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Smaže všechna silová pole.  <a href="#abe07f9f53380e291e59e3e0e02ae31a1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#aac0d1406a8bbc24bf605f3298982f2eb">AddField</a> (<a class="el" href="a00006.html">Field</a> F)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Přidá fyzikální pole.  <a href="#aac0d1406a8bbc24bf605f3298982f2eb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a840588a33e049e6438eb84a92e6f9511">AddObject</a> (<a class="el" href="a00013.html">SimObject</a> O)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Přidá těleso do světa.  <a href="#a840588a33e049e6438eb84a92e6f9511"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00013.html">SimObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a0cd942568d2efb8b9942bccaad9841a6">NearestObject</a> (<a class="el" href="a00015.html">Vector</a> Position, bool SkipStatic=true)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Najde první nejbližší těžiště objektu ve světě k dané pozici.  <a href="#a0cd942568d2efb8b9942bccaad9841a6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a741051dddcf5be1458403d764d2d93c4">Tick</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provede simulační krok.  <a href="#a741051dddcf5be1458403d764d2d93c4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00012.html">ObjectEnergy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#abe054bfbe16d40f4f3e51df82212ae3c">GetObjectEnergy</a> (<a class="el" href="a00013.html">SimObject</a> Object, <a class="el" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca">ConversionType</a> Units=ConversionType.MetersToPixels)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Spočítá všechny typy energií pro dané těleso.  <a href="#abe054bfbe16d40f4f3e51df82212ae3c"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="properties"></a>
+Vlastnosti</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00015.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a139704aae3670f6af84e68479ba4200f">X</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Směr osy X.  <a href="#a139704aae3670f6af84e68479ba4200f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00015.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#affdacd648a414e1fa9a8f11d764586d8">Y</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Směr osy Y.  <a href="#affdacd648a414e1fa9a8f11d764586d8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00015.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#abc358161c6c99ba15a653998e8bdae73">Z</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Směr osy Z.  <a href="#abc358161c6c99ba15a653998e8bdae73"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00010.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a1c93734b986d5338035675866774860b">B</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Standardní matice souřadných os.  <a href="#a1c93734b986d5338035675866774860b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00010.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#ae6676aec4dd7d0e316fcb8629a201fc8">DisplayDefault</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Výchozí zobrazovací matice souřadných os na displeji.  <a href="#ae6676aec4dd7d0e316fcb8629a201fc8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00015.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#aa6ca4044f10cf7980f5d77ffd1b16da8">EarthG</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Průměrné zemské gravitační zrychlení  <a href="#aa6ca4044f10cf7980f5d77ffd1b16da8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#ad93dceb2bb66640be80f5df14f356799">Resolution</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Rozlišení světa.  <a href="#ad93dceb2bb66640be80f5df14f356799"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00003.html">CollisionSolver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a17e98ed91c35e085461efed0cfd08655">Solver</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Třída pro vyhodnocení kolizí  <a href="#a17e98ed91c35e085461efed0cfd08655"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00015.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#ae3de84e1eaaf168a9610acf00f2e78e5">Gravity</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Vektor gravitace.  <a href="#ae3de84e1eaaf168a9610acf00f2e78e5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a41bed8efe3c4dcacbf57fab99090e9ac">CurrentTimeFrame</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Aktuální krok simulace.  <a href="#a41bed8efe3c4dcacbf57fab99090e9ac"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#acc31f79361976080fbb775cdaaa5b1cb">MaximumRadius</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximální vzdálenost tělesa od počátku.  <a href="#acc31f79361976080fbb775cdaaa5b1cb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00010.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#ae56d5c021fa932c4bc1962d4f143079e">Orientation</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Orientace světa.  <a href="#ae56d5c021fa932c4bc1962d4f143079e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#ae0627807d62480261dbf7b50519c4dd4">Aether</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Hustota prostředí (v jednotkách SI)  <a href="#ae0627807d62480261dbf7b50519c4dd4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00006.html">Field</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a4d4ce7495b98535a2941d031526c660f">ForceFields</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Silová pole.  <a href="#a4d4ce7495b98535a2941d031526c660f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00013.html">SimObject</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#ad212e78d2f10329bcd5f2b5270da498e">Objects</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Všechna tělesa ve světě  <a href="#ad212e78d2f10329bcd5f2b5270da498e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a0fbab9547603842f4a45ec58e52150f6">CountObjects</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Počet těles ve světě  <a href="#a0fbab9547603842f4a45ec58e52150f6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a22ff97b800117ca8ca007715e13ce278">CountFields</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Počet polí ve světě  <a href="#a22ff97b800117ca8ca007715e13ce278"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a824644987a31ae273191a7a3a0010fc1">Paused</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Indikuje, zda je simulace pozastavena.  <a href="#a824644987a31ae273191a7a3a0010fc1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00013.html">SimObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#ade4f980c1f2ede06114acfca7955359e">this[int index]</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Získá/změní těleso ve světě  <a href="#ade4f980c1f2ede06114acfca7955359e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a08b91c2bcb4482f4658fcdf153d8d5ca">Delta</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Velikost kroku simulace (v sekundách)  <a href="#a08b91c2bcb4482f4658fcdf153d8d5ca"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#ac4d441ca3ae5bc1d6cd6aa44571f40de">DeleteOutOfBounds</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Indikuje, zda objekty mimo simulační okno budou smazány místo vypnutí  <a href="#ac4d441ca3ae5bc1d6cd6aa44571f40de"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00015.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a2589161ff13f9249db504035d413589b">Level</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Poloha bodu, podle kterého se určuje hladina potenciální energie.  <a href="#a2589161ff13f9249db504035d413589b"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="events"></a>
+Události</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">EventHandler&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#a9bcae788313108e402f90afdc429ef74">OnTick</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Událost nastávající při každém simulačním kroku.  <a href="#a9bcae788313108e402f90afdc429ef74"></a><br/></td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Detailní popis</h2>
+<div class="textblock"><p>Reprezentuje fyzikální svět. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00026">26</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+</div><hr/><h2>Dokumentace konstruktoru a destruktoru</h2>
+<a class="anchor" id="a019879d846242fa9e081d7f380de4a67"></a><!-- doxytag: member="PhysLib::World::World" ref="a019879d846242fa9e081d7f380de4a67" args="(Matrix WorldOrientation, Vector WorldGravity, double WorldDiameter, double WorldResolution=30)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PhysLib.World.World </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00010.html">Matrix</a>&#160;</td>
+          <td class="paramname"><em>WorldOrientation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>WorldGravity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>WorldDiameter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>WorldResolution</em> = <code>30</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vytvoří fyzikální svět. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">WorldOrientation</td><td>Orientace os zobrazovacího zařízení</td></tr>
+    <tr><td class="paramname">WorldGravity</td><td>Gravitační zrychlení (v jednotkách SI)</td></tr>
+    <tr><td class="paramname">WorldDiameter</td><td>Poloměr světa v pixelech (maximální vzdálnost tělesa od počátku souřadnic)</td></tr>
+    <tr><td class="paramname">WorldResolution</td><td>Počet pixelů který představuje jeden fyzický metr</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00077">77</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Dokumentace k metodám</h2>
+<a class="anchor" id="aac0d1406a8bbc24bf605f3298982f2eb"></a><!-- doxytag: member="PhysLib::World::AddField" ref="aac0d1406a8bbc24bf605f3298982f2eb" args="(Field F)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PhysLib.World.AddField </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00006.html">Field</a>&#160;</td>
+          <td class="paramname"><em>F</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Přidá fyzikální pole. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">F</td><td>Pole sil</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Index pole</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00299">299</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a840588a33e049e6438eb84a92e6f9511"></a><!-- doxytag: member="PhysLib::World::AddObject" ref="a840588a33e049e6438eb84a92e6f9511" args="(SimObject O)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PhysLib.World.AddObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00013.html">SimObject</a>&#160;</td>
+          <td class="paramname"><em>O</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Přidá těleso do světa. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">O</td><td>Těleso</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Index tělesa</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00318">318</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abe07f9f53380e291e59e3e0e02ae31a1"></a><!-- doxytag: member="PhysLib::World::ClearFields" ref="abe07f9f53380e291e59e3e0e02ae31a1" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhysLib.World.ClearFields </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Smaže všechna silová pole. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00260">260</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ade1ac2f54d91433a59da9c12aa12f961"></a><!-- doxytag: member="PhysLib::World::ClearObjects" ref="ade1ac2f54d91433a59da9c12aa12f961" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhysLib.World.ClearObjects </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Smaže všechna tělesa. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00223">223</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a74b4c9b5acadb0b0565cf3ac339e2617"></a><!-- doxytag: member="PhysLib::World::Convert" ref="a74b4c9b5acadb0b0565cf3ac339e2617" args="(Vector Input, ConversionType Type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00015.html">Vector</a> PhysLib.World.Convert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>Input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca">ConversionType</a>&#160;</td>
+          <td class="paramname"><em>Type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Provede převod vektoru z metrů na pixely nebo z pixelů na metry podle daného rozlišení světa. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Input</td><td>Vstupní číslo</td></tr>
+    <tr><td class="paramname">Type</td><td>Typ převodu</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Převedené číslo</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00115">115</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0304b913f959a862c9b7eca47bee6a89"></a><!-- doxytag: member="PhysLib::World::Convert" ref="a0304b913f959a862c9b7eca47bee6a89" args="(double Input, ConversionType Type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.World.Convert </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>Input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca">ConversionType</a>&#160;</td>
+          <td class="paramname"><em>Type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Provede převod z metrů na pixely nebo z pixelů na metry podle daného rozlišení světa. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Input</td><td>Vstupní číslo</td></tr>
+    <tr><td class="paramname">Type</td><td>Typ převodu</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Převedené číslo</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00102">102</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2bcec0c439821acca9d11cc0855d5c0c"></a><!-- doxytag: member="PhysLib::World::DeleteField" ref="a2bcec0c439821acca9d11cc0855d5c0c" args="(int Index)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhysLib.World.DeleteField </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Smaže silové pole s daným indexem. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Index</td><td>Index pole</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00248">248</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a566232b6f5624ff486ffad4d6920c517"></a><!-- doxytag: member="PhysLib::World::DeleteObject" ref="a566232b6f5624ff486ffad4d6920c517" args="(int Index)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhysLib.World.DeleteObject </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Smaže těleso s daným indexem. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Index</td><td>Index tělesa</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00235">235</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abe054bfbe16d40f4f3e51df82212ae3c"></a><!-- doxytag: member="PhysLib::World::GetObjectEnergy" ref="abe054bfbe16d40f4f3e51df82212ae3c" args="(SimObject Object, ConversionType Units=ConversionType.MetersToPixels)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00012.html">ObjectEnergy</a> PhysLib.World.GetObjectEnergy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00013.html">SimObject</a>&#160;</td>
+          <td class="paramname"><em>Object</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00027.html#a8fa2fc76b1dd67c14c83e1c40034e9ca">ConversionType</a>&#160;</td>
+          <td class="paramname"><em>Units</em> = <code>ConversionType.MetersToPixels</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Spočítá všechny typy energií pro dané těleso. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Object</td><td>Těleso</td></tr>
+    <tr><td class="paramname">Units</td><td>Jednotky</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Energie</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00448">448</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0cd942568d2efb8b9942bccaad9841a6"></a><!-- doxytag: member="PhysLib::World::NearestObject" ref="a0cd942568d2efb8b9942bccaad9841a6" args="(Vector Position, bool SkipStatic=true)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00013.html">SimObject</a> PhysLib.World.NearestObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>Position</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>SkipStatic</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Najde první nejbližší těžiště objektu ve světě k dané pozici. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Position</td><td>Pozice</td></tr>
+    <tr><td class="paramname">SkipStatic</td><td>Indikuje, zda přeskočit statické objekty</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Nejbližší objekt</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00334">334</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa0fddc9a66ce8b4146c3dcafd534c36b"></a><!-- doxytag: member="PhysLib::World::OrientationOf" ref="aa0fddc9a66ce8b4146c3dcafd534c36b" args="(Axes Axis)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.World.OrientationOf </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00027.html#aa1626a0fb162178b21a9121cd1ea8e6d">Axes</a>&#160;</td>
+          <td class="paramname"><em>Axis</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Získá úhel orientace dané osy vzhledem k bázovému směru osy. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Axis</td><td>Osa</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Úhel</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00179">179</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a741051dddcf5be1458403d764d2d93c4"></a><!-- doxytag: member="PhysLib::World::Tick" ref="a741051dddcf5be1458403d764d2d93c4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhysLib.World.Tick </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Provede simulační krok. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00378">378</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Dokumentace k vlastnosti</h2>
+<a class="anchor" id="ae0627807d62480261dbf7b50519c4dd4"></a><!-- doxytag: member="PhysLib::World::Aether" ref="ae0627807d62480261dbf7b50519c4dd4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.World.Aether<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Hustota prostředí (v jednotkách SI) </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00188">188</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1c93734b986d5338035675866774860b"></a><!-- doxytag: member="PhysLib::World::B" ref="a1c93734b986d5338035675866774860b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00010.html">Matrix</a> PhysLib.World.B<code> [static, get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Standardní matice souřadných os. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00046">46</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a22ff97b800117ca8ca007715e13ce278"></a><!-- doxytag: member="PhysLib::World::CountFields" ref="a22ff97b800117ca8ca007715e13ce278" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint PhysLib.World.CountFields<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Počet polí ve světě </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00216">216</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0fbab9547603842f4a45ec58e52150f6"></a><!-- doxytag: member="PhysLib::World::CountObjects" ref="a0fbab9547603842f4a45ec58e52150f6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint PhysLib.World.CountObjects<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Počet těles ve světě </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00208">208</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a41bed8efe3c4dcacbf57fab99090e9ac"></a><!-- doxytag: member="PhysLib::World::CurrentTimeFrame" ref="a41bed8efe3c4dcacbf57fab99090e9ac" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.World.CurrentTimeFrame<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Aktuální krok simulace. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00148">148</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac4d441ca3ae5bc1d6cd6aa44571f40de"></a><!-- doxytag: member="PhysLib::World::DeleteOutOfBounds" ref="ac4d441ca3ae5bc1d6cd6aa44571f40de" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PhysLib.World.DeleteOutOfBounds<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Indikuje, zda objekty mimo simulační okno budou smazány místo vypnutí </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00370">370</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a08b91c2bcb4482f4658fcdf153d8d5ca"></a><!-- doxytag: member="PhysLib::World::Delta" ref="a08b91c2bcb4482f4658fcdf153d8d5ca" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.World.Delta<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Velikost kroku simulace (v sekundách) </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00361">361</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae6676aec4dd7d0e316fcb8629a201fc8"></a><!-- doxytag: member="PhysLib::World::DisplayDefault" ref="ae6676aec4dd7d0e316fcb8629a201fc8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00010.html">Matrix</a> PhysLib.World.DisplayDefault<code> [static, get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Výchozí zobrazovací matice souřadných os na displeji. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00051">51</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa6ca4044f10cf7980f5d77ffd1b16da8"></a><!-- doxytag: member="PhysLib::World::EarthG" ref="aa6ca4044f10cf7980f5d77ffd1b16da8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00015.html">Vector</a> PhysLib.World.EarthG<code> [static, get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Průměrné zemské gravitační zrychlení </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00056">56</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4d4ce7495b98535a2941d031526c660f"></a><!-- doxytag: member="PhysLib::World::ForceFields" ref="a4d4ce7495b98535a2941d031526c660f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00006.html">Field</a> [] PhysLib.World.ForceFields<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Silová pole. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00196">196</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae3de84e1eaaf168a9610acf00f2e78e5"></a><!-- doxytag: member="PhysLib::World::Gravity" ref="ae3de84e1eaaf168a9610acf00f2e78e5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00015.html">Vector</a> PhysLib.World.Gravity<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vektor gravitace. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00139">139</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2589161ff13f9249db504035d413589b"></a><!-- doxytag: member="PhysLib::World::Level" ref="a2589161ff13f9249db504035d413589b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00015.html">Vector</a> PhysLib.World.Level<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Poloha bodu, podle kterého se určuje hladina potenciální energie. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00432">432</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acc31f79361976080fbb775cdaaa5b1cb"></a><!-- doxytag: member="PhysLib::World::MaximumRadius" ref="acc31f79361976080fbb775cdaaa5b1cb" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.World.MaximumRadius<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Maximální vzdálenost tělesa od počátku. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00156">156</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad212e78d2f10329bcd5f2b5270da498e"></a><!-- doxytag: member="PhysLib::World::Objects" ref="ad212e78d2f10329bcd5f2b5270da498e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00013.html">SimObject</a> [] PhysLib.World.Objects<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Všechna tělesa ve světě </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00201">201</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae56d5c021fa932c4bc1962d4f143079e"></a><!-- doxytag: member="PhysLib::World::Orientation" ref="ae56d5c021fa932c4bc1962d4f143079e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00010.html">Matrix</a> PhysLib.World.Orientation<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Orientace světa. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00170">170</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a824644987a31ae273191a7a3a0010fc1"></a><!-- doxytag: member="PhysLib::World::Paused" ref="a824644987a31ae273191a7a3a0010fc1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PhysLib.World.Paused<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Indikuje, zda je simulace pozastavena. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00272">272</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad93dceb2bb66640be80f5df14f356799"></a><!-- doxytag: member="PhysLib::World::Resolution" ref="ad93dceb2bb66640be80f5df14f356799" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.World.Resolution<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Rozlišení světa. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00125">125</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a17e98ed91c35e085461efed0cfd08655"></a><!-- doxytag: member="PhysLib::World::Solver" ref="a17e98ed91c35e085461efed0cfd08655" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00003.html">CollisionSolver</a> PhysLib.World.Solver<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Třída pro vyhodnocení kolizí </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00131">131</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ade4f980c1f2ede06114acfca7955359e"></a><!-- doxytag: member="PhysLib::World::this[int index]" ref="ade4f980c1f2ede06114acfca7955359e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00013.html">SimObject</a> PhysLib.World.this[int index]<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Získá/změní těleso ve světě </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>Index tělesa</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Těleso</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00283">283</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a139704aae3670f6af84e68479ba4200f"></a><!-- doxytag: member="PhysLib::World::X" ref="a139704aae3670f6af84e68479ba4200f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00015.html">Vector</a> PhysLib.World.X<code> [static, get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Směr osy X. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00031">31</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="affdacd648a414e1fa9a8f11d764586d8"></a><!-- doxytag: member="PhysLib::World::Y" ref="affdacd648a414e1fa9a8f11d764586d8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00015.html">Vector</a> PhysLib.World.Y<code> [static, get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Směr osy Y. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00036">36</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abc358161c6c99ba15a653998e8bdae73"></a><!-- doxytag: member="PhysLib::World::Z" ref="abc358161c6c99ba15a653998e8bdae73" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00015.html">Vector</a> PhysLib.World.Z<code> [static, get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Směr osy Z. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00041">41</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Dokumentace událostí</h2>
+<a class="anchor" id="a9bcae788313108e402f90afdc429ef74"></a><!-- doxytag: member="PhysLib::World::OnTick" ref="a9bcae788313108e402f90afdc429ef74" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventHandler PhysLib.World.OnTick</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Událost nastávající při každém simulačním kroku. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00026_source.html#l00311">311</a> v souboru <a class="el" href="a00026_source.html">World.cs</a>.</p>
+
+</div>
+</div>
+<hr/>Dokumentace pro tuto třídu byla generována z následujícího souboru:<ul>
+<li><a class="el" href="a00026_source.html">World.cs</a></li>
+</ul>
+</div>
+<hr class="footer"/><address class="footer"><small>Generováno st 11. kvě 2011 14.02:06 pro projekt PhysLib programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
+</body>
+</html>

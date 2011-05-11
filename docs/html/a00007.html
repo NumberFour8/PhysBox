@@ -1,0 +1,659 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>PhysLib: Dokumentace třídy PhysLib.Geometry</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Generováno programem Doxygen 1.7.4 -->
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PhysLib&#160;<span id="projectnumber">0.2</span></div>
+   <div id="projectbrief">Knihovna pro 2D simulaci mechaniky tuhých těles</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hlavní&#160;stránka</span></a></li>
+      <li><a href="namespaces.html"><span>Balíky</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Třídy</span></a></li>
+      <li><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Seznam&#160;tříd</span></a></li>
+      <li><a href="functions.html"><span>Seznam&#160;členů&#160;tříd</span></a></li>
+    </ul>
+  </div>
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><a class="el" href="a00027.html">PhysLib</a>      </li>
+      <li class="navelem"><a class="el" href="a00007.html">Geometry</a>      </li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Veřejné metody</a> &#124;
+<a href="#pub-static-methods">Statické veřejné metody</a> &#124;
+<a href="#properties">Vlastnosti</a> &#124;
+<a href="#events">Události</a>  </div>
+  <div class="headertitle">
+<div class="title">Dokumentace třídy PhysLib.Geometry</div>  </div>
+</div>
+<div class="contents">
+<!-- doxytag: class="PhysLib::Geometry" -->
+<p>Abstraktní třída reprezentující 2D fyzický model tělesa.  
+ <a href="a00007.html#details">...</a></p>
+
+<p><a href="a00036.html">Seznam všech členů.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Veřejné metody</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#abd44a2e0be7ca59b578f93793e3463bd">CollisionHandler</a> (object sender, <a class="el" href="a00001.html">CollisionEventArgs</a> e)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Delegát pro událost kolize.  <a href="#abd44a2e0be7ca59b578f93793e3463bd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a7bdeee055913161951e14976816e11fe">Geometry</a> (PointF[] Vertices, PointF InitPosition, PointF?COG)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Vytvoří fyzický model tělesa jako objekt z daných vertexů  <a href="#a7bdeee055913161951e14976816e11fe"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00015.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a6951cd27db46e54483a9208eae51b0e0">ProjectToObject</a> (<a class="el" href="a00015.html">Vector</a> ExternalPoint)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provede projekci libovolného bodu na povrch tělesa.  <a href="#a6951cd27db46e54483a9208eae51b0e0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a3660be945ecec74cecde8e337518c09a">ProjectToAxis</a> (<a class="el" href="a00015.html">Vector</a> Axis, ref double min, ref double max)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Projektuje těleso na danou osu.  <a href="#a3660be945ecec74cecde8e337518c09a"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="pub-static-methods"></a>
+Statické veřejné metody</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a3df938cd93d2df2af7aed8fb59d137db">PolygonArea</a> (PointF[] Vertices)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Spočte obsah polygonu daný určenými vertexy.  <a href="#a3df938cd93d2df2af7aed8fb59d137db"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00008.html">GeometryDescriptor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a0c34c013ea02adfc8d755b8c9c33e226">AnalyzeVertexGroup</a> (PointF[] Vertices)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Analyzuje pole vertexů jako polygon a zjistí jeho geometrický střed (centroid), šířku a výšku.  <a href="#a0c34c013ea02adfc8d755b8c9c33e226"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#af85267217006c70bf21a251bcf422f11">PointDistance</a> (PointF A, PointF B)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Spočte vzdálenost dvou bodů  <a href="#af85267217006c70bf21a251bcf422f11"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="properties"></a>
+Vlastnosti</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a4e66a23359a51b17bede92205730d24e">DragCoefficient</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Koeficient odporu.  <a href="#a4e66a23359a51b17bede92205730d24e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00015.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a47fb00258f8f196b43d82fc5967eda21">Position</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Pozice těžiště objektu vzhledem k počátku světa.  <a href="#a47fb00258f8f196b43d82fc5967eda21"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a1e8503693216b6a3d578ba51f41851ba">Orientation</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Orientace objektu v úhlových stupních.  <a href="#a1e8503693216b6a3d578ba51f41851ba"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a6242589f3d4618404614029447b238be">Scale</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Škáluje těleso daným faktorem.  <a href="#a6242589f3d4618404614029447b238be"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PointF[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#af3a7b3e74846ff6610e1d07fff9184eb">ObjectGeometry</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolutní polohy vertexů tvořící fyzický model tělesa.  <a href="#af3a7b3e74846ff6610e1d07fff9184eb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PointF[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a5af0dd92de56fa5de82a496af9ce3893">RelativeGeometry</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Relativní polohy vertexů tvořící fyzický model tělesa vzhledem k centroidu.  <a href="#a5af0dd92de56fa5de82a496af9ce3893"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">PointF[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a53ea962fb7f4ac902e35898b2e32ddb9">BoundingBox</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolutní poloha konvexního útvaru ohraničující těleso.  <a href="#a53ea962fb7f4ac902e35898b2e32ddb9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00015.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#ac9c1ae2a7624167be9cc4cab9aac44c8">Nail</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolutní poloha bodu osy otáčení v rovině těžiště  <a href="#ac9c1ae2a7624167be9cc4cab9aac44c8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a5434e9ce6b416eb37bbb62090087d3c3">Depth</a><code> [get, set]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Hloubka tělesa.  <a href="#a5434e9ce6b416eb37bbb62090087d3c3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a988a6e0a503763fc314d72051af91f7e">Height</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Výška objektu.  <a href="#a988a6e0a503763fc314d72051af91f7e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a36d0b136444be5f248f71403d5918b08">Width</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Šířka objektu.  <a href="#a36d0b136444be5f248f71403d5918b08"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#aa786449a044ceec7772d4d923dfab12f">Volume</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Objem objektu v krychlových pixelech.  <a href="#aa786449a044ceec7772d4d923dfab12f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#adc6b0f749f7b0a0e1e361a78fc4b54bf">Convex</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Indikuje, zda je útvar konvexní  <a href="#adc6b0f749f7b0a0e1e361a78fc4b54bf"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#ad9889dec141aa5aecd811f264ac2d7cb">Surface</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Povrch objektu v pixelech čtverečních.  <a href="#ad9889dec141aa5aecd811f264ac2d7cb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a7e86471f6a3ae35ccc693597f571b25b">FrontalArea</a><code> [get]</code></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obsah plochy polygonu.  <a href="#a7e86471f6a3ae35ccc693597f571b25b"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="events"></a>
+Události</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">CollisionHandler&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00007.html#a9b20dc8fe56feed97f6fd4a4a7da26e3">OnCollision</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Událost nastávající při kolizi tělesa.  <a href="#a9b20dc8fe56feed97f6fd4a4a7da26e3"></a><br/></td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Detailní popis</h2>
+<div class="textblock"><p>Abstraktní třída reprezentující 2D fyzický model tělesa. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00012">12</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+</div><hr/><h2>Dokumentace konstruktoru a destruktoru</h2>
+<a class="anchor" id="a7bdeee055913161951e14976816e11fe"></a><!-- doxytag: member="PhysLib::Geometry::Geometry" ref="a7bdeee055913161951e14976816e11fe" args="(PointF[] Vertices, PointF InitPosition, PointF?COG)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PhysLib.Geometry.Geometry </td>
+          <td>(</td>
+          <td class="paramtype">PointF[]&#160;</td>
+          <td class="paramname"><em>Vertices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PointF&#160;</td>
+          <td class="paramname"><em>InitPosition</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PointF?&#160;</td>
+          <td class="paramname"><em>COG</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Vytvoří fyzický model tělesa jako objekt z daných vertexů </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Vertices</td><td>Vertexy tělesa</td></tr>
+    <tr><td class="paramname">InitPosition</td><td>Počáteční poloha tělesa</td></tr>
+    <tr><td class="paramname">COG</td><td>Těžiště tělesa</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00040">40</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Dokumentace k metodám</h2>
+<a class="anchor" id="a0c34c013ea02adfc8d755b8c9c33e226"></a><!-- doxytag: member="PhysLib::Geometry::AnalyzeVertexGroup" ref="a0c34c013ea02adfc8d755b8c9c33e226" args="(PointF[] Vertices)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="a00008.html">GeometryDescriptor</a> PhysLib.Geometry.AnalyzeVertexGroup </td>
+          <td>(</td>
+          <td class="paramtype">PointF[]&#160;</td>
+          <td class="paramname"><em>Vertices</em></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Analyzuje pole vertexů jako polygon a zjistí jeho geometrický střed (centroid), šířku a výšku. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Vertices</td><td>Pole vertexů</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Výsledek analýzy polygonu</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00158">158</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abd44a2e0be7ca59b578f93793e3463bd"></a><!-- doxytag: member="PhysLib::Geometry::CollisionHandler" ref="abd44a2e0be7ca59b578f93793e3463bd" args="(object sender, CollisionEventArgs e)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">delegate void PhysLib.Geometry.CollisionHandler </td>
+          <td>(</td>
+          <td class="paramtype">object&#160;</td>
+          <td class="paramname"><em>sender</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00001.html">CollisionEventArgs</a>&#160;</td>
+          <td class="paramname"><em>e</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Delegát pro událost kolize. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sender</td><td>Objekt, který hlásil kolizi</td></tr>
+    <tr><td class="paramname">e</td><td>Hlášení o kolizi</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="af85267217006c70bf21a251bcf422f11"></a><!-- doxytag: member="PhysLib::Geometry::PointDistance" ref="af85267217006c70bf21a251bcf422f11" args="(PointF A, PointF B)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static double PhysLib.Geometry.PointDistance </td>
+          <td>(</td>
+          <td class="paramtype">PointF&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PointF&#160;</td>
+          <td class="paramname"><em>B</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Spočte vzdálenost dvou bodů </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>Bod A</td></tr>
+    <tr><td class="paramname">B</td><td>Bod B</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Vzdálenost |AB|</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00259">259</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3df938cd93d2df2af7aed8fb59d137db"></a><!-- doxytag: member="PhysLib::Geometry::PolygonArea" ref="a3df938cd93d2df2af7aed8fb59d137db" args="(PointF[] Vertices)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static double PhysLib.Geometry.PolygonArea </td>
+          <td>(</td>
+          <td class="paramtype">PointF[]&#160;</td>
+          <td class="paramname"><em>Vertices</em></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Spočte obsah polygonu daný určenými vertexy. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Vertices</td><td>Vertexy tvořící polygon</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Rovinný obsah polygonu</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00141">141</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3660be945ecec74cecde8e337518c09a"></a><!-- doxytag: member="PhysLib::Geometry::ProjectToAxis" ref="a3660be945ecec74cecde8e337518c09a" args="(Vector Axis, ref double min, ref double max)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PhysLib.Geometry.ProjectToAxis </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>Axis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ref double&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ref double&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Projektuje těleso na danou osu. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Axis</td><td>Osa projekce</td></tr>
+    <tr><td class="paramname">min</td><td>Dolní mez intervalu</td></tr>
+    <tr><td class="paramname">max</td><td>Horní mez intervalu</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00345">345</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6951cd27db46e54483a9208eae51b0e0"></a><!-- doxytag: member="PhysLib::Geometry::ProjectToObject" ref="a6951cd27db46e54483a9208eae51b0e0" args="(Vector ExternalPoint)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00015.html">Vector</a> PhysLib.Geometry.ProjectToObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00015.html">Vector</a>&#160;</td>
+          <td class="paramname"><em>ExternalPoint</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Provede projekci libovolného bodu na povrch tělesa. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ExternalPoint</td><td>Bod ležící mimo těleso</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Návratová hodnota:</b></dt><dd>Bod na tělese</dd></dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00195">195</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Dokumentace k vlastnosti</h2>
+<a class="anchor" id="a53ea962fb7f4ac902e35898b2e32ddb9"></a><!-- doxytag: member="PhysLib::Geometry::BoundingBox" ref="a53ea962fb7f4ac902e35898b2e32ddb9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PointF [] PhysLib.Geometry.BoundingBox<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Absolutní poloha konvexního útvaru ohraničující těleso. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00243">243</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adc6b0f749f7b0a0e1e361a78fc4b54bf"></a><!-- doxytag: member="PhysLib::Geometry::Convex" ref="adc6b0f749f7b0a0e1e361a78fc4b54bf" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PhysLib.Geometry.Convex<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Indikuje, zda je útvar konvexní </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00319">319</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5434e9ce6b416eb37bbb62090087d3c3"></a><!-- doxytag: member="PhysLib::Geometry::Depth" ref="a5434e9ce6b416eb37bbb62090087d3c3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.Geometry.Depth<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Hloubka tělesa. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00276">276</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4e66a23359a51b17bede92205730d24e"></a><!-- doxytag: member="PhysLib::Geometry::DragCoefficient" ref="a4e66a23359a51b17bede92205730d24e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.Geometry.DragCoefficient<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Koeficient odporu. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00063">63</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7e86471f6a3ae35ccc693597f571b25b"></a><!-- doxytag: member="PhysLib::Geometry::FrontalArea" ref="a7e86471f6a3ae35ccc693597f571b25b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.Geometry.FrontalArea<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Obsah plochy polygonu. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00335">335</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a988a6e0a503763fc314d72051af91f7e"></a><!-- doxytag: member="PhysLib::Geometry::Height" ref="a988a6e0a503763fc314d72051af91f7e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.Geometry.Height<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Výška objektu. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00295">295</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac9c1ae2a7624167be9cc4cab9aac44c8"></a><!-- doxytag: member="PhysLib::Geometry::Nail" ref="ac9c1ae2a7624167be9cc4cab9aac44c8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00015.html">Vector</a> PhysLib.Geometry.Nail<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Absolutní poloha bodu osy otáčení v rovině těžiště </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00268">268</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af3a7b3e74846ff6610e1d07fff9184eb"></a><!-- doxytag: member="PhysLib::Geometry::ObjectGeometry" ref="af3a7b3e74846ff6610e1d07fff9184eb" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PointF [] PhysLib.Geometry.ObjectGeometry<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Absolutní polohy vertexů tvořící fyzický model tělesa. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00124">124</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1e8503693216b6a3d578ba51f41851ba"></a><!-- doxytag: member="PhysLib::Geometry::Orientation" ref="a1e8503693216b6a3d578ba51f41851ba" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.Geometry.Orientation<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Orientace objektu v úhlových stupních. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00090">90</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a47fb00258f8f196b43d82fc5967eda21"></a><!-- doxytag: member="PhysLib::Geometry::Position" ref="a47fb00258f8f196b43d82fc5967eda21" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00015.html">Vector</a> PhysLib.Geometry.Position<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Pozice těžiště objektu vzhledem k počátku světa. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00071">71</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5af0dd92de56fa5de82a496af9ce3893"></a><!-- doxytag: member="PhysLib::Geometry::RelativeGeometry" ref="a5af0dd92de56fa5de82a496af9ce3893" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PointF [] PhysLib.Geometry.RelativeGeometry<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Relativní polohy vertexů tvořící fyzický model tělesa vzhledem k centroidu. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00132">132</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6242589f3d4618404614029447b238be"></a><!-- doxytag: member="PhysLib::Geometry::Scale" ref="a6242589f3d4618404614029447b238be" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float PhysLib.Geometry.Scale<code> [get, set]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Škáluje těleso daným faktorem. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Factor</td><td>Faktor</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00109">109</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad9889dec141aa5aecd811f264ac2d7cb"></a><!-- doxytag: member="PhysLib::Geometry::Surface" ref="ad9889dec141aa5aecd811f264ac2d7cb" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double PhysLib.Geometry.Surface<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Povrch objektu v pixelech čtverečních. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00327">327</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa786449a044ceec7772d4d923dfab12f"></a><!-- doxytag: member="PhysLib::Geometry::Volume" ref="aa786449a044ceec7772d4d923dfab12f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double PhysLib.Geometry.Volume<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Objem objektu v krychlových pixelech. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00311">311</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a36d0b136444be5f248f71403d5918b08"></a><!-- doxytag: member="PhysLib::Geometry::Width" ref="a36d0b136444be5f248f71403d5918b08" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PhysLib.Geometry.Width<code> [get]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Šířka objektu. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00303">303</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Dokumentace událostí</h2>
+<a class="anchor" id="a9b20dc8fe56feed97f6fd4a4a7da26e3"></a><!-- doxytag: member="PhysLib::Geometry::OnCollision" ref="a9b20dc8fe56feed97f6fd4a4a7da26e3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CollisionHandler PhysLib.Geometry.OnCollision</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Událost nastávající při kolizi tělesa. </p>
+
+<p>Definice je uvedena na řádku <a class="el" href="a00021_source.html#l00024">24</a> v souboru <a class="el" href="a00021_source.html">Geometry.cs</a>.</p>
+
+</div>
+</div>
+<hr/>Dokumentace pro tuto třídu byla generována z následujícího souboru:<ul>
+<li><a class="el" href="a00021_source.html">Geometry.cs</a></li>
+</ul>
+</div>
+<hr class="footer"/><address class="footer"><small>Generováno st 11. kvě 2011 14.02:06 pro projekt PhysLib programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
+</body>
+</html>
