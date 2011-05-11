@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PhysLib
 {     
@@ -417,8 +418,10 @@ namespace PhysLib
 
                     PhysObjs[i].Reset();
 
-                    foreach (CollisionReport rep in csolve.DetectCollisionsFor(i))
+                    Parallel.ForEach(csolve.DetectCollisionsFor(i), delegate(CollisionReport rep)
+                    {
                         csolve.SolveCollision(rep);
+                    });
                 }
             }
 

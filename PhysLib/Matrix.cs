@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace PhysLib
 {
@@ -206,12 +207,12 @@ namespace PhysLib
 
             Matrix C = new Matrix(A.Rows, B.Columns);
 
-            for (int i = 0; i < A.Rows; i++)
+            for (int i = 0;i < A.Rows;i++)
             {
                 for (int j = 0; j < B.Columns; j++)
                 {
                     for (int k = 0; k < A.Columns; k++)
-                       C[i, j] += A[i, k] * B[k, j];
+                        C[i, j] += A[i, k] * B[k, j];
                 }
             }
 

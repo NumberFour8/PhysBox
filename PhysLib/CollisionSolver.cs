@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace PhysLib
@@ -101,15 +101,17 @@ namespace PhysLib
         /// Sestaví report o kolizích v momentálním stavu systému pro daný objekt
         /// </summary>
         /// <returns>Výčet reportů o kolizích</returns>
-        public IEnumerable DetectCollisionsFor(int ObjectIndex)
+        public List<CollisionReport> DetectCollisionsFor(int ObjectIndex)
         {
-            if (!Enabled || w.CountObjects < 2) yield break;
+            List<CollisionReport> Output = new List<CollisionReport>();
+            if (!Enabled || w.CountObjects < 2) return Output;
             for (int i = 0; i < w.CountObjects; i++)
             {
                 if (i == ObjectIndex || !w[i].Enabled || w[i].Static) continue;
                 CollisionReport rpt = ObjectsCollide(w[ObjectIndex],w[i]);
-                if (rpt != null) yield return rpt;
+                if (rpt != null) Output.Add(rpt);
             }
+            return Output;
         }
 
         internal void SolveCollision_Experimental(CollisionReport Report) // Experimentální!
