@@ -418,10 +418,8 @@ namespace PhysLib
 
                     PhysObjs[i].Reset();
 
-                    Parallel.ForEach(csolve.DetectCollisionsFor(i), delegate(CollisionReport rep)
-                    {
-                        csolve.SolveCollision(rep);
-                    });
+                    foreach(CollisionReport rep in csolve.DetectCollisionsFor(i))
+                        csolve.SolveCollision(rep);                    
                 }
             }
 
