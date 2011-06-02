@@ -69,7 +69,7 @@ namespace PhysLib
         {
             get
             {
-                return Static ? Double.PositiveInfinity : Math.Floor((J * m / 6) + m * Math.Pow(Math.Round(Vector.PointDistance(RotationPoint, COG),1),2));
+                return Static ? Double.PositiveInfinity : (J * m / 6) + m * Math.Pow(Math.Round(Vector.PointDistance(RotationPoint, COG),1),2);
             }
         }
 

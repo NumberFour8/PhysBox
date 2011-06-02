@@ -244,9 +244,23 @@ namespace PhysLib
             get
             {
                 if (Convex) return geom;
-                Matrix T = Transform2D.TranslateAndRotate(center, angle * Math.PI / 180, Nail);
+                PointF[] transformedHull = new PointF[desc.ConvexHull.Length];
+                desc.ConvexHull.CopyTo(transformedHull, 0);
 
-                return Transform2D.TransformPoints(T, desc.ConvexHull);
+                //// DOČASNÉ!
+                using (System.Drawing.Drawing2D.Matrix rot = new System.Drawing.Drawing2D.Matrix())
+                {
+                    rot.Translate((float)center[0], (float)center[1]);
+                    rot.RotateAt((float)angle, (PointF)Nail, System.Drawing.Drawing2D.MatrixOrder.Append);
+                    rot.TransformPoints(transformedHull);
+                }
+
+                /*
+                //Matrix rot = Transform2D.Translate(center);
+                Matrix rot = Transform2D.Rotate(angle * Math.PI / 180, Nail);
+                transformedHull = Transform2D.TransformPoints(rot, transformedHull);*/
+
+                return transformedHull;
             }
         }
 
